@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name — Portfolio</title>
+  <meta name="description" content="Projects, resume, and contact — with subtle animations and optional 3D viewer." />
+  <link rel="icon" href="favicon.ico">
+  <style>
+    /* ====== Design tokens ====== */
+    :root {
+      --max: 1080px; --pad: 1.25rem;
+      --bg: #0b0b10; --fg: #f3f4f6; --muted:#a1a1b3; --line:#23232b; --card:#12131a;
+      --brand:#6aa9ff; --brand-2:#7b5cff; --accent:#25d0a2;
+      --round: 16px; --shadow: 0 10px 25px rgba(0,0,0,.25);
+      --ease: cubic-bezier(.2,.65,.2,1);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; color:var(--fg); background:var(--bg); }
+
+    /* ====== Moving gradient backdrop (subtle) ====== */
+    body::before{
+      content:""; position: fixed; inset:-20vmax; z-index:-2;
+      background: radial-gradient(60vmax 60vmax at 20% 15%, rgba(106,169,255,.12), transparent 60%),
+                  radial-gradient(60vmax 60vmax at 80% 30%, rgba(37,208,162,.10), transparent 60%),
+                  radial-gradient(70vmax 70vmax at 50% 80%, rgba(123,92,255,.10), transparent 60%);
+      animation: drift 28s linear infinite alternate;
+      filter: saturate(120%);
+    }
+    @keyframes drift { to { transform: translate3d(3vmax,-3vmax,0) scale(1.02); } }
+
+    /* ====== Starfield canvas behind everything ====== */
+    #bg { position: fixed; inset:0; z-index:-1; display:block; background: transparent; }
+
+    header { position: sticky; top:0; backdrop-filter: blur(6px); background: color-mix(in oklab, var(--bg), transparent 70%);
+      border-bottom: 1px solid var(--line); z-index: 10; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: var(--pad); }
+    nav a { color: var(--fg); opacity:.9; text-decoration:none; margin-right:1rem; }
+    nav a:hover { color: var(--brand); }
+
+    .hero { display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem; align-items:center; padding: clamp(1rem,4vw,2.5rem) var(--pad); }
+    .hero h1 { font-size: clamp(1.8rem, 4.5vw, 3rem); line-height:1.15; margin:.25rem 0; }
+    .muted { color: var(--muted); }
+    .row { display:flex; gap:.75rem; flex-wrap:wrap; }
+    .btn { display:inline-block; padding:.7rem 1rem; border-radius:12px; text-decoration:none; border:1px solid var(--line); background:var(--card); color:var(--fg); box-shadow: var(--shadow);
+      transition: transform .2s var(--ease), background .2s var(--ease), border .2s var(--ease); }
+    .btn:hover { transform: translateY(-2px); border-color: color-mix(in oklab, var(--brand), white 15%); }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); border-color: transparent; }
+
+    /* Cards grid */
+    section { padding: 2rem var(--pad); }
+    h2 { font-size: clamp(1.2rem, 3vw, 1.6rem); margin: 0 0 .75rem 0; }
+    .grid { display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--round); padding: 1rem; box-shadow: var(--shadow); }
+    .thumb { width:100%; height:170px; border-radius:12px; object-fit: cover; background:#1b1c23; }
+    .tags { margin:.4rem 0 0; }
+    .tag { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:.15rem .6rem; font-size:.85rem; margin:.1rem .25rem 0 0; color: var(--muted); }
+
+    /* Reveal on scroll */
+    .reveal { opacity:0; transform: translateY(14px) scale(.98); filter: blur(3px);
+      transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); }
+    .reveal.visible { opacity:1; transform: none; filter: blur(0); }
+
+    footer { border-top:1px solid var(--line); color: var(--muted); font-size:.95rem; }
+
+    /* Responsive hero stack */
+    @media (max-width: 900px){ .hero { grid-template-columns: 1fr; } }
+
+    /* Reduce motion: disable animations */
+    @media (prefers-reduced-motion: reduce){
+      body::before{ animation: none; }
+      .reveal { transition: none; opacity: 1; transform: none; filter:none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
+      <div style="font-weight:600; letter-spacing:.3px;">Your Name</div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="resume.pdf" download>Resume (PDF)</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero wrap">
+    <div class="reveal">
+      <h1>Undergrad Engineer — Robotics & Embedded</h1>
+      <p class="muted">I build small robots, fast prototypes, and clean tooling. Currently exploring ROS, perception, and motion planning.</p>
+      <div class="row" style="margin-top:.6rem;">
+        <a class="btn primary" href="resume.pdf" download>Download Resume</a>
+        <a class="btn" href="https://github.com/youruser" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/youruser" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- Optional 3D viewer: drop a GLB at /assets/robot.glb or replace with your own -->
+    <div class="reveal" style="min-height: 360px;">
+      <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+      <model-viewer src="assets/robot.glb" alt="Robot model"
+        camera-controls ar ar-modes="webxr scene-viewer quick-look"
+        interaction-prompt="none" environment-image="neutral" shadow-intensity="1"
+        exposure="1" style="width:100%; height:360px; background: transparent; border-radius: var(--round); outline:1px solid var(--line);"></model-viewer>
+      <div class="muted" style="font-size:.9rem; text-align:center; margin-top:.25rem;">Tip: replace <code>assets/robot.glb</code> with your model or swap this block for a Sketchfab/Spline embed.</div>
+    </div>
+  </section>
+
+  <section id="projects" class="wrap">
+    <h2 class="reveal">Projects</h2>
+    <div class="grid">
+      <article class="card reveal">
+        <img class="thumb" src="images/project-hero.jpg" alt="HeRo robot demo thumbnail">
+        <h3>HeRo Robot “cmd_vel” Dance</h3>
+        <p>ROS1/Noetic demo that publishes a short Twist sequence to verify motion and topic wiring.</p>
+        <div class="tags"><span class="tag">ROS</span><span class="tag">Python</span><span class="tag">Gazebo</span></div>
+        <p class="row" style="margin-top:.5rem;">
+          <a class="btn" href="https://github.com/youruser/hero-demo" target="_blank" rel="noopener">View Code</a>
+          <a class="btn" href="videos/hero-dance.mp4">Demo Video</a>
+        </p>
+      </article>
+
+      <article class="card reveal">
+        <img class="thumb" src="images/project-ev.jpg" alt="EV charger module thumbnail">
+        <h3>EV Charger HW Notes</h3>
+        <p>Teardown and documentation of a fast-charging module; includes BOM, safety notes, and test setup.</p>
+        <div class="tags"><span class="tag">Hardware</span><span class="tag">Docs</span></div>
+        <p class="row" style="margin-top:.5rem;">
+          <a class="btn" href="https://github.com/youruser/ev-notes" target="_blank" rel="noopener">Read Notes</a>
+        </p>
+      </article>
+
+      <article class="card reveal">
+        <img class="thumb" src="images/project-vision.jpg" alt="Computer vision board-game robot thumbnail">
+        <h3>CV Board‑Game Robot</h3>
+        <p>OpenCV piece detection with a small pick‑and‑place arm; basic path planning and calibration routine.</p>
+        <div class="tags"><span class="tag">OpenCV</span><span class="tag">Python</span><span class="tag">Mechanics</span></div>
+        <p class="row" style="margin-top:.5rem;">
+          <a class="btn" href="https://github.com/youruser/cv-robot" target="_blank" rel="noopener">View Code</a>
+          <a class="btn" href="images/project-vision.jpg">Screenshot</a>
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <h2 class="reveal">About</h2>
+    <p class="reveal muted">2–3 sentences about your studies, what you like building, and what you’re looking for (internship/co‑op, research, etc.).
+    Add a headshot at <code>images/avatar.jpg</code> and reference it in your theme if you like.</p>
+  </section>
+
+  <section id="contact" class="wrap">
+    <h2 class="reveal">Contact</h2>
+    <p class="reveal row">
+      <a class="btn primary" href="resume.pdf" download>Download Resume (PDF)</a>
+      <a class="btn" href="mailto:you@school.edu">Email me</a>
+    </p>
+  </section>
+
+  <footer class="wrap">
+    <p>© <span id="y"></span> Your Name — Built with GitHub Pages.</p>
+  </footer>
+
+  <script>
+    // ====== IntersectionObserver: fade/slide sections in ======
+    const revealEls = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } })
+    }, { rootMargin: '0px 0px -10% 0px', threshold: .1 });
+    revealEls.forEach(el=>obs.observe(el));
+
+    // ====== Tiny starfield background (GPU-friendly) ======
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let stars = [], w=0, h=0, dpr = Math.min(window.devicePixelRatio||1, 2), anim=true;
+
+    function resize(){
+      w = canvas.width = innerWidth * dpr; h = canvas.height = innerHeight * dpr; canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px';
+      stars = Array.from({length: Math.floor((innerWidth*innerHeight)/1400)}, ()=>({
+        x: Math.random()*w, y: Math.random()*h, z: Math.random()*0.6+0.4, v: Math.random()*0.25+0.05
+      }));
+    }
+
+    function loop(){ if(!anim) return; ctx.clearRect(0,0,w,h); ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      for(const s of stars){ const r = (s.z*1.2); ctx.globalAlpha = s.z; ctx.beginPath(); ctx.arc(s.x, s.y, r, 0, Math.PI*2); ctx.fill(); s.x += s.v; if(s.x> w+10) s.x = -10; }
+      requestAnimationFrame(loop);
+    }
+
+    // Respect reduced motion
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if(reduce.matches){ anim=false; }
+    addEventListener('resize', resize); resize(); if(anim) loop();
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

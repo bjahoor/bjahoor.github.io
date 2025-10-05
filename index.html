@@ -6,6 +6,8 @@
   <title>Brandon Jahoor — Portfolio</title>
   <meta name="description" content="Mechatronics & Robotics — projects, resume, and contact. Subtle animations and interactive 3D demos." />
   <link rel="icon" href="favicon.ico">
+  <!-- Make animations opt-in; if JS fails, content still shows -->
+  <script>document.documentElement.classList.add('js')</script>
   <!-- Typography -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <style>
@@ -88,9 +90,9 @@
     .tags { margin:.4rem 0 0; }
     .tag { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:.15rem .6rem; font-size:.85rem; margin:.1rem .25rem 0 0; color: var(--muted); }
 
-    /* Reveal on scroll + stagger */
-    .reveal { opacity:0; transform: translateY(14px) scale(.98); filter: blur(3px); transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); }
-    .reveal.visible { opacity:1; transform: none; filter: blur(0); }
+    /* Reveal on scroll + stagger (JS opt-in) */
+    .js .reveal { opacity:0; transform: translateY(14px) scale(.98); filter: blur(3px); transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); }
+    .js .reveal.visible { opacity:1; transform: none; filter: blur(0); }
 
     /* Scroll progress bar */
     #prog { position:fixed; top:0; left:0; height:3px; width:0; background: var(--brand); z-index:9999; }
@@ -106,7 +108,7 @@
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       body::before{ animation: none; }
-      .reveal { transition: none; opacity: 1; transform: none; filter:none; }
+      .js .reveal { transition: none; opacity: 1; transform: none; filter:none; }
     }
 
     /* Polished scrollbars */
@@ -136,16 +138,16 @@
   <section class="hero wrap">
     <div class="reveal">
       <h1 class="grad-text">Mechatronics & Robotics Engineering — University of Waterloo</h1>
-      <p class="muted">Robotics engineering undergraduate with hands‑on work in ROS2 perception, rover kinematics, and autonomous systems. Built camera pipelines, modeled drive trains, and deployed navigation for real robots. Seeking Winter 2026 robotics/embedded roles.</p>
+      <p class="muted">Robotics engineering undergraduate with hands-on work in ROS2 perception, rover kinematics, and autonomous systems. Built camera pipelines, modeled drive trains, and deployed navigation for real robots. Seeking Winter 2026 robotics/embedded roles.</p>
       <div class="row" style="margin-top:.6rem;">
         <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume</a>
         <a class="btn" href="https://www.linkedin.com/in/bjahoor" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
       </div>
-      <p class="muted" style="margin-top:.5rem;">bjahoor@uwaterloo.ca · +1 (647) 668‑7341</p>
+      <p class="muted" style="margin-top:.5rem;">bjahoor@uwaterloo.ca · +1 (647) 668-7341</p>
     </div>
 
-    <!-- 3D viewer: uses a hosted sample so it works instantly; replace src with assets/robot.glb later -->
+    <!-- 3D viewer: hosted sample so it works instantly; replace src with assets/robot.glb later -->
     <div class="reveal" style="min-height: 360px;">
       <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
       <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" alt="Robot model"
@@ -153,8 +155,11 @@
         interaction-prompt="none"
         environment-image="https://modelviewer.dev/shared-assets/environments/three-point-light.hdr"
         exposure="1.1" shadow-intensity="1"
-        style="width:100%; height:360px; background: transparent; border-radius: var(--round); outline:1px solid var(--line);"></model-viewer>
-      <div class="muted" style="font-size:.9rem; text-align:center; margin-top:.25rem;">Swap to your own <code>assets/robot.glb</code> when ready.</div>
+        style="width:100%; height:360px; background: transparent; border-radius: var(--round); outline:1px solid var(--line);">
+      </model-viewer>
+      <div class="muted" style="font-size:.9rem; text-align:center; margin-top:.25rem;">
+        Swap to your own <code>assets/robot.glb</code> when ready.
+      </div>
     </div>
   </section>
 
@@ -168,9 +173,9 @@
           <img class="thumb" src="images/project-arm.jpg" alt="ROS2 token-sorting arm" loading="lazy" style="aspect-ratio:16 / 9;">
           <div class="cap">ROS2 + OpenCV token sorter on Raspberry Pi</div>
         </div>
-        <h3>3‑DOF Robotic Arm (ROS2)</h3>
-        <p>Built a 3‑DOF arm on Raspberry Pi with OpenCV color detection and ROS2. Designed, 3D‑printed, and integrated camera‑based sorting.</p>
-        <div class="tags"><span class="tag">ROS2</span><span class="tag">OpenCV</span><span class="tag">Raspberry Pi</span></div>
+        <h3>3-DOF Robotic Arm (ROS2)</h3>
+        <p>Built a 3-DOF arm on Raspberry Pi with OpenCV color detection and ROS2. Designed, 3D-printed, and integrated camera-based sorting.</p>
+        <div class="tags"><span class="tag">ROS2</span><span class="tag">OpenCV</span><span class="tag">Raspberry Pi</span></div>
         <p class="row" style="margin-top:.5rem;">
           <a class="btn" href="#" target="_blank" rel="noopener">Code (add link)</a>
         </p>
@@ -178,7 +183,7 @@
 
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
-          <img class="thumb" src="images/project-realsense.jpg" alt="ROS2 Realsense streaming" loading="lazy" style="aspect-ratio:16 / 9;">
+          <img class="thumb" src="images/project-realsense.jpg" alt="ROS2 RealSense streaming" loading="lazy" style="aspect-ratio:16 / 9;">
           <div class="cap">Compressed RealSense streaming, viewer, resolution select</div>
         </div>
         <h3>ROS2 RealSense Pipeline</h3>
@@ -191,21 +196,21 @@
 
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
-          <img class="thumb" src="images/project-rover.jpg" alt="6‑wheel rover kinematics" loading="lazy" style="aspect-ratio:16 / 9;">
-          <div class="cap">Forward & inverse kinematics for 6‑wheel rover</div>
+          <img class="thumb" src="images/project-rover.jpg" alt="6-wheel rover kinematics" loading="lazy" style="aspect-ratio:16 / 9;">
+          <div class="cap">Forward & inverse kinematics for 6-wheel rover</div>
         </div>
         <h3>Rover Kinematics</h3>
-        <p>Modeled and solved forward/inverse kinematics for a Mars‑style 6‑wheel drivetrain; fed into motion planning experiments.</p>
+        <p>Modeled and solved forward/inverse kinematics for a Mars-style 6-wheel drivetrain; fed into motion planning experiments.</p>
         <div class="tags"><span class="tag">Kinematics</span><span class="tag">Modeling</span></div>
       </article>
 
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
           <img class="thumb" src="images/project-stm32.jpg" alt="C OS on STM32" loading="lazy" style="aspect-ratio:16 / 9;">
-          <div class="cap">Custom C OS on STM32 Nucleo‑64</div>
+          <div class="cap">Custom C OS on STM32 Nucleo-64</div>
         </div>
         <h3>Embedded C Operating System</h3>
-        <p>In‑progress microcontroller OS in C on STM32: context switching, basic scheduling, and peripheral drivers.</p>
+        <p>In-progress microcontroller OS in C on STM32: context switching, basic scheduling, and peripheral drivers.</p>
         <div class="tags"><span class="tag">C</span><span class="tag">STM32</span></div>
       </article>
 
@@ -215,7 +220,7 @@
           <div class="cap">Motors/sensors via ladder logic</div>
         </div>
         <h3>PLC Controls (Siemens)</h3>
-        <p>Programmed ladder logic to control motors, sensors, and buttons; built small factory‑style demos.</p>
+        <p>Programmed ladder logic to control motors, sensors, and buttons; built small factory-style demos.</p>
         <div class="tags"><span class="tag">PLC</span><span class="tag">Siemens</span></div>
       </article>
 
@@ -232,11 +237,11 @@
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
           <img class="thumb" src="images/project-arcade.jpg" alt="Retro arcade" loading="lazy" style="aspect-ratio:16 / 9;">
-          <div class="cap">Raspberry Pi arcade retrofit</div>
+          <div class="cap">Raspberry Pi arcade retrofit</div>
         </div>
         <h3>Retro Arcade Console</h3>
-        <p>Retrofit arcade cabinet powered by Raspberry Pi; controls, display, and ROM management tuned for plug‑and‑play.</p>
-        <div class="tags"><span class="tag">Raspberry Pi</span></div>
+        <p>Retrofit arcade cabinet powered by Raspberry Pi; controls, display, and ROM management tuned for plug-and-play.</p>
+        <div class="tags"><span class="tag">Raspberry Pi</span></div>
       </article>
     </div>
   </section>
@@ -254,45 +259,45 @@
         </ul>
       </article>
       <article class="card reveal">
-        <h3>Robotics Engineering — UW Robotics Team (Co‑op)</h3>
+        <h3>Robotics Engineering — UW Robotics Team (Co-op)</h3>
         <p class="muted">Jun 2025 – Aug 2025</p>
         <ul>
           <li>Developed control & autonomy in Linux with ROS2 (Docker).</li>
           <li>Built RealSense streaming with compression, OpenCV viewer, resolution selection.</li>
-          <li>Modeled 6‑wheel drivetrain; solved forward & inverse kinematics.</li>
-          <li>Supported electro‑mechanical integration and component sourcing/design.</li>
+          <li>Modeled 6-wheel drivetrain; solved forward & inverse kinematics.</li>
+          <li>Supported electro-mechanical integration and component sourcing/design.</li>
         </ul>
       </article>
       <article class="card reveal">
-        <h3>Robotics Engineering — BHF Robotics (Co‑op)</h3>
+        <h3>Robotics Engineering — BHF Robotics (Co-op)</h3>
         <p class="muted">May 2025 – Jun 2025</p>
         <ul>
-          <li>Autonomous Electric Weeder: ROS2 navigation & auto‑drive algorithms.</li>
+          <li>Autonomous Electric Weeder: ROS2 navigation & auto-drive algorithms.</li>
           <li>Trained deep learning model for weed/crop detection.</li>
-          <li>Restored manual controls and e‑stop; resolved electrical issues.</li>
+          <li>Restored manual controls and e-stop; resolved electrical issues.</li>
         </ul>
       </article>
       <article class="card reveal">
-        <h3>Mechatronics Engineering — RAB Design Lighting (Co‑op)</h3>
+        <h3>Mechatronics Engineering — RAB Design Lighting (Co-op)</h3>
         <p class="muted">Sep 2024 – Dec 2024</p>
         <ul>
           <li>Validated lighting controls app; authored manuals & training material.</li>
-          <li>Process‑improvement tooling for product launches; electrical & mechanical testing.</li>
+          <li>Process-improvement tooling for product launches; electrical & mechanical testing.</li>
         </ul>
       </article>
       <article class="card reveal">
-        <h3>Quality Assurance — Ontario Drive & Gear (Co‑op)</h3>
+        <h3>Quality Assurance — Ontario Drive & Gear (Co-op)</h3>
         <p class="muted">Jan 2024 – Apr 2024</p>
         <ul>
-          <li>Led QA for prototype product launch under tight deadlines (AGMA Foundation Scholarship recognition).</li>
-          <li>Performed precision inspections using GD&T and delivered engineering documentation.</li>
+          <li>Led QA for prototype product launch (AGMA Foundation Scholarship recognition).</li>
+          <li>Performed precision inspections using GD&T; shipped engineering documentation.</li>
         </ul>
       </article>
       <article class="card reveal">
-        <h3>Electrical Engineering — Jule/eCAMION (Co‑op)</h3>
+        <h3>Electrical Engineering — Jule/eCAMION (Co-op)</h3>
         <p class="muted">Feb 2022 – Jun 2022</p>
         <ul>
-          <li>Hands‑on across electrical, design, software & QA for EV charging systems; assembly & wiring.</li>
+          <li>Hands-on across electrical, design, software & QA for EV charging systems; assembly & wiring.</li>
         </ul>
       </article>
       <article class="card reveal">
@@ -315,7 +320,7 @@
 
   <!-- Robotics Playground: interactive three.js planar arm demo (no assets) -->
   <section id="playground" class="wrap">
-    <h2 class="reveal">Robotics Playground — 3‑DOF Planar Arm</h2>
+    <h2 class="reveal">Robotics Playground — 3-DOF Planar Arm</h2>
     <p class="reveal muted">Tiny kinematics sandbox: adjust joint angles and see links update. Built with three.js; great for explaining forward kinematics.</p>
     <div class="reveal" style="display:grid; grid-template-columns: 1fr 300px; gap:1rem; align-items:start;">
       <canvas id="arm3d" style="width:100%; height:420px; border-radius: var(--round); outline:1px solid var(--line);"></canvas>
@@ -333,7 +338,7 @@
 
   <section id="about" class="wrap">
     <h2 class="reveal">About</h2>
-    <p class="reveal muted">I’m Brandon Jahoor — a Mechatronics Engineering student at the University of Waterloo. I’ve built ROS2 perception pipelines, modeled rover kinematics, and shipped autonomous behaviors on real robots. I enjoy fast prototyping across software, electrical, and mechanical, and I’m aiming my Winter 2026 co‑op at robotics/embedded teams.</p>
+    <p class="reveal muted">I’m Brandon Jahoor — a Mechatronics Engineering student at the University of Waterloo. I’ve built ROS2 perception pipelines, modeled rover kinematics, and shipped autonomous behaviors on real robots. I enjoy fast prototyping across software, electrical, and mechanical, and I’m aiming my Winter 2026 co-op at robotics/embedded teams.</p>
   </section>
 
   <section id="contact" class="wrap">
@@ -343,12 +348,17 @@
       <a class="btn" href="mailto:bjahoor@uwaterloo.ca">bjahoor@uwaterloo.ca</a>
       <a class="btn" href="https://www.linkedin.com/in/bjahoor" target="_blank" rel="noopener">LinkedIn</a>
     </p>
-    <p class="reveal muted">Phone: +1 (647) 668‑7341</p>
+    <p class="reveal muted">Phone: +1 (647) 668-7341</p>
   </section>
 
   <footer class="wrap">
     <p>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</p>
   </footer>
+
+  <!-- If JS is disabled, keep everything visible -->
+  <noscript>
+    <style>.reveal{opacity:1!important;transform:none!important;filter:none!important}</style>
+  </noscript>
 
   <!-- Scripts -->
   <script type="module">

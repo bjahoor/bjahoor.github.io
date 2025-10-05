@@ -4,11 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Brandon Jahoor — Portfolio</title>
-  <meta name="description" content="Mechatronics & Robotics — projects, UW RoboHub highlight, resume, and contact." />
+  <meta name="description" content="Robotics & Mechatronics projects, UW RoboHub, experience, and contact." />
   <link rel="icon" href="favicon.ico">
-  <!-- Enable animations only if JS is running -->
   <script>document.documentElement.classList.add('js')</script>
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -24,16 +22,19 @@
     html,body{height:100%}
     body{margin:0;font-family:var(--font-sans);letter-spacing:.02px;line-height:1.6;color:var(--fg);background:var(--bg)}
 
-    /* subtle moving gradient bg */
+    /* soft color wash behind 3D */
     body::before{
-      content:"";position:fixed;inset:-20vmax;z-index:-1;
+      content:"";position:fixed;inset:-20vmax;z-index:-3;
       background:
         radial-gradient(60vmax 60vmax at 20% 15%, rgba(122,162,255,.12), transparent 60%),
         radial-gradient(60vmax 60vmax at 80% 30%, rgba(42,219,177,.10), transparent 60%),
         radial-gradient(70vmax 70vmax at 50% 80%, rgba(155,107,255,.10), transparent 60%);
-      animation:drift 28s linear infinite alternate;filter:saturate(120%);
+      animation:drift 28s linear infinite alternate; filter:saturate(120%);
     }
     @keyframes drift{to{transform:translate3d(3vmax,-3vmax,0) scale(1.02)}}
+
+    /* 3D background canvas sits under content */
+    #bg3d{position:fixed;inset:0;z-index:-2;display:block;background:transparent}
 
     header{position:sticky;top:0;backdrop-filter:blur(6px);
       background:color-mix(in oklab,var(--bg),transparent 70%);border-bottom:1px solid var(--line);z-index:10}
@@ -57,7 +58,7 @@
     h2{font-family:var(--font-display);font-size:clamp(1.3rem,2.8vw,1.8rem);margin:0 0 .75rem 0}
     .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .card{background:color-mix(in oklab,var(--card),transparent 20%);border:1px solid color-mix(in oklab,var(--line),white 5%);
-      border-radius:var(--round);padding:1rem;box-shadow:0 8px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.03);
+      border-radius:var(--round);padding:1rem;box-shadow:0 8px 24px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.03);
       transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
     .card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.32)}
     .thumb{width:100%;height:170px;border-radius:12px;object-fit:cover;background:#1b1c23}
@@ -70,23 +71,28 @@
     .tags{margin:.4rem 0 0}
     .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.85rem;margin:.1rem .25rem 0 0;color:var(--muted)}
 
-    /* reveal animation — only when JS is on AND init ran */
+    /* reveal animations — safe default (content shows even if JS fails) */
     .js.reveal-ready .reveal{opacity:0;transform:translateY(14px) scale(.98);filter:blur(3px);
       transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease)}
     .js.reveal-ready .reveal.visible{opacity:1;transform:none;filter:none}
 
     .divider{display:block;width:100%;height:auto;opacity:.6;color:var(--card)}
     footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+    @media (prefers-reduced-motion: reduce){
+      body::before{animation:none}
+      .js.reveal-ready .reveal{opacity:1;transform:none;filter:none;transition:none}
+    }
   </style>
 </head>
 <body>
+  <canvas id="bg3d" aria-hidden="true"></canvas>
+
   <header>
     <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
       <div style="font-weight:700;letter-spacing:.3px;font-family:var(--font-display)">Brandon Jahoor</div>
       <nav>
-        <a href="#projects">Projects</a>
         <a href="#robohub">UW RoboHub</a>
-        <a href="#swarm">Swarm</a>
+        <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a class="underline" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Resume (PDF)</a>
         <a href="#contact">Contact</a>
@@ -97,31 +103,54 @@
   <section class="hero wrap">
     <div class="reveal">
       <h1 class="grad-text">Mechatronics & Robotics Engineering — University of Waterloo</h1>
-      <p class="muted">Robotics engineering undergraduate with hands-on work in ROS2 perception, rover kinematics, and autonomous systems. Built camera pipelines, modeled drive trains, and deployed navigation for real robots. Seeking Winter 2026 robotics/embedded roles.</p>
+      <p class="muted">Robotics engineering undergraduate with hands-on work in ROS2 perception, rover kinematics, and autonomous systems. Built camera pipelines, modeled drive trains, and deployed navigation for real robots.</p>
       <div class="row" style="margin-top:.6rem;">
         <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume</a>
         <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
       </div>
-      <p class="muted" style="margin-top:.5rem;">bjahoor@uwaterloo.ca</p>
     </div>
   </section>
 
-  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90">
-    <path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/>
-  </svg>
+  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
+
+  <!-- UW RoboHub section ABOVE projects — no text or dates -->
+  <section id="robohub" class="wrap">
+    <h2 class="reveal">UW RoboHub</h2>
+    <div class="card reveal" style="display:flex;align-items:center;justify-content:center;min-height:120px;">
+      <img src="images/robohub.png" alt="UW RoboHub logo" style="max-width:220px;height:auto;display:block;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));background:#fff;border-radius:12px;padding:.4rem;">
+    </div>
+  </section>
+
+  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
 
   <section id="projects" class="wrap">
     <h2 class="reveal">Projects</h2>
     <div class="grid">
+      <!-- Swarm Hackathon — HeRo 2.0 (as a project) -->
+      <article class="card reveal">
+        <div class="thumb-wrap" style="height:170px;">
+          <img class="thumb" src="images/project-swarm.jpg" alt="HeRo 2.0 swarm hackathon" loading="lazy" style="aspect-ratio:16/9;">
+          <div class="cap">HeRo 2.0 multi-robot swarm hackathon</div>
+        </div>
+        <h3>Swarm Hackathon — HeRo 2.0</h3>
+        <p>Rapid team build using HeRo 2.0 robots to prototype multi-robot behaviors with ROS2-centric workflows.</p>
+        <div class="row" style="margin:.4rem 0 0;">
+          <a class="btn" href="https://verlab.github.io/hero_common/" target="_blank" rel="noopener">HeRo 2.0 Site</a>
+          <a class="btn" href="https://github.com/verlab/hero_common/" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://luma.com/7xkp31u4?tk=PUsKnJ" target="_blank" rel="noopener">Event</a>
+        </div>
+        <div class="tags"><span class="tag">Swarm</span><span class="tag">ROS2</span><span class="tag">Multi-robot</span></div>
+      </article>
+
       <!-- Mars-style Rover -->
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
           <img class="thumb" src="images/project-rover.jpg" alt="Mars-style rover platform" loading="lazy" style="aspect-ratio:16/9;">
-          <div class="cap">Mars-style rover build & autonomy experiments</div>
+          <div class="cap">Rocker-bogie rover & autonomy experiments</div>
         </div>
         <h3>Mars-Style Rover</h3>
-        <p>Designed and assembled a 6-wheel, rocker-bogie rover. Integrated Linux + ROS2 for teleop and autonomy experiments on rough terrain.</p>
+        <p>Designed a 6-wheel rocker-bogie rover; integrated Linux + ROS2 for teleop and autonomy on rough terrain.</p>
         <div class="tags"><span class="tag">ROS2</span><span class="tag">Rocker-bogie</span><span class="tag">Embedded</span></div>
       </article>
 
@@ -129,10 +158,10 @@
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
           <img class="thumb" src="images/project-realsense.jpg" alt="ROS2 RealSense streaming" loading="lazy" style="aspect-ratio:16/9;">
-          <div class="cap">Compressed RealSense streaming, viewer, resolution select</div>
+          <div class="cap">Compressed streaming, viewer, resolution control</div>
         </div>
         <h3>ROS2 RealSense Pipeline</h3>
-        <p>Camera streaming stack with compression, OpenCV viewer, and resolution control nodes; built for rover perception on Linux/Docker.</p>
+        <p>Camera streaming stack with compression, OpenCV viewer, and resolution control nodes; built for rover perception.</p>
         <div class="tags"><span class="tag">ROS2</span><span class="tag">OpenCV</span><span class="tag">Docker</span></div>
       </article>
 
@@ -143,7 +172,7 @@
           <div class="cap">Forward & inverse kinematics for 6-wheel rover</div>
         </div>
         <h3>Rover Kinematics</h3>
-        <p>Modeled and solved forward/inverse kinematics for a Mars-style 6-wheel drivetrain; fed into motion-planning experiments.</p>
+        <p>Modeled and solved forward/inverse kinematics for a Mars-style drivetrain; fed motion-planning experiments.</p>
         <div class="tags"><span class="tag">Kinematics</span><span class="tag">Modeling</span></div>
       </article>
 
@@ -154,7 +183,7 @@
           <div class="cap">ROS2 + OpenCV token sorter on Raspberry Pi</div>
         </div>
         <h3>3-DOF Robotic Arm (ROS2)</h3>
-        <p>Built a 3-DOF arm on Raspberry Pi with OpenCV color detection and ROS2. Designed, 3D-printed, and integrated camera-based sorting.</p>
+        <p>Built a 3-DOF arm on Raspberry Pi with OpenCV color detection and ROS2; designed and 3D-printed the mechanics.</p>
         <div class="tags"><span class="tag">ROS2</span><span class="tag">OpenCV</span><span class="tag">Raspberry Pi</span></div>
       </article>
 
@@ -176,18 +205,18 @@
           <div class="cap">Custom motorized bicycle — mechanics & wiring</div>
         </div>
         <h3>Motorized Bicycle</h3>
-        <p>Designed and assembled a motorized bicycle project, handling drivetrain integration, electrical wiring, and controls tuning.</p>
+        <p>Designed and assembled a motorized bicycle project: drivetrain integration, electrical wiring, and controls tuning.</p>
         <div class="tags"><span class="tag">Mechanical</span><span class="tag">Electrical</span></div>
       </article>
 
-      <!-- PLC Controls (Siemens) — added back -->
+      <!-- PLC Controls (Siemens) -->
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
           <img class="thumb" src="images/project-plc.jpg" alt="Siemens PLC controls" loading="lazy" style="aspect-ratio:16/9;">
           <div class="cap">Motors & sensors via ladder logic (Siemens)</div>
         </div>
         <h3>PLC Controls (Siemens)</h3>
-        <p>Programmed ladder logic to control motors, sensors, and buttons on Siemens hardware; delivered factory-style demos and documentation.</p>
+        <p>Programmed ladder logic to control motors, sensors, and buttons on Siemens hardware; delivered factory-style demos.</p>
         <div class="tags"><span class="tag">PLC</span><span class="tag">Siemens</span></div>
       </article>
 
@@ -215,64 +244,17 @@
     </div>
   </section>
 
-  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90">
-    <path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/>
-  </svg>
-
-  <!-- Featured RoboHub highlight with logo -->
-  <section id="robohub" class="wrap">
-    <h2 class="reveal">UW RoboHub — Highlight</h2>
-    <div class="card reveal" style="display:grid;grid-template-columns:96px 1fr;gap:1rem;align-items:center;">
-      <img src="images/robohub.png" alt="UW RoboHub" width="96" height="96" style="border-radius:12px; background:#fff; padding:.4rem;">
-      <div>
-        <p class="muted" style="margin:.25rem 0 0;">Robotics Research Assistant — <strong>Sep 2025 – Dec 2025</strong></p>
-        <ul style="margin:.4rem 0 0 1rem;">
-          <li>Supported robotics research at Waterloo RoboHub and collaborated with cross-disciplinary teams.</li>
-          <li>Hands-on with autonomy and perception workflows (ROS2 experimentation; lab bring-up & testing).</li>
-          <li>Prepared demos/documentation and contributed to day-to-day engineering tasks in a research environment.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90">
-    <path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/>
-  </svg>
-
-  <!-- Swarm Hackathon — HeRo 2.0 -->
-  <section id="swarm" class="wrap">
-    <h2 class="reveal">Swarm Hackathon — HeRo 2.0 Robots</h2>
-    <div class="card reveal" style="display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:1rem;align-items:center;">
-      <img class="thumb" src="images/project-swarm.jpg" alt="HeRo 2.0 swarm robots" style="height:220px;object-fit:cover;border-radius:12px;">
-      <div>
-        <p class="muted">Rapid team project using HeRo 2.0 educational robots for multi-robot behaviors. Explored swarm coordination, sensing, and ROS2-centric workflows.</p>
-        <div class="row" style="margin-top:.5rem;">
-          <a class="btn" href="https://verlab.github.io/hero_common/" target="_blank" rel="noopener">HeRo 2.0 Site</a>
-          <a class="btn" href="https://github.com/verlab/hero_common/" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="https://luma.com/7xkp31u4?tk=PUsKnJ" target="_blank" rel="noopener">Event Page</a>
-        </div>
-        <div class="tags" style="margin-top:.5rem;">
-          <span class="tag">Swarm</span><span class="tag">ROS2</span><span class="tag">Multi-robot</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90">
-    <path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/>
-  </svg>
+  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
 
   <section id="experience" class="wrap">
     <h2 class="reveal">Experience</h2>
     <div class="grid">
       <article class="card reveal">
         <h3>Robotics Research Assistant — UW RoboHub</h3>
-        <p class="muted">Sep 2025 – Dec 2025</p>
         <ul><li>Contributed to robotics research initiatives; assisted experiments and demos.</li></ul>
       </article>
       <article class="card reveal">
         <h3>Robotics Engineering — UW Robotics Team (Co-op)</h3>
-        <p class="muted">Jun 2025 – Aug 2025</p>
         <ul>
           <li>Developed control & autonomy in Linux with ROS2 (Docker).</li>
           <li>Built RealSense streaming with compression, OpenCV viewer, resolution selection.</li>
@@ -282,7 +264,6 @@
       </article>
       <article class="card reveal">
         <h3>Robotics Engineering — BHF Robotics (Co-op)</h3>
-        <p class="muted">May 2025 – Jun 2025</p>
         <ul>
           <li>Autonomous Electric Weeder: ROS2 navigation & auto-drive algorithms.</li>
           <li>Trained deep learning model for weed/crop detection.</li>
@@ -291,7 +272,6 @@
       </article>
       <article class="card reveal">
         <h3>Mechatronics Engineering — RAB Design Lighting (Co-op)</h3>
-        <p class="muted">Sep 2024 – Dec 2024</p>
         <ul>
           <li>Validated lighting controls app; authored manuals & training material.</li>
           <li>Process-improvement tooling for product launches; electrical & mechanical testing.</li>
@@ -299,40 +279,29 @@
       </article>
       <article class="card reveal">
         <h3>Quality Assurance — Ontario Drive & Gear (Co-op)</h3>
-        <p class="muted">Jan 2024 – Apr 2024</p>
         <ul>
           <li>Led QA for prototype product launch (AGMA Foundation Scholarship recognition).</li>
-          <li>Performed precision inspections using GD&T; shipped engineering documentation.</li>
+          <li>Performed precision inspections with GD&T; shipped engineering documentation.</li>
         </ul>
       </article>
       <article class="card reveal">
         <h3>Electrical Engineering — Jule/eCAMION (Co-op)</h3>
-        <p class="muted">Feb 2022 – Jun 2022</p>
         <ul><li>Hands-on across electrical, design, software & QA for EV charging systems; assembly & wiring.</li></ul>
       </article>
       <article class="card reveal">
         <h3>Youth Robotics Mentor — FIRST (FLL)</h3>
-        <p class="muted">Jan 2021 – Dec 2023</p>
         <ul><li>Coach/Mentor Award; team qualified for Arkansas Razorback International.</li></ul>
       </article>
     </div>
-
-    <h3 class="reveal" style="margin-top:1.5rem;">Selected Awards</h3>
-    <ul class="reveal">
-      <li>FIRST Mechatronics Engineering Scholarship (University of Waterloo) — $5,000</li>
-      <li>AGMA Foundation Scholarship — recognition for excellence during prototype launch</li>
-    </ul>
   </section>
 
-  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90">
-    <path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/>
-  </svg>
+  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
 
   <section id="contact" class="wrap">
     <h2 class="reveal">Contact</h2>
     <p class="reveal row">
       <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume (PDF)</a>
-      <a class="btn" href="mailto:bjahoor@uwaterloo.ca">bjahoor@uwaterloo.ca</a>
+      <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
       <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank" rel="noopener">LinkedIn</a>
     </p>
   </section>
@@ -341,16 +310,89 @@
     <p>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</p>
   </footer>
 
-  <!-- If JS is disabled, keep everything visible -->
+  <!-- Keep content visible & animations working -->
   <noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important}</style></noscript>
-
-  <!-- Minimal JS: make reveal work & set year -->
   <script>
     document.documentElement.classList.add('reveal-ready');
     const els=document.querySelectorAll('.reveal');
     const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}})},{rootMargin:'0px 0px -10% 0px',threshold:.1});
     els.forEach(el=>io.observe(el));
     document.getElementById('y').textContent=new Date().getFullYear();
+  </script>
+
+  <!-- Moving 3D background (Three.js particles) -->
+  <script type="module">
+    // loads three.js and renders a subtle 3D particle field behind the site
+    import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
+
+    const canvas = document.getElementById('bg3d');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, 16/9, 0.1, 100);
+    camera.position.set(0, 0, 12);
+
+    // gradient fog for depth
+    scene.fog = new THREE.FogExp2(0x0b0c12, 0.04);
+
+    // particles geometry
+    const COUNT = 2800;
+    const geo = new THREE.BufferGeometry();
+    const positions = new Float32Array(COUNT * 3);
+    for (let i=0;i<COUNT;i++){
+      positions[i*3+0] = (Math.random()-0.5) * 40;
+      positions[i*3+1] = (Math.random()-0.5) * 24;
+      positions[i*3+2] = (Math.random()-0.5) * 40;
+    }
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    // shimmering color shift
+    const mat = new THREE.PointsMaterial({
+      size: 0.045, sizeAttenuation: true,
+      color: 0x7aa2ff, transparent:true, opacity:0.85,
+      depthWrite:false
+    });
+    const points = new THREE.Points(geo, mat);
+    scene.add(points);
+
+    // gentle swirl motion
+    let t = 0, mx=0, my=0, tx=0, ty=0;
+    window.addEventListener('pointermove', (e)=>{
+      const r = canvas.getBoundingClientRect();
+      mx = (e.clientX - r.width/2) / r.width;
+      my = (e.clientY - r.height/2) / r.height;
+    }, {passive:true});
+
+    function resize(){
+      const w = canvas.clientWidth = window.innerWidth;
+      const h = canvas.clientHeight = window.innerHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w/h; camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function animate(){
+      requestAnimationFrame(animate);
+      t += 0.0025;
+      tx += (mx - tx) * 0.03;
+      ty += (my - ty) * 0.03;
+
+      // rotate field and parallax camera
+      points.rotation.y = t * 0.6;
+      points.rotation.x = Math.sin(t*0.7)*0.1;
+      camera.position.x = tx * 2.2;
+      camera.position.y = -ty * 1.6;
+      camera.lookAt(0,0,0);
+
+      // subtle color pulse between brand hues
+      const c = (Math.sin(t*2)+1)/2; // 0..1
+      mat.color.setHSL(0.58 + c*0.10, 0.6, 0.65); // between blue & purple
+
+      renderer.render(scene, camera);
+    }
+    animate();
   </script>
 </body>
 </html>

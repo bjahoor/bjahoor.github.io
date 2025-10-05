@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Name — Portfolio</title>
-  <meta name="description" content="Projects, resume, and contact — with subtle animations and optional 3D viewer." />
+  <title>Brandon Jahoor — Portfolio</title>
+  <meta name="description" content="Mechatronics & Robotics — projects, resume, and contact. Subtle animations and interactive 3D demos." />
   <link rel="icon" href="favicon.ico">
   <!-- Typography -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
@@ -121,10 +121,11 @@
 
   <header>
     <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
-      <div style="font-weight:700; letter-spacing:.3px; font-family: var(--font-display);">Your Name</div>
+      <div style="font-weight:700; letter-spacing:.3px; font-family: var(--font-display);">Brandon Jahoor</div>
       <nav>
         <a href="#projects">Projects</a>
         <a href="#playground">3D</a>
+        <a href="#experience">Experience</a>
         <a href="#about">About</a>
         <a class="underline" href="resume.pdf" download>Resume (PDF)</a>
         <a href="#contact">Contact</a>
@@ -134,25 +135,26 @@
 
   <section class="hero wrap">
     <div class="reveal">
-      <h1 class="grad-text">Undergrad Engineer — Robotics & Embedded</h1>
-      <p class="muted">I build small robots, fast prototypes, and clean tooling. Currently exploring ROS, perception, and motion planning.</p>
+      <h1 class="grad-text">Mechatronics & Robotics Engineering — University of Waterloo</h1>
+      <p class="muted">Robotics engineering undergraduate with hands‑on work in ROS2 perception, rover kinematics, and autonomous systems. Built camera pipelines, modeled drive trains, and deployed navigation for real robots. Seeking Winter 2026 robotics/embedded roles.</p>
       <div class="row" style="margin-top:.6rem;">
         <a class="btn primary" href="resume.pdf" download>Download Resume</a>
-        <a class="btn" href="https://github.com/youruser" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/youruser" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://www.linkedin.com/in/bjahoor" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
       </div>
+      <p class="muted" style="margin-top:.5rem;">bjahoor@uwaterloo.ca · +1 (647) 668‑7341</p>
     </div>
 
-    <!-- Optional 3D viewer: drop a GLB at /assets/robot.glb or replace with your own -->
+    <!-- 3D viewer: uses a hosted sample so it works instantly; replace src with assets/robot.glb later -->
     <div class="reveal" style="min-height: 360px;">
       <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-      <model-viewer src="assets/robot.glb" alt="Robot model"
+      <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" alt="Robot model"
         camera-controls auto-rotate auto-rotate-delay="0" camera-orbit="35deg 70deg 3.2m"
         interaction-prompt="none"
         environment-image="https://modelviewer.dev/shared-assets/environments/three-point-light.hdr"
         exposure="1.1" shadow-intensity="1"
         style="width:100%; height:360px; background: transparent; border-radius: var(--round); outline:1px solid var(--line);"></model-viewer>
-      <div class="muted" style="font-size:.9rem; text-align:center; margin-top:.25rem;">Tip: replace <code>assets/robot.glb</code> with your model or swap this block for a Sketchfab/Spline embed.</div>
+      <div class="muted" style="font-size:.9rem; text-align:center; margin-top:.25rem;">Swap to your own <code>assets/robot.glb</code> when ready.</div>
     </div>
   </section>
 
@@ -163,45 +165,150 @@
     <div class="grid">
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
-          <img class="thumb" src="images/project-hero.jpg" alt="HeRo robot demo thumbnail" loading="lazy" style="aspect-ratio:16 / 9;">
-          <div class="cap">ROS1 Twist choreography demo</div>
+          <img class="thumb" src="images/project-arm.jpg" alt="ROS2 token-sorting arm" loading="lazy" style="aspect-ratio:16 / 9;">
+          <div class="cap">ROS2 + OpenCV token sorter on Raspberry Pi</div>
         </div>
-        <h3>HeRo Robot “cmd_vel” Dance</h3>
-        <p>ROS1/Noetic demo that publishes a short Twist sequence to verify motion and topic wiring.</p>
-        <div class="tags"><span class="tag">ROS</span><span class="tag">Python</span><span class="tag">Gazebo</span></div>
+        <h3>3‑DOF Robotic Arm (ROS2)</h3>
+        <p>Built a 3‑DOF arm on Raspberry Pi with OpenCV color detection and ROS2. Designed, 3D‑printed, and integrated camera‑based sorting.</p>
+        <div class="tags"><span class="tag">ROS2</span><span class="tag">OpenCV</span><span class="tag">Raspberry Pi</span></div>
         <p class="row" style="margin-top:.5rem;">
-          <a class="btn" href="https://github.com/youruser/hero-demo" target="_blank" rel="noopener">View Code</a>
-          <a class="btn" href="videos/hero-dance.mp4">Demo Video</a>
+          <a class="btn" href="#" target="_blank" rel="noopener">Code (add link)</a>
         </p>
       </article>
 
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
-          <img class="thumb" src="images/project-ev.jpg" alt="EV charger module thumbnail" loading="lazy" style="aspect-ratio:16 / 9;">
-          <div class="cap">Fast-charging module teardown</div>
+          <img class="thumb" src="images/project-realsense.jpg" alt="ROS2 Realsense streaming" loading="lazy" style="aspect-ratio:16 / 9;">
+          <div class="cap">Compressed RealSense streaming, viewer, resolution select</div>
         </div>
-        <h3>EV Charger HW Notes</h3>
-        <p>Teardown and documentation of a fast-charging module; includes BOM, safety notes, and test setup.</p>
-        <div class="tags"><span class="tag">Hardware</span><span class="tag">Docs</span></div>
+        <h3>ROS2 RealSense Pipeline</h3>
+        <p>Camera streaming stack with compression, OpenCV viewer, and resolution control nodes; built for rover perception on Linux/Docker.</p>
+        <div class="tags"><span class="tag">ROS2</span><span class="tag">OpenCV</span><span class="tag">Docker</span></div>
         <p class="row" style="margin-top:.5rem;">
-          <a class="btn" href="https://github.com/youruser/ev-notes" target="_blank" rel="noopener">Read Notes</a>
+          <a class="btn" href="#" target="_blank" rel="noopener">Notes/Repo (add link)</a>
         </p>
       </article>
 
       <article class="card reveal">
         <div class="thumb-wrap" style="height:170px;">
-          <img class="thumb" src="images/project-vision.jpg" alt="Computer vision board-game robot thumbnail" loading="lazy" style="aspect-ratio:16 / 9;">
-          <div class="cap">OpenCV pick-and-place robot</div>
+          <img class="thumb" src="images/project-rover.jpg" alt="6‑wheel rover kinematics" loading="lazy" style="aspect-ratio:16 / 9;">
+          <div class="cap">Forward & inverse kinematics for 6‑wheel rover</div>
         </div>
-        <h3>CV Board‑Game Robot</h3>
-        <p>OpenCV piece detection with a small pick‑and‑place arm; basic path planning and calibration routine.</p>
-        <div class="tags"><span class="tag">OpenCV</span><span class="tag">Python</span><span class="tag">Mechanics</span></div>
-        <p class="row" style="margin-top:.5rem;">
-          <a class="btn" href="https://github.com/youruser/cv-robot" target="_blank" rel="noopener">View Code</a>
-          <a class="btn" href="images/project-vision.jpg">Screenshot</a>
-        </p>
+        <h3>Rover Kinematics</h3>
+        <p>Modeled and solved forward/inverse kinematics for a Mars‑style 6‑wheel drivetrain; fed into motion planning experiments.</p>
+        <div class="tags"><span class="tag">Kinematics</span><span class="tag">Modeling</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="thumb-wrap" style="height:170px;">
+          <img class="thumb" src="images/project-stm32.jpg" alt="C OS on STM32" loading="lazy" style="aspect-ratio:16 / 9;">
+          <div class="cap">Custom C OS on STM32 Nucleo‑64</div>
+        </div>
+        <h3>Embedded C Operating System</h3>
+        <p>In‑progress microcontroller OS in C on STM32: context switching, basic scheduling, and peripheral drivers.</p>
+        <div class="tags"><span class="tag">C</span><span class="tag">STM32</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="thumb-wrap" style="height:170px;">
+          <img class="thumb" src="images/project-plc.jpg" alt="Siemens PLC" loading="lazy" style="aspect-ratio:16 / 9;">
+          <div class="cap">Motors/sensors via ladder logic</div>
+        </div>
+        <h3>PLC Controls (Siemens)</h3>
+        <p>Programmed ladder logic to control motors, sensors, and buttons; built small factory‑style demos.</p>
+        <div class="tags"><span class="tag">PLC</span><span class="tag">Siemens</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="thumb-wrap" style="height:170px;">
+          <img class="thumb" src="images/project-ev3.jpg" alt="EV3 Rubik’s Solver" loading="lazy" style="aspect-ratio:16 / 9;">
+          <div class="cap">RobotC + Python solver integration</div>
+        </div>
+        <h3>Rubik’s Cube Solver (EV3)</h3>
+        <p>Built a LEGO EV3 robot in RobotC and integrated a Python solver; reliable cube solves with sensor feedback.</p>
+        <div class="tags"><span class="tag">RobotC</span><span class="tag">Python</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="thumb-wrap" style="height:170px;">
+          <img class="thumb" src="images/project-arcade.jpg" alt="Retro arcade" loading="lazy" style="aspect-ratio:16 / 9;">
+          <div class="cap">Raspberry Pi arcade retrofit</div>
+        </div>
+        <h3>Retro Arcade Console</h3>
+        <p>Retrofit arcade cabinet powered by Raspberry Pi; controls, display, and ROM management tuned for plug‑and‑play.</p>
+        <div class="tags"><span class="tag">Raspberry Pi</span></div>
       </article>
     </div>
+  </section>
+
+  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
+
+  <section id="experience" class="wrap">
+    <h2 class="reveal">Experience</h2>
+    <div class="grid">
+      <article class="card reveal">
+        <h3>Robotics Research Assistant — UW RoboHub</h3>
+        <p class="muted">Sep 2025 – Dec 2025</p>
+        <ul>
+          <li>Contributed to robotics research initiatives at Waterloo RoboHub.</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3>Robotics Engineering — UW Robotics Team (Co‑op)</h3>
+        <p class="muted">Jun 2025 – Aug 2025</p>
+        <ul>
+          <li>Developed control & autonomy in Linux with ROS2 (Docker).</li>
+          <li>Built RealSense streaming with compression, OpenCV viewer, resolution selection.</li>
+          <li>Modeled 6‑wheel drivetrain; solved forward & inverse kinematics.</li>
+          <li>Supported electro‑mechanical integration and component sourcing/design.</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3>Robotics Engineering — BHF Robotics (Co‑op)</h3>
+        <p class="muted">May 2025 – Jun 2025</p>
+        <ul>
+          <li>Autonomous Electric Weeder: ROS2 navigation & auto‑drive algorithms.</li>
+          <li>Trained deep learning model for weed/crop detection.</li>
+          <li>Restored manual controls and e‑stop; resolved electrical issues.</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3>Mechatronics Engineering — RAB Design Lighting (Co‑op)</h3>
+        <p class="muted">Sep 2024 – Dec 2024</p>
+        <ul>
+          <li>Validated lighting controls app; authored manuals & training material.</li>
+          <li>Process‑improvement tooling for product launches; electrical & mechanical testing.</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3>Quality Assurance — Ontario Drive & Gear (Co‑op)</h3>
+        <p class="muted">Jan 2024 – Apr 2024</p>
+        <ul>
+          <li>Led QA for prototype product launch under tight deadlines (AGMA Foundation Scholarship recognition).</li>
+          <li>Performed precision inspections using GD&T and delivered engineering documentation.</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3>Electrical Engineering — Jule/eCAMION (Co‑op)</h3>
+        <p class="muted">Feb 2022 – Jun 2022</p>
+        <ul>
+          <li>Hands‑on across electrical, design, software & QA for EV charging systems; assembly & wiring.</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3>Youth Robotics Mentor — FIRST (FLL)</h3>
+        <p class="muted">Jan 2021 – Dec 2023</p>
+        <ul>
+          <li>Coach/Mentor Award; team qualified for Arkansas Razorback International.</li>
+        </ul>
+      </article>
+    </div>
+
+    <h3 class="reveal" style="margin-top:1.5rem;">Selected Awards</h3>
+    <ul class="reveal">
+      <li>FIRST Mechatronics Engineering Scholarship (University of Waterloo) — $5,000</li>
+      <li>AGMA Foundation Scholarship — recognition for excellence during prototype launch</li>
+    </ul>
   </section>
 
   <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
@@ -209,7 +316,7 @@
   <!-- Robotics Playground: interactive three.js planar arm demo (no assets) -->
   <section id="playground" class="wrap">
     <h2 class="reveal">Robotics Playground — 3‑DOF Planar Arm</h2>
-    <p class="reveal muted">Tiny kinematics sandbox: adjust joint angles and see the links update. Built with three.js (static‑site friendly).</p>
+    <p class="reveal muted">Tiny kinematics sandbox: adjust joint angles and see links update. Built with three.js; great for explaining forward kinematics.</p>
     <div class="reveal" style="display:grid; grid-template-columns: 1fr 300px; gap:1rem; align-items:start;">
       <canvas id="arm3d" style="width:100%; height:420px; border-radius: var(--round); outline:1px solid var(--line);"></canvas>
       <div class="card" style="padding:1rem;">
@@ -217,7 +324,7 @@
         <label>θ2 (shoulder): <input id="j2" type="range" min="-180" max="180" value="30"></label><br/>
         <label>θ3 (elbow): <input id="j3" type="range" min="-180" max="180" value="-15"></label><br/>
         <p class="muted" id="ee"></p>
-        <p class="muted">Tip: Replace this with your <code>.glb</code> robot in the hero above for a portfolio‑grade 3D viewer, and keep this sandbox as an educational demo.</p>
+        <p class="muted">Tip: keep this as a learning demo; show your robot model above for portfolio visuals.</p>
       </div>
     </div>
   </section>
@@ -226,20 +333,21 @@
 
   <section id="about" class="wrap">
     <h2 class="reveal">About</h2>
-    <p class="reveal muted">2–3 sentences about your studies, what you like building, and what you’re looking for (internship/co‑op, research, etc.).
-    Add a headshot at <code>images/avatar.jpg</code> and reference it if you like.</p>
+    <p class="reveal muted">I’m Brandon Jahoor — a Mechatronics Engineering student at the University of Waterloo. I’ve built ROS2 perception pipelines, modeled rover kinematics, and shipped autonomous behaviors on real robots. I enjoy fast prototyping across software, electrical, and mechanical, and I’m aiming my Winter 2026 co‑op at robotics/embedded teams.</p>
   </section>
 
   <section id="contact" class="wrap">
     <h2 class="reveal">Contact</h2>
     <p class="reveal row">
       <a class="btn primary" href="resume.pdf" download>Download Resume (PDF)</a>
-      <a class="btn" href="mailto:you@school.edu">Email me</a>
+      <a class="btn" href="mailto:bjahoor@uwaterloo.ca">bjahoor@uwaterloo.ca</a>
+      <a class="btn" href="https://www.linkedin.com/in/bjahoor" target="_blank" rel="noopener">LinkedIn</a>
     </p>
+    <p class="reveal muted">Phone: +1 (647) 668‑7341</p>
   </section>
 
   <footer class="wrap">
-    <p>© <span id="y"></span> Your Name — Built with GitHub Pages.</p>
+    <p>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</p>
   </footer>
 
   <!-- Scripts -->
@@ -345,7 +453,7 @@
       j1.rotation.z = Number(s1.value) * r2d;
       j2.rotation.z = Number(s2.value) * r2d;
       j3.rotation.z = Number(s3.value) * r2d;
-      // Compute forward kinematics in plane (x,y)
+      // Forward kinematics in plane (x,y)
       const a1=1.6, a2=1.3, a3=1.0;
       const t1=j1.rotation.z, t2=j2.rotation.z, t3=j3.rotation.z;
       const x = a1*Math.cos(t1) + a2*Math.cos(t1+t2) + a3*Math.cos(t1+t2+t3);
@@ -357,7 +465,7 @@
     function onResize(){ sizeArm(); camera.aspect = c.clientWidth / c.clientHeight; camera.updateProjectionMatrix(); }
     addEventListener('resize', onResize);
 
-    function animate(t){ ctrls.update(); renderer.render(scene, camera); requestAnimationFrame(animate); }
+    function animate(){ ctrls.update(); renderer.render(scene, camera); requestAnimationFrame(animate); }
     requestAnimationFrame(animate);
   </script>
 </body>

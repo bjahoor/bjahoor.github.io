@@ -32,39 +32,10 @@
 
     h2{font-family:var(--font-display);font-size:clamp(1.3rem,2.8vw,1.8rem);margin:1rem 0}
     .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .card{
-      position:relative;
-      overflow:visible; /* allow pop-out */
-      border-radius:var(--round);
-      height:200px;
-      box-shadow:var(--shadow);
-      cursor:pointer;
-    }
-    .card img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      border-radius:var(--round);
-      transition:transform .5s var(--ease), box-shadow .5s var(--ease);
-    }
-    .card:hover img{
-      transform:scale(1.3);
-      box-shadow:0 10px 30px rgba(0,0,0,0.6);
-      z-index:2;
-    }
-    .card h3{
-      position:absolute;bottom:0;left:0;right:0;
-      margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.5);font-size:1rem;
-      z-index:3;
-    }
-    .overlay{
-      position:absolute;inset:0;
-      background:rgba(0,0,0,.75);
-      color:#fff;padding:1rem;opacity:0;transition:opacity .3s;
-      z-index:3;
-      display:flex;align-items:center;justify-content:center;text-align:center;
-    }
-    .card:hover .overlay{opacity:1}
+    .card{position:relative;border-radius:var(--round);overflow:hidden;height:200px;cursor:pointer;box-shadow:var(--shadow)}
+    .card img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+    .card:hover img{transform:scale(1.05)}
+    .card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.5);font-size:1rem}
 
     /* timeline */
     #experience .timeline{position:relative;list-style:none;margin:1rem 0;padding-left:1.25rem}
@@ -75,6 +46,11 @@
 
     footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
     #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
+
+    /* lightbox */
+    #lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:999}
+    #lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 0 25px rgba(0,0,0,.6)}
+    #lightbox.closeable{cursor:zoom-out}
   </style>
 </head>
 <body>
@@ -109,27 +85,17 @@
   <section id="projects" class="wrap">
     <h2>Projects</h2>
     <div class="grid">
-      <div class="card">
-        <img src="images/robohub.png" alt="UW RoboHub">
-        <h3>UW RoboHub Research</h3>
-        <div class="overlay">Robotics research at the University of Waterloo’s RoboHub, exploring swarm robotics and advanced mechatronic systems.</div>
-      </div>
-
-      <div class="card">
-        <img src="images/project-swarm.jpg" alt="Swarm Hackathon">
-        <h3>Swarm Hackathon — HeRo 2.0</h3>
-        <div class="overlay">Developed swarm algorithms and navigation using HeRo 2.0 robots during a robotics hackathon.</div>
-      </div>
-
-      <div class="card"><img src="images/project-rover.jpg"><h3>Mars-Style Rover</h3><div class="overlay">Designed and prototyped a rover platform for navigation and autonomy testing.</div></div>
-      <div class="card"><img src="images/project-realsense.jpg"><h3>ROS2 RealSense Pipeline</h3><div class="overlay">Implemented a perception stack using Intel RealSense and ROS2 for robotics projects.</div></div>
-      <div class="card"><img src="images/project-rover.jpg"><h3>Rover Kinematics</h3><div class="overlay">Validated and modeled rover kinematics for autonomous navigation.</div></div>
-      <div class="card"><img src="images/project-arm.jpg"><h3>3-DOF Robotic Arm (ROS2)</h3><div class="overlay">Designed and programmed a small robotic arm with ROS2 control.</div></div>
-      <div class="card"><img src="images/project-stm32.jpg"><h3>Embedded C Operating System</h3><div class="overlay">Created a lightweight embedded OS on STM32 microcontrollers in C.</div></div>
-      <div class="card"><img src="images/project-bike.jpg"><h3>Motorized Bicycle</h3><div class="overlay">Built and modified an electric-assisted bicycle with custom control.</div></div>
-      <div class="card"><img src="images/project-plc.jpg"><h3>PLC Controls (Siemens)</h3><div class="overlay">Developed industrial control logic on Siemens PLCs for automation systems.</div></div>
-      <div class="card"><img src="images/project-ev3.jpg"><h3>Rubik’s Cube Solver (EV3)</h3><div class="overlay">Programmed an EV3 robot to solve a Rubik’s Cube autonomously.</div></div>
-      <div class="card"><img src="images/project-arcade.jpg"><h3>Retro Arcade Console</h3><div class="overlay">Designed and built a retro gaming console with custom controls and Raspberry Pi.</div></div>
+      <div class="card"><img src="images/robohub.png" alt="UW RoboHub"><h3>UW RoboHub Research</h3></div>
+      <div class="card"><img src="images/project-swarm.jpg" alt="Swarm Hackathon"><h3>Swarm Hackathon — HeRo 2.0</h3></div>
+      <div class="card"><img src="images/project-rover.jpg" alt="Mars Rover"><h3>Mars-Style Rover</h3></div>
+      <div class="card"><img src="images/project-realsense.jpg" alt="RealSense"><h3>ROS2 RealSense Pipeline</h3></div>
+      <div class="card"><img src="images/project-rover.jpg" alt="Rover Kinematics"><h3>Rover Kinematics</h3></div>
+      <div class="card"><img src="images/project-arm.jpg" alt="Robotic Arm"><h3>3-DOF Robotic Arm (ROS2)</h3></div>
+      <div class="card"><img src="images/project-stm32.jpg" alt="Embedded OS"><h3>Embedded C Operating System</h3></div>
+      <div class="card"><img src="images/project-bike.jpg" alt="Motorized Bike"><h3>Motorized Bicycle</h3></div>
+      <div class="card"><img src="images/project-plc.jpg" alt="PLC"><h3>PLC Controls (Siemens)</h3></div>
+      <div class="card"><img src="images/project-ev3.jpg" alt="EV3"><h3>Rubik’s Cube Solver (EV3)</h3></div>
+      <div class="card"><img src="images/project-arcade.jpg" alt="Arcade"><h3>Retro Arcade Console</h3></div>
     </div>
   </section>
 
@@ -157,7 +123,19 @@
 
   <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <!-- Lightbox -->
+  <div id="lightbox" class="closeable"><img src="" alt=""></div>
+  <script>
+    document.getElementById('y').textContent=new Date().getFullYear();
+    const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');
+    document.querySelectorAll('.card img').forEach(img=>{
+      img.addEventListener('click',()=>{
+        lbImg.src=img.src;
+        lb.style.display='flex';
+      });
+    });
+    lb.addEventListener('click',()=>{lb.style.display='none';lbImg.src='';});
+  </script>
 
   <!-- 3D background -->
   <script type="module">

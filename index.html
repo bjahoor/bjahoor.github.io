@@ -4,128 +4,88 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Brandon Jahoor — Portfolio</title>
-  <meta name="description" content="Mechatronics & Robotics — projects, resume, and contact. Subtle animations and interactive 3D demos." />
   <link rel="icon" href="favicon.ico">
-  <!-- Typography -->
+  <script>document.documentElement.classList.add('js')</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <style>
-    /* ====== Design tokens ====== */
-    :root {
-      --max: 1080px; --pad: 1.25rem;
-      /* Deep Indigo palette */
+    :root{
+      --max:1080px; --pad:1.25rem;
       --bg:#0b0c12; --fg:#eef0f4; --muted:#9aa1ac; --line:#262837; --card:#12131b;
       --brand:#7aa2ff; --brand-2:#9b6bff; --accent:#2adbb1;
-      --round: 16px; --shadow: 0 10px 25px rgba(0,0,0,.25);
-      --ease: cubic-bezier(.2,.65,.2,1);
-      --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      --font-display: "Space Grotesk", var(--font-sans);
+      --round:16px; --shadow:0 10px 25px rgba(0,0,0,.25);
+      --ease:cubic-bezier(.2,.65,.2,1);
+      --font-sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      --font-display:"Space Grotesk",var(--font-sans);
     }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body { margin:0; font-family: var(--font-sans); letter-spacing:.02px; line-height:1.6; color:var(--fg); background:var(--bg); }
-
-    /* ====== Moving gradient backdrop (subtle) ====== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:var(--font-sans);line-height:1.6;color:var(--fg);background:var(--bg)}
     body::before{
-      content:""; position: fixed; inset:-20vmax; z-index:-3;
-      background: radial-gradient(60vmax 60vmax at 20% 15%, rgba(122,162,255,.12), transparent 60%),
-                  radial-gradient(60vmax 60vmax at 80% 30%, rgba(42,219,177,.10), transparent 60%),
-                  radial-gradient(70vmax 70vmax at 50% 80%, rgba(155,107,255,.10), transparent 60%);
-      animation: drift 28s linear infinite alternate;
-      filter: saturate(120%);
+      content:"";position:fixed;inset:-20vmax;z-index:-3;
+      background:
+        radial-gradient(60vmax 60vmax at 20% 15%, rgba(122,162,255,.12), transparent 60%),
+        radial-gradient(60vmax 60vmax at 80% 30%, rgba(42,219,177,.10), transparent 60%),
+        radial-gradient(70vmax 70vmax at 50% 80%, rgba(155,107,255,.10), transparent 60%);
+      animation:drift 28s linear infinite alternate; filter:saturate(120%);
     }
-    /* Studio grain overlay */
-    body::after{
-      content:""; position:fixed; inset:0; pointer-events:none; z-index:-2;
-      background-image: radial-gradient(rgba(255,255,255,.015) 1px, transparent 1.5px),
-                        radial-gradient(rgba(0,0,0,.02) 1px, transparent 1.5px);
-      background-size: 3px 3px, 4px 4px; mix-blend-mode: overlay;
-    }
-    @keyframes drift { to { transform: translate3d(3vmax,-3vmax,0) scale(1.02); } }
+    @keyframes drift{to{transform:translate3d(3vmax,-3vmax,0) scale(1.02)}}
+    #bg3d{position:fixed;inset:0;z-index:-2;display:block;background:transparent}
 
-    /* ====== Starfield canvas behind everything ====== */
-    #bg { position: fixed; inset:0; z-index:-1; display:block; background: transparent; }
+    header{position:sticky;top:0;backdrop-filter:blur(6px);
+      background:color-mix(in oklab,var(--bg),transparent 70%);border-bottom:1px solid var(--line);z-index:10}
+    .wrap{max-width:var(--max);margin:0 auto;padding:var(--pad)}
+    nav a{color:var(--fg);opacity:.9;text-decoration:none;margin-right:1rem}
+    nav a:hover{color:var(--brand)}
 
-    header { position: sticky; top:0; backdrop-filter: blur(6px); background: color-mix(in oklab, var(--bg), transparent 70%);
-      border-bottom: 1px solid var(--line); z-index: 10; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: var(--pad); }
-    nav a { color: var(--fg); opacity:.9; text-decoration:none; margin-right:1rem; }
-    nav a:hover { color: var(--brand); }
+    .hero{padding:clamp(1rem,4vw,2.5rem) var(--pad)}
+    .hero h1{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.2rem)}
+    .grad-text{background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:.75rem;flex-wrap:wrap}
 
-    .hero { display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem; align-items:center; padding: clamp(1rem,4vw,2.5rem) var(--pad); transition: transform .3s var(--ease); }
-    .hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3.2rem); line-height:1.15; margin:.25rem 0; letter-spacing:.4px; }
-    .grad-text { background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .muted { color: var(--muted); }
-    .row { display:flex; gap:.75rem; flex-wrap:wrap; }
+    .btn{padding:.7rem 1rem;border-radius:12px;text-decoration:none;border:1px solid var(--line);
+      background:var(--card);color:var(--fg);box-shadow:var(--shadow);transition:transform .2s var(--ease),border .2s var(--ease)}
+    .btn:hover{transform:translateY(-2px);border-color:color-mix(in oklab,var(--brand),white 15%)}
+    .btn.primary{background:linear-gradient(135deg,color-mix(in oklab,var(--brand),white 8%),var(--brand-2));border-color:transparent}
 
-    .btn { position:relative; overflow:hidden; display:inline-block; padding:.7rem 1rem; border-radius:12px; text-decoration:none; border:1px solid var(--line); background:var(--card); color:var(--fg); box-shadow: var(--shadow);
-      transition: transform .2s var(--ease), background .2s var(--ease), border .2s var(--ease); }
-    .btn:hover { transform: translateY(-2px); border-color: color-mix(in oklab, var(--brand), white 15%); }
-    .btn.primary { background: linear-gradient(135deg, color-mix(in oklab, var(--brand), white 8%), var(--brand-2)); border-color: transparent; box-shadow: 0 8px 18px rgba(0,0,0,.25); }
-    .btn.primary::after{ content:""; position:absolute; inset:0; opacity:0;
-      background: radial-gradient(120px 60px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.22), transparent 40%);
-      transition: opacity .25s var(--ease); }
-    .btn.primary:hover::after{ opacity:1; }
-    .btn:active{ transform: translateY(1px); }
+    section{padding:2rem var(--pad)}
+    h2{font-family:var(--font-display);font-size:clamp(1.3rem,2.8vw,1.8rem);margin-bottom:.75rem}
+    .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:color-mix(in oklab,var(--card),transparent 20%);border:1px solid color-mix(in oklab,var(--line),white 5%);
+      border-radius:var(--round);padding:1rem;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .thumb{width:100%;height:170px;border-radius:12px;object-fit:cover}
+    .thumb-wrap{position:relative;overflow:hidden;border-radius:12px}
+    .thumb-wrap img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+    .thumb-wrap:hover img{transform:scale(1.04)}
+    .tags{margin-top:.4rem}
+    .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.85rem;margin:.1rem .25rem 0 0;color:var(--muted)}
 
-    /* Text underline aesthetic */
-    a.underline { background: linear-gradient(currentColor,currentColor) 0 100% / 0 1px no-repeat; transition: background-size .25s ease; }
-    a.underline:hover { background-size: 100% 1px; }
+    /* reveal safe */
+    .js.anim-ready .reveal{opacity:0;transform:translateY(14px) scale(.98);filter:blur(3px);transition:.9s var(--ease)}
+    .js.anim-ready .reveal.visible{opacity:1;transform:none;filter:none}
 
-    /* Cards grid */
-    section { padding: 2rem var(--pad); }
-    h2 { font-family: var(--font-display); font-size: clamp(1.3rem, 2.8vw, 1.8rem); margin: 0 0 .75rem 0; letter-spacing:.4px; }
-    .grid { display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .card { background: color-mix(in oklab, var(--card), transparent 20%); border: 1px solid color-mix(in oklab, var(--line), white 5%); border-radius: var(--round); padding: 1rem; box-shadow: 0 8px 24px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.03); transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
-    .card:hover{ transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,.32); }
+    /* timeline for experience */
+    #experience .timeline{position:relative;list-style:none;margin:1rem 0;padding-left:1.25rem}
+    #experience .timeline::before{content:\"\";position:absolute;left:.55rem;top:0;bottom:0;width:2px;background:var(--line)}
+    #experience .timeline li{position:relative;margin:.9rem 0;padding-left:1.25rem}
+    #experience .timeline li .node{position:absolute;left:.2rem;top:.45rem;width:10px;height:10px;border-radius:50%;background:var(--brand)}
+    #experience .timeline h3{margin:0;font-size:1.05rem;font-weight:600}
 
-    .thumb { width:100%; height:170px; border-radius:12px; object-fit: cover; background:#1b1c23; }
-    .thumb-wrap{ position:relative; overflow:hidden; border-radius:12px; }
-    .thumb-wrap img{ display:block; width:100%; height:100%; object-fit:cover; transform: translateZ(0); transition: transform .5s var(--ease), filter .5s var(--ease); }
-    .thumb-wrap .cap{ position:absolute; inset:auto 0 0 0; padding:.6rem .8rem; color:#fff; font-size:.9rem; background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0)); opacity:0; transform: translateY(10px); transition: .35s var(--ease); }
-    .thumb-wrap:hover img{ transform: scale(1.04); filter: saturate(105%); }
-    .thumb-wrap:hover .cap{ opacity:1; transform: translateY(0); }
-
-    .tags { margin:.4rem 0 0; }
-    .tag { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:.15rem .6rem; font-size:.85rem; margin:.1rem .25rem 0 0; color: var(--muted); }
-
-    /* Reveal on scroll + stagger */
-    .reveal { opacity:0; transform: translateY(14px) scale(.98); filter: blur(3px); transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); }
-    .reveal.visible { opacity:1; transform: none; filter: blur(0); }
-
-    /* Scroll progress bar */
-    #prog { position:fixed; top:0; left:0; height:3px; width:0; background: var(--brand); z-index:9999; }
-
-    footer { border-top:1px solid var(--line); color: var(--muted); font-size:.95rem; }
-
-    /* Section divider color */
-    .divider { display:block; width:100%; height:auto; opacity:.6; color:var(--card); }
-
-    /* Responsive hero stack */
-    @media (max-width: 900px){ .hero { grid-template-columns: 1fr; } }
-
-    /* Reduce motion */
-    @media (prefers-reduced-motion: reduce){
-      body::before{ animation: none; }
-      .reveal { transition: none; opacity: 1; transform: none; filter:none; }
-    }
-
-    /* Polished scrollbars */
-    *::-webkit-scrollbar{ height:10px; width:10px; }
-    *::-webkit-scrollbar-track{ background:var(--bg); }
-    *::-webkit-scrollbar-thumb{ background: color-mix(in oklab, var(--brand), black 20%); border-radius:999px; border:2px solid var(--bg); }
+    .divider{display:block;width:100%;height:auto;opacity:.6;color:var(--card)}
+    footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
   </style>
 </head>
 <body>
-  <canvas id="bg" aria-hidden="true"></canvas>
-  <div id="prog"></div>
+  <canvas id="bg3d" aria-hidden="true"></canvas>
 
   <header>
-    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
-      <div style="font-weight:700; letter-spacing:.3px; font-family: var(--font-display);">Brandon Jahoor</div>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;">
+      <div style="font-weight:700;font-family:var(--font-display)">Brandon Jahoor</div>
       <nav>
+        <a href="#robohub">UW RoboHub</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
-        <a class="underline" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Resume (PDF)</a>
+        <a href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Resume (PDF)</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -134,98 +94,102 @@
   <section class="hero wrap">
     <div class="reveal">
       <h1 class="grad-text">Mechatronics & Robotics Engineering — University of Waterloo</h1>
-      <p class="muted">Robotics engineering undergraduate with hands‑on work in ROS2 perception, rover kinematics, and autonomous systems. Built camera pipelines, modeled drive trains, and deployed navigation for real robots. Seeking Winter 2026 robotics/embedded roles.</p>
+      <p class="muted">Robotics engineering undergraduate with hands-on work in ROS2 perception, rover kinematics, and autonomous systems.</p>
       <div class="row" style="margin-top:.6rem;">
         <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume</a>
-        <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
         <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
       </div>
-      <p class="muted" style="margin-top:.5rem;">bjahoor@uwaterloo.ca · +1 (647) 668‑7341</p>
-    </div>
-
-    <!-- 3D viewer: uses a hosted sample so it works instantly; replace src with assets/robot.glb later -->
-    <div class="reveal" style="min-height: 360px;">
-      <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-      <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" alt="Robot model"
-        camera-controls auto-rotate auto-rotate-delay="0" camera-orbit="35deg 70deg 3.2m"
-        interaction-prompt="none"
-        environment-image="https://modelviewer.dev/shared-assets/environments/three-point-light.hdr"
-        exposure="1.1" shadow-intensity="1"
-        style="width:100%; height:360px; background: transparent; border-radius: var(--round); outline:1px solid var(--line);"></model-viewer>
-      <div class="muted" style="font-size:.9rem; text-align:center; margin-top:.25rem;">Swap to your own <code>assets/robot.glb</code> when ready.</div>
     </div>
   </section>
 
-  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
+  <svg class="divider" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
+
+  <section id="robohub" class="wrap">
+    <h2 class="reveal">UW RoboHub</h2>
+    <div class="card reveal" style="display:flex;justify-content:center;align-items:center;min-height:120px;">
+      <img src="images/robohub.png" alt="UW RoboHub logo" style="max-width:220px;background:#fff;border-radius:12px;padding:.4rem;">
+    </div>
+  </section>
+
+  <svg class="divider" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
 
   <section id="projects" class="wrap">
     <h2 class="reveal">Projects</h2>
     <div class="grid">
+      <!-- Swarm Hackathon -->
       <article class="card reveal">
-        <div class="thumb-wrap" style="height:170px;">
-          <img class="thumb" src="images/project-ev3.jpg" alt="EV3 Rubik’s Solver" loading="lazy" style="aspect-ratio:16 / 9;">
-          <div class="cap">RobotC + Python solver integration</div>
-        </div>
-        <h3>Rubik’s Cube Solver (EV3)</h3>
-        <p>Built a LEGO EV3 robot in RobotC and integrated a Python solver; reliable cube solves with sensor feedback.</p>
-        <div class="tags"><span class="tag">RobotC</span><span class="tag">Python</span></div>
+        <div class="thumb-wrap"><img class="thumb" src="images/project-swarm.jpg" alt="HeRo 2.0 swarm"></div>
+        <h3>Swarm Hackathon — HeRo 2.0</h3>
       </article>
-
-      <article class="card reveal">
-        <div class="thumb-wrap" style="height:170px;">
-          <img class="thumb" src="images/project-arcade.jpg" alt="Retro arcade" loading="lazy" style="aspect-ratio:16 / 9;">
-          <div class="cap">Raspberry Pi arcade retrofit</div>
-        </div>
-        <h3>Retro Arcade Console</h3>
-        <p>Retrofit arcade cabinet powered by Raspberry Pi; controls, display, and ROM management tuned for plug‑and‑play.</p>
-        <div class="tags"><span class="tag">Raspberry Pi</span></div>
-      </article>
+      <article class="card reveal"><div class="thumb-wrap"><img class="thumb" src="images/project-rover.jpg"></div><h3>Mars-Style Rover</h3></article>
+      <article class="card reveal"><div class="thumb-wrap"><img class="thumb" src="images/project-realsense.jpg"></div><h3>ROS2 RealSense Pipeline</h3></article>
+      <article class="card reveal"><div class="thumb-wrap"><img class="thumb" src="images/project-rover.jpg"></div><h3>Rover Kinematics</h3></article>
+      <article class="card reveal"><div class="thumb-wrap"><img class="thumb" src="images/project-arm.jpg"></div><h3>3-DOF Robotic Arm (ROS2)</h3></article>
+      <article class="card reveal"><div class="thumb-wrap"><img class="thumb" src="images/project-stm32.jpg"></div><h3>Embedded C Operating System</h3></article>
+      <article class="card reveal"><div class="thumb-wrap"><img class="thumb" src="images/project-bike.jpg"></div><h3>Motorized Bicycle</h3></article>
+      <article class="card reveal"><div class="thumb-wrap"><img class="thumb" src="images/project-plc.jpg"></div><h3>PLC Controls (Siemens)</h3></article>
+      <article class="card reveal"><div class="thumb-wrap"><img class="thumb" src="images/project-ev3.jpg"></div><h3>Rubik’s Cube Solver (EV3)</h3></article>
+      <article class="card reveal"><div class="thumb-wrap"><img class="thumb" src="images/project-arcade.jpg"></div><h3>Retro Arcade Console</h3></article>
     </div>
   </section>
 
-  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
+  <svg class="divider" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
 
   <section id="experience" class="wrap">
     <h2 class="reveal">Experience</h2>
-    <style>
-      /* Roadmap / timeline styles scoped to Experience */
-      #experience .timeline{position:relative;list-style:none;margin:1rem 0;padding-left:1.25rem}
-      #experience .timeline::before{content:"";position:absolute;left:.55rem;top:0;bottom:0;width:2px;background:var(--line)}
-      #experience .timeline li{position:relative;margin:.9rem 0;padding-left:1.25rem}
-      #experience .timeline li .node{position:absolute;left:.2rem;top:.45rem;width:10px;height:10px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 6px color-mix(in oklab,var(--brand),transparent 85%)}
-      #experience .timeline h3{margin:0;font-size:1.05rem;font-weight:600}
-    </style>
     <ol class="timeline reveal">
       <li><span class="node"></span><h3>Robotics Research Assistant — UW RoboHub</h3></li>
-      <li><span class="node"></span><h3>Robotics Engineering — UW Robotics Team (Co‑op)</h3></li>
-      <li><span class="node"></span><h3>Robotics Engineering — BHF Robotics (Co‑op)</h3></li>
-      <li><span class="node"></span><h3>Mechatronics Engineering — RAB Design Lighting (Co‑op)</h3></li>
-      <li><span class="node"></span><h3>Quality Assurance — Ontario Drive & Gear (Co‑op)</h3></li>
-      <li><span class="node"></span><h3>Electrical Engineering — Jule/eCAMION (Co‑op)</h3></li>
+      <li><span class="node"></span><h3>Robotics Engineering — UW Robotics Team (Co-op)</h3></li>
+      <li><span class="node"></span><h3>Robotics Engineering — BHF Robotics (Co-op)</h3></li>
+      <li><span class="node"></span><h3>Mechatronics Engineering — RAB Design Lighting (Co-op)</h3></li>
+      <li><span class="node"></span><h3>Quality Assurance — Ontario Drive & Gear (Co-op)</h3></li>
+      <li><span class="node"></span><h3>Electrical Engineering — Jule/eCAMION (Co-op)</h3></li>
       <li><span class="node"></span><h3>Youth Robotics Mentor — FIRST (FLL)</h3></li>
     </ol>
   </section>
 
-  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
-
-  <!-- Robotics Playground: interactive three.js planar arm demo (no assets) -->
-  <svg class="divider" aria-hidden="true" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
+  <svg class="divider" viewBox="0 0 1440 90"><path fill="currentColor" d="M0,64 C240,16 480,16 720,64 C960,112 1200,112 1440,64 L1440,160 L0,160 Z"/></svg>
 
   <section id="contact" class="wrap">
     <h2 class="reveal">Contact</h2>
-    <p class="reveal row">
+    <p class="row reveal">
       <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume (PDF)</a>
-      <a class="btn" href="mailto:bjahoor@uwaterloo.ca">bjahoor@uwaterloo.ca</a>
-      <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
+      <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
     </p>
-    <p class="reveal muted">Phone: +1 (647) 668‑7341</p>
   </section>
 
-  <footer class="wrap">
-    <p>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</p>
-  </footer>
+  <footer class="wrap"><p>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</p></footer>
 
-  <!-- Scripts -->
-  
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      const els=document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('visible'));return;}
+      const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}})},{rootMargin:'0px 0px -10% 0px',threshold:.1});
+      els.forEach(el=>io.observe(el));
+      document.documentElement.classList.add('anim-ready');
+      document.getElementById('y').textContent=new Date().getFullYear();
+    });
+  </script>
+
+  <!-- 3D background -->
+  <script type="module">
+    import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
+    const canvas=document.getElementById('bg3d');
+    const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
+    camera.position.z=12;
+    const COUNT=2500,geo=new THREE.BufferGeometry(),pos=new Float32Array(COUNT*3);
+    for(let i=0;i<COUNT;i++){pos[i*3]=(Math.random()-0.5)*40;pos[i*3+1]=(Math.random()-0.5)*24;pos[i*3+2]=(Math.random()-0.5)*40;}
+    geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    const mat=new THREE.PointsMaterial({size:0.045,transparent:true,opacity:0.85,color:0x7aa2ff,depthWrite:false});
+    scene.add(new THREE.Points(geo,mat));
+    function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
+    window.addEventListener('resize',resize);resize();
+    let t=0;function anim(){requestAnimationFrame(anim);t+=0.0025;scene.rotation.y=t*0.6;renderer.render(scene,camera);}anim();
+  </script>
 </body>
 </html>

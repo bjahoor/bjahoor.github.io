@@ -60,7 +60,7 @@
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Resume (PDF)</a>
-        <a href="#contact">Contact</a>
+        <a href="mailto:bjahoor@uwaterloo.ca">Contact</a>
       </nav>
     </div>
   </header>
@@ -97,15 +97,6 @@
     </ol>
   </section>
 
-  <section id="contact" class="wrap">
-    <h2>Contact</h2>
-    <div class="row">
-      <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume (PDF)</a>
-      <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
-      <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
-    </div>
-  </section>
-
   <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
   <!-- Lightbox -->
@@ -132,7 +123,7 @@
     ];
 
     const grid=document.getElementById("projectGrid");
-    projects.forEach((p,i)=>{
+    projects.forEach(p=>{
       const c=document.createElement("div");
       c.className="card";
       c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;

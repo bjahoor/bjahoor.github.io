@@ -7,9 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --max:1080px; --pad:1.25rem;
-      --bg:#0b0c12; --fg:#eef0f4; --muted:#9aa1ac; --line:#262837; --card:#12131b;
-      --brand:#7aa2ff; --brand-2:#9b6bff; --round:16px; --shadow:0 10px 25px rgba(0,0,0,.25);
+      --max:1080px;--pad:1.25rem;--bg:#0b0c12;--fg:#eef0f4;--muted:#9aa1ac;--line:#262837;
+      --card:#12131b;--brand:#7aa2ff;--brand-2:#9b6bff;--round:16px;--shadow:0 10px 25px rgba(0,0,0,.25);
       --ease:cubic-bezier(.2,.65,.2,1);
       --font-sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       --font-display:"Space Grotesk",var(--font-sans);
@@ -20,36 +19,34 @@
     .wrap{max-width:var(--max);margin:0 auto;padding:var(--pad)}
     nav a{color:var(--fg);opacity:.9;text-decoration:none;margin-right:1rem}
     nav a:hover{color:var(--brand)}
-
     .hero{padding:clamp(1rem,4vw,2.5rem) var(--pad)}
     .hero h1{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.2rem)}
-    .grad-text{background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .grad-text{background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      -webkit-background-clip:text;background-clip:text;color:transparent}
     .muted{color:var(--muted)}
     .row{display:flex;gap:.75rem;flex-wrap:wrap}
-    .btn{padding:.7rem 1rem;border-radius:12px;text-decoration:none;border:1px solid var(--line);
-      background:var(--card);color:var(--fg);box-shadow:var(--shadow)}
+    .btn{padding:.7rem 1rem;border-radius:12px;text-decoration:none;
+      border:1px solid var(--line);background:var(--card);color:var(--fg);box-shadow:var(--shadow)}
     .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none}
-
     h2{font-family:var(--font-display);font-size:clamp(1.3rem,2.8vw,1.8rem);margin:1rem 0}
     .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .card{position:relative;border-radius:var(--round);overflow:hidden;height:200px;cursor:pointer;box-shadow:var(--shadow)}
     .card img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
     .card:hover img{transform:scale(1.05)}
     .card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.5);font-size:1rem}
-
-    /* timeline */
     #experience .timeline{position:relative;list-style:none;margin:1rem 0;padding-left:1.25rem}
     #experience .timeline::before{content:"";position:absolute;left:.55rem;top:0;bottom:0;width:2px;background:var(--line)}
     #experience .timeline li{position:relative;margin:.9rem 0;padding-left:1.25rem}
     #experience .timeline li .node{position:absolute;left:.2rem;top:.45rem;width:10px;height:10px;border-radius:50%;background:var(--brand)}
     #experience .timeline h3{margin:0;font-size:1.05rem;font-weight:600}
-
     footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
     #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
 
-    /* lightbox */
-    #lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:999}
-    #lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 0 25px rgba(0,0,0,.6)}
+    /* Lightbox */
+    #lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;
+      align-items:center;justify-content:center;z-index:999;flex-direction:column;padding:1rem;text-align:center}
+    #lightbox img{max-width:90vw;max-height:70vh;border-radius:12px;box-shadow:0 0 25px rgba(0,0,0,.6)}
+    #lightbox p{max-width:800px;margin-top:1rem;font-size:1rem;color:#ddd}
     #lightbox.closeable{cursor:zoom-out}
   </style>
 </head>
@@ -84,19 +81,7 @@
 
   <section id="projects" class="wrap">
     <h2>Projects</h2>
-    <div class="grid">
-      <div class="card"><img src="images/robohub.png" alt="UW RoboHub"><h3>UW RoboHub Research</h3></div>
-      <div class="card"><img src="images/project-swarm.jpg" alt="Swarm Hackathon"><h3>Swarm Hackathon — HeRo 2.0</h3></div>
-      <div class="card"><img src="images/project-rover.jpg" alt="Mars Rover"><h3>Mars-Style Rover</h3></div>
-      <div class="card"><img src="images/project-realsense.jpg" alt="RealSense"><h3>ROS2 RealSense Pipeline</h3></div>
-      <div class="card"><img src="images/project-rover.jpg" alt="Rover Kinematics"><h3>Rover Kinematics</h3></div>
-      <div class="card"><img src="images/project-arm.jpg" alt="Robotic Arm"><h3>3-DOF Robotic Arm (ROS2)</h3></div>
-      <div class="card"><img src="images/project-stm32.jpg" alt="Embedded OS"><h3>Embedded C Operating System</h3></div>
-      <div class="card"><img src="images/project-bike.jpg" alt="Motorized Bike"><h3>Motorized Bicycle</h3></div>
-      <div class="card"><img src="images/project-plc.jpg" alt="PLC"><h3>PLC Controls (Siemens)</h3></div>
-      <div class="card"><img src="images/project-ev3.jpg" alt="EV3"><h3>Rubik’s Cube Solver (EV3)</h3></div>
-      <div class="card"><img src="images/project-arcade.jpg" alt="Arcade"><h3>Retro Arcade Console</h3></div>
-    </div>
+    <div class="grid" id="projectGrid"></div>
   </section>
 
   <section id="experience" class="wrap">
@@ -124,17 +109,43 @@
   <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
   <!-- Lightbox -->
-  <div id="lightbox" class="closeable"><img src="" alt=""></div>
+  <div id="lightbox" class="closeable">
+    <img src="" alt="">
+    <p id="lightbox-desc"></p>
+  </div>
+
   <script>
     document.getElementById('y').textContent=new Date().getFullYear();
-    const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');
-    document.querySelectorAll('.card img').forEach(img=>{
-      img.addEventListener('click',()=>{
-        lbImg.src=img.src;
-        lb.style.display='flex';
+
+    const projects=[
+      {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Research on advanced robotic platforms at the University of Waterloo RoboHub."},
+      {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed multi-robot swarm navigation and planning strategies using HeRo 2.0 robots."},
+      {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"Designed and built a rugged rover for off-road robotics experiments."},
+      {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg",desc:"Integrated Intel RealSense depth cameras into ROS2 for robotic perception."},
+      {title:"Rover Kinematics",img:"images/project-rover.jpg",desc:"Validated kinematic models for custom-built rover platforms."},
+      {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg",desc:"Built and controlled a 3-DOF robotic arm with ROS2 for pick-and-place tasks."},
+      {title:"Embedded C Operating System",img:"images/project-stm32.jpg",desc:"Developed a lightweight embedded OS for STM32 microcontrollers."},
+      {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"Converted a standard bicycle into a motorized prototype."},
+      {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg",desc:"Designed and programmed Siemens PLCs for automation tasks."},
+      {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Created a LEGO EV3 robot capable of solving a Rubik's cube."},
+      {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Built a retro arcade gaming console using Raspberry Pi."},
+    ];
+
+    const grid=document.getElementById("projectGrid");
+    projects.forEach((p,i)=>{
+      const c=document.createElement("div");
+      c.className="card";
+      c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
+      c.addEventListener("click",()=>{
+        document.getElementById('lightbox').style.display='flex';
+        document.querySelector('#lightbox img').src=p.img;
+        document.getElementById('lightbox-desc').textContent=p.desc;
       });
+      grid.appendChild(c);
     });
-    lb.addEventListener('click',()=>{lb.style.display='none';lbImg.src='';});
+
+    const lb=document.getElementById('lightbox');
+    lb.addEventListener('click',()=>{lb.style.display='none';});
   </script>
 
   <!-- 3D background -->

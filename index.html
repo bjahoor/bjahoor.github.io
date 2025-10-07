@@ -40,7 +40,7 @@
     section.wrap { max-width: 1100px; margin: 4rem auto; padding: 0 1rem; }
     h2 { font-size: 2rem; margin-bottom: 1.5rem; }
 
-    /* PROJECT CARDS */
+    /* PROJECTS */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
@@ -171,32 +171,18 @@
   <section id="experience" class="wrap">
     <h2 style="text-align:center;">Experience</h2>
     <div class="timeline-centered">
-      <div class="timeline-item left">
-        <div class="timeline-card"><h3>Robotics Research Assistant</h3><p class="company">UW RoboHub</p><p class="description">Worked on swarm robotics research with the HeRo 2.0 platform — developed ROS2 communication pipelines and testing frameworks.</p></div>
-      </div>
-      <div class="timeline-item right">
-        <div class="timeline-card"><h3>Robotics Engineering</h3><p class="company">UW Robotics Team (Co-op)</p><p class="description">Supported competition robot development including motion planning and hardware integration.</p></div>
-      </div>
-      <div class="timeline-item left">
-        <div class="timeline-card"><h3>Robotics Engineering</h3><p class="company">BHF Robotics (Co-op)</p><p class="description">Developed embedded control systems and integrated sensors for autonomous robotic platforms.</p></div>
-      </div>
-      <div class="timeline-item right">
-        <div class="timeline-card"><h3>Mechatronics Engineering</h3><p class="company">RAB Design Lighting (Co-op)</p><p class="description">Designed and tested smart LED systems and Bluetooth-enabled lighting controllers.</p></div>
-      </div>
-      <div class="timeline-item left">
-        <div class="timeline-card"><h3>Quality Assurance</h3><p class="company">Ontario Drive & Gear (Co-op)</p><p class="description">Quality testing and validation of prototype gear systems for electric vehicles and robotics.</p></div>
-      </div>
-      <div class="timeline-item right">
-        <div class="timeline-card"><h3>Electrical Engineering</h3><p class="company">Jule / eCAMION (Co-op)</p><p class="description">Worked on high-power EV fast charging systems and power electronics hardware.</p></div>
-      </div>
-      <div class="timeline-item left">
-        <div class="timeline-card"><h3>Youth Robotics Mentor</h3><p class="company">FIRST (FLL)</p><p class="description">Mentored students on design, coding, and competition strategy in FIRST Lego League.</p></div>
-      </div>
+      <div class="timeline-item left"><div class="timeline-card"><h3>Robotics Research Assistant</h3><p class="company">UW RoboHub</p><p class="description">Worked on swarm robotics research with the HeRo 2.0 platform — developed ROS2 communication pipelines and testing frameworks.</p></div></div>
+      <div class="timeline-item right"><div class="timeline-card"><h3>Robotics Engineering</h3><p class="company">UW Robotics Team (Co-op)</p><p class="description">Supported competition robot development including motion planning and hardware integration.</p></div></div>
+      <div class="timeline-item left"><div class="timeline-card"><h3>Robotics Engineering</h3><p class="company">BHF Robotics (Co-op)</p><p class="description">Developed embedded control systems and integrated sensors for autonomous robotic platforms.</p></div></div>
+      <div class="timeline-item right"><div class="timeline-card"><h3>Mechatronics Engineering</h3><p class="company">RAB Design Lighting (Co-op)</p><p class="description">Designed and tested smart LED systems and Bluetooth-enabled lighting controllers.</p></div></div>
+      <div class="timeline-item left"><div class="timeline-card"><h3>Quality Assurance</h3><p class="company">Ontario Drive & Gear (Co-op)</p><p class="description">Quality testing and validation of prototype gear systems for electric vehicles and robotics.</p></div></div>
+      <div class="timeline-item right"><div class="timeline-card"><h3>Electrical Engineering</h3><p class="company">Jule / eCAMION (Co-op)</p><p class="description">Worked on high-power EV fast charging systems and power electronics hardware.</p></div></div>
+      <div class="timeline-item left"><div class="timeline-card"><h3>Youth Robotics Mentor</h3><p class="company">FIRST (FLL)</p><p class="description">Mentored students on design, coding, and competition strategy in FIRST Lego League.</p></div></div>
     </div>
   </section>
 
   <script>
-    /* Simple star background */
+    /* Star background */
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
     let w, h;

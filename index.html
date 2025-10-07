@@ -33,8 +33,14 @@ h2{font-family:var(--font-display);font-size:1.8rem;margin:1rem 0;}
 .card img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
 .card:hover img{transform:scale(1.05);}
 .card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.5);font-size:1rem;}
-/* Skill map */
-#skillmap{width:100%;height:500px;border:1px solid var(--line);border-radius:10px;}
+/* Accordion */
+.accordion{border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+.accordion-item{border-top:1px solid var(--line);}
+.accordion-header{padding:1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;}
+.accordion-header:hover{background:rgba(255,255,255,.05);}
+.accordion-body{padding:0 1rem 1rem 1rem;display:none;color:var(--muted);}
+.accordion-header::after{content:"+";transition:.3s;}
+.accordion-header.active::after{content:"–";}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem;}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent;}
 </style>
@@ -74,17 +80,54 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 </section>
 
 <section id="experience" class="wrap">
-  <h2>Experience — Skill Map</h2>
-  <div id="skillmap"></div>
+  <h2>Experience</h2>
+  <div class="accordion" id="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header">Robotics Research Assistant — UW RoboHub</div>
+      <div class="accordion-body">Worked on cutting-edge robotics research with autonomous navigation and ROS2 development.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Robotics Engineering — UW Robotics Team (Co-op)</div>
+      <div class="accordion-body">Contributed to competitive robotics projects, integrating sensors and designing mechatronic systems.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Robotics Engineering — BHF Robotics (Co-op)</div>
+      <div class="accordion-body">Developed robotic prototypes and improved embedded systems for automation.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Mechatronics Engineering — RAB Design Lighting (Co-op)</div>
+      <div class="accordion-body">Designed and tested electronics and mechanical systems for lighting solutions.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Quality Assurance — Ontario Drive & Gear (Co-op)</div>
+      <div class="accordion-body">Ensured quality of prototype gear systems, testing precision and durability.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Electrical Engineering — Jule/eCAMION (Co-op)</div>
+      <div class="accordion-body">Worked on EV fast-charging systems and hardware testing.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Youth Robotics Mentor — FIRST (FLL)</div>
+      <div class="accordion-body">Mentored youth robotics teams, guiding design and programming challenges.</div>
+    </div>
+  </div>
 </section>
 
 <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
-<!-- Lightbox -->
-<div id="lightbox" style="display:none;"></div>
-
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
+
+// Accordion script
+document.querySelectorAll(".accordion-header").forEach(head=>{
+  head.addEventListener("click",()=>{
+    head.classList.toggle("active");
+    const body=head.nextElementSibling;
+    body.style.display = body.style.display==="block"?"none":"block";
+  });
+});
+
+// Projects (keep your popup grid)
 const projects=[
   {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Research on advanced robotic platforms at the University of Waterloo RoboHub."},
   {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed multi-robot swarm navigation and planning strategies using HeRo 2.0 robots."},
@@ -106,88 +149,6 @@ projects.forEach(p=>{
   c.addEventListener("click",()=>alert(p.title+" — "+p.desc));
   grid.appendChild(c);
 });
-</script>
-
-<!-- D3.js skill map -->
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script>
-const width=document.getElementById('skillmap').clientWidth,
-      height=500;
-const svg=d3.select("#skillmap").append("svg")
-  .attr("width",width).attr("height",height);
-
-const nodes=[
-  {id:"UW RoboHub",type:"job"},
-  {id:"UW Robotics Team",type:"job"},
-  {id:"BHF Robotics",type:"job"},
-  {id:"RAB Design",type:"job"},
-  {id:"Ontario Drive & Gear",type:"job"},
-  {id:"Jule/eCAMION",type:"job"},
-  {id:"FIRST Mentor",type:"job"},
-  {id:"ROS2",type:"skill"},
-  {id:"Embedded C",type:"skill"},
-  {id:"STM32",type:"skill"},
-  {id:"PLC",type:"skill"},
-  {id:"CAD",type:"skill"},
-  {id:"Prototyping",type:"skill"},
-  {id:"Teamwork",type:"skill"}
-];
-const links=[
-  {source:"UW RoboHub",target:"ROS2"},
-  {source:"UW RoboHub",target:"CAD"},
-  {source:"UW RoboHub",target:"Prototyping"},
-  {source:"UW Robotics Team",target:"ROS2"},
-  {source:"UW Robotics Team",target:"Teamwork"},
-  {source:"BHF Robotics",target:"ROS2"},
-  {source:"RAB Design",target:"CAD"},
-  {source:"RAB Design",target:"Prototyping"},
-  {source:"Ontario Drive & Gear",target:"CAD"},
-  {source:"Jule/eCAMION",target:"PLC"},
-  {source:"Jule/eCAMION",target:"Embedded C"},
-  {source:"FIRST Mentor",target:"Teamwork"}
-];
-
-const simulation=d3.forceSimulation(nodes)
-  .force("link",d3.forceLink(links).id(d=>d.id).distance(120))
-  .force("charge",d3.forceManyBody().strength(-400))
-  .force("center",d3.forceCenter(width/2,height/2));
-
-const link=svg.append("g")
-  .selectAll("line")
-  .data(links)
-  .enter().append("line")
-  .attr("stroke","#555").attr("stroke-width",1.5);
-
-const node=svg.append("g")
-  .selectAll("circle")
-  .data(nodes)
-  .enter().append("circle")
-  .attr("r",d=>d.type==="job"?14:10)
-  .attr("fill",d=>d.type==="job"?"#7aa2ff":"#9b6bff")
-  .call(d3.drag()
-      .on("start",dragstarted)
-      .on("drag",dragged)
-      .on("end",dragended));
-
-const label=svg.append("g")
-  .selectAll("text")
-  .data(nodes)
-  .enter().append("text")
-  .text(d=>d.id)
-  .attr("font-size",d=>d.type==="job"?"13px":"11px")
-  .attr("fill","#ddd")
-  .attr("text-anchor","middle")
-  .attr("dy",-20);
-
-simulation.on("tick",()=>{
-  link.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
-      .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
-  node.attr("cx",d=>d.x).attr("cy",d=>d.y);
-  label.attr("x",d=>d.x).attr("y",d=>d.y);
-});
-function dragstarted(e,d){if(!e.active)simulation.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
-function dragged(e,d){d.fx=e.x;d.fy=e.y;}
-function dragended(e,d){if(!e.active)simulation.alphaTarget(0);d.fx=null;d.fy=null;}
 </script>
 
 <!-- 3D background -->

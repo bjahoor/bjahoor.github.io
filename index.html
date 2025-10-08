@@ -16,7 +16,8 @@ body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,12,18,.75);border-bottom:1px solid var(--line);z-index:10;padding:0.5rem 0}
 .wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem}
 header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem}
-.brand{font-weight:700;font-family:var(--font-display);font-size:1.3rem}
+.brand{font-weight:700;font-family:var(--font-display);font-size:1.3rem;text-decoration:none;color:var(--fg)}
+.brand:hover{color:var(--brand)}
 nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;font-size:1.05rem}
 nav a:hover{color:var(--brand)}
@@ -98,16 +99,16 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 
 <header>
   <div class="wrap nav-container">
-    <div class="brand">Brandon Jahoor</div>
+    <a class="brand" href="#top">Brandon Jahoor</a>
     <nav>
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" target="_blank" rel="noopener">Resume</a>
-      <a href="mailto:bjahoor@uwaterloo.ca">Contact</a>
     </nav>
   </div>
 </header>
 
+<a id="top"></a>
 <section class="hero fade-in">
   <svg viewBox="0 0 600 100" aria-hidden="true">
     <defs>
@@ -238,9 +239,15 @@ geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
 starsGroup.add(new THREE.Points(geo,mat));
 
-// Floating skill labels (independent of mouse)
+// Floating skill labels – spawn anywhere (edge-biased)
 const skills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping"];
 const sprites=[];
+function randBetween(min,max){ return Math.random()*(max-min)+min; }
+function edgeBiased(min,max,bias=0.65){
+  // With `bias` probability, spawn at one of the two edges; otherwise anywhere
+  if(Math.random()<bias){ return Math.random()<0.5?min:max; }
+  return randBetween(min,max);
+}
 function makeLabel(text){
   const cvs=document.createElement('canvas'); cvs.width=512; cvs.height=128;
   const ctx=cvs.getContext('2d');
@@ -253,8 +260,11 @@ function makeLabel(text){
   const sm=new THREE.SpriteMaterial({map:tex,transparent:true});
   const sp=new THREE.Sprite(sm);
   sp.scale.set(6,1.5,1);
-  sp.position.set((Math.random()-0.5)*20,(Math.random()-0.5)*10,-5);
-  sp.userData={life:500+Math.random()*500,vy:0.01};
+  // World ranges roughly match star field extents
+  const x=edgeBiased(-20,20);
+  const y=edgeBiased(-10,10);
+  sp.position.set(x,y,-5);
+  sp.userData={life:500+Math.random()*500,vy:0.01+Math.random()*0.02,vx:(Math.random()-0.5)*0.02};
   labelsGroup.add(sp);
   sprites.push(sp);
 }
@@ -264,7 +274,13 @@ function animateLabels(){
   for(let i=sprites.length-1;i>=0;i--){
     const s=sprites[i];
     s.position.y+=s.userData.vy;
+    s.position.x+=s.userData.vx;
     s.userData.life--;
+    // Soft wrap around bounds so words keep drifting on screen
+    if(s.position.x>22) s.position.x=-22;
+    if(s.position.x<-22) s.position.x=22;
+    if(s.position.y>12) s.position.y=-12;
+    if(s.position.y<-12) s.position.y=12;
     if(s.userData.life<=0){ labelsGroup.remove(s); sprites.splice(i,1); }
   }
 }
@@ -285,7 +301,7 @@ addEventListener('mousemove',e=>{
   starsGroup.rotation.x = y * 0.2;
 });
 
-// Background spin: only stars drift
+// Background spin: subtle continuous motion
 function anim(){
   requestAnimationFrame(anim);
   starsGroup.rotation.y += 0.006;

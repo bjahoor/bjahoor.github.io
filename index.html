@@ -9,10 +9,9 @@
 :root{--bg:#0b0c12;--fg:#eef0f4;--muted:#9aa1ac;--line:#262837;--brand:#7aa2ff;--brand-2:#9b6bff;--round:14px;--font-sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--font-display:"Space Grotesk",var(--font-sans)}
 *{box-sizing:border-box}
 html,body{height:100%}
-html{scroll-behavior:smooth}
 body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 
-/* Header (fixed) */
+/* Fixed header */
 header{position:fixed;top:0;left:0;width:100%;backdrop-filter:blur(8px);background:rgba(11,12,18,.85);border-bottom:1px solid var(--line);z-index:50;padding:0.5rem 0}
 .wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem}
 header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem}
@@ -22,11 +21,81 @@ nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;font-size:1.05rem;cursor:pointer}
 nav a:hover{color:var(--brand)}
 
-/* Smooth scroll adjustment */
-html{scroll-behavior:auto}
+/* Reveal */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* Hero */
+.hero{padding:4rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-top:4.5rem}
+.hero svg{width:clamp(260px,40vw,420px);height:auto;display:block;margin:0 auto .25rem}
+.hero svg path{stroke:url(#grad);stroke-width:3;fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 2.2s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero h1.neon{font-family:var(--font-display);font-size:clamp(4rem,10vw,6.2rem);font-weight:900;color:#fff;text-shadow:0 0 20px var(--brand),0 0 40px var(--brand-2);margin:.4rem 0}
+.subtitle,.school{font-family:var(--font-display);background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{font-size:clamp(1.6rem,4vw,2.2rem);margin:.5rem 0}
+.school{font-size:clamp(1.4rem,3.5vw,2rem);margin:.2rem 0 .8rem}
+
+/* CTAs */
+.row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1rem}
+.btn{padding:1rem 1.8rem;border-radius:14px;text-decoration:none;border:1px solid var(--line);background:#12131b;color:var(--fg);font-weight:600;font-size:1.1rem;transition:transform .3s ease,box-shadow .3s ease;animation:bounce 2s infinite ease-in-out}
+.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff}
+.btn:hover{transform:translateY(-5px) scale(1.06);box-shadow:0 0 25px rgba(122,162,255,.8)}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* Skills chips */
+.skills{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem;max-width:900px;margin-left:auto;margin-right:auto}
+.skill{padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);font-size:1rem;transition:transform .3s ease}
+.skill:hover{transform:translateY(-3px)}
+
+/* Scroll arrow */
+.scroll-arrow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowjump 1.2s infinite ease-in-out;text-shadow:0 0 25px var(--brand),0 0 50px var(--brand-2),0 0 80px var(--brand)}
+@keyframes arrowjump{0%,70%,100%{transform:translate(-50%,0) scale(1)}35%{transform:translate(-50%,-18px) scale(1.2)}}
+
+/* Section spacing */
+#experience{margin-top:4rem;margin-bottom:2rem}
+#projects{margin-top:3rem;margin-bottom:4rem}
+
+/* Experiences (compact + hover expand) */
+.timeline{max-width:800px;margin:2rem auto;position:relative;display:flex;flex-direction:column;gap:1rem}
+.timeline .item{background:#12131b;border-radius:var(--round);padding:1rem 1.5rem;box-shadow:0 5px 10px rgba(0,0,0,.4);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer}
+.timeline .item:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.45)}
+.item-line{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display);font-size:1.1rem;font-weight:700}
+.item-line span{color:var(--muted);font-weight:600}
+.desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .5s ease,max-height .5s ease;color:var(--muted);margin-top:.5rem;font-size:1rem;text-align:left}
+.timeline .item:hover .desc{opacity:1;max-height:320px}
+.desc p{margin:.2rem 0 .4rem}
+.desc ul{margin:.5rem 0 0 1.2rem;padding:0}
+.desc ul li{margin-bottom:.35rem}
+
+/* Projects grid */
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(3,1fr);max-width:1000px;margin:auto}
+@media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.card{position:relative;border-radius:var(--round);overflow:hidden;height:220px;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.3);transition:transform .35s ease,box-shadow .35s ease,border .35s ease}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.card:hover img{transform:scale(1.08)}
+.card:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(122,162,255,1);border:2px solid var(--brand)}
+.card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.55);font-size:1rem}
+
+/* Modal */
+#modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:20;flex-direction:column;text-align:center;padding:1rem}
+#modal img{max-width:90%;max-height:60vh;border-radius:var(--round);box-shadow:0 0 40px rgba(122,162,255,0.8)}
+#modal h3{margin:1rem 0 .5rem;font-size:1.6rem;font-family:var(--font-display)}
+#modal p{max-width:700px;color:var(--muted);line-height:1.5}
+
+/* Background layers */
+#bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.35}
+#bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
+
+/* Footer */
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:2rem 1rem 3rem}
 </style>
 </head>
 <body>
+
+<video autoplay muted loop playsinline id="bgVideo"><source src="images/robo_video.mp4" type="video/mp4"></video>
+<canvas id="bg3d" aria-hidden="true"></canvas>
+
 <header>
   <div class="wrap nav-container">
     <a class="brand" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Brandon Jahoor</a>
@@ -40,34 +109,157 @@ html{scroll-behavior:auto}
   </div>
 </header>
 
-<section style="height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;">
-  <h1>Scroll Test Area</h1>
-  <a href="#experience">Go to Experiences</a>
-</section>
-<section id="experience" style="height:100vh;background:#12131b;color:white;display:flex;align-items:center;justify-content:center;">
-  <h2>Experiences Section</h2>
-</section>
-<section id="projects" style="height:100vh;background:#1a1b22;color:white;display:flex;align-items:center;justify-content:center;">
-  <h2>Projects Section</h2>
+<section class="hero fade-in">
+  <svg viewBox="0 0 600 100" aria-hidden="true">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#7aa2ff"/><stop offset="100%" stop-color="#9b6bff"/>
+      </linearGradient>
+    </defs>
+    <path d="M15 60 Q 65 10, 115 60 T 215 60 T 315 60 T 415 60 T 515 60" />
+  </svg>
+  <h1 class="neon">Brandon Jahoor</h1>
+  <h2 class="subtitle">Mechatronics & Robotics Engineering</h2>
+  <h3 class="school">University of Waterloo</h3>
+
+  <div class="skills" id="skillsRow">
+    <div class="skill">ROS2</div><div class="skill">C++</div><div class="skill">Python</div>
+    <div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">PLC</div>
+    <div class="skill">FPGA</div><div class="skill">CAD</div><div class="skill">3D Printing</div>
+    <div class="skill">Prototyping</div><div class="skill">Ubuntu</div>
+    <div class="skill">Electrical Design</div><div class="skill">Mechanical Design</div><div class="skill">Assembly</div>
+  </div>
+
+  <div class="row">
+    <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" target="_blank" rel="noopener">See Resume</a>
+    <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
+    <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
+  </div>
+  <div class="scroll-arrow">↓</div>
 </section>
 
+<section id="experience" class="wrap fade-in">
+  <h2>Experiences</h2>
+  <div class="timeline" id="experienceTimeline"></div>
+</section>
+
+<section id="projects" class="wrap fade-in">
+  <h2>Projects</h2>
+  <div class="grid" id="projectGrid"></div>
+</section>
+
+<div id="modal"></div>
+
+<footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
+
 <script>
-// Disable default anchor jump and use manual scroll with exact offset
-const headerOffset = 70;
-const navLinks = document.querySelectorAll('nav a[href^="#"]');
-navLinks.forEach(link => {
-  link.addEventListener('click', e => {
-    const id = link.getAttribute('href');
-    if(id && id.startsWith('#')){
-      e.preventDefault();
-      const el = document.querySelector(id);
-      if(el){
-        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-        window.scrollTo({top: y, behavior:'smooth'});
-      }
+// Year
+document.getElementById('y').textContent=(new Date).getFullYear();
+
+// Reveal on scroll
+const faders=document.querySelectorAll('.fade-in');
+const obs=new IntersectionObserver(entries=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); }}); },{threshold:0.2});
+faders.forEach(f=>obs.observe(f));
+
+// Projects + modal
+const projects=[
+  {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Undergraduate research assistant working on swarm robotics: ROS2 networking, navigation, and coordination on HeRo 2.0 platforms."},
+  {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed swarm navigation and communication strategies for HeRo 2.0 robots during a robotics hackathon."},
+  {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"Designed control & autonomy software for a Mars-style rover using ROS2. Modeled 6-wheel drivetrain kinematics and integrated sensors."},
+  {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg",desc:"Streamed color & depth data with a custom ROS2 RealSense wrapper. Added compression to reduce wireless bandwidth and dynamic resolution selection."},
+  {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg",desc:"Designed, prototyped, and 3D printed a robotic arm. Controlled motors via PWM and ROS2 on a Raspberry Pi with OpenCV for token color detection."},
+  {title:"Embedded C Operating System",img:"images/project-stm32.jpg",desc:"Developed a custom real-time operating system in C on an STM32 Nucleo microcontroller board."},
+  {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"Transformed a bicycle with a 2-stroke engine retrofit kit using cutting, welding, and drilling skills."},
+  {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg",desc:"Programmed a Siemens PLC in ladder logic to control motors, sensors, and buttons for industrial automation."},
+  {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Built a LEGO EV3 robot, programmed in RobotC, and integrated a Python solving algorithm with formal design documentation."},
+  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Assembled a Raspberry Pi-powered retro arcade console with a wide selection of classic games."}
+];
+const grid=document.getElementById('projectGrid');
+const modal=document.getElementById('modal');
+projects.forEach(p=>{ const c=document.createElement('div'); c.className='card'; c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`; c.addEventListener('click',()=>{ modal.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`; modal.style.display='flex'; }); grid.appendChild(c); });
+modal.addEventListener('click',()=>{ modal.style.display='none'; });
+
+// Experiences (compact one-line; hover to expand)
+const experiences=[
+  {title:"Robotics Research Assistant",company:"UW RoboHub",date:"May 2025 – Present",bullets:["Swarm robotics research on HeRo 2.0.","Implemented ROS2 networking and navigation."]},
+  {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)",date:"Jan 2025 – Apr 2025",bullets:["Developed autonomy software on ROS2.","Integrated Realsense camera and drivetrain kinematics."]},
+  {title:"Robotics Engineering",company:"BHF Robotics (Co-op)",date:"May 2024 – Aug 2024",bullets:["Prototyped parts and technical drawings.","Simulated autonomous navigation in Python."]},
+  {title:"Mechatronics Engineering",company:"RAB Design Lighting (Co-op)",date:"Jan 2024 – Apr 2024",bullets:["Validated Bluetooth lighting app.","Created training materials and validation tests."]},
+  {title:"Quality Assurance",company:"Ontario Drive & Gear (Co-op)",date:"May 2023 – Aug 2023",bullets:["Led QA for prototype gear launches.","Performed high-precision GD&T inspections."]},
+  {title:"Electrical Engineering",company:"Jule / eCAMION (Co-op)",date:"Jan 2023 – Apr 2023",bullets:["Assembled EV fast chargers.","Worked on electrical design and quality engineering."]},
+  {title:"Youth Robotics Mentor",company:"FIRST (FLL)",date:"2018 – Present",bullets:["Coached teams to national competitions.","Guided design and programming; won mentor awards."]}
+];
+const exp=document.getElementById('experienceTimeline');
+experiences.forEach(e=>{ const d=document.createElement('div'); d.className='item'; d.innerHTML=`<div class='item-line'><div>${e.title}</div><span>${e.company}</span></div><div class='desc'><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`; exp.appendChild(d); });
+
+// Smooth scroll with fixed offset (no URL hash changes)
+const headerOffset=70;
+document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const id=link.getAttribute('href');
+    const el=document.querySelector(id);
+    if(el){
+      const y=el.getBoundingClientRect().top+window.pageYOffset-headerOffset;
+      const startY=window.scrollY; const distance=y-startY; const duration=500; let start;
+      function step(ts){ if(!start) start=ts; const p=Math.min((ts-start)/duration,1); window.scrollTo(0,startY+distance*p); if(p<1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
     }
   });
 });
+</script>
+<script type="module">
+import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
+
+const canvas=document.getElementById('bg3d');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
+camera.position.z=12;
+
+// Separate groups so only stars react to mouse
+const starsGroup=new THREE.Group();
+const labelsGroup=new THREE.Group();
+scene.add(starsGroup); scene.add(labelsGroup);
+
+// Stars (500)
+const COUNT=500; const pos=new Float32Array(COUNT*3);
+for(let i=0;i<COUNT;i++){ pos[i*3]=(Math.random()-0.5)*40; pos[i*3+1]=(Math.random()-0.5)*24; pos[i*3+2]=(Math.random()-0.5)*40; }
+const geo=new THREE.BufferGeometry(); geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
+starsGroup.add(new THREE.Points(geo,mat));
+
+// Floating skill labels – spawn anywhere (edge-biased) and drift; not affected by mouse
+const skills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping"];
+const sprites=[];
+function randBetween(min,max){ return Math.random()*(max-min)+min; }
+function edgeBiased(min,max,bias=0.65){ if(Math.random()<bias){ return Math.random()<0.5?min:max; } return randBetween(min,max); }
+function makeLabel(text){
+  const cvs=document.createElement('canvas'); cvs.width=512; cvs.height=128; const ctx=cvs.getContext('2d');
+  ctx.clearRect(0,0,cvs.width,cvs.height); ctx.fillStyle='white'; ctx.font='48px Space Grotesk'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(text,256,64);
+  const tex=new THREE.CanvasTexture(cvs); const sm=new THREE.SpriteMaterial({map:tex,transparent:true}); const sp=new THREE.Sprite(sm);
+  sp.scale.set(6,1.5,1); sp.position.set(edgeBiased(-20,20),edgeBiased(-10,10),-5);
+  sp.userData={life:500+Math.random()*500,vy:0.01+Math.random()*0.02,vx:(Math.random()-0.5)*0.02};
+  labelsGroup.add(sp); sprites.push(sp);
+}
+setInterval(()=>{ makeLabel(skills[Math.floor(Math.random()*skills.length)]) },3000);
+
+function animateLabels(){
+  for(let i=sprites.length-1;i>=0;i--){ const s=sprites[i]; s.position.y+=s.userData.vy; s.position.x+=s.userData.vx; s.userData.life--; if(s.position.x>22)s.position.x=-22; if(s.position.x<-22)s.position.x=22; if(s.position.y>12)s.position.y=-12; if(s.position.y<-12)s.position.y=12; if(s.userData.life<=0){ labelsGroup.remove(s); sprites.splice(i,1); } }
+}
+
+// Resize
+function resize(){ renderer.setSize(innerWidth,innerHeight); camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); }
+window.addEventListener('resize',resize); resize();
+
+// Mouse interaction: rotate only the stars group
+addEventListener('mousemove',e=>{ const x=(e.clientX/innerWidth-0.5)*2; const y=-(e.clientY/innerHeight-0.5)*2; starsGroup.rotation.y=x*0.3; starsGroup.rotation.x=y*0.2; });
+
+// Background spin: subtle continuous motion
+function anim(){ requestAnimationFrame(anim); starsGroup.rotation.y+=0.006; animateLabels(); renderer.render(scene,camera); }
+anim();
 </script>
 </body>
 </html>

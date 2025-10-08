@@ -219,6 +219,12 @@ const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
 camera.position.z=12;
 
+// Separate groups so only stars react to mouse
+const starsGroup=new THREE.Group();
+const labelsGroup=new THREE.Group();
+scene.add(starsGroup);
+scene.add(labelsGroup);
+
 // Stars (500)
 const COUNT=500;
 const pos=new Float32Array(COUNT*3);
@@ -230,9 +236,9 @@ for(let i=0;i<COUNT;i++){
 const geo=new THREE.BufferGeometry();
 geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
-scene.add(new THREE.Points(geo,mat));
+starsGroup.add(new THREE.Points(geo,mat));
 
-// Floating skill labels
+// Floating skill labels (independent of mouse)
 const skills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping"];
 const sprites=[];
 function makeLabel(text){
@@ -249,7 +255,7 @@ function makeLabel(text){
   sp.scale.set(6,1.5,1);
   sp.position.set((Math.random()-0.5)*20,(Math.random()-0.5)*10,-5);
   sp.userData={life:500+Math.random()*500,vy:0.01};
-  scene.add(sp);
+  labelsGroup.add(sp);
   sprites.push(sp);
 }
 setInterval(()=>{ makeLabel(skills[Math.floor(Math.random()*skills.length)]) },3000);
@@ -259,7 +265,7 @@ function animateLabels(){
     const s=sprites[i];
     s.position.y+=s.userData.vy;
     s.userData.life--;
-    if(s.userData.life<=0){ scene.remove(s); sprites.splice(i,1); }
+    if(s.userData.life<=0){ labelsGroup.remove(s); sprites.splice(i,1); }
   }
 }
 
@@ -271,18 +277,18 @@ function resize(){
 }
 window.addEventListener('resize',resize); resize();
 
-// Mouse interaction
-document.addEventListener('mousemove',e=>{
-  const x=(e.clientX/window.innerWidth-0.5)*2;
-  const y=-(e.clientY/window.innerHeight-0.5)*2;
-  scene.rotation.y = x * 0.3;
-  scene.rotation.x = y * 0.2;
+// Mouse interaction: rotate only the stars group
+addEventListener('mousemove',e=>{
+  const x=(e.clientX/innerWidth-0.5)*2;
+  const y=-(e.clientY/innerHeight-0.5)*2;
+  starsGroup.rotation.y = x * 0.3;
+  starsGroup.rotation.x = y * 0.2;
 });
 
-// Background spin
+// Background spin: only stars drift
 function anim(){
   requestAnimationFrame(anim);
-  scene.rotation.y += 0.006;
+  starsGroup.rotation.y += 0.006;
   animateLabels();
   renderer.render(scene,camera);
 }

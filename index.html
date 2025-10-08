@@ -14,29 +14,41 @@
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
-header{position:sticky;top:0;backdrop-filter:blur(6px);background:rgba(11,12,18,.7);border-bottom:1px solid var(--line);z-index:10}
+
+/* Background layers */
+#video-bg{
+  position:fixed;inset:0;object-fit:cover;z-index:-3;
+  filter:brightness(.35) contrast(1.05) saturate(1.05);
+}
+#bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
+
+/* Header */
+header{position:sticky;top:0;backdrop-filter:blur(6px);background:rgba(11,12,18,.7);border-bottom:1px solid var(--line);z-index:20}
 .wrap{max-width:1100px;margin:0 auto;padding:1.2rem}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;margin-right:1rem}
 nav a:hover{color:var(--brand)}
 
-.hero{
-  position:relative;
-  text-align:center;
-  padding:clamp(2rem,6vw,4rem) 1rem;
-  z-index:1;
-}
+/* Hero */
+.hero{padding:clamp(3rem,6vw,5rem) 1rem;text-align:center;position:relative;z-index:1}
 .hero h1{
   font-family:var(--font-display);
-  font-size:clamp(2rem,4.5vw,3.6rem);
-  margin:0 0 .6rem;
-  background:linear-gradient(135deg,var(--brand),var(--brand-2));
-  -webkit-background-clip:text;background-clip:text;color:transparent
+  font-size:clamp(2.4rem,6vw,4rem);
+  line-height:1.15;
+  margin:0 0 .8rem;
 }
-.hero p{color:var(--muted);max-width:800px;margin:1rem auto;font-size:1.1rem;line-height:1.6}
-.row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
-.btn{padding:.7rem 1rem;border-radius:12px;text-decoration:none;border:1px solid var(--line);background:#12131b;color:var(--fg)}
+.hero .line{
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  display:inline-block;
+}
+.hero p{color:var(--muted);font-size:1.1rem;max-width:820px;margin:0.8rem auto 0;line-height:1.65}
+.row{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:1.2rem}
+.btn{padding:.85rem 1.25rem;border-radius:12px;text-decoration:none;border:1px solid var(--line);background:#12131b;color:var(--fg);transition:background .25s}
+.btn:hover{background:#1a1c28}
 .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none}
-h2{font-family:var(--font-display);font-size:1.9rem;margin:2rem 0;text-align:center}
+
+/* Section titles */
+h2{font-family:var(--font-display);font-size:1.9rem;margin:2rem 0 1rem;text-align:center}
 
 /* Projects grid */
 .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
@@ -45,63 +57,45 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:2rem 0;text-align:cen
 .card:hover img{transform:scale(1.05)}
 .card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.5);font-size:1rem}
 
-/* Fullscreen project modal */
-#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;align-items:center;justify-content:center;padding:2rem}
-#modal.active{display:flex}
-#modal-content{max-width:900px;max-height:90vh;overflow:auto;text-align:center}
-#modal-content img{width:100%;height:auto;border-radius:var(--round);margin-bottom:1rem}
-#modal-content p{font-size:1rem;line-height:1.6;color:var(--fg);}
+/* Fullscreen project viewer */
+#viewer{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;flex-direction:column;padding:2rem;z-index:9999}
+#viewer img{max-width:90%;max-height:70vh;object-fit:contain;border-radius:var(--round);box-shadow:0 12px 30px rgba(0,0,0,.6)}
+#viewer .desc{max-width:800px;margin-top:1rem;font-size:1.1rem;line-height:1.6;text-align:center;color:var(--fg)}
 
-/* Timeline */
+/* Single-column timeline with glowing line BEHIND cards */
 .timeline{
-  max-width:700px;
-  margin:3rem auto;
-  position:relative;
+  max-width:800px;margin:3rem auto;position:relative;z-index:0;
 }
 .timeline::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:0;
-  transform:translateX(-50%);
-  width:6px;
-  height:100%;
-  background:linear-gradient(var(--brand),var(--brand-2));
-  box-shadow:0 0 15px var(--brand-2);
+  content:'';position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);
+  width:8px;background:linear-gradient(180deg,var(--brand),var(--brand-2));
+  border-radius:4px;box-shadow:0 0 25px rgba(122,162,255,.6),0 0 40px rgba(155,107,255,.5);
+  z-index:-1;
 }
-.timeline .item{
-  position:relative;
-  width:calc(50% - 30px);
-  background:#12131b;
-  border-radius:var(--round);
-  padding:1.2rem 1.6rem;
-  box-shadow:0 8px 18px rgba(0,0,0,.4);
-  margin:1.5rem 0;
+.item{
+  position:relative;z-index:1;
+  background:#12131b;border-radius:var(--round);
+  box-shadow:0 10px 22px rgba(0,0,0,.45);
+  padding:2rem;margin:2rem auto;width:80%;
+  text-align:center;font-size:1.05rem;
+  transition:transform .25s, box-shadow .25s;
 }
-.timeline .item.left{left:0;text-align:right;float:left;clear:both;transform:translateX(-10px)}
-.timeline .item.right{right:0;float:right;clear:both;transform:translateX(10px)}
-.timeline .title{font-size:1.2rem;font-weight:700;margin:0 0 .3rem}
-.timeline .company{font-size:1rem;color:var(--muted);margin:0 0 .5rem}
-.timeline .desc{font-size:.95rem;color:var(--fg);line-height:1.5;display:none}
-.timeline .item:hover .desc{display:block}
+.item:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.55)}
+.item .title{margin:0;font-size:1.45rem;font-weight:800}
+.item .company{margin:.5rem 0 0;font-size:1rem;color:var(--muted)}
+.item .desc{margin-top:1rem;color:#d0d3da;line-height:1.6}
 
-/* Mobile */
-@media(max-width:768px){
-  .timeline::before{left:20px;transform:none}
-  .timeline .item{width:calc(100% - 40px);float:none;text-align:left;transform:none}
+/* Mobile tweaks */
+@media (max-width:768px){
+  .item{width:92%}
 }
 
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
-#bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
-#bgvideo{
-  position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:0.25;mix-blend-mode:screen;
-}
 </style>
 </head>
 <body>
-<video id="bgvideo" autoplay loop muted playsinline>
-  <source src="images/robo_video.mp4" type="video/mp4">
-</video>
+<!-- Blended background: your video behind the starfield -->
+<video id="video-bg" autoplay muted playsinline></video>
 <canvas id="bg3d" aria-hidden="true"></canvas>
 
 <header>
@@ -116,8 +110,11 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   </div>
 </header>
 
-<section class="hero wrap">
-  <h1 class="grad-text">Mechatronics & Robotics Engineering<br>University of Waterloo</h1>
+<section class="hero">
+  <h1>
+    <span class="line">Mechatronics & Robotics Engineering</span><br>
+    <span class="line">University of Waterloo</span>
+  </h1>
   <p>
     Engineering undergraduate student combining <strong>industry co-op experience</strong> with
     <strong>research at the University of Waterloo’s RoboHub</strong>. Skilled in <strong>ROS2</strong>,
@@ -138,55 +135,95 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 <section id="experience" class="wrap">
   <h2>Experience</h2>
   <div class="timeline">
-    <div class="item left"><h3 class="title">Robotics Research Assistant</h3><p class="company">UW RoboHub</p></div>
-    <div class="item right"><h3 class="title">Robotics Engineering</h3><p class="company">UW Robotics Team (Co-op)</p></div>
-    <div class="item left"><h3 class="title">Robotics Engineering</h3><p class="company">BHF Robotics (Co-op)</p></div>
-    <div class="item right"><h3 class="title">Mechatronics Engineering</h3><p class="company">RAB Design Lighting (Co-op)</p></div>
-    <div class="item left"><h3 class="title">Quality Assurance</h3><p class="company">Ontario Drive & Gear (Co-op)</p></div>
-    <div class="item right"><h3 class="title">Electrical Engineering</h3><p class="company">Jule / eCAMION (Co-op)</p></div>
-    <div class="item left"><h3 class="title">Youth Robotics Mentor</h3><p class="company">FIRST (FLL)</p></div>
+    <div class="item">
+      <div class="title">Robotics Research Assistant</div>
+      <div class="company">UW RoboHub</div>
+      <div class="desc">Conducted swarm robotics research with HeRo 2.0 robots — built ROS2 communication frameworks, tested navigation algorithms, and supported experimental multi-robot coordination.</div>
+    </div>
+
+    <div class="item">
+      <div class="title">Robotics Engineering</div>
+      <div class="company">UW Robotics Team (Co-op)</div>
+      <div class="desc">Designed and implemented a Mars-style rover drivetrain and kinematics system; integrated RealSense camera pipelines and custom perception nodes in ROS2.</div>
+    </div>
+
+    <div class="item">
+      <div class="title">Robotics Engineering</div>
+      <div class="company">BHF Robotics (Co-op)</div>
+      <div class="desc">Developed navigation stack for an autonomous electric weeding robot; configured ROS2 networking, debugged electrical systems, and supported deep-learning model deployment.</div>
+    </div>
+
+    <div class="item">
+      <div class="title">Mechatronics Engineering</div>
+      <div class="company">RAB Design Lighting (Co-op)</div>
+      <div class="desc">Designed and tested Bluetooth-enabled lighting controllers; validated firmware and documented smart lighting system performance for production launch.</div>
+    </div>
+
+    <div class="item">
+      <div class="title">Quality Assurance</div>
+      <div class="company">Ontario Drive & Gear (Co-op)</div>
+      <div class="desc">Led QA on prototype gear assemblies; performed GD&T-based inspections, tolerance analysis, and supported launch readiness for drivetrain components.</div>
+    </div>
+
+    <div class="item">
+      <div class="title">Electrical Engineering</div>
+      <div class="company">Jule / eCAMION (Co-op)</div>
+      <div class="desc">Assisted in development of EV fast-charging hardware; assembled and tested power electronics and supported integration for commercial deployment.</div>
+    </div>
+
+    <div class="item">
+      <div class="title">Youth Robotics Mentor</div>
+      <div class="company">FIRST (FLL)</div>
+      <div class="desc">Mentored student robotics teams to regional/national competitions; coached mechanical design, coding fundamentals, and strategy.</div>
+    </div>
   </div>
 </section>
 
 <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
-<!-- Modal -->
-<div id="modal"><div id="modal-content"></div></div>
+<!-- Fullscreen project viewer -->
+<div id="viewer"></div>
 
 <script>
+// Year
 document.getElementById('y').textContent=new Date().getFullYear();
+
+// Set & loop background video (0-18s)
+const vid=document.getElementById('video-bg');
+vid.src='images/robo_video.mp4';
+vid.addEventListener('timeupdate',()=>{ if(vid.currentTime>=18){ vid.currentTime=0; vid.play(); } });
+
+// Projects grid + fullscreen viewer
 const projects=[
-  {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Contributed to swarm robotics research at UW RoboHub, implementing ROS2-based networking, navigation, and multi-robot coordination on HeRo 2.0 platforms."},
-  {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed a swarm navigation algorithm for the HeRo 2.0 robotics hackathon, enabling distributed path planning and robot coordination."},
-  {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"Designed and built a rugged rover platform for off-road robotics experiments with onboard sensors and teleoperation."},
-  {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg",desc:"Implemented an Intel RealSense vision pipeline for robotics perception using ROS2 and Python for depth-based navigation."},
-  {title:"Rover Kinematics",img:"images/project-rover.jpg",desc:"Analyzed rover forward and inverse kinematics and validated motion against motion capture data."},
-  {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg",desc:"Created a 3-DOF robotic arm with ROS2 control for pick-and-place experiments."},
-  {title:"Embedded C Operating System",img:"images/project-stm32.jpg",desc:"Developed a minimal RTOS-like system in C for STM32 microcontrollers with multitasking and interrupt handling."},
-  {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"Built a motorized bicycle with custom electronics and power delivery system."},
-  {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg",desc:"Programmed Siemens PLCs to automate industrial processes and control mechatronic systems."},
-  {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Programmed a LEGO EV3 robot to solve Rubik’s cubes using computer vision and motor control."},
-  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Designed and built a retro arcade console powered by Raspberry Pi and custom electronics."},
+  {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Undergraduate research on swarm robotics and multi-robot communication with HeRo 2.0 at UW RoboHub."},
+  {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed swarm navigation and package routing algorithms during a robotics hackathon using HeRo 2.0 bots."},
+  {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"Built a Mars-style rover with 6-wheel drivetrain, solved kinematics, and integrated electro-mechanical systems."},
+  {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg",desc:"Built a ROS2 pipeline for RealSense camera streaming with compression and OpenCV viewer to optimize bandwidth."},
+  {title:"Rover Kinematics",img:"images/project-rover.jpg",desc:"Created and validated forward/inverse kinematics models for rover mobility systems."},
+  {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg",desc:"CAD-designed and printed a 3-DOF arm using ROS2 and OpenCV for token color detection."},
+  {title:"Embedded C Operating System",img:"images/project-stm32.jpg",desc:"Developing a custom operating system in C on an STM32 Nucleo 64 microcontroller."},
+  {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"Retrofitted a bicycle with a 2-stroke engine; cutting, welding, and custom mechanical assembly."},
+  {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg",desc:"Programmed Siemens PLC with ladder logic to control motors, sensors, and system safety devices."},
+  {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Lego EV3 robot that uses a Python solving algorithm for autonomous Rubik’s Cube solves."},
+  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Raspberry-Pi powered arcade console with a wide library of retro games."}
 ];
-const grid=document.getElementById("projectGrid");
+
+const grid=document.getElementById('projectGrid');
+const viewer=document.getElementById('viewer');
 projects.forEach(p=>{
-  const c=document.createElement("div");
-  c.className="card";
+  const c=document.createElement('div');
+  c.className='card';
   c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
-  c.addEventListener("click",()=>{
-    const modal=document.getElementById("modal");
-    const mc=document.getElementById("modal-content");
-    mc.innerHTML=`<img src="${p.img}" alt="${p.title}"><p>${p.desc}</p>`;
-    modal.classList.add("active");
-  });
+  c.onclick=()=>{
+    viewer.innerHTML=`<img src="${p.img}" alt="${p.title}"><div class="desc"><h3 style="margin:.4rem 0">${p.title}</h3><p>${p.desc}</p></div>`;
+    viewer.style.display='flex';
+  };
   grid.appendChild(c);
 });
-document.getElementById("modal").addEventListener("click",e=>{
-  if(e.target.id==="modal"||e.target.id==="modal-content"){document.getElementById("modal").classList.remove("active");}
-});
+viewer.addEventListener('click',()=>viewer.style.display='none');
 </script>
 
-<!-- 3D starfield -->
+<!-- Starfield (kept exactly as before) -->
 <script type="module">
 import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
 const canvas=document.getElementById('bg3d');

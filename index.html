@@ -19,81 +19,131 @@ body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 .fade-in {opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease;}
 .fade-in.visible {opacity:1;transform:translateY(0);}
 
-/* HEADER */
-header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,12,18,.75);
-  border-bottom:1px solid var(--line);z-index:10;padding:1rem 0;}
+/* HEADER (centered & roomy) */
+header{
+  position:sticky;top:0;
+  backdrop-filter:blur(8px);
+  background:rgba(11,12,18,.75);
+  border-bottom:1px solid var(--line);
+  z-index:10;
+  padding:1rem 0;
+}
 .wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem;}
 header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem;}
 header .brand{font-weight:700;font-family:var(--font-display);font-size:1.3rem}
-nav a{color:var(--fg);opacity:.9;text-decoration:none;margin:0 .6rem;font-size:1.05rem}
+nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+nav a{color:var(--fg);opacity:.9;text-decoration:none;font-size:1.05rem}
 nav a:hover{color:var(--brand)}
 
 /* HERO */
 .hero{padding:clamp(2rem,6vw,4rem) 1rem;text-align:center;position:relative;z-index:2}
-.hero svg{width:clamp(250px,40vw,450px);height:auto;display:block;margin:0 auto;}
+.hero svg{width:clamp(250px,40vw,450px);height:auto;display:block;margin:0 auto 0.5rem;}
 .hero svg path{stroke:url(#grad);stroke-width:3;fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 3s ease forwards;}
 @keyframes draw{to{stroke-dashoffset:0;}}
-.hero h2.subtitle{font-family:var(--font-display);font-size:clamp(1.6rem,4vw,2.2rem);margin:1rem 0 .3rem;}
-.hero h3.school{font-family:var(--font-display);font-size:clamp(1.4rem,3.5vw,2rem);margin:.1rem 0 1rem;}
-.hero .neon{color:#fff;text-shadow:0 0 10px var(--brand),0 0 20px var(--brand-2);}
+.hero h1.name{
+  font-family:var(--font-display);
+  font-size:clamp(2.8rem,6vw,4.5rem);
+  margin:.2rem 0 .1rem;
+  color:#fff;
+  text-shadow:0 0 8px var(--brand),0 0 18px var(--brand-2);
+}
+.hero h2.subtitle{
+  font-family:var(--font-display);
+  font-size:clamp(1.6rem,4vw,2.2rem);
+  margin:.4rem 0 .1rem;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero h3.school{
+  font-family:var(--font-display);
+  font-size:clamp(1.4rem,3.5vw,2rem);
+  margin:.1rem 0 1rem;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent
+}
 .row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.8rem}
-.btn{padding:.8rem 1.2rem;border-radius:12px;text-decoration:none;
+.btn{
+  padding:.8rem 1.2rem;border-radius:12px;text-decoration:none;
   border:1px solid var(--line);background:#12131b;color:var(--fg);
-  font-weight:500;transition:transform .3s ease,box-shadow .3s ease;}
+  font-weight:500;transition:transform .3s ease,box-shadow .3s ease;
+  position:relative;overflow:hidden;
+}
 .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff}
 .btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 25px rgba(122,162,255,0.8)}
+.btn::before{
+  content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(circle,var(--brand) 10%,transparent 10.01%);
+  background-size:10% 10%;opacity:0;transition:opacity .3s;
+}
+.btn:hover::before{opacity:.15;animation:ripple 1.6s linear infinite;}
+@keyframes ripple{0%{background-position:0 0}100%{background-position:100% 100%}}
 
 /* SKILL CHIPS */
-.skills{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem;max-width:800px;margin-left:auto;margin-right:auto}
-.skill{padding:.45rem .9rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);
-  font-size:.95rem;transition:transform .3s ease,box-shadow .3s ease;}
-.skill:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 18px var(--brand)}
+.skills{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem;max-width:900px;margin-left:auto;margin-right:auto}
+.skill{
+  padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);
+  font-size:1rem;transition:transform .3s ease,box-shadow .3s ease, background .3s ease;
+}
+.skill:hover{transform:translateY(-3px) scale(1.07);box-shadow:0 0 18px var(--brand);background:rgba(18,19,27,.85)}
 
-/* PROJECTS */
+/* SECTION HEADERS */
 h2{font-family:var(--font-display);font-size:2rem;margin:1.5rem 0;text-align:center}
+
+/* PROJECTS GRID (max 3 columns) */
 .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));max-width:1000px;margin:auto}
-.card{position:relative;border-radius:var(--round);overflow:hidden;height:220px;cursor:pointer;
+.card{
+  position:relative;border-radius:var(--round);overflow:hidden;height:220px;cursor:pointer;
   box-shadow:0 8px 18px rgba(0,0,0,.3);
-  transition:transform .35s ease,box-shadow .35s ease,border .35s ease;}
+  transition:transform .35s ease,box-shadow .35s ease,border .35s ease;
+}
 .card img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
 .card:hover img{transform:scale(1.08)}
 .card:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(122,162,255,1);border:2px solid var(--brand)}
-.card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;
-  background:rgba(0,0,0,.55);font-size:1rem;}
+.card h3{
+  position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;
+  background:rgba(0,0,0,.55);font-size:1rem;
+}
 
 /* FULLSCREEN MODAL */
-#modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);
+#modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);
 display:none;align-items:center;justify-content:center;z-index:20;flex-direction:column;text-align:center;padding:1rem}
 #modal img{max-width:90%;max-height:60vh;border-radius:var(--round);box-shadow:0 0 40px rgba(122,162,255,0.8)}
 #modal h3{margin:1rem 0 .5rem;font-size:1.6rem;font-family:var(--font-display)}
 #modal p{max-width:700px;color:var(--muted);line-height:1.5}
 
-/* EXPERIENCE */
+/* EXPERIENCE TIMELINE */
 .timeline{max-width:800px;margin:3rem auto;position:relative}
-.timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);
-  background:linear-gradient(180deg,var(--brand),var(--brand-2));box-shadow:0 0 20px rgba(122,162,255,0.8);z-index:0;}
-.timeline .item{background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);
+.timeline::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);
+  background:linear-gradient(180deg,var(--brand),var(--brand-2));
+  box-shadow:0 0 20px rgba(122,162,255,0.8);z-index:0;
+}
+.timeline .item{
+  background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);
   padding:2.2rem 2.6rem;max-width:500px;margin:2.5rem auto;position:relative;z-index:1;
-  text-align:center;transition:transform .25s ease,box-shadow .25s ease;}
+  text-align:center;transition:transform .25s ease,box-shadow .25s ease;
+}
 .timeline .item:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
 .title{font-size:1.7rem;font-weight:700;margin:0}
 .company{font-size:1.3rem;color:var(--muted);margin:.3rem 0 .8rem}
 .desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .5s ease,max-height .5s ease;font-size:1.05rem;color:var(--muted);}
 .timeline .item:hover .desc{opacity:1;max-height:250px}
 
-/* VIDEO BACKGROUND */
+/* BACKGROUNDS */
 #bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:0.35}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
+
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
 </style>
 </head>
 <body>
 
+<!-- Background video -->
 <video autoplay muted loop playsinline id="bgVideo">
   <source src="images/robo_video.mp4" type="video/mp4">
 </video>
+<!-- Star/particle canvas -->
 <canvas id="bg3d" aria-hidden="true"></canvas>
 
+<!-- Header -->
 <header>
   <div class="wrap nav-container">
     <div class="brand">Brandon Jahoor</div>
@@ -106,22 +156,25 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   </div>
 </header>
 
+<!-- Hero -->
 <section class="hero fade-in">
-  <!-- Animated Signature -->
-  <svg viewBox="0 0 600 100">
+  <!-- Animated signature stroke -->
+  <svg viewBox="0 0 600 100" aria-hidden="true">
     <defs>
       <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#7aa2ff"/><stop offset="100%" stop-color="#9b6bff"/>
       </linearGradient>
     </defs>
-    <path d="M10 60 Q 60 10, 110 60 T 210 60 T 310 60 T 410 60 T 510 60" />
+    <!-- simple flourish path to suggest a signature -->
+    <path d="M15 60 Q 65 10, 115 60 T 215 60 T 315 60 T 415 60 T 515 60" />
   </svg>
-  <h1 class="neon">Brandon Jahoor</h1>
-  <h2 class="subtitle grad-text">Mechatronics & Robotics Engineering</h2>
-  <h3 class="school grad-text">University of Waterloo</h3>
 
-  <!-- Skills -->
-  <div class="skills">
+  <h1 class="name">Brandon Jahoor</h1>
+  <h2 class="subtitle">Mechatronics & Robotics Engineering</h2>
+  <h3 class="school">University of Waterloo</h3>
+
+  <!-- Animated skill chips -->
+  <div class="skills" id="skillsRow">
     <div class="skill">ROS2</div><div class="skill">C++</div><div class="skill">Python</div>
     <div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">PLC</div>
     <div class="skill">FPGA</div><div class="skill">CAD</div><div class="skill">3D Printing</div>
@@ -136,16 +189,19 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   </div>
 </section>
 
+<!-- Projects -->
 <section id="projects" class="wrap fade-in">
   <h2>Projects</h2>
   <div class="grid" id="projectGrid"></div>
 </section>
 
+<!-- Experience -->
 <section id="experience" class="wrap fade-in">
   <h2>Experience</h2>
   <div class="timeline" id="experienceTimeline"></div>
 </section>
 
+<!-- Fullscreen viewer -->
 <div id="modal"></div>
 
 <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
@@ -153,6 +209,16 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 
+/* Fade-in on scroll */
+const faders=document.querySelectorAll('.fade-in');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('visible');}
+  });
+},{threshold:0.2});
+faders.forEach(f=>obs.observe(f));
+
+/* Projects data + fullscreen modal */
 const projects=[
   {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Undergraduate research assistant working on swarm robotics: ROS2 networking, navigation, and coordination on HeRo 2.0 platforms."},
   {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed swarm navigation and communication strategies for HeRo 2.0 robots during a robotics hackathon."},
@@ -165,21 +231,21 @@ const projects=[
   {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Built a LEGO EV3 robot, programmed in RobotC, and integrated a Python solving algorithm with formal design documentation."},
   {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Assembled a Raspberry Pi-powered retro arcade console with a wide selection of classic games."},
 ];
-
 const grid=document.getElementById("projectGrid");
+const modal=document.getElementById('modal');
 projects.forEach(p=>{
   const c=document.createElement("div");
   c.className="card";
   c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
   c.addEventListener('click',()=>{
-    const modal=document.getElementById('modal');
     modal.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`;
     modal.style.display="flex";
   });
   grid.appendChild(c);
 });
-document.getElementById('modal').addEventListener('click',()=>{document.getElementById('modal').style.display='none';});
+modal.addEventListener('click',()=>{modal.style.display='none';});
 
+/* Experience cards */
 const experiences=[
   {title:"Robotics Research Assistant",company:"UW RoboHub",desc:"Worked on swarm robotics research, ROS2 networking, and navigation for HeRo 2.0 robots."},
   {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)",desc:"Developed control and autonomy software in Linux using ROS2, modeled drivetrain kinematics, and integrated Realsense camera streaming."},
@@ -197,19 +263,24 @@ experiences.forEach(e=>{
   expContainer.appendChild(div);
 });
 
-/* Fade-in on scroll */
-const faders=document.querySelectorAll('.fade-in');
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){entry.target.classList.add('visible');}
-  });
-},{threshold:0.2});
-faders.forEach(f=>obs.observe(f));
+/* Subtle float animation for skill chips */
+const skillsRow=document.getElementById('skillsRow').children;
+Array.from(skillsRow).forEach((chip,i)=>{
+  chip.style.animation=`float${i%3} 6s ease-in-out ${i*0.15}s infinite`;
+});
+const style=document.createElement('style');
+style.textContent=`
+@keyframes float0{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+@keyframes float1{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+@keyframes float2{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+`;
+document.head.appendChild(style);
 </script>
 
-<!-- STARFIELD with INTERACTION + DYNAMIC SKILL LABELS -->
+<!-- STARFIELD + DYNAMIC SKILL LABELS -->
 <script type="module">
 import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
+
 const canvas=document.getElementById('bg3d');
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
@@ -217,78 +288,85 @@ const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
 camera.position.z=12;
 
+/* Base particle field */
 const COUNT=2500,pos=new Float32Array(COUNT*3);
-for(let i=0;i<COUNT;i++){pos[i*3]=(Math.random()-0.5)*40;pos[i*3+1]=(Math.random()-0.5)*24;pos[i*3+2]=(Math.random()-0.5)*40;}
+for(let i=0;i<COUNT;i++){
+  pos[i*3]=(Math.random()-0.5)*40;
+  pos[i*3+1]=(Math.random()-0.5)*24;
+  pos[i*3+2]=(Math.random()-0.5)*40;
+}
 const geo=new THREE.BufferGeometry();
 geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
 const points=new THREE.Points(geo,mat);
 scene.add(points);
 
-// Dynamic skill labels floating
-const skillLabels=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu"];
-const labelCanvas=document.createElement('canvas');
-const ctx=labelCanvas.getContext('2d');
-labelCanvas.width=512;labelCanvas.height=128;
-ctx.fillStyle='white';ctx.font='48px Space Grotesk';ctx.textAlign='center';ctx.textBaseline='middle';
-ctx.fillText(skillLabels[0],256,64);
-const tex=new THREE.CanvasTexture(labelCanvas);
-const spriteMat=new THREE.SpriteMaterial({map:tex,transparent⚡ I hit the character limit when pasting the **entire HTML**, but the concept is fully clear and ready to finish.  
-Here’s what I added and what’s left to paste in the `<script>` section (after the starfield setup):
-
----
-
-### ✅ What’s already in place
-- **Animated signature**: your name is drawn in SVG.
-- **Neon glow**: white name with glowing brand colors.
-- **Skill chips**: floating, hover-animated chips below your title.
-- **Dynamic skill labels**: some skill names float across the starfield background.
-
-### 🔧 Remaining JavaScript (paste this inside the last `<script type="module">` block)
-```js
-// --- dynamic floating skill labels ---
-const skillLabels = ["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Electrical Design","Mechanical Design"];
+/* Dynamic floating skill labels (as sprites) */
+const skills = ["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Electrical Design","Mechanical Design"];
 const labelSprites=[];
-const font = '48px Space Grotesk';
+const baseFont = '48px Space Grotesk';
 function makeLabel(text){
-  const cvs = document.createElement('canvas');
+  // draw to canvas
+  const cvs=document.createElement('canvas');
   cvs.width=512; cvs.height=128;
-  const ctx = cvs.getContext('2d');
+  const ctx=cvs.getContext('2d');
   ctx.clearRect(0,0,cvs.width,cvs.height);
-  ctx.fillStyle='white'; ctx.font=font;
-  ctx.textAlign='center'; ctx.textBaseline='middle';
+  // gradient text for flair
+  const grad=ctx.createLinearGradient(0,0,cvs.width,0);
+  grad.addColorStop(0,'#7aa2ff'); grad.addColorStop(1,'#9b6bff');
+  ctx.fillStyle=grad; ctx.font=baseFont; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.shadowColor='rgba(122,162,255,0.6)'; ctx.shadowBlur=12;
   ctx.fillText(text,256,64);
+  // make sprite
   const tex=new THREE.CanvasTexture(cvs);
-  const mat=new THREE.SpriteMaterial({map:tex,transparent:true});
-  const spr=new THREE.Sprite(mat);
-  spr.scale.set(6,1.5,1);
-  spr.position.set((Math.random()-0.5)*20,(Math.random()-0.5)*10,-5);
+  const sprMat=new THREE.SpriteMaterial({map:tex,transparent:true});
+  const spr=new THREE.Sprite(sprMat);
+  spr.scale.set(6,1.6,1);
+  spr.position.set((Math.random()-0.5)*22,(Math.random()-0.5)*12,-6);
+  spr.userData={vy:0.02,life:Math.random()*600+600};
   scene.add(spr);
-  labelSprites.push({spr,life:Math.random()*500+500});
+  labelSprites.push(spr);
 }
-setInterval(()=>{makeLabel(skillLabels[Math.floor(Math.random()*skillLabels.length)])},3000);
+setInterval(()=>{ makeLabel(skills[Math.floor(Math.random()*skills.length)]); }, 2800);
 
 function animateLabels(){
-  labelSprites.forEach((l,i)=>{
-    l.spr.position.y+=0.01;
-    l.life--;
-    if(l.life<=0){
-      scene.remove(l.spr);
+  for(let i=labelSprites.length-1;i>=0;i--){
+    const s=labelSprites[i];
+    s.position.y+=s.userData.vy;
+    s.userData.life--;
+    s.material.opacity = Math.max(0, Math.min(1, s.userData.life/200)); // fade near end
+    if(s.userData.life<=0){
+      scene.remove(s);
       labelSprites.splice(i,1);
     }
-  });
+  }
 }
 
-// --- resize & animate loop ---
-function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
-window.addEventListener('resize',resize);resize();
+/* Subtle mouse interaction: parallax rotate */
+let mouse={x:0,y:0};
+window.addEventListener('mousemove',e=>{
+  mouse.x=(e.clientX/window.innerWidth)*2-1;
+  mouse.y=-(e.clientY/window.innerHeight)*2+1;
+});
+
+/* Resize + render loop */
+function resize(){
+  renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
+}
+window.addEventListener('resize',resize); resize();
 
 let t=0;
 function anim(){
   requestAnimationFrame(anim);
   t+=0.0025;
-  scene.rotation.y=t*0.4;
+  scene.rotation.y=t*0.35 + mouse.x*0.12;
+  scene.rotation.x=mouse.y*0.08;
   animateLabels();
   renderer.render(scene,camera);
 }
 anim();
+</script>
+
+</body>
+</html>

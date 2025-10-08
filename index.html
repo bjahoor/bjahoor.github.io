@@ -21,6 +21,10 @@ nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;font-size:1.05rem;cursor:pointer}
 nav a:hover{color:var(--brand)}
 
+/* ===== Reveal ===== */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
 /* ===== Hero ===== */
 .hero{padding:4.6rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-bottom:0.8rem}
 .hero svg{width:clamp(220px,32vw,360px);height:auto;display:block;margin:0 auto .15rem}
@@ -43,8 +47,8 @@ nav a:hover{color:var(--brand)}
 .skill{padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);font-size:1rem;transition:transform .3s ease}
 .skill:hover{transform:translateY(-3px)}
 
-/* ===== Scroll arrow ===== */
-.scroll-arrow{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowPulse 1.5s ease-in-out infinite;text-shadow:0 0 16px var(--brand),0 0 36px var(--brand-2)}
+/* ===== Scroll arrow (moved lower) ===== */
+.scroll-arrow{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowPulse 1.5s ease-in-out infinite;text-shadow:0 0 16px var(--brand),0 0 36px var(--brand-2)}
 @keyframes arrowPulse{0%{transform:translate(-50%,0)}30%{transform:translate(-50%,-10px)}45%{transform:translate(-50%,-10px)}100%{transform:translate(-50%,0)}}
 
 /* ===== Sections ===== */
@@ -232,7 +236,7 @@ starsGroup.add(new THREE.Points(geo,mat));
 const skills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping"];
 const sprites=[];
 function randBetween(min,max){ return Math.random()*(max-min)+min; }
-function edgeBiased(min,max,bias=0.65){ if(Math.random()<bias){ return Math.random()<0.5?min:max; } return randBetween(min,max); }
+function edgeBiased(min,max,bias=0.65){ if(Math.random()<bias){ return Math.random()<0.5?min|max; } return randBetween(min,max); }
 function makeLabel(text){
   const cvs=document.createElement('canvas'); cvs.width=512; cvs.height=128; const ctx=cvs.getContext('2d');
   ctx.clearRect(0,0,cvs.width,cvs.height); ctx.fillStyle='white'; ctx.font='48px Space Grotesk'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(text,256,64);

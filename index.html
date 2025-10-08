@@ -20,14 +20,8 @@ body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 .fade-in.visible {opacity:1;transform:translateY(0);}
 
 /* HEADER */
-header{
-  position:sticky;top:0;
-  backdrop-filter:blur(8px);
-  background:rgba(11,12,18,.75);
-  border-bottom:1px solid var(--line);
-  z-index:10;
-  padding:1rem 0;
-}
+header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,12,18,.75);
+  border-bottom:1px solid var(--line);z-index:10;padding:1rem 0;}
 .wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem;}
 header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem;}
 header .brand{font-weight:700;font-family:var(--font-display);font-size:1.3rem}
@@ -35,48 +29,37 @@ nav a{color:var(--fg);opacity:.9;text-decoration:none;margin:0 .6rem;font-size:1
 nav a:hover{color:var(--brand)}
 
 /* HERO */
-.hero{padding:clamp(2rem,6vw,4rem) 1rem;text-align:center}
-.hero h1.name{
-  font-family:var(--font-display);
-  font-size:clamp(2.8rem,6vw,4.5rem);
-  margin:0 0 .3rem;
-}
-.hero h2.subtitle{
-  font-family:var(--font-display);
-  font-size:clamp(1.6rem,4vw,2.2rem);
-  margin:0 0 .2rem;
-}
-.hero h3.school{
-  font-family:var(--font-display);
-  font-size:clamp(1.4rem,3.5vw,2rem);
-  margin:.1rem 0 .8rem;
-}
-.grad-text{background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.muted{color:var(--muted);max-width:800px;margin:0 auto}
+.hero{padding:clamp(2rem,6vw,4rem) 1rem;text-align:center;position:relative;z-index:2}
+.hero svg{width:clamp(250px,40vw,450px);height:auto;display:block;margin:0 auto;}
+.hero svg path{stroke:url(#grad);stroke-width:3;fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 3s ease forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.hero h2.subtitle{font-family:var(--font-display);font-size:clamp(1.6rem,4vw,2.2rem);margin:1rem 0 .3rem;}
+.hero h3.school{font-family:var(--font-display);font-size:clamp(1.4rem,3.5vw,2rem);margin:.1rem 0 1rem;}
+.hero .neon{color:#fff;text-shadow:0 0 10px var(--brand),0 0 20px var(--brand-2);}
 .row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.8rem}
-.btn{
-  padding:.8rem 1.2rem;border-radius:12px;text-decoration:none;
+.btn{padding:.8rem 1.2rem;border-radius:12px;text-decoration:none;
   border:1px solid var(--line);background:#12131b;color:var(--fg);
-  font-weight:500;transition:transform .3s ease,box-shadow .3s ease;
-}
+  font-weight:500;transition:transform .3s ease,box-shadow .3s ease;}
 .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff}
 .btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 25px rgba(122,162,255,0.8)}
+
+/* SKILL CHIPS */
+.skills{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem;max-width:800px;margin-left:auto;margin-right:auto}
+.skill{padding:.45rem .9rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);
+  font-size:.95rem;transition:transform .3s ease,box-shadow .3s ease;}
+.skill:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 18px var(--brand)}
 
 /* PROJECTS */
 h2{font-family:var(--font-display);font-size:2rem;margin:1.5rem 0;text-align:center}
 .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));max-width:1000px;margin:auto}
-.card{
-  position:relative;border-radius:var(--round);overflow:hidden;height:220px;cursor:pointer;
+.card{position:relative;border-radius:var(--round);overflow:hidden;height:220px;cursor:pointer;
   box-shadow:0 8px 18px rgba(0,0,0,.3);
-  transition:transform .35s ease,box-shadow .35s ease,border .35s ease;
-}
+  transition:transform .35s ease,box-shadow .35s ease,border .35s ease;}
 .card img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
 .card:hover img{transform:scale(1.08)}
 .card:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(122,162,255,1);border:2px solid var(--brand)}
-.card h3{
-  position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;
-  background:rgba(0,0,0,.55);font-size:1rem;
-}
+.card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;
+  background:rgba(0,0,0,.55);font-size:1rem;}
 
 /* FULLSCREEN MODAL */
 #modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);
@@ -87,16 +70,11 @@ display:none;align-items:center;justify-content:center;z-index:20;flex-direction
 
 /* EXPERIENCE */
 .timeline{max-width:800px;margin:3rem auto;position:relative}
-.timeline::before{
-  content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);
-  background:linear-gradient(180deg,var(--brand),var(--brand-2));
-  box-shadow:0 0 20px rgba(122,162,255,0.8);z-index:0;
-}
-.timeline .item{
-  background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);
+.timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);
+  background:linear-gradient(180deg,var(--brand),var(--brand-2));box-shadow:0 0 20px rgba(122,162,255,0.8);z-index:0;}
+.timeline .item{background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);
   padding:2.2rem 2.6rem;max-width:500px;margin:2.5rem auto;position:relative;z-index:1;
-  text-align:center;transition:transform .25s ease,box-shadow .25s ease;
-}
+  text-align:center;transition:transform .25s ease,box-shadow .25s ease;}
 .timeline .item:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
 .title{font-size:1.7rem;font-weight:700;margin:0}
 .company{font-size:1.3rem;color:var(--muted);margin:.3rem 0 .8rem}
@@ -129,14 +107,28 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 </header>
 
 <section class="hero fade-in">
-  <h1 class="name grad-text">Brandon Jahoor</h1>
+  <!-- Animated Signature -->
+  <svg viewBox="0 0 600 100">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#7aa2ff"/><stop offset="100%" stop-color="#9b6bff"/>
+      </linearGradient>
+    </defs>
+    <path d="M10 60 Q 60 10, 110 60 T 210 60 T 310 60 T 410 60 T 510 60" />
+  </svg>
+  <h1 class="neon">Brandon Jahoor</h1>
   <h2 class="subtitle grad-text">Mechatronics & Robotics Engineering</h2>
   <h3 class="school grad-text">University of Waterloo</h3>
-  <p class="muted">
-    Engineering undergraduate student combining <strong>industry co-op experience</strong> with
-    <strong>research at the University of Waterloo’s RoboHub</strong>. Skilled in <strong>ROS2</strong>,
-    electrical/mechanical design and prototyping, and <strong>team-driven innovation in robotics</strong>.
-  </p>
+
+  <!-- Skills -->
+  <div class="skills">
+    <div class="skill">ROS2</div><div class="skill">C++</div><div class="skill">Python</div>
+    <div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">PLC</div>
+    <div class="skill">FPGA</div><div class="skill">CAD</div><div class="skill">3D Printing</div>
+    <div class="skill">Ubuntu</div><div class="skill">Electrical Design</div>
+    <div class="skill">Mechanical Design</div><div class="skill">Assembly</div>
+  </div>
+
   <div class="row">
     <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume</a>
     <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
@@ -215,7 +207,7 @@ const obs=new IntersectionObserver(entries=>{
 faders.forEach(f=>obs.observe(f));
 </script>
 
-<!-- STARFIELD with INTERACTION -->
+<!-- STARFIELD with INTERACTION + DYNAMIC SKILL LABELS -->
 <script type="module">
 import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
 const canvas=document.getElementById('bg3d');
@@ -233,25 +225,12 @@ const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color
 const points=new THREE.Points(geo,mat);
 scene.add(points);
 
-let mouse={x:0,y:0};
-window.addEventListener('mousemove',e=>{
-  mouse.x=(e.clientX/window.innerWidth)*2-1;
-  mouse.y=-(e.clientY/window.innerHeight)*2+1;
-});
-
-function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
-window.addEventListener('resize',resize);resize();
-let t=0;
-function anim(){
-  requestAnimationFrame(anim);
-  t+=0.0025;
-  scene.rotation.y=t*0.4;
-  scene.rotation.x=mouse.y*0.1;
-  scene.rotation.y+=mouse.x*0.05;
-  renderer.render(scene,camera);
-}
-anim();
-</script>
-
-</body>
-</html>
+// Dynamic skill labels floating
+const skillLabels=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu"];
+const labelCanvas=document.createElement('canvas');
+const ctx=labelCanvas.getContext('2d');
+labelCanvas.width=512;labelCanvas.height=128;
+ctx.fillStyle='white';ctx.font='48px Space Grotesk';ctx.textAlign='center';ctx.textBaseline='middle';
+ctx.fillText(skillLabels[0],256,64);
+const tex=new THREE.CanvasTexture(labelCanvas);
+const spriteMat=new THREE.SpriteMaterial({map:tex,transparent

@@ -11,7 +11,7 @@
 html,body{height:100%}
 body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 
-/* Fixed header */
+/* ===== Header ===== */
 header{position:fixed;top:0;left:0;width:100%;backdrop-filter:blur(8px);background:rgba(11,12,18,.85);border-bottom:1px solid var(--line);z-index:50;padding:0.5rem 0}
 .wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem}
 header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem}
@@ -21,53 +21,50 @@ nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;font-size:1.05rem;cursor:pointer}
 nav a:hover{color:var(--brand)}
 
-/* Reveal */
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-
-/* Hero */
-.hero{padding:4rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-top:4.5rem}
-.hero svg{width:clamp(260px,40vw,420px);height:auto;display:block;margin:0 auto .25rem}
-.hero svg path{stroke:url(#grad);stroke-width:3;fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 2.2s ease forwards}
+/* ===== Hero ===== */
+.hero{padding:4.6rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-bottom:0.8rem}
+.hero svg{width:clamp(220px,32vw,360px);height:auto;display:block;margin:0 auto .15rem}
+.hero svg path{stroke:url(#grad);stroke-width:3;fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 2.6s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
-.hero h1.neon{font-family:var(--font-display);font-size:clamp(4rem,10vw,6.2rem);font-weight:900;color:#fff;text-shadow:0 0 20px var(--brand),0 0 40px var(--brand-2);margin:.4rem 0}
+.hero h1.neon{font-family:var(--font-display);font-size:clamp(4rem,10vw,6rem);font-weight:900;color:#fff;text-shadow:0 0 20px var(--brand),0 0 40px var(--brand-2);margin:.5rem 0}
 .subtitle,.school{font-family:var(--font-display);background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.subtitle{font-size:clamp(1.6rem,4vw,2.2rem);margin:.5rem 0}
-.school{font-size:clamp(1.4rem,3.5vw,2rem);margin:.2rem 0 .8rem}
+.subtitle{font-size:clamp(1.6rem,4vw,2.2rem);margin:.6rem 0}
+.school{font-size:clamp(1.4rem,3.5vw,2rem);margin:.2rem 0 1rem}
 
-/* CTAs */
-.row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1rem}
-.btn{padding:1rem 1.8rem;border-radius:14px;text-decoration:none;border:1px solid var(--line);background:#12131b;color:var(--fg);font-weight:600;font-size:1.1rem;transition:transform .3s ease,box-shadow .3s ease;animation:bounce 2s infinite ease-in-out}
+/* ===== CTAs ===== */
+.row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.2rem}
+.btn{padding:1rem 1.8rem;border-radius:14px;text-decoration:none;border:1px solid var(--line);background:#12131b;color:var(--fg);font-weight:600;font-size:1.2rem;transition:transform .3s ease,box-shadow .3s ease;animation:bounce 2s infinite ease-in-out}
 .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff}
-.btn:hover{transform:translateY(-5px) scale(1.06);box-shadow:0 0 25px rgba(122,162,255,.8)}
+.btn:hover{transform:translateY(-5px) scale(1.08);box-shadow:0 0 25px rgba(122,162,255,.8)}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-/* Skills chips */
+/* ===== Skills ===== */
 .skills{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem;max-width:900px;margin-left:auto;margin-right:auto}
 .skill{padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);font-size:1rem;transition:transform .3s ease}
 .skill:hover{transform:translateY(-3px)}
 
-/* Scroll arrow */
-.scroll-arrow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowjump 1.2s infinite ease-in-out;text-shadow:0 0 25px var(--brand),0 0 50px var(--brand-2),0 0 80px var(--brand)}
-@keyframes arrowjump{0%,70%,100%{transform:translate(-50%,0) scale(1)}35%{transform:translate(-50%,-18px) scale(1.2)}}
+/* ===== Scroll arrow ===== */
+.scroll-arrow{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowPulse 1.5s ease-in-out infinite;text-shadow:0 0 16px var(--brand),0 0 36px var(--brand-2)}
+@keyframes arrowPulse{0%{transform:translate(-50%,0)}30%{transform:translate(-50%,-10px)}45%{transform:translate(-50%,-10px)}100%{transform:translate(-50%,0)}}
 
-/* Section spacing */
-#experience{margin-top:4rem;margin-bottom:2rem}
-#projects{margin-top:3rem;margin-bottom:4rem}
+/* ===== Sections ===== */
+h2{font-family:var(--font-display);font-size:2rem;margin:2.2rem 0 1.1rem;text-align:center}
+#experience{margin-top:3.6rem;margin-bottom:2.2rem}
+#projects{margin-top:2.6rem;margin-bottom:4.2rem}
 
-/* Experiences (compact + hover expand) */
+/* ===== Experiences (compact + hover expand) ===== */
 .timeline{max-width:800px;margin:2rem auto;position:relative;display:flex;flex-direction:column;gap:1rem}
 .timeline .item{background:#12131b;border-radius:var(--round);padding:1rem 1.5rem;box-shadow:0 5px 10px rgba(0,0,0,.4);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer}
 .timeline .item:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.45)}
-.item-line{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display);font-size:1.1rem;font-weight:700}
-.item-line span{color:var(--muted);font-weight:600}
-.desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .5s ease,max-height .5s ease;color:var(--muted);margin-top:.5rem;font-size:1rem;text-align:left}
+.item-line{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display);font-size:1.15rem;font-weight:800}
+.item-line span{color:var(--muted);font-weight:700}
+.desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .45s ease,max-height .45s ease;color:var(--muted);margin-top:.5rem;font-size:1rem;text-align:left}
 .timeline .item:hover .desc{opacity:1;max-height:320px}
 .desc p{margin:.2rem 0 .4rem}
 .desc ul{margin:.5rem 0 0 1.2rem;padding:0}
 .desc ul li{margin-bottom:.35rem}
 
-/* Projects grid */
+/* ===== Projects grid ===== */
 .grid{display:grid;gap:1rem;grid-template-columns:repeat(3,1fr);max-width:1000px;margin:auto}
 @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.grid{grid-template-columns:1fr}}
@@ -77,18 +74,18 @@ nav a:hover{color:var(--brand)}
 .card:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(122,162,255,1);border:2px solid var(--brand)}
 .card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.55);font-size:1rem}
 
-/* Modal */
+/* ===== Modal ===== */
 #modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:20;flex-direction:column;text-align:center;padding:1rem}
 #modal img{max-width:90%;max-height:60vh;border-radius:var(--round);box-shadow:0 0 40px rgba(122,162,255,0.8)}
 #modal h3{margin:1rem 0 .5rem;font-size:1.6rem;font-family:var(--font-display)}
 #modal p{max-width:700px;color:var(--muted);line-height:1.5}
 
-/* Background layers */
+/* ===== Background layers ===== */
 #bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.35}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
 
-/* Footer */
-footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:2rem 1rem 3rem}
+/* ===== Footer ===== */
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1.8rem 1rem 2.6rem}
 </style>
 </head>
 <body>
@@ -135,7 +132,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
     <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
     <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
   </div>
-  <div class="scroll-arrow">↓</div>
+  <div class="scroll-arrow" aria-hidden="true">↓</div>
 </section>
 
 <section id="experience" class="wrap fade-in">
@@ -158,7 +155,7 @@ document.getElementById('y').textContent=(new Date).getFullYear();
 
 // Reveal on scroll
 const faders=document.querySelectorAll('.fade-in');
-const obs=new IntersectionObserver(entries=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); }}); },{threshold:0.2});
+const obs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');}});},{threshold:0.2});
 faders.forEach(f=>obs.observe(f));
 
 // Projects + modal
@@ -176,10 +173,10 @@ const projects=[
 ];
 const grid=document.getElementById('projectGrid');
 const modal=document.getElementById('modal');
-projects.forEach(p=>{ const c=document.createElement('div'); c.className='card'; c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`; c.addEventListener('click',()=>{ modal.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`; modal.style.display='flex'; }); grid.appendChild(c); });
-modal.addEventListener('click',()=>{ modal.style.display='none'; });
+projects.forEach(p=>{const c=document.createElement('div');c.className='card';c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;c.addEventListener('click',()=>{modal.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`;modal.style.display='flex';});grid.appendChild(c);});
+modal.addEventListener('click',()=>{modal.style.display='none';});
 
-// Experiences (compact one-line; hover to expand)
+// Experiences (compact inline + hover expand)
 const experiences=[
   {title:"Robotics Research Assistant",company:"UW RoboHub",date:"May 2025 – Present",bullets:["Swarm robotics research on HeRo 2.0.","Implemented ROS2 networking and navigation."]},
   {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)",date:"Jan 2025 – Apr 2025",bullets:["Developed autonomy software on ROS2.","Integrated Realsense camera and drivetrain kinematics."]},
@@ -190,17 +187,17 @@ const experiences=[
   {title:"Youth Robotics Mentor",company:"FIRST (FLL)",date:"2018 – Present",bullets:["Coached teams to national competitions.","Guided design and programming; won mentor awards."]}
 ];
 const exp=document.getElementById('experienceTimeline');
-experiences.forEach(e=>{ const d=document.createElement('div'); d.className='item'; d.innerHTML=`<div class='item-line'><div>${e.title}</div><span>${e.company}</span></div><div class='desc'><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`; exp.appendChild(d); });
+experiences.forEach(e=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class='item-line'><div>${e.title}</div><span>${e.company}</span></div><div class='desc'><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;exp.appendChild(d);});
 
-// Smooth scroll with fixed offset (no URL hash changes)
-const headerOffset=70;
+// Smooth scroll with fixed offset and no hash updates
+const HEADER_OFFSET=70;
 document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
   link.addEventListener('click',e=>{
     e.preventDefault();
     const id=link.getAttribute('href');
-    const el=document.querySelector(id);
-    if(el){
-      const y=el.getBoundingClientRect().top+window.pageYOffset-headerOffset;
+    const target=document.querySelector(id);
+    if(target){
+      const y=target.getBoundingClientRect().top+window.pageYOffset-HEADER_OFFSET;
       const startY=window.scrollY; const distance=y-startY; const duration=500; let start;
       function step(ts){ if(!start) start=ts; const p=Math.min((ts-start)/duration,1); window.scrollTo(0,startY+distance*p); if(p<1) requestAnimationFrame(step); }
       requestAnimationFrame(step);
@@ -247,7 +244,7 @@ function makeLabel(text){
 setInterval(()=>{ makeLabel(skills[Math.floor(Math.random()*skills.length)]) },3000);
 
 function animateLabels(){
-  for(let i=sprites.length-1;i>=0;i--){ const s=sprites[i]; s.position.y+=s.userData.vy; s.position.x+=s.userData.vx; s.userData.life--; if(s.position.x>22)s.position.x=-22; if(s.position.x<-22)s.position.x=22; if(s.position.y>12)s.position.y=-12; if(s.position.y<-12)s.position.y=12; if(s.userData.life<=0){ labelsGroup.remove(s); sprites.splice(i,1); } }
+  for(let i=sprites.length-1;i>=0;i--){ const s=sprites[i]; s.position.y+=s.userData.vy; s.position.x+=s.userData.vx; s.userData.life--; if(s.position.x>22)s.position.x=-22; if(s.position.x<-22)s.position.x=22; if(s.position.y>12)s.position.y=-12; if(s.position.y< -12)s.position.y=12; if(s.userData.life<=0){ labelsGroup.remove(s); sprites.splice(i,1); } }
 }
 
 // Resize

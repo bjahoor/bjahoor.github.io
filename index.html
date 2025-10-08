@@ -68,7 +68,7 @@ display:none;align-items:center;justify-content:center;z-index:20;flex-direction
 #modal p{max-width:700px;color:var(--muted);line-height:1.5}
 
 /* EXPERIENCE */
-.timeline{max-width:700px;margin:3rem auto;position:relative}
+.timeline{max-width:800px;margin:3rem auto;position:relative}
 .timeline::before{
   content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);
   background:linear-gradient(180deg,var(--brand),var(--brand-2));
@@ -76,13 +76,13 @@ display:none;align-items:center;justify-content:center;z-index:20;flex-direction
 }
 .timeline .item{
   background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);
-  padding:1.2rem 1.4rem;max-width:380px;margin:2rem auto;position:relative;z-index:1;
+  padding:2rem 2.4rem;max-width:480px;margin:2.5rem auto;position:relative;z-index:1;
   text-align:center;transition:transform .25s ease,box-shadow .25s ease;
 }
 .timeline .item:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
-.title,.company{transition:opacity .3s ease}
-.desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .4s ease,max-height .4s ease;font-size:.95rem;color:var(--muted);margin-top:.5rem}
-.timeline .item:hover .title,.timeline .item:hover .company{opacity:0}
+.title{font-size:1.3rem;font-weight:700;margin:0}
+.company{font-size:1.05rem;color:var(--muted);margin:.25rem 0 .5rem}
+.desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .4s ease,max-height .4s ease;font-size:.95rem;color:var(--muted);margin-top:.8rem}
 .timeline .item:hover .desc{opacity:1;max-height:200px}
 
 /* VIDEO BACKGROUND */

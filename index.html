@@ -15,83 +15,155 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 
-#video-bg{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  object-fit:cover;object-position:center center;
-  z-index:-3;filter:brightness(.35) contrast(1.05);
+/* ----- HEADER ----- */
+header{
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(8px);
+  background:rgba(11,12,18,.75);
+  border-bottom:1px solid var(--line);
+  z-index:10;
+  padding:.8rem 0; /* more height */
 }
-#bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
-
-/* 🔹 NAVIGATION CENTERED */
-header{position:sticky;top:0;backdrop-filter:blur(6px);background:rgba(11,12,18,.7);border-bottom:1px solid var(--line);z-index:20}
-header .wrap{display:flex;flex-direction:column;align-items:center;text-align:center}
-header .brand{font-weight:700;font-family:var(--font-display);font-size:1.2rem;margin-bottom:.4rem}
-nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-nav a{color:var(--fg);opacity:.9;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem;}
+header .nav-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:2rem;
+}
+header .brand{
+  font-weight:700;
+  font-family:var(--font-display);
+  font-size:1.2rem;
+}
+nav a{
+  color:var(--fg);
+  opacity:.9;
+  text-decoration:none;
+  margin:0 .6rem;
+  font-size:1.05rem;
+}
 nav a:hover{color:var(--brand)}
 
-.hero{padding:clamp(3rem,6vw,5rem) 1rem;text-align:center;position:relative;z-index:1}
-.hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,6vw,4rem);line-height:1.15;margin:0 0 .8rem}
-.hero .line{background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
-.hero p{color:var(--muted);font-size:1.1rem;max-width:820px;margin:0.8rem auto 0;line-height:1.65}
-.row{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:1.2rem;animation:float 4s ease-in-out infinite}
-@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
-.btn{position:relative;overflow:hidden;padding:.85rem 1.25rem;border-radius:12px;text-decoration:none;border:1px solid var(--line);background:#12131b;color:var(--fg);transition:transform .35s ease, box-shadow .35s ease;}
-.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none}
-.btn::before{
-  content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-  background:radial-gradient(circle,var(--brand) 10%,transparent 10.01%);
-  background-size:10% 10%;opacity:0;transition:opacity .3s;
+/* ----- HERO ----- */
+.hero{padding:clamp(2rem,6vw,4rem) 1rem;text-align:center}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.2rem,5vw,3.6rem);
+  margin:0 0 .5rem;
 }
-.btn:hover::before{opacity:.15;animation:ripple 1.6s linear infinite;}
-@keyframes ripple{0%{background-position:0 0}100%{background-position:100% 100%}}
-.btn:hover{transform:scale(1.08);box-shadow:0 0 20px rgba(122,162,255,.6)}
+.grad-text{background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.muted{color:var(--muted);max-width:800px;margin:0 auto}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.8rem}
+.btn{
+  padding:.8rem 1.2rem;
+  border-radius:12px;
+  text-decoration:none;
+  border:1px solid var(--line);
+  background:#12131b;
+  color:var(--fg);
+  font-weight:500;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff}
+.btn:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 0 20px rgba(122,162,255,0.6);
+}
 
-h2{font-family:var(--font-display);font-size:1.9rem;margin:2rem 0 1rem;text-align:center}
-
-.fade-section{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease;}
-.fade-section.visible{opacity:1;transform:translateY(0)}
-
+/* ----- PROJECTS GRID ----- */
+h2{font-family:var(--font-display);font-size:1.9rem;margin:1.5rem 0;text-align:center}
 .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.card{position:relative;border-radius:var(--round);overflow:hidden;height:200px;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.3)}
+.card{
+  position:relative;
+  border-radius:var(--round);
+  overflow:hidden;
+  height:200px;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,0,0,.3);
+  transition:transform .35s ease, box-shadow .35s ease, border .35s ease;
+}
 .card img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
 .card:hover img{transform:scale(1.05)}
-.card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.5);font-size:1rem}
-
-#viewer{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;flex-direction:column;padding:2rem;z-index:9999}
-#viewer img{max-width:90%;max-height:70vh;object-fit:contain;border-radius:var(--round);box-shadow:0 12px 30px rgba(0,0,0,.6)}
-#viewer .desc{max-width:800px;margin-top:1rem;font-size:1.1rem;line-height:1.6;text-align:center;color:var(--fg)}
-
-.timeline{max-width:800px;margin:3rem auto;position:relative}
-.timeline::before{
-  content:'';position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);
-  width:8px;background:linear-gradient(180deg,var(--brand),var(--brand-2));
-  border-radius:4px;box-shadow:0 0 25px rgba(122,162,255,.6),0 0 40px rgba(155,107,255,.5);
-  z-index:-1;
+.card:hover{
+  box-shadow:0 0 25px rgba(122,162,255,.7);
+  border:2px solid var(--brand);
 }
-.item{background:transparent;perspective:1000px;margin:2rem auto;width:80%;}
-.flip-card{position:relative;width:100%;height:160px;transform-style:preserve-3d;transition:transform .7s;cursor:pointer;}
-.flip-card:hover{transform:rotateY(180deg)}
-.front,.back{position:absolute;inset:0;border-radius:var(--round);box-shadow:0 10px 22px rgba(0,0,0,.45);display:flex;flex-direction:column;justify-content:center;align-items:center;backface-visibility:hidden;padding:1rem;}
-.front{background:#12131b}
-.back{background:#1c1f2b;transform:rotateY(180deg);text-align:center}
-.title{margin:0;font-size:1.3rem;font-weight:700}
-.company{margin:.4rem 0 0;font-size:1rem;color:var(--muted)}
-.desc{font-size:1rem;line-height:1.5}
+.card h3{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:0;
+  padding:.5rem 1rem;
+  background:rgba(0,0,0,.55);
+  font-size:1rem;
+}
 
-@media(max-width:768px){.item{width:92%}}
+/* ----- TIMELINE ----- */
+.timeline{
+  max-width:700px;
+  margin:3rem auto;
+  position:relative;
+}
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:6px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,var(--brand),var(--brand-2));
+  box-shadow:0 0 20px rgba(122,162,255,0.8);
+  z-index:0; /* behind cards */
+}
+.timeline .item{
+  background:#12131b;
+  border-radius:var(--round);
+  box-shadow:0 8px 18px rgba(0,0,0,.4);
+  padding:1rem 1.4rem;
+  max-width:380px;
+  margin:1.5rem auto;
+  position:relative;
+  z-index:1;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.timeline .item:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(0,0,0,.45);
+}
+.timeline .title{margin:0;font-size:1.2rem;font-weight:700;text-align:center}
+.timeline .company{margin:.25rem 0 0;font-size:1rem;color:var(--muted);text-align:center}
+
+/* ----- VIDEO BACKGROUND ----- */
+#bgVideo{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-3;
+  opacity:0.35;
+}
+
+/* STAR PARTICLES LAYER */
+#bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
 
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
 </style>
 </head>
 <body>
-<video id="video-bg" autoplay muted playsinline loop>
+
+<video autoplay muted loop playsinline id="bgVideo">
   <source src="images/robo_video.mp4" type="video/mp4">
 </video>
 <canvas id="bg3d" aria-hidden="true"></canvas>
 
 <header>
-  <div class="wrap">
+  <div class="wrap nav-container">
     <div class="brand">Brandon Jahoor</div>
     <nav>
       <a href="#projects">Projects</a>
@@ -102,14 +174,13 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   </div>
 </header>
 
-<section class="hero fade-section">
-  <h1>
-    <span class="line">Mechatronics & Robotics Engineering</span><br>
-    <span class="line">University of Waterloo</span>
-  </h1>
-  <p>Engineering undergraduate student combining <strong>industry co-op experience</strong> with
+<section class="hero">
+  <h1 class="grad-text">Mechatronics & Robotics Engineering<br>University of Waterloo</h1>
+  <p class="muted">
+    Engineering undergraduate student combining <strong>industry co-op experience</strong> with
     <strong>research at the University of Waterloo’s RoboHub</strong>. Skilled in <strong>ROS2</strong>,
-    electrical/mechanical design and prototyping, and <strong>team-driven innovation in robotics</strong>.</p>
+    electrical/mechanical design and prototyping, and <strong>team-driven innovation in robotics</strong>.
+  </p>
   <div class="row">
     <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume</a>
     <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
@@ -117,60 +188,63 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   </div>
 </section>
 
-<section id="projects" class="wrap fade-section">
+<section id="projects" class="wrap">
   <h2>Projects</h2>
   <div class="grid" id="projectGrid"></div>
 </section>
 
-<section id="experience" class="wrap fade-section">
+<section id="experience" class="wrap">
   <h2>Experience</h2>
-  <div class="timeline">
-    <div class="item"><div class="flip-card"><div class="front"><div class="title">Robotics Research Assistant</div><div class="company">UW RoboHub</div></div><div class="back"><div class="desc">Swarm robotics research with HeRo 2.0 — built ROS2 communication frameworks, tested navigation algorithms, and supported multi-robot coordination.</div></div></div></div>
-    <div class="item"><div class="flip-card"><div class="front"><div class="title">Robotics Engineering</div><div class="company">UW Robotics Team (Co-op)</div></div><div class="back"><div class="desc">Developed a Mars-style rover drivetrain & kinematics system, integrated RealSense camera pipelines and custom perception nodes in ROS2.</div></div></div></div>
-    <div class="item"><div class="flip-card"><div class="front"><div class="title">Robotics Engineering</div><div class="company">BHF Robotics (Co-op)</div></div><div class="back"><div class="desc">Built navigation stack for an autonomous weeding robot, configured ROS2 networking and tested deep learning models.</div></div></div></div>
-    <div class="item"><div class="flip-card"><div class="front"><div class="title">Mechatronics Engineering</div><div class="company">RAB Design Lighting (Co-op)</div></div><div class="back"><div class="desc">Designed and tested Bluetooth-enabled lighting controllers; validated firmware and documented smart lighting system performance.</div></div></div></div>
-    <div class="item"><div class="flip-card"><div class="front"><div class="title">Quality Assurance</div><div class="company">Ontario Drive & Gear (Co-op)</div></div><div class="back"><div class="desc">Performed QA for prototype gears, tolerance analysis and supported launch readiness for drivetrain components.</div></div></div></div>
-    <div class="item"><div class="flip-card"><div class="front"><div class="title">Electrical Engineering</div><div class="company">Jule / eCAMION (Co-op)</div></div><div class="back"><div class="desc">Worked on EV fast-charging hardware; assembled and tested power electronics, assisting commercial integration.</div></div></div></div>
-    <div class="item"><div class="flip-card"><div class="front"><div class="title">Youth Robotics Mentor</div><div class="company">FIRST (FLL)</div></div><div class="back"><div class="desc">Mentored student teams for competitions, coaching mechanical design, coding fundamentals and strategy.</div></div></div></div>
-  </div>
+  <div class="timeline" id="experienceTimeline"></div>
 </section>
 
 <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
-<div id="viewer"></div>
-
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}})
-},{threshold:.2});
-document.querySelectorAll('.fade-section').forEach(s=>observer.observe(s));
-
 const projects=[
-  {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Undergraduate research on swarm robotics and multi-robot communication with HeRo 2.0 at UW RoboHub."},
-  {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed swarm navigation and package routing algorithms during a robotics hackathon using HeRo 2.0 bots."},
-  {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"Built a Mars-style rover with 6-wheel drivetrain, solved kinematics, and integrated electro-mechanical systems."},
-  {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg",desc:"Built a ROS2 pipeline for RealSense camera streaming with compression and OpenCV viewer to optimize bandwidth."},
-  {title:"Rover Kinematics",img:"images/project-rover.jpg",desc:"Created and validated forward/inverse kinematics models for rover mobility systems."},
-  {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg",desc:"CAD-designed and printed a 3-DOF arm using ROS2 and OpenCV for token color detection."},
-  {title:"Embedded C Operating System",img:"images/project-stm32.jpg",desc:"Developing a custom operating system in C on an STM32 Nucleo 64 microcontroller."},
-  {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"Retrofitted a bicycle with a 2-stroke engine; cutting, welding, and custom mechanical assembly."},
-  {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg",desc:"Programmed Siemens PLC with ladder logic to control motors, sensors, and system safety devices."},
-  {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Lego EV3 robot that uses a Python solving algorithm for autonomous Rubik’s Cube solves."},
-  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Raspberry-Pi powered arcade console with a wide library of retro games."}
+  {title:"UW RoboHub Research",img:"images/robohub.png"},
+  {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg"},
+  {title:"Mars-Style Rover",img:"images/project-rover.jpg"},
+  {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg"},
+  {title:"Rover Kinematics",img:"images/project-rover.jpg"},
+  {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg"},
+  {title:"Embedded C Operating System",img:"images/project-stm32.jpg"},
+  {title:"Motorized Bicycle",img:"images/project-bike.jpg"},
+  {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg"},
+  {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg"},
+  {title:"Retro Arcade Console",img:"images/project-arcade.jpg"},
 ];
-const grid=document.getElementById("projectGrid"),viewer=document.getElementById("viewer");
+
+const grid=document.getElementById("projectGrid");
 projects.forEach(p=>{
   const c=document.createElement("div");
   c.className="card";
   c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
-  c.onclick=()=>{viewer.innerHTML=`<img src="${p.img}" alt="${p.title}"><div class="desc"><h3 style="margin:.4rem 0">${p.title}</h3><p>${p.desc}</p></div>`;viewer.style.display='flex';};
   grid.appendChild(c);
 });
-viewer.addEventListener('click',()=>viewer.style.display='none');
+
+const experiences=[
+  {title:"Robotics Research Assistant",company:"UW RoboHub"},
+  {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)"},
+  {title:"Robotics Engineering",company:"BHF Robotics (Co-op)"},
+  {title:"Mechatronics Engineering",company:"RAB Design Lighting (Co-op)"},
+  {title:"Quality Assurance",company:"Ontario Drive & Gear (Co-op)"},
+  {title:"Electrical Engineering",company:"Jule / eCAMION (Co-op)"},
+  {title:"Youth Robotics Mentor",company:"FIRST (FLL)"}
+];
+
+const expContainer=document.getElementById("experienceTimeline");
+experiences.forEach(e=>{
+  const div=document.createElement("div");
+  div.className="item";
+  div.innerHTML=`<h3 class="title">${e.title}</h3><p class="company">${e.company}</p>`;
+  expContainer.appendChild(div);
+});
 </script>
 
+<!-- STARFIELD BACKGROUND -->
 <script type="module">
 import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
 const canvas=document.getElementById('bg3d');
@@ -183,13 +257,11 @@ const COUNT=2500,geo=new THREE.BufferGeometry(),pos=new Float32Array(COUNT*3);
 for(let i=0;i<COUNT;i++){pos[i*3]=(Math.random()-0.5)*40;pos[i*3+1]=(Math.random()-0.5)*24;pos[i*3+2]=(Math.random()-0.5)*40;}
 geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 const mat=new THREE.PointsMaterial({size:0.045,transparent:true,opacity:0.85,color:0x7aa2ff,depthWrite:false});
-const points=new THREE.Points(geo,mat);scene.add(points);
-let mouse={x:0,y:0};
-window.addEventListener('mousemove',e=>{mouse.x=(e.clientX/window.innerWidth)*2-1;mouse.y=-(e.clientY/window.innerHeight)*2+1;});
+scene.add(new THREE.Points(geo,mat));
 function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
 window.addEventListener('resize',resize);resize();
-let t=0;
-function anim(){requestAnimationFrame(anim);t+=0.0025;scene.rotation.y=t*0.6;points.rotation.x=mouse.y*0.2;points.rotation.y=mouse.x*0.2;renderer.render(scene,camera);}anim();
+let t=0;function anim(){requestAnimationFrame(anim);t+=0.0025;scene.rotation.y=t*0.6;renderer.render(scene,camera);}anim();
 </script>
+
 </body>
 </html>

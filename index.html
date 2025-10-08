@@ -14,67 +14,91 @@
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
-/* Fade-in on scroll */
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-/* Header */
-header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,12,18,.75);border-bottom:1px solid var(--line);z-index:10;padding:1rem 0}
-.wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem}
-header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem}
+
+.fade-in {opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease;}
+.fade-in.visible {opacity:1;transform:translateY(0)}
+
+header{
+  position:sticky;top:0;backdrop-filter:blur(8px);
+  background:rgba(11,12,18,.75);border-bottom:1px solid var(--line);
+  z-index:10;padding:1rem 0;
+}
+.wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem;}
+header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem;}
 header .brand{font-weight:700;font-family:var(--font-display);font-size:1.3rem}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;margin:0 .6rem;font-size:1.05rem}
 nav a:hover{color:var(--brand)}
-/* Hero */
+
 .hero{padding:clamp(2rem,6vw,4rem) 1rem;text-align:center}
 .hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.8rem);margin:0 0 .5rem}
 .grad-text{background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .muted{color:var(--muted);max-width:800px;margin:0 auto}
 .row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.8rem}
-.btn{padding:.8rem 1.2rem;border-radius:12px;text-decoration:none;border:1px solid var(--line);background:#12131b;color:var(--fg);font-weight:500;transition:transform .3s ease,box-shadow .3s ease}
+.btn{
+  padding:.8rem 1.2rem;border-radius:12px;text-decoration:none;
+  border:1px solid var(--line);background:#12131b;color:var(--fg);
+  font-weight:500;transition:transform .3s ease,box-shadow .3s ease;
+}
 .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff}
-.btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 25px rgba(122,162,255,.8)}
-/* Projects */
+.btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 25px rgba(122,162,255,0.8)}
+
 h2{font-family:var(--font-display);font-size:2rem;margin:1.5rem 0;text-align:center}
+
 .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));max-width:1000px;margin:auto}
-.card{position:relative;border-radius:var(--round);overflow:hidden;height:220px;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.3);transition:transform .35s ease,box-shadow .35s ease,border .35s ease}
+.card{
+  position:relative;border-radius:var(--round);overflow:hidden;height:220px;cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,0,0,.3);
+  transition:transform .35s ease,box-shadow .35s ease,border .35s ease;
+}
 .card img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
 .card:hover img{transform:scale(1.08)}
 .card:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(122,162,255,1);border:2px solid var(--brand)}
-.card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.55);font-size:1rem}
-/* Fullscreen modal for projects */
-#modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:20;flex-direction:column;text-align:center;padding:1rem}
-#modal img{max-width:90%;max-height:60vh;border-radius:var(--round);box-shadow:0 0 40px rgba(122,162,255,.8)}
+.card h3{
+  position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;
+  background:rgba(0,0,0,.55);font-size:1rem;
+}
+
+#modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);
+display:none;align-items:center;justify-content:center;z-index:20;flex-direction:column;text-align:center;padding:1rem}
+#modal img{max-width:90%;max-height:60vh;border-radius:var(--round);box-shadow:0 0 40px rgba(122,162,255,0.8)}
 #modal h3{margin:1rem 0 .5rem;font-size:1.6rem;font-family:var(--font-display)}
 #modal p{max-width:700px;color:var(--muted);line-height:1.5}
-/* Experience timeline */
+
 .timeline{max-width:800px;margin:3rem auto;position:relative}
-.timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);background:linear-gradient(180deg,var(--brand),var(--brand-2));box-shadow:0 0 20px rgba(122,162,255,.8);z-index:0}
-.timeline .item{background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);padding:2.2rem 2.6rem;max-width:500px;margin:2.5rem auto;position:relative;z-index:1;text-align:center;transition:transform .25s ease,box-shadow .25s ease}
+.timeline::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);
+  background:linear-gradient(180deg,var(--brand),var(--brand-2));
+  box-shadow:0 0 20px rgba(122,162,255,0.8);z-index:0;
+}
+.timeline .item{
+  background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);
+  padding:2.2rem 2.6rem;max-width:500px;margin:2.5rem auto;position:relative;z-index:1;
+  text-align:center;transition:transform .25s ease,box-shadow .25s ease;
+}
 .timeline .item:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
 .title{font-size:1.5rem;font-weight:700;margin:0}
 .company{font-size:1.2rem;color:var(--muted);margin:.3rem 0 .8rem}
-.desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .5s ease,max-height .5s ease;font-size:1rem;color:var(--muted)}
+.desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .5s ease,max-height .5s ease;font-size:1rem;color:var(--muted);}
 .timeline .item:hover .desc{opacity:1;max-height:250px}
-/* NEW: Arm Path Drawer section */
-#arm-section{margin:4rem auto;max-width:1100px;padding:0 1.2rem}
-.arm-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:1.2rem}
-@media(max-width:900px){.arm-wrap{grid-template-columns:1fr}}
-.arm-panel{background:#12131b;border:1px solid var(--line);border-radius:var(--round);box-shadow:0 12px 28px rgba(0,0,0,.4);padding:1rem;position:relative}
-#armCanvas{width:100%;height:480px;border-radius:12px;background:radial-gradient(1200px 600px at 50% 30%,rgba(122,162,255,.1),transparent),#0f1119;display:block}
-.controls{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem}
-.controls .btn{border-color:#1f2333}
-.legend{font-size:.95rem;color:var(--muted);line-height:1.55}
-.legend code{background:#0f1119;border:1px solid #1f2232;border-radius:8px;padding:.1rem .35rem}
-.badge{display:inline-block;border:1px solid #223; padding:.15rem .5rem; border-radius:999px; font-size:.8rem; color:#b9c3d6; margin-right:.35rem; background:#0f1119}
-.note{color:#9fb2ff}
-/* Video & stars */
-#bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.35}
+
+#bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:0.35}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
+
+/* 3D ARM SECTION */
+#robot-arm {max-width:1100px;margin:4rem auto;text-align:center}
+#robotCanvas {width:100%;height:500px;border:1px solid var(--line);border-radius:var(--round);}
+.sliders {display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1rem}
+.sliders label {display:flex;flex-direction:column;font-size:.9rem;align-items:center;color:var(--muted);}
+.sliders input {width:150px}
+
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
 </style>
 </head>
 <body>
-<video autoplay muted loop playsinline id="bgVideo"><source src="images/robo_video.mp4" type="video/mp4"></video>
+
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="images/robo_video.mp4" type="video/mp4">
+</video>
 <canvas id="bg3d" aria-hidden="true"></canvas>
 
 <header>
@@ -83,6 +107,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
     <nav>
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
+      <a href="#robot-arm">Robot Arm</a>
       <a href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Resume (PDF)</a>
       <a href="mailto:bjahoor@uwaterloo.ca">Contact</a>
     </nav>
@@ -91,9 +116,11 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 
 <section class="hero fade-in">
   <h1 class="grad-text">Mechatronics & Robotics Engineering<br>University of Waterloo</h1>
-  <p class="muted">Engineering undergraduate student combining <strong>industry co-op experience</strong> with
+  <p class="muted">
+    Engineering undergraduate student combining <strong>industry co-op experience</strong> with
     <strong>research at the University of Waterloo’s RoboHub</strong>. Skilled in <strong>ROS2</strong>,
-    electrical/mechanical design and prototyping, and <strong>team-driven innovation in robotics</strong>.</p>
+    electrical/mechanical design and prototyping, and <strong>team-driven innovation in robotics</strong>.
+  </p>
   <div class="row">
     <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume</a>
     <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
@@ -111,51 +138,22 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   <div class="timeline" id="experienceTimeline"></div>
 </section>
 
-<!-- NEW: Draw Path / End-Effector Trajectory -->
-<section id="arm-section" class="fade-in">
-  <h2>Draw a Path — Control the Arm</h2>
-  <div class="arm-wrap">
-    <div class="arm-panel">
-      <canvas id="armCanvas" width="800" height="480"></canvas>
-      <div class="controls">
-        <button class="btn primary" id="playBtn">Play</button>
-        <button class="btn" id="pauseBtn">Pause</button>
-        <button class="btn" id="clearBtn">Clear Path</button>
-        <button class="btn" id="resetBtn">Reset Arm</button>
-      </div>
-    </div>
-    <div class="arm-panel">
-      <div class="legend">
-        <span class="badge">How it works</span>
-        Draw any path on the canvas (click & drag). A simplified planar 3-link arm uses a fast
-        <strong>FABRIK</strong> inverse kinematics solver to make the end-effector follow your path.
-        <br><br>
-        <span class="badge">Tips</span>
-        • Draw slowly for smoother paths <br>
-        • Click <code>Play</code> to start following the path <br>
-        • Click <code>Reset Arm</code> to return to home pose <br>
-        • Click <code>Clear Path</code> to sketch a new trajectory
-        <br><br>
-        <span class="badge">Under the hood</span>
-        <span class="note">3-link demo</span> approximates the Panda. You can replace this with your Panda kinematics later (same UI).
-      </div>
-    </div>
-  </div>
+<!-- Interactive Robot Arm -->
+<section id="robot-arm" class="fade-in">
+  <h2>Interactive Emika Panda Arm</h2>
+  <canvas id="robotCanvas"></canvas>
+  <div class="sliders" id="jointSliders"></div>
 </section>
 
 <div id="modal"></div>
+
 <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 
-/* Fade-in on scroll */
-const faders=document.querySelectorAll('.fade-in');
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.2});
-faders.forEach(el=>obs.observe(el));
-
-/* Projects & fullscreen modal */
-const projects=[
+/* ----- PROJECTS ----- */
+const projects=[ /* same as before */ 
   {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Undergraduate research assistant working on swarm robotics: ROS2 networking, navigation, and coordination on HeRo 2.0 platforms."},
   {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed swarm navigation and communication strategies for HeRo 2.0 robots during a robotics hackathon."},
   {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"Designed control & autonomy software for a Mars-style rover using ROS2. Modeled 6-wheel drivetrain kinematics and integrated sensors."},
@@ -165,25 +163,29 @@ const projects=[
   {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"Transformed a bicycle with a 2-stroke engine retrofit kit using cutting, welding, and drilling skills."},
   {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg",desc:"Programmed a Siemens PLC in ladder logic to control motors, sensors, and buttons for industrial automation."},
   {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Built a LEGO EV3 robot, programmed in RobotC, and integrated a Python solving algorithm with formal design documentation."},
-  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Assembled a Raspberry Pi-powered retro arcade console with a wide selection of classic games."}
+  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Assembled a Raspberry Pi-powered retro arcade console with a wide selection of classic games."},
 ];
-const grid=document.getElementById("projectGrid"),modal=document.getElementById("modal");
+const grid=document.getElementById("projectGrid");
 projects.forEach(p=>{
   const c=document.createElement("div");
   c.className="card";
   c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
-  c.addEventListener('click',()=>{modal.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`;modal.style.display="flex";});
+  c.addEventListener('click',()=>{
+    const modal=document.getElementById('modal');
+    modal.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`;
+    modal.style.display="flex";
+  });
   grid.appendChild(c);
 });
-modal.addEventListener('click',()=>modal.style.display='none');
+document.getElementById('modal').addEventListener('click',()=>{document.getElementById('modal').style.display='none';});
 
-/* Experience */
+/* ----- EXPERIENCE ----- */
 const experiences=[
   {title:"Robotics Research Assistant",company:"UW RoboHub",desc:"Worked on swarm robotics research, ROS2 networking, and navigation for HeRo 2.0 robots."},
-  {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)",desc:"Developed control and autonomy software in Linux using ROS2, modeled drivetrain kinematics, and integrated RealSense streaming."},
+  {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)",desc:"Developed control and autonomy software in Linux using ROS2, modeled drivetrain kinematics, and integrated Realsense camera streaming."},
   {title:"Robotics Engineering",company:"BHF Robotics (Co-op)",desc:"Prototyped robotic parts, created technical drawings, ran simulations, and programmed autonomous navigation with ROS2 & Python."},
   {title:"Mechatronics Engineering",company:"RAB Design Lighting (Co-op)",desc:"Validated and tested Bluetooth lighting controls app, created training materials, and performed electrical/mechanical validation."},
-  {title:"Quality Assurance",company:"Ontario Drive & Gear (Co-op)",desc:"Led QA for prototype gear launches, performed GD&T inspections, and managed engineering deliverables."},
+  {title:"Quality Assurance",company:"Ontario Drive & Gear (Co-op)",desc:"Led QA for prototype gear launches under tight deadlines, performed high-precision GD&T inspections, and managed engineering deliverables."},
   {title:"Electrical Engineering",company:"Jule / eCAMION (Co-op)",desc:"Worked across electrical, design, and quality engineering; assembled and wired EV fast chargers."},
   {title:"Youth Robotics Mentor",company:"FIRST (FLL)",desc:"Coached teams to national competitions, guided design and programming, and won mentor awards."}
 ];
@@ -194,159 +196,130 @@ experiences.forEach(e=>{
   div.innerHTML=`<h3 class="title">${e.title}</h3><p class="company">${e.company}</p><p class="desc">${e.desc}</p>`;
   expContainer.appendChild(div);
 });
+
+/* Fade-in on scroll */
+const faders=document.querySelectorAll('.fade-in');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('visible');}
+  });
+},{threshold:0.2});
+faders.forEach(f=>obs.observe(f));
 </script>
 
-<!-- NEW: Path drawing + IK (FABRIK) -->
-<script>
-const canvas=document.getElementById('armCanvas');
-const ctx=canvas.getContext('2d');
-let drawing=false, path=[], playing=false, tIdx=0;
-
-/* Arm model (planar 3-link demo) */
-const base={x:canvas.width*0.5, y:canvas.height*0.75};
-const segLen=[140,120,90]; // approximate link lengths (px)
-let joints=[{x:base.x,y:base.y},{x:base.x+segLen[0],y:base.y},{x:base.x+segLen[0]+segLen[1],y:base.y},{x:base.x+segLen[0]+segLen[1]+segLen[2],y:base.y}];
-
-function distance(a,b){const dx=a.x-b.x,dy=a.y-b.y;return Math.hypot(dx,dy)}
-function fabrik(target, iters=15, tol=0.5){
-  const total=segLen.reduce((a,b)=>a+b,0);
-  const dist=distance(base,target);
-  if(dist>total){
-    // unreachable: stretch toward target
-    let dir={x:(target.x-base.x)/dist,y:(target.y-base.y)/dist};
-    joints[0]={...base};
-    for(let i=1;i<joints.length;i++){
-      joints[i]={x:joints[i-1].x+dir.x*segLen[i-1],y:joints[i-1].y+dir.y*segLen[i-1]};
-    }
-    return;
-  }
-  // reachable: iterative FABRIK
-  let b={...base};
-  for(let k=0;k<iters;k++){
-    // forward
-    joints[joints.length-1]={...target};
-    for(let i=joints.length-2;i>=0;i--){
-      const r=distance(joints[i+1],joints[i]);
-      const lam=segLen[i]/(r||1);
-      joints[i]={x:(1-lam)*joints[i+1].x+lam*joints[i].x,y:(1-lam)*joints[i+1].y+lam*joints[i].y};
-    }
-    // backward
-    joints[0]={...b};
-    for(let i=0;i<joints.length-1;i++){
-      const r=distance(joints[i+1],joints[i]);
-      const lam=segLen[i]/(r||1);
-      joints[i+1]={x:(1-lam)*joints[i].x+lam*joints[i+1].x,y:(1-lam)*joints[i].y+lam*joints[i+1].y};
-    }
-    if(distance(joints[joints.length-1],target)<tol) break;
-  }
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  // Grid
-  ctx.save();
-  ctx.strokeStyle="rgba(255,255,255,0.06)";
-  ctx.lineWidth=1;
-  for(let x=0;x<canvas.width;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke()}
-  for(let y=0;y<canvas.height;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke()}
-  ctx.restore();
-
-  // Path
-  if(path.length>1){
-    ctx.beginPath();
-    ctx.moveTo(path[0].x,path[0].y);
-    for(let i=1;i<path.length;i++) ctx.lineTo(path[i].x,path[i].y);
-    ctx.strokeStyle="rgba(122,162,255,0.9)";
-    ctx.lineWidth=3;
-    ctx.shadowColor="rgba(122,162,255,0.8)";
-    ctx.shadowBlur=12;
-    ctx.stroke();
-    ctx.shadowBlur=0;
-  }
-
-  // Animate along path
-  if(playing && path.length>0){
-    const target=path[tIdx|0];
-    fabrik(target,18,0.3);
-    tIdx=Math.min(path.length-1, tIdx+1);
-    if(tIdx===path.length-1) playing=false;
-  }
-
-  // Arm
-  ctx.lineCap="round";
-  for(let i=0;i<3;i++){
-    // link
-    ctx.beginPath();
-    ctx.moveTo(joints[i].x,joints[i].y);
-    ctx.lineTo(joints[i+1].x,joints[i+1].y);
-    ctx.lineWidth=12;
-    ctx.strokeStyle="rgba(180,190,255,0.2)";
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(joints[i].x,joints[i].y);
-    ctx.lineTo(joints[i+1].x,joints[i+1].y);
-    ctx.lineWidth=6;
-    const grad=ctx.createLinearGradient(joints[i].x,joints[i].y,joints[i+1].x,joints[i+1].y);
-    grad.addColorStop(0,"#7aa2ff"); grad.addColorStop(1,"#9b6bff");
-    ctx.strokeStyle=grad;
-    ctx.stroke();
-
-    // joints (nodes)
-    ctx.beginPath();
-    ctx.arc(joints[i].x,joints[i].y,7,0,Math.PI*2);
-    ctx.fillStyle="#0b0c12";
-    ctx.fill();
-    ctx.lineWidth=3;
-    ctx.strokeStyle="rgba(122,162,255,.9)";
-    ctx.stroke();
-  }
-  // end effector
-  const ee=joints[3];
-  ctx.beginPath();ctx.arc(ee.x,ee.y,8,0,Math.PI*2);
-  ctx.fillStyle="#0b0c12";ctx.fill();
-  ctx.lineWidth=3;ctx.strokeStyle="rgba(155,107,255,.95)";ctx.stroke();
-
-  requestAnimationFrame(draw);
-}
-draw();
-
-/* Input */
-function getMouse(e){
-  const r=canvas.getBoundingClientRect();
-  return {x:(e.clientX - r.left) * (canvas.width/r.width), y:(e.clientY - r.top) * (canvas.height/r.height)};
-}
-canvas.addEventListener('pointerdown',e=>{drawing=true;playing=false;path=[];tIdx=0;path.push(getMouse(e))});
-canvas.addEventListener('pointermove',e=>{ if(!drawing) return; const p=getMouse(e); const last=path[path.length-1]; if(!last || distance(p,last)>3) path.push(p); });
-window.addEventListener('pointerup',()=>{drawing=false});
-
-/* Controls */
-document.getElementById('playBtn').onclick=()=>{ if(path.length>0){ playing=true; tIdx=0; } };
-document.getElementById('pauseBtn').onclick=()=>{ playing=false; };
-document.getElementById('clearBtn').onclick=()=>{ path=[]; playing=false; tIdx=0; };
-document.getElementById('resetBtn').onclick=()=>{ path=[]; playing=false; tIdx=0; joints=[{x:base.x,y:base.y},{x:base.x+segLen[0],y:base.y},{x:base.x+segLen[0]+segLen[1],y:base.y},{x:base.x+segLen[0]+segLen[1]+segLen[2],y:base.y}]; };
-</script>
-
-<!-- Starfield (interactive) -->
+<!-- STARFIELD -->
 <script type="module">
 import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
-const canvas3=document.getElementById('bg3d');
-const renderer=new THREE.WebGLRenderer({canvas:canvas3,antialias:true,alpha:true});
+const canvas=document.getElementById('bg3d');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
 camera.position.z=12;
-const COUNT=2500,geo=new THREE.BufferGeometry(),pos=new Float32Array(COUNT*3);
+const COUNT=2500,pos=new Float32Array(COUNT*3);
 for(let i=0;i<COUNT;i++){pos[i*3]=(Math.random()-0.5)*40;pos[i*3+1]=(Math.random()-0.5)*24;pos[i*3+2]=(Math.random()-0.5)*40;}
+const geo=new THREE.BufferGeometry();
 geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
-const points=new THREE.Points(geo,mat);scene.add(points);
+const points=new THREE.Points(geo,mat);
+scene.add(points);
 let mouse={x:0,y:0};
 window.addEventListener('mousemove',e=>{mouse.x=(e.clientX/window.innerWidth)*2-1;mouse.y=-(e.clientY/window.innerHeight)*2+1;});
 function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
 window.addEventListener('resize',resize);resize();
 let t=0;function anim(){requestAnimationFrame(anim);t+=0.0025;scene.rotation.y=t*0.4;scene.rotation.x=mouse.y*0.1;scene.rotation.y+=mouse.x*0.05;renderer.render(scene,camera);}anim();
 </script>
-</body>
-</html>
+
+<!-- 3D ROBOT ARM -->
+<script type="module">
+import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
+import { GLTFLoader } from "https://unpkg.com/three@0.165.0/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "https://unpkg.com/three@0.165.0/examples/jsm/controls/OrbitControls.js";
+
+const canvasArm=document.getElementById('robotCanvas');
+const rendererArm=new THREE.WebGLRenderer({canvas:canvasArm,antialias:true,alpha:true});
+rendererArm.setSize(canvasArm.clientWidth,canvasArm.clientHeight);
+rendererArm.setPixelRatio(window.devicePixelRatio);
+
+const sceneArm=new THREE.Scene();
+sceneArm.background=null;
+const cameraArm=new THREE.PerspectiveCamera(45,canvasArm.clientWidth/canvasArm.clientHeight,0.1,100);
+cameraArm.position.set(2,2,5);
+
+const controls=new OrbitControls(cameraArm,rendererArm.domElement);
+controls.enableDamping=true;
+
+const light=new THREE.DirectionalLight(0xffffff,1);light.position.set(5,5,5);sceneArm.add(light);
+sceneArm.add(new THREE.AmbientLight(0x888888));
+
+let joints=[];
+new GLTFLoader().load("images/emika_panda.glb",gltf=>{
+  const model=gltf.scene;
+  sceneArm.add(model);
+  // Assume child structure is sequentialI had to stop because the `index.html` was getting very long, but here’s the key part you still need to paste at the **end of your file** to make the **interactive robot arm** work.  
+(It plugs right after your last `<script>` blocks.)
+
+```html
+<!-- 3D ROBOT ARM (continued) -->
+<script type="module">
+import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
+import { GLTFLoader } from "https://unpkg.com/three@0.165.0/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "https://unpkg.com/three@0.165.0/examples/jsm/controls/OrbitControls.js";
+
+const canvasArm=document.getElementById('robotCanvas');
+const rendererArm=new THREE.WebGLRenderer({canvas:canvasArm,antialias:true,alpha:true});
+rendererArm.setSize(canvasArm.clientWidth,canvasArm.clientHeight);
+rendererArm.setPixelRatio(window.devicePixelRatio);
+
+const sceneArm=new THREE.Scene();
+const cameraArm=new THREE.PerspectiveCamera(45,canvasArm.clientWidth/canvasArm.clientHeight,0.1,100);
+cameraArm.position.set(2,2,5);
+
+const controls=new OrbitControls(cameraArm,rendererArm.domElement);
+controls.enableDamping=true;
+
+sceneArm.add(new THREE.HemisphereLight(0xffffff,0x444444,1));
+const dirLight=new THREE.DirectionalLight(0xffffff,1);
+dirLight.position.set(5,5,5);
+sceneArm.add(dirLight);
+
+let joints=[];
+new GLTFLoader().load("images/emika_panda.glb",gltf=>{
+  const model=gltf.scene;
+  model.scale.set(1,1,1);
+  sceneArm.add(model);
+
+  // Collect top-level children as joints (adjust if your export is nested)
+  model.traverse(o=>{
+    if(o.isObject3D && o.children.length===0){ /* leaves */ }
+  });
+
+  // For demo: just take first 7 children as "joints"
+  joints = model.children.slice(0,7);
+
+  const sliderContainer=document.getElementById('jointSliders');
+  joints.forEach((joint,idx)=>{
+    const lbl=document.createElement('label');
+    lbl.textContent=`Joint ${idx+1}`;
+    const slider=document.createElement('input');
+    slider.type='range';slider.min=-180;slider.max=180;slider.value=0;
+    slider.addEventListener('input',()=>{joint.rotation.z=THREE.MathUtils.degToRad(slider.value);});
+    lbl.appendChild(slider);
+    sliderContainer.appendChild(lbl);
+  });
+});
+
+function resizeArm(){
+  rendererArm.setSize(canvasArm.clientWidth,canvasArm.clientHeight);
+  cameraArm.aspect=canvasArm.clientWidth/canvasArm.clientHeight;
+  cameraArm.updateProjectionMatrix();
+}
+window.addEventListener('resize',resizeArm);
+
+function animateArm(){
+  requestAnimationFrame(animateArm);
+  controls.update();
+  rendererArm.render(sceneArm,cameraArm);
+}
+animateArm();
+</script>

@@ -60,6 +60,13 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:1.5rem 0;text-align:c
   background:rgba(0,0,0,.55);font-size:1rem;
 }
 
+/* FULLSCREEN MODAL */
+#modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);
+display:none;align-items:center;justify-content:center;z-index:20;flex-direction:column;text-align:center;padding:1rem}
+#modal img{max-width:90%;max-height:60vh;border-radius:var(--round);box-shadow:0 0 40px rgba(122,162,255,0.8)}
+#modal h3{margin:1rem 0 .5rem;font-size:1.6rem;font-family:var(--font-display)}
+#modal p{max-width:700px;color:var(--muted);line-height:1.5}
+
 /* EXPERIENCE */
 .timeline{max-width:700px;margin:3rem auto;position:relative}
 .timeline::before{
@@ -127,23 +134,24 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   <div class="timeline" id="experienceTimeline"></div>
 </section>
 
+<div id="modal"></div>
+
 <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 
 const projects=[
-  {title:"UW RoboHub Research",img:"images/robohub.png"},
-  {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg"},
-  {title:"Mars-Style Rover",img:"images/project-rover.jpg"},
-  {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg"},
-  {title:"Rover Kinematics",img:"images/project-rover.jpg"},
-  {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg"},
-  {title:"Embedded C Operating System",img:"images/project-stm32.jpg"},
-  {title:"Motorized Bicycle",img:"images/project-bike.jpg"},
-  {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg"},
-  {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg"},
-  {title:"Retro Arcade Console",img:"images/project-arcade.jpg"},
+  {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Undergraduate research assistant working on swarm robotics: ROS2 networking, navigation, and coordination on HeRo 2.0 platforms."},
+  {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed swarm navigation and communication strategies for HeRo 2.0 robots during a robotics hackathon."},
+  {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"Designed control & autonomy software for a Mars-style rover using ROS2. Modeled 6-wheel drivetrain kinematics and integrated sensors."},
+  {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg",desc:"Streamed color & depth data with a custom ROS2 RealSense wrapper. Added compression to reduce wireless bandwidth and dynamic resolution selection."},
+  {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg",desc:"Designed, prototyped, and 3D printed a robotic arm. Controlled motors via PWM and ROS2 on a Raspberry Pi with OpenCV for token color detection."},
+  {title:"Embedded C Operating System",img:"images/project-stm32.jpg",desc:"Developed a custom real-time operating system in C on an STM32 Nucleo microcontroller board."},
+  {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"Transformed a bicycle with a 2-stroke engine retrofit kit using cutting, welding, and drilling skills."},
+  {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg",desc:"Programmed a Siemens PLC in ladder logic to control motors, sensors, and buttons for industrial automation."},
+  {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Built a LEGO EV3 robot, programmed in RobotC, and integrated a Python solving algorithm with formal design documentation."},
+  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Assembled a Raspberry Pi-powered retro arcade console with a wide selection of classic games."},
 ];
 
 const grid=document.getElementById("projectGrid");
@@ -151,19 +159,24 @@ projects.forEach(p=>{
   const c=document.createElement("div");
   c.className="card";
   c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
+  c.addEventListener('click',()=>{
+    const modal=document.getElementById('modal');
+    modal.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`;
+    modal.style.display="flex";
+  });
   grid.appendChild(c);
 });
+document.getElementById('modal').addEventListener('click',()=>{document.getElementById('modal').style.display='none';});
 
 const experiences=[
   {title:"Robotics Research Assistant",company:"UW RoboHub",desc:"Worked on swarm robotics research, ROS2 networking, and navigation for HeRo 2.0 robots."},
-  {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)",desc:"Developed kinematics and control systems for robotic arms and vision-guided manipulation."},
-  {title:"Robotics Engineering",company:"BHF Robotics (Co-op)",desc:"Prototyped robotic subsystems and integrated ROS-based control software."},
-  {title:"Mechatronics Engineering",company:"RAB Design Lighting (Co-op)",desc:"Designed and tested embedded lighting control systems with Bluetooth-enabled features."},
-  {title:"Quality Assurance",company:"Ontario Drive & Gear (Co-op)",desc:"Performed QA for prototype gears, tolerance analysis, and process validation."},
-  {title:"Electrical Engineering",company:"Jule / eCAMION (Co-op)",desc:"Worked on EV fast-charging hardware and power electronics testing."},
-  {title:"Youth Robotics Mentor",company:"FIRST (FLL)",desc:"Mentored robotics teams in design, programming, and competition strategy."}
+  {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)",desc:"Developed control and autonomy software in Linux using ROS2, modeled drivetrain kinematics, and integrated Realsense camera streaming."},
+  {title:"Robotics Engineering",company:"BHF Robotics (Co-op)",desc:"Prototyped robotic parts, created technical drawings, ran simulations, and programmed autonomous navigation with ROS2 & Python."},
+  {title:"Mechatronics Engineering",company:"RAB Design Lighting (Co-op)",desc:"Validated and tested Bluetooth lighting controls app, created training materials, and performed electrical/mechanical validation."},
+  {title:"Quality Assurance",company:"Ontario Drive & Gear (Co-op)",desc:"Led QA for prototype gear launches under tight deadlines, performed high-precision GD&T inspections, and managed engineering deliverables."},
+  {title:"Electrical Engineering",company:"Jule / eCAMION (Co-op)",desc:"Worked across electrical, design, and quality engineering; assembled and wired EV fast chargers."},
+  {title:"Youth Robotics Mentor",company:"FIRST (FLL)",desc:"Coached teams to national competitions, guided design and programming, and won mentor awards."}
 ];
-
 const expContainer=document.getElementById("experienceTimeline");
 experiences.forEach(e=>{
   const div=document.createElement("div");

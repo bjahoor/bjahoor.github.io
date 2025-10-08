@@ -40,22 +40,44 @@
     section.wrap { max-width: 1100px; margin: 4rem auto; padding: 0 1rem; }
     h2 { font-size: 2rem; margin-bottom: 1.5rem; }
 
-    /* PROJECTS */
+    /* PROJECTS GRID */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
       gap: 1.5rem;
     }
     .project-card {
+      position: relative;
       background: #12131b;
       border-radius: var(--round);
       overflow: hidden;
       box-shadow: 0 6px 16px rgba(0,0,0,0.4);
       transition: transform .3s ease;
+      cursor: pointer;
     }
-    .project-card:hover { transform: scale(1.05); }
     .project-card img { width: 100%; height: 160px; object-fit: cover; }
     .project-card h3 { margin: 0; padding: 1rem; font-size: 1rem; font-weight: 600; }
+    .project-card:hover { transform: scale(1.03); }
+
+    /* MODAL FOR PROJECTS */
+    .modal {
+      display: none;
+      position: fixed; top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 2000;
+      justify-content:center; align-items:center;
+    }
+    .modal-content {
+      background:#12131b;
+      padding:1rem;
+      max-width:90%;
+      max-height:90%;
+      border-radius:var(--round);
+    }
+    .modal-content img {max-width:100%; max-height:70vh; display:block; margin:0 auto;}
+    .modal-content p {margin-top:1rem; color:#ccc;}
+    .close {position:absolute; top:20px; right:30px; font-size:2rem; color:#fff; cursor:pointer;}
 
     /* TIMELINE */
     .timeline-centered {
@@ -154,16 +176,16 @@
   <section id="projects" class="wrap">
     <h2>Projects</h2>
     <div class="projects-grid">
-      <div class="project-card"><img src="images/robohub.png"><h3>UW RoboHub Research</h3></div>
-      <div class="project-card"><img src="images/project-realsense.jpg"><h3>ROS2 RealSense Pipeline</h3></div>
-      <div class="project-card"><img src="images/project-rover.jpg"><h3>Mars-Style Rover</h3></div>
-      <div class="project-card"><img src="images/project-kinematics.jpg"><h3>Rover Kinematics</h3></div>
-      <div class="project-card"><img src="images/project-arm.jpg"><h3>3-DOF Robotic Arm (ROS2)</h3></div>
-      <div class="project-card"><img src="images/project-bicycle.jpg"><h3>Motorized Bicycle</h3></div>
-      <div class="project-card"><img src="images/project-arcade.jpg"><h3>Retro Arcade Console</h3></div>
-      <div class="project-card"><img src="images/project-ev3.jpg"><h3>Rubik’s Cube Solver (EV3)</h3></div>
-      <div class="project-card"><img src="images/siemens.jpg"><h3>PLC Controls (Siemens)</h3></div>
-      <div class="project-card"><img src="images/hero-swarm.jpg"><h3>Swarm Hackathon — HeRo 2.0</h3></div>
+      <div class="project-card" data-desc="Swarm robotics and advanced research at the UW RoboHub."><img src="images/robohub.png"><h3>UW RoboHub Research</h3></div>
+      <div class="project-card" data-desc="ROS2 RealSense camera pipeline integration and testing."><img src="images/project-realsense.jpg"><h3>ROS2 RealSense Pipeline</h3></div>
+      <div class="project-card" data-desc="Custom-built Mars-style rover with autonomous navigation."><img src="images/project-rover.jpg"><h3>Mars-Style Rover</h3></div>
+      <div class="project-card" data-desc="Kinematic validation for rover control systems."><img src="images/project-kinematics.jpg"><h3>Rover Kinematics</h3></div>
+      <div class="project-card" data-desc="3-DOF robotic arm built on ROS2 with motion planning."><img src="images/project-arm.jpg"><h3>3-DOF Robotic Arm (ROS2)</h3></div>
+      <div class="project-card" data-desc="Custom motorized bicycle project with control electronics."><img src="images/project-bicycle.jpg"><h3>Motorized Bicycle</h3></div>
+      <div class="project-card" data-desc="Custom retro gaming console project."><img src="images/project-arcade.jpg"><h3>Retro Arcade Console</h3></div>
+      <div class="project-card" data-desc="Rubik’s Cube solver using EV3 robotics."><img src="images/project-ev3.jpg"><h3>Rubik’s Cube Solver (EV3)</h3></div>
+      <div class="project-card" data-desc="PLC programming and industrial control system with Siemens hardware."><img src="images/siemens.jpg"><h3>PLC Controls (Siemens)</h3></div>
+      <div class="project-card" data-desc="Swarm navigation and package routing algorithms at hackathon."><img src="images/hero-swarm.jpg"><h3>Swarm Hackathon — HeRo 2.0</h3></div>
     </div>
   </section>
 
@@ -181,8 +203,30 @@
     </div>
   </section>
 
+  <!-- Project modal -->
+  <div class="modal" id="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+      <img id="modal-img" src="" alt="">
+      <p id="modal-desc"></p>
+    </div>
+  </div>
+
   <script>
-    /* Star background */
+    // Project modal functionality
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalDesc = document.getElementById('modal-desc');
+    document.querySelectorAll('.project-card').forEach(card=>{
+      card.addEventListener('click',()=>{
+        modal.style.display='flex';
+        modalImg.src = card.querySelector('img').src;
+        modalDesc.textContent = card.dataset.desc || '';
+      });
+    });
+    function closeModal(){ modal.style.display='none'; }
+
+    // Simple stars background
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
     let w, h;

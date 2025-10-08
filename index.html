@@ -40,14 +40,13 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:1.25rem 0;text-align:
   background:rgba(0,0,0,.8);z-index:2000;justify-content:center;align-items:center;
 }
 .modal-content{
-  background:#12131b;padding:1rem;max-width:90%;max-height:90%;border-radius:var(--round);
-  text-align:center;
+  background:#12131b;padding:1rem;max-width:80%;max-height:90%;
+  border-radius:var(--round);text-align:center;
 }
 .modal-content img{max-width:100%;max-height:70vh}
-.modal-content p{margin-top:1rem;color:#ccc;font-size:1rem}
-.close{position:absolute;top:20px;right:30px;font-size:2rem;color:#fff;cursor:pointer}
+.modal-content p{margin-top:1rem;color:#ccc;font-size:1rem;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.5}
 
-/* Single column timeline */
+/* Single column timeline with line behind */
 .timeline{
   max-width:700px;
   margin:3rem auto;
@@ -57,18 +56,21 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:1.25rem 0;text-align:
   content:'';
   position:absolute;
   top:0;
-  left:20px;
+  left:50%;
+  transform:translateX(-50%);
   width:6px;
   height:100%;
   background:linear-gradient(var(--brand),var(--brand-2));
   border-radius:3px;
+  z-index:-1; /* behind cards */
 }
 .timeline .item{
   background:#12131b;
   border-radius:var(--round);
   box-shadow:0 8px 18px rgba(0,0,0,.4);
   padding:1rem 1.4rem;
-  margin:1.5rem 0 1.5rem 60px;
+  margin:1.5rem auto;
+  width:80%;
   text-align:center;
   transition:transform .25s ease, box-shadow .25s ease;
   position:relative;
@@ -77,12 +79,14 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:1.25rem 0;text-align:
   content:'';
   position:absolute;
   top:20px;
-  left:-40px;
+  left:50%;
+  transform:translateX(-50%);
   width:20px;
   height:20px;
   background:var(--brand);
   border-radius:50%;
   box-shadow:0 0 10px rgba(122,162,255,.7);
+  z-index:1;
 }
 .timeline .item:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(0,0,0,.45)}
 .timeline .title{margin:0;font-size:1.15rem;font-weight:700}
@@ -172,7 +176,6 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 
 <!-- Modal -->
 <div class="modal" id="modal" onclick="closeModal(event)">
-  <span class="close" onclick="closeModal(event)">&times;</span>
   <div class="modal-content" onclick="event.stopPropagation()">
     <img id="modal-img" src="" alt="">
     <p id="modal-desc"></p>
@@ -208,10 +211,7 @@ projects.forEach(p=>{
   };
   grid.appendChild(c);
 });
-function closeModal(e){
-  if(e) e.stopPropagation();
-  document.getElementById('modal').style.display='none';
-}
+function closeModal(e){document.getElementById('modal').style.display='none';}
 </script>
 
 <!-- 3D starfield background -->

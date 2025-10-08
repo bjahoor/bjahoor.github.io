@@ -11,7 +11,11 @@
 html,body{height:100%}
 body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 
-/* Header */
+/* Reveal */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* Header (fixed) */
 header{position:fixed;top:0;left:0;width:100%;backdrop-filter:blur(8px);background:rgba(11,12,18,.85);border-bottom:1px solid var(--line);z-index:50;padding:0.5rem 0}
 .wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem}
 header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem}
@@ -21,7 +25,7 @@ nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;font-size:1.05rem;cursor:pointer}
 nav a:hover{color:var(--brand)}
 
-/* Hero */
+/* Hero (compact with signature line) */
 .hero{padding:4.6rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-bottom:4.2rem}
 .hero svg{width:clamp(220px,32vw,360px);height:auto;display:block;margin:0 auto .15rem}
 .hero svg path{stroke:url(#grad);stroke-width:3;fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 2.6s ease forwards}
@@ -43,16 +47,16 @@ nav a:hover{color:var(--brand)}
 .skill{padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);font-size:1rem;transition:transform .3s ease}
 .skill:hover{transform:translateY(-3px)}
 
-/* Arrow */
+/* Scroll arrow: short hop + rest + glow */
 .scroll-arrow{position:absolute;bottom:-120px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowPulse 1.5s ease-in-out infinite;text-shadow:0 0 16px var(--brand),0 0 36px var(--brand-2)}
 @keyframes arrowPulse{0%{transform:translate(-50%,0)}30%{transform:translate(-50%,-10px)}45%{transform:translate(-50%,-10px)}100%{transform:translate(-50%,0)}}
 
-/* Section spacing & anchors */
+/* Headings & anchor offsets */
 h2{font-family:var(--font-display);font-size:2rem;margin:3.6rem 0 1.1rem;text-align:center}
 #experience{scroll-margin-top:130px;margin-top:5.6rem;margin-bottom:2.2rem}
 #projects{scroll-margin-top:130px;margin-top:2.6rem;margin-bottom:4.2rem}
 
-/* Timeline (compact) */
+/* Compact Experience */
 .timeline{max-width:800px;margin:2rem auto;position:relative;display:flex;flex-direction:column;gap:1rem}
 .timeline .item{background:#12131b;border-radius:var(--round);padding:1rem 1.5rem;box-shadow:0 5px 10px rgba(0,0,0,.4);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer}
 .timeline .item:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.45)}
@@ -97,8 +101,8 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   <div class="wrap nav-container">
     <a class="brand" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Brandon Jahoor</a>
     <nav>
-      <a href="#experience" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'});return false;">Experiences</a>
-      <a href="#projects" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'});return false;">Projects</a>
+      <a href="#experience" onclick="const e=document.getElementById('experience');e.scrollIntoView({behavior:'smooth',block:'center'});window.scrollBy(0,-80);return false;">Experiences</a>
+      <a href="#projects" onclick="const p=document.getElementById('projects');p.scrollIntoView({behavior:'smooth',block:'center'});window.scrollBy(0,-80);return false;">Projects</a>
       <a href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" target="_blank" rel="noopener">Resume</a>
       <a href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
       <a href="mailto:bjahoor@uwaterloo.ca">Email</a>
@@ -142,7 +146,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
 <script>
-// Year
+// Footer year
 const yEl=document.getElementById('y'); if(yEl) yEl.textContent=(new Date).getFullYear();
 
 // Fade-in on scroll
@@ -153,7 +157,7 @@ faders.forEach(f=>obs.observe(f));
 // Skills chips (populate)
 const skillsRow=document.getElementById('skillsRow');
 const skills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Prototyping","Ubuntu","Electrical Design","Mechanical Design","Assembly"];
-if(skillsRow){ skillsRow.innerHTML=skills.map(s=>`<div class="skill">${s}</div>`).join(''); }
+if(skillsRow){ skillsRow.innerHTML=skills.map(s=>`<div class=\"skill\">${s}</div>`).join(''); }
 
 // Projects + fullscreen modal
 const projects=[
@@ -199,8 +203,8 @@ if(exp){
   experiences.forEach(e=>{
     const d=document.createElement('div');
     d.className='item';
-    d.innerHTML=`<div class="item-line"><div>${e.title}</div><span>${e.company}</span></div>
-                 <div class="desc"><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;
+    d.innerHTML=`<div class=\"item-line\"><div>${e.title}</div><span>${e.company}</span></div>
+                 <div class=\"desc\"><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;
     exp.appendChild(d);
   });
 }
@@ -214,24 +218,30 @@ renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
 camera.position.z=12;
+// Separate groups so only stars react to mouse
 const starsGroup=new THREE.Group();
 const labelsGroup=new THREE.Group();
 scene.add(starsGroup);scene.add(labelsGroup);
+// Stars (500)
 const COUNT=500;const pos=new Float32Array(COUNT*3);
 for(let i=0;i<COUNT;i++){pos[i*3]=(Math.random()-0.5)*40;pos[i*3+1]=(Math.random()-0.5)*24;pos[i*3+2]=(Math.random()-0.5)*40;}
 const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
 starsGroup.add(new THREE.Points(geo,mat));
+// Floating skill labels – spawn anywhere (edge-biased) and drift; not affected by mouse
 const floatSkills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping"];
 const sprites=[];
-function edgeBiased(min,max,bias=0.65){if(Math.random()<bias){return Math.random()<0.5?min:max;}return Math.random()*(max-min)+min;}
-function makeLabel(text){const cvs=document.createElement('canvas');cvs.width=512;cvs.height=128;const ctx=cvs.getContext('2d');ctx.fillStyle='white';ctx.font='48px Space Grotesk';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,256,64);const tex=new THREE.CanvasTexture(cvs);const sm=new THREE.SpriteMaterial({map:tex,transparent:true});const sp=new THREE.Sprite(sm);sp.scale.set(6,1.5,1);sp.position.set(edgeBiased(-20,20),edgeBiased(-10,10),-5);sp.userData={life:500+Math.random()*500,vy:0.01+Math.random()*0.02,vx:(Math.random()-0.5)*0.02};labelsGroup.add(sp);sprites.push(sp);}
+function randBetween(min,max){return Math.random()*(max-min)+min;}
+function edgeBiased(min,max,bias=0.65){if(Math.random()<bias){return Math.random()<0.5?min:max;}return randBetween(min,max);}
+function makeLabel(text){const cvs=document.createElement('canvas');cvs.width=512;cvs.height=128;const ctx=cvs.getContext('2d');ctx.clearRect(0,0,cvs.width,cvs.height);ctx.fillStyle='white';ctx.font='48px Space Grotesk';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,256,64);const tex=new THREE.CanvasTexture(cvs);const sm=new THREE.SpriteMaterial({map:tex,transparent:true});const sp=new THREE.Sprite(sm);sp.scale.set(6,1.5,1);const x=edgeBiased(-20,20);const y=edgeBiased(-10,10);sp.position.set(x,y,-5);sp.userData={life:500+Math.random()*500,vy:0.01+Math.random()*0.02,vx:(Math.random()-0.5)*0.02};labelsGroup.add(sp);sprites.push(sp);} 
 setInterval(()=>{makeLabel(floatSkills[Math.floor(Math.random()*floatSkills.length)])},3000);
-function animateLabels(){for(let i=sprites.length-1;i>=0;i--){const s=sprites[i];s.position.y+=s.userData.vy;s.position.x+=s.userData.vx;s.userData.life--;if(s.position.x>22)s.position.x=-22;if(s.position.x<-22)s.position.x=22;if(s.position.y>12)s.position.y=-12;if(s.position.y<-
-12)s.position.y=12;if(s.userData.life<=0){labelsGroup.remove(s);sprites.splice(i,1);}}}
+function animateLabels(){for(let i=sprites.length-1;i>=0;i--){const s=sprites[i];s.position.y+=s.userData.vy;s.position.x+=s.userData.vx;s.userData.life--;if(s.position.x>22)s.position.x=-22;if(s.position.x<-22)s.position.x=22;if(s.position.y>12)s.position.y=-12;if(s.position.y<-12)s.position.y=12;if(s.userData.life<=0){labelsGroup.remove(s);sprites.splice(i,1);}}}
+// Resize
 function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
 window.addEventListener('resize',resize);resize();
+// Mouse interaction: rotate only the stars group
 addEventListener('mousemove',e=>{const x=(e.clientX/innerWidth-0.5)*2;const y=-(e.clientY/innerHeight-0.5)*2;starsGroup.rotation.y=x*0.3;starsGroup.rotation.x=y*0.2;});
+// Background spin
 function anim(){requestAnimationFrame(anim);starsGroup.rotation.y+=0.006;animateLabels();renderer.render(scene,camera);}anim();
 </script>
 

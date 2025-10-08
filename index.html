@@ -8,7 +8,7 @@
 <style>
 :root{
   --bg:#0b0c12;--fg:#eef0f4;--muted:#9aa1ac;--line:#262837;
-  --brand:#7aa2ff;--brand-2:#9b6bff;--round:14px;
+  --brand:#7aa2ff;--brand-2:#9b6bff;--round:16px;
   --font-sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --font-display:"Space Grotesk",var(--font-sans);
 }
@@ -46,9 +46,9 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:1.25rem 0;text-align:
 .modal-content img{max-width:100%;max-height:70vh}
 .modal-content p{margin-top:1rem;color:#ccc;font-size:1rem;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.5}
 
-/* Single column timeline with line behind */
+/* Single column timeline with glowing line */
 .timeline{
-  max-width:700px;
+  max-width:800px;
   margin:3rem auto;
   position:relative;
 }
@@ -58,41 +58,32 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:1.25rem 0;text-align:
   top:0;
   left:50%;
   transform:translateX(-50%);
-  width:6px;
+  width:8px;
   height:100%;
-  background:linear-gradient(var(--brand),var(--brand-2));
-  border-radius:3px;
-  z-index:-1; /* behind cards */
+  background:linear-gradient(180deg,var(--brand),var(--brand-2));
+  border-radius:4px;
+  box-shadow:0 0 20px rgba(122,162,255,.6),0 0 30px rgba(155,107,255,.5);
+  animation:glow 4s ease-in-out infinite alternate;
+  z-index:-1;
+}
+@keyframes glow {
+  0% { box-shadow:0 0 15px rgba(122,162,255,.6),0 0 20px rgba(155,107,255,.5); }
+  100% { box-shadow:0 0 35px rgba(122,162,255,.9),0 0 40px rgba(155,107,255,.8);}
 }
 .timeline .item{
   background:#12131b;
   border-radius:var(--round);
   box-shadow:0 8px 18px rgba(0,0,0,.4);
-  padding:1rem 1.4rem;
-  margin:1.5rem auto;
+  padding:2rem 2rem;
+  margin:2rem auto;
   width:80%;
   text-align:center;
   transition:transform .25s ease, box-shadow .25s ease;
-  position:relative;
 }
-.timeline .item::before{
-  content:'';
-  position:absolute;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:20px;
-  height:20px;
-  background:var(--brand);
-  border-radius:50%;
-  box-shadow:0 0 10px rgba(122,162,255,.7);
-  z-index:1;
-}
-.timeline .item:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(0,0,0,.45)}
-.timeline .title{margin:0;font-size:1.15rem;font-weight:700}
-.timeline .company{margin:.25rem 0 0;font-size:.95rem;color:var(--muted)}
-.timeline .desc{display:none;margin-top:.6rem;font-size:.95rem;line-height:1.45}
-.timeline .item:hover .desc{display:block}
+.timeline .item:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.45)}
+.timeline .title{margin:0;font-size:1.4rem;font-weight:700}
+.timeline .company{margin:.5rem 0 0;font-size:1rem;color:var(--muted)}
+.timeline .desc{margin-top:1rem;font-size:1rem;line-height:1.55;color:#d0d3da}
 
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
@@ -134,42 +125,41 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 
 <section id="experience" class="wrap">
   <h2>Experience</h2>
-
   <div class="timeline">
     <div class="item">
       <h3 class="title">Robotics Research Assistant</h3>
       <p class="company">UW RoboHub</p>
-      <div class="desc">Undergraduate research on swarm robotics and multi-robot communication with HeRo 2.0 platforms.</div>
+      <p class="desc">Conducted swarm robotics research with HeRo 2.0 robots — built ROS2 communication frameworks, tested navigation algorithms, and supported experimental multi-robot coordination.</p>
     </div>
     <div class="item">
       <h3 class="title">Robotics Engineering</h3>
       <p class="company">UW Robotics Team (Co-op)</p>
-      <div class="desc">Built control and autonomy software for a Mars-style rover; developed RealSense camera pipeline and drivetrain kinematics.</div>
+      <p class="desc">Designed and implemented a Mars-style rover drivetrain and kinematics system; integrated RealSense camera pipelines and custom perception nodes in ROS2.</p>
     </div>
     <div class="item">
       <h3 class="title">Robotics Engineering</h3>
       <p class="company">BHF Robotics (Co-op)</p>
-      <div class="desc">Worked on autonomous electric weeder; ROS2-based navigation, deep learning model training, and electrical troubleshooting.</div>
+      <p class="desc">Developed navigation stack for an autonomous electric weeding robot; configured ROS2 networking, debugged electrical systems, and supported deep learning model deployment for weed detection.</p>
     </div>
     <div class="item">
       <h3 class="title">Mechatronics Engineering</h3>
       <p class="company">RAB Design Lighting (Co-op)</p>
-      <div class="desc">Launched a Bluetooth lighting control app; validated and documented smart lighting systems.</div>
+      <p class="desc">Designed and tested Bluetooth-enabled lighting controllers; validated firmware and documented smart lighting system performance for production launch.</p>
     </div>
     <div class="item">
       <h3 class="title">Quality Assurance</h3>
       <p class="company">Ontario Drive & Gear (Co-op)</p>
-      <div class="desc">Led QA on prototype gears under tight deadlines; performed GD&T-based inspections and validation.</div>
+      <p class="desc">Led QA on prototype gear assemblies; performed GD&T-based inspections, tolerance analysis, and supported launch readiness for electric drivetrain components.</p>
     </div>
     <div class="item">
       <h3 class="title">Electrical Engineering</h3>
       <p class="company">Jule / eCAMION (Co-op)</p>
-      <div class="desc">Assisted with high-power EV charging systems; assembled and tested electrical hardware.</div>
+      <p class="desc">Assisted in the development of EV fast-charging hardware; assembled and tested power electronics and supported hardware integration for commercial deployment.</p>
     </div>
     <div class="item">
       <h3 class="title">Youth Robotics Mentor</h3>
       <p class="company">FIRST (FLL)</p>
-      <div class="desc">Mentored teams to national qualification; coached robot design, coding, and competition strategy.</div>
+      <p class="desc">Mentored student robotics teams to regional/national competitions, teaching mechanical design, coding fundamentals, and strategy planning.</p>
     </div>
   </div>
 </section>

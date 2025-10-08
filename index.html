@@ -44,7 +44,7 @@ nav a:hover{color:var(--brand)}
 .skill{padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);font-size:1rem;transition:transform .3s ease}
 .skill:hover{transform:translateY(-3px)}
 
-/* Fast, jumpy scroll arrow with rest */
+/* Scroll arrow: short hop, rest, glow */
 .scroll-arrow{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowjump 1.2s infinite ease-in-out;text-shadow:0 0 25px var(--brand),0 0 50px var(--brand-2),0 0 80px var(--brand)}
 @keyframes arrowjump{0%,70%,100%{transform:translate(-50%,0) scale(1)}35%{transform:translate(-50%,-18px) scale(1.2)}}
 
@@ -99,16 +99,17 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 
 <header>
   <div class="wrap nav-container">
-    <a class="brand" href="#top">Brandon Jahoor</a>
+    <a class="brand" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Brandon Jahoor</a>
     <nav>
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
+      <a href="mailto:bjahoor@uwaterloo.ca">Email</a>
     </nav>
   </div>
 </header>
 
-<a id="top"></a>
 <section class="hero fade-in">
   <svg viewBox="0 0 600 100" aria-hidden="true">
     <defs>
@@ -239,12 +240,11 @@ geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
 starsGroup.add(new THREE.Points(geo,mat));
 
-// Floating skill labels – spawn anywhere (edge-biased)
+// Floating skill labels – spawn anywhere (edge-biased) and drift; not affected by mouse
 const skills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping"];
 const sprites=[];
 function randBetween(min,max){ return Math.random()*(max-min)+min; }
 function edgeBiased(min,max,bias=0.65){
-  // With `bias` probability, spawn at one of the two edges; otherwise anywhere
   if(Math.random()<bias){ return Math.random()<0.5?min:max; }
   return randBetween(min,max);
 }
@@ -260,7 +260,6 @@ function makeLabel(text){
   const sm=new THREE.SpriteMaterial({map:tex,transparent:true});
   const sp=new THREE.Sprite(sm);
   sp.scale.set(6,1.5,1);
-  // World ranges roughly match star field extents
   const x=edgeBiased(-20,20);
   const y=edgeBiased(-10,10);
   sp.position.set(x,y,-5);
@@ -276,7 +275,6 @@ function animateLabels(){
     s.position.y+=s.userData.vy;
     s.position.x+=s.userData.vx;
     s.userData.life--;
-    // Soft wrap around bounds so words keep drifting on screen
     if(s.position.x>22) s.position.x=-22;
     if(s.position.x<-22) s.position.x=22;
     if(s.position.y>12) s.position.y=-12;

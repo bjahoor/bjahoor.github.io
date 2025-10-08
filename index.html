@@ -34,6 +34,19 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:1.25rem 0;text-align:
 .card:hover img{transform:scale(1.05)}
 .card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.5);font-size:1rem}
 
+/* Modal */
+.modal{
+  display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,.8);z-index:2000;justify-content:center;align-items:center;
+}
+.modal-content{
+  background:#12131b;padding:1rem;max-width:90%;max-height:90%;border-radius:var(--round);
+  text-align:center;
+}
+.modal-content img{max-width:100%;max-height:70vh}
+.modal-content p{margin-top:1rem;color:#ccc}
+.close{position:absolute;top:20px;right:30px;font-size:2rem;color:#fff;cursor:pointer}
+
 /* Single column timeline */
 .timeline{
   max-width:700px;
@@ -124,37 +137,31 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
       <p class="company">UW RoboHub</p>
       <div class="desc">Swarm robotics research; ROS2 networking, navigation and coordination on HeRo 2.0 platforms.</div>
     </div>
-
     <div class="item">
       <h3 class="title">Robotics Engineering</h3>
       <p class="company">UW Robotics Team (Co-op)</p>
       <div class="desc">Robot arm kinematics, perception and controls for team projects and competitions.</div>
     </div>
-
     <div class="item">
       <h3 class="title">Robotics Engineering</h3>
       <p class="company">BHF Robotics (Co-op)</p>
       <div class="desc">Prototyped robotic subsystems and integrated ROS-based control software.</div>
     </div>
-
     <div class="item">
       <h3 class="title">Mechatronics Engineering</h3>
       <p class="company">RAB Design Lighting (Co-op)</p>
       <div class="desc">Designed and tested lighting control systems with embedded electronics.</div>
     </div>
-
     <div class="item">
       <h3 class="title">Quality Assurance</h3>
       <p class="company">Ontario Drive & Gear (Co-op)</p>
       <div class="desc">QA for prototype gears, tolerance analysis, and process validation.</div>
     </div>
-
     <div class="item">
       <h3 class="title">Electrical Engineering</h3>
       <p class="company">Jule / eCAMION (Co-op)</p>
       <div class="desc">EV fast charging hardware development and power electronics testing.</div>
     </div>
-
     <div class="item">
       <h3 class="title">Youth Robotics Mentor</h3>
       <p class="company">FIRST (FLL)</p>
@@ -163,30 +170,42 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   </div>
 </section>
 
+<!-- Modal -->
+<div class="modal" id="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <div class="modal-content">
+    <img id="modal-img" src="" alt="">
+    <p id="modal-desc"></p>
+  </div>
+</div>
+
 <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 const projects=[
-  {title:"UW RoboHub Research",img:"images/robohub.png"},
-  {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg"},
-  {title:"Mars-Style Rover",img:"images/project-rover.jpg"},
-  {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg"},
-  {title:"Rover Kinematics",img:"images/project-rover.jpg"},
-  {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg"},
-  {title:"Embedded C Operating System",img:"images/project-stm32.jpg"},
-  {title:"Motorized Bicycle",img:"images/project-bike.jpg"},
-  {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg"},
-  {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg"},
-  {title:"Retro Arcade Console",img:"images/project-arcade.jpg"},
+  {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Swarm robotics and advanced research at the UW RoboHub."},
+  {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Swarm navigation and package routing algorithms at hackathon."},
+  {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"Custom-built Mars-style rover with autonomous navigation."},
+  {title:"ROS2 RealSense Pipeline",img:"images/project-realsense.jpg",desc:"ROS2 RealSense camera pipeline integration and testing."},
+  {title:"Rover Kinematics",img:"images/project-rover.jpg",desc:"Kinematic validation for rover control systems."},
+  {title:"3-DOF Robotic Arm (ROS2)",img:"images/project-arm.jpg",desc:"3-DOF robotic arm built on ROS2 with motion planning."},
+  {title:"Embedded C Operating System",img:"images/project-stm32.jpg",desc:"Custom embedded C OS for STM32 microcontrollers."},
+  {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"Custom motorized bicycle with electronic controls."},
+  {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg",desc:"PLC programming and industrial control with Siemens hardware."},
+  {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Rubik’s Cube solver using EV3 robotics."},
+  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Custom retro gaming console build."}
 ];
 const grid=document.getElementById("projectGrid");
 projects.forEach(p=>{
   const c=document.createElement("div");
   c.className="card";
+  c.dataset.desc=p.desc;
   c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
+  c.onclick=()=>{document.getElementById('modal-img').src=p.img;document.getElementById('modal-desc').textContent=p.desc;document.getElementById('modal').style.display='flex';};
   grid.appendChild(c);
 });
+function closeModal(){document.getElementById('modal').style.display='none';}
 </script>
 
 <!-- 3D starfield background -->

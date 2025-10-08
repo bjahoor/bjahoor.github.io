@@ -325,6 +325,7 @@ navLinks.forEach(link => {
       if(el){
         const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
         window.scrollTo({top: y, behavior: 'smooth'});
+      history.replaceState(null,null,' '); // prevent browser hash jump on repeat click
       }
     }
   });

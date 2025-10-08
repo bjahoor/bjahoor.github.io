@@ -26,7 +26,7 @@ nav a:hover{color:var(--brand)}
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
 /* ===== Hero ===== */
-.hero{padding:4.6rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-bottom:0.8rem}
+.hero{padding:4.6rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-bottom:2.6rem}
 .hero svg{width:clamp(220px,32vw,360px);height:auto;display:block;margin:0 auto .15rem}
 .hero svg path{stroke:url(#grad);stroke-width:3;fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 2.6s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
@@ -47,8 +47,8 @@ nav a:hover{color:var(--brand)}
 .skill{padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);font-size:1rem;transition:transform .3s ease}
 .skill:hover{transform:translateY(-3px)}
 
-/* ===== Scroll arrow (moved lower) ===== */
-.scroll-arrow{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowPulse 1.5s ease-in-out infinite;text-shadow:0 0 16px var(--brand),0 0 36px var(--brand-2)}
+/* ===== Scroll arrow (lower for separation from Experiences) ===== */
+.scroll-arrow{position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowPulse 1.5s ease-in-out infinite;text-shadow:0 0 16px var(--brand),0 0 36px var(--brand-2)}
 @keyframes arrowPulse{0%{transform:translate(-50%,0)}30%{transform:translate(-50%,-10px)}45%{transform:translate(-50%,-10px)}100%{transform:translate(-50%,0)}}
 
 /* ===== Sections ===== */
@@ -193,19 +193,21 @@ const experiences=[
 const exp=document.getElementById('experienceTimeline');
 experiences.forEach(e=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<div class='item-line'><div>${e.title}</div><span>${e.company}</span></div><div class='desc'><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;exp.appendChild(d);});
 
-// Smooth scroll with fixed offset and no hash updates
-const HEADER_OFFSET=70;
+// Smooth scroll with fixed offset and debounced repeat clicks (prevents upward nudge)
+const HEADER_OFFSET=80; // adjust if your header height changes
+let isAnimating=false;
 document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
   link.addEventListener('click',e=>{
     e.preventDefault();
+    if(isAnimating) return;
     const id=link.getAttribute('href');
     const target=document.querySelector(id);
-    if(target){
-      const y=target.getBoundingClientRect().top+window.pageYOffset-HEADER_OFFSET;
-      const startY=window.scrollY; const distance=y-startY; const duration=500; let start;
-      function step(ts){ if(!start) start=ts; const p=Math.min((ts-start)/duration,1); window.scrollTo(0,startY+distance*p); if(p<1) requestAnimationFrame(step); }
-      requestAnimationFrame(step);
-    }
+    if(!target) return;
+    isAnimating=true;
+    const y=target.getBoundingClientRect().top+window.pageYOffset-HEADER_OFFSET;
+    const startY=window.scrollY; const dist=y-startY; const duration=450; let start;
+    function step(ts){ if(!start) start=ts; const p=Math.min((ts-start)/duration,1); window.scrollTo(0,startY+dist*p); if(p<1){requestAnimationFrame(step);} else { isAnimating=false; } }
+    requestAnimationFrame(step);
   });
 });
 </script>
@@ -236,7 +238,7 @@ starsGroup.add(new THREE.Points(geo,mat));
 const skills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping"];
 const sprites=[];
 function randBetween(min,max){ return Math.random()*(max-min)+min; }
-function edgeBiased(min,max,bias=0.65){ if(Math.random()<bias){ return Math.random()<0.5?min|max; } return randBetween(min,max); }
+function edgeBiased(min,max,bias=0.65){ if(Math.random()<bias){ return Math.random()<0.5?min:max; } return randBetween(min,max); }
 function makeLabel(text){
   const cvs=document.createElement('canvas'); cvs.width=512; cvs.height=128; const ctx=cvs.getContext('2d');
   ctx.clearRect(0,0,cvs.width,cvs.height); ctx.fillStyle='white'; ctx.font='48px Space Grotesk'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(text,256,64);
@@ -248,7 +250,7 @@ function makeLabel(text){
 setInterval(()=>{ makeLabel(skills[Math.floor(Math.random()*skills.length)]) },3000);
 
 function animateLabels(){
-  for(let i=sprites.length-1;i>=0;i--){ const s=sprites[i]; s.position.y+=s.userData.vy; s.position.x+=s.userData.vx; s.userData.life--; if(s.position.x>22)s.position.x=-22; if(s.position.x<-22)s.position.x=22; if(s.position.y>12)s.position.y=-12; if(s.position.y< -12)s.position.y=12; if(s.userData.life<=0){ labelsGroup.remove(s); sprites.splice(i,1); } }
+  for(let i=sprites.length-1;i>=0;i--){ const s=sprites[i]; s.position.y+=s.userData.vy; s.position.x+=s.userData.vx; s.userData.life--; if(s.position.x>22)s.position.x=-22; if(s.position.x<-22)s.position.x=22; if(s.position.y>12)s.position.y=-12; if(s.position.y<-12)s.position.y=12; if(s.userData.life<=0){ labelsGroup.remove(s); sprites.splice(i,1); } }
 }
 
 // Resize

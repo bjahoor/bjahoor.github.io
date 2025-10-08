@@ -18,11 +18,11 @@ header{position:sticky;top:0;backdrop-filter:blur(6px);background:rgba(11,12,18,
 .wrap{max-width:1100px;margin:0 auto;padding:1.2rem}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;margin-right:1rem}
 nav a:hover{color:var(--brand)}
-.hero{padding:clamp(1rem,4vw,2.5rem) 1rem}
+.hero{padding:clamp(1rem,4vw,2.5rem) 1rem;text-align:center}
 .hero h1{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.2rem);margin:0 0 .4rem}
 .grad-text{background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.muted{color:var(--muted)}
-.row{display:flex;gap:.75rem;flex-wrap:wrap}
+.muted{color:var(--muted);max-width:700px;margin:0 auto}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.8rem}
 .btn{padding:.7rem 1rem;border-radius:12px;text-decoration:none;border:1px solid var(--line);background:#12131b;color:var(--fg)}
 .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none}
 h2{font-family:var(--font-display);font-size:1.9rem;margin:1.25rem 0;text-align:center}
@@ -59,6 +59,7 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:1.25rem 0;text-align:
   box-shadow:0 8px 18px rgba(0,0,0,.4);
   padding:1rem 1.4rem;
   max-width:360px;
+  text-align:center;
   transition:transform .25s ease, box-shadow .25s ease;
 }
 .timeline .item:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(0,0,0,.45)}
@@ -68,14 +69,14 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:1.25rem 0;text-align:
 .timeline .item:hover .desc{display:block}
 
 /* Place items left/right of the line */
-.timeline .left{grid-column:1;justify-self:end;text-align:right}
+.timeline .left{grid-column:1;justify-self:end}
 .timeline .right{grid-column:3;justify-self:start}
 
 /* Mobile: single column with line on the left */
 @media (max-width:768px){
   .timeline{grid-template-columns: 6px 1fr; column-gap:1rem}
   .timeline .line{grid-column:1}
-  .timeline .left,.timeline .right{grid-column:2;justify-self:start;text-align:left}
+  .timeline .left,.timeline .right{grid-column:2;justify-self:center;text-align:center}
 }
 
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
@@ -104,7 +105,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
     <strong>research at the University of Waterloo’s RoboHub</strong>. Skilled in <strong>ROS2</strong>,
     electrical/mechanical design and prototyping, and <strong>team-driven innovation in robotics</strong>.
   </p>
-  <div class="row" style="margin-top:.6rem;">
+  <div class="row">
     <a class="btn primary" href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" download>Download Resume</a>
     <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
     <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>

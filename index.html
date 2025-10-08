@@ -15,7 +15,12 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 
-#video-bg{position:fixed;inset:0;object-fit:cover;z-index:-3;filter:brightness(.35) contrast(1.05);}
+/* 🔹 FIXED VIDEO BACKGROUND */
+#video-bg{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  object-fit:cover;object-position:center center;
+  z-index:-3;filter:brightness(.35) contrast(1.05);
+}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
 
 header{position:sticky;top:0;backdrop-filter:blur(6px);background:rgba(11,12,18,.7);border-bottom:1px solid var(--line);z-index:20}

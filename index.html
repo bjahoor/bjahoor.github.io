@@ -20,7 +20,7 @@ header .nav-container{display:flex;justify-content:center;align-items:center;gap
 nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;font-size:1.05rem}
 nav a:hover{color:var(--brand)}
-.hero{padding:6rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-bottom:0.5rem}
+.hero{padding:4.5rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-bottom:1rem}
 .hero svg{width:clamp(200px,30vw,350px);height:auto;display:block;margin:0 auto .2rem}
 .hero svg path{stroke:url(#grad);stroke-width:3;fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 3s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
@@ -36,12 +36,12 @@ nav a:hover{color:var(--brand)}
 .skills{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem;max-width:900px;margin-left:auto;margin-right:auto}
 .skill{padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);font-size:1rem;transition:transform .3s ease}
 .skill:hover{transform:translateY(-3px)}
-.scroll-arrow{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowjump 1.2s infinite ease-in-out;text-shadow:0 0 25px var(--brand),0 0 50px var(--brand-2),0 0 80px var(--brand)}
+.scroll-arrow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowjump 1.2s infinite ease-in-out;text-shadow:0 0 25px var(--brand),0 0 50px var(--brand-2),0 0 80px var(--brand)}
 @keyframes arrowjump{0%,70%,100%{transform:translate(-50%,0) scale(1)}35%{transform:translate(-50%,-18px) scale(1.2)}}
-h2{font-family:var(--font-display);font-size:2rem;margin:2rem 0 1rem;text-align:center}
+h2{font-family:var(--font-display);font-size:2rem;margin:3rem 0 1rem;text-align:center}
 section[id]{scroll-margin-top:100px}
-#experience{margin-top:2.5rem;margin-bottom:2rem}
-#projects{margin-top:2rem;margin-bottom:10rem}
+#experience{margin-top:3rem;margin-bottom:2.5rem}
+#projects{margin-top:3rem;margin-bottom:5rem}
 .timeline{max-width:800px;margin:2rem auto;position:relative;display:flex;flex-direction:column;gap:1rem}
 .timeline .item{background:#12131b;border-radius:var(--round);padding:1rem 1.5rem;box-shadow:0 5px 10px rgba(0,0,0,.4);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer}
 .timeline .item:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.45)}
@@ -66,7 +66,7 @@ section[id]{scroll-margin-top:100px}
 #modal p{max-width:700px;color:var(--muted);line-height:1.5}
 #bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.35}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
-footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:3rem 1rem 6rem}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:2rem 1rem 3rem}
 </style>
 </head>
 <body>
@@ -103,91 +103,81 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 100);
 camera.position.z = 12;
 
-// Separate groups so only stars react to mouse
+// Groups for interaction
 const starsGroup = new THREE.Group();
 const labelsGroup = new THREE.Group();
 scene.add(starsGroup);
 scene.add(labelsGroup);
 
-// Stars (500)
+// Stars
 const COUNT = 500;
 const pos = new Float32Array(COUNT * 3);
 for (let i = 0; i < COUNT; i++) {
-  pos[i*3]   = (Math.random()-0.5) * 40;
-  pos[i*3+1] = (Math.random()-0.5) * 24;
-  pos[i*3+2] = (Math.random()-0.5) * 40;
+  pos[i*3] = (Math.random()-0.5)*40;
+  pos[i*3+1] = (Math.random()-0.5)*24;
+  pos[i*3+2] = (Math.random()-0.5)*40;
 }
 const geo = new THREE.BufferGeometry();
 geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
 const mat = new THREE.PointsMaterial({ size: 0.06, transparent: true, opacity: 0.9, color: 0x7aa2ff, depthWrite: false });
 starsGroup.add(new THREE.Points(geo, mat));
 
-// Floating skill labels – spawn anywhere (edge-biased) and drift; not affected by mouse
+// Floating skill labels – drift naturally
 const skills = ["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping"];
 const sprites = [];
-function randBetween(min,max){ return Math.random()*(max-min)+min; }
-function edgeBiased(min,max,bias=0.65){
-  if(Math.random() < bias){ return Math.random() < 0.5 ? min : max; }
-  return randBetween(min,max);
-}
+function randBetween(min,max){return Math.random()*(max-min)+min;}
+function edgeBiased(min,max,bias=0.65){if(Math.random()<bias){return Math.random()<0.5?min:max;}return randBetween(min,max);}
 function makeLabel(text){
-  const cvs = document.createElement('canvas'); cvs.width = 512; cvs.height = 128;
-  const ctx = cvs.getContext('2d');
-  ctx.clearRect(0,0,cvs.width,cvs.height);
-  ctx.fillStyle = 'white';
-  ctx.font = '48px Space Grotesk';
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText(text,256,64);
-  const tex = new THREE.CanvasTexture(cvs);
-  const sm = new THREE.SpriteMaterial({ map: tex, transparent: true });
-  const sp = new THREE.Sprite(sm);
+  const cvs=document.createElement('canvas'); cvs.width=512; cvs.height=128;
+  const ctx=cvs.getContext('2d'); ctx.clearRect(0,0,cvs.width,cvs.height);
+  ctx.fillStyle='white'; ctx.font='48px Space Grotesk'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(text,256,64);
+  const tex=new THREE.CanvasTexture(cvs);
+  const sm=new THREE.SpriteMaterial({map:tex,transparent:true});
+  const sp=new THREE.Sprite(sm);
   sp.scale.set(6,1.5,1);
-  const x = edgeBiased(-20,20);
-  const y = edgeBiased(-10,10);
+  const x=edgeBiased(-20,20); const y=edgeBiased(-10,10);
   sp.position.set(x,y,-5);
-  sp.userData = { life: 500 + Math.random()*500, vy: 0.01 + Math.random()*0.02, vx: (Math.random()-0.5)*0.02 };
+  sp.userData={life:500+Math.random()*500,vy:0.01+Math.random()*0.02,vx:(Math.random()-0.5)*0.02};
   labelsGroup.add(sp);
   sprites.push(sp);
 }
-setInterval(()=>{ makeLabel(skills[Math.floor(Math.random()*skills.length)]); }, 3000);
+setInterval(()=>makeLabel(skills[Math.floor(Math.random()*skills.length)]),3000);
 
 function animateLabels(){
   for(let i=sprites.length-1;i>=0;i--){
     const s=sprites[i];
-    s.position.y += s.userData.vy;
-    s.position.x += s.userData.vx;
+    s.position.y+=s.userData.vy;
+    s.position.x+=s.userData.vx;
     s.userData.life--;
-    // wrap around bounds so words keep drifting
-    if(s.position.x > 22) s.position.x = -22;
-    if(s.position.x < -22) s.position.x = 22;
-    if(s.position.y > 12) s.position.y = -12;
-    if(s.position.y < -12) s.position.y = 12;
-    if(s.userData.life <= 0){ labelsGroup.remove(s); sprites.splice(i,1); }
+    if(s.position.x>22)s.position.x=-22;
+    if(s.position.x<-22)s.position.x=22;
+    if(s.position.y>12)s.position.y=-12;
+    if(s.position.y<-12)s.position.y=12;
+    if(s.userData.life<=0){labelsGroup.remove(s);sprites.splice(i,1);}
   }
 }
 
-// Resize
+// Resize handler
 function resize(){
-  renderer.setSize(innerWidth, innerHeight);
-  camera.aspect = innerWidth/innerHeight;
+  renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight;
   camera.updateProjectionMatrix();
 }
-window.addEventListener('resize', resize); resize();
+window.addEventListener('resize',resize); resize();
 
-// Mouse interaction: rotate only the stars group
-addEventListener('mousemove', e => {
-  const x = (e.clientX/innerWidth - 0.5) * 2;
-  const y = -(e.clientY/innerHeight - 0.5) * 2;
-  starsGroup.rotation.y = x * 0.3;
-  starsGroup.rotation.x = y * 0.2;
+// Mouse affects stars only
+addEventListener('mousemove',e=>{
+  const x=(e.clientX/innerWidth-0.5)*2;
+  const y=-(e.clientY/innerHeight-0.5)*2;
+  starsGroup.rotation.y=x*0.3;
+  starsGroup.rotation.x=y*0.2;
 });
 
-// Background spin: subtle continuous motion
 function anim(){
   requestAnimationFrame(anim);
-  starsGroup.rotation.y += 0.006;
+  starsGroup.rotation.y+=0.006;
   animateLabels();
-  renderer.render(scene, camera);
+  renderer.render(scene,camera);
 }
 anim();
 </script>

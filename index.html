@@ -65,7 +65,7 @@ h2{font-family:var(--font-display);font-size:2rem;margin:1.5rem 0;text-align:cen
 
 #bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.35}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
-footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:0.5rem}
 </style>
 </head>
 <body>
@@ -196,8 +196,8 @@ const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
 camera.position.z=12;
 
-// Fewer stars
-const COUNT=1200;
+// Fewer stars (500 instead of 1200)
+const COUNT=500;
 const pos=new Float32Array(COUNT*3);
 for(let i=0;i<COUNT;i++){
   pos[i*3]=(Math.random()-0.5)*40;

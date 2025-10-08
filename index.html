@@ -311,6 +311,23 @@ function anim(){
 }
 anim();
 </script>
-
+<script>
+// Smooth scroll with offset for nav links
+const headerOffset = 80; // height of fixed header + padding
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    const id = link.getAttribute('href');
+    if(id.startsWith('#')){
+      e.preventDefault();
+      const el = document.querySelector(id);
+      if(el){
+        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }
+    }
+  });
+});
+</script>
 </body>
 </html>

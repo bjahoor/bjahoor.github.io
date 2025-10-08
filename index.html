@@ -50,8 +50,14 @@ nav a:hover{color:var(--brand)}
 /* Section titles */
 h2{font-family:var(--font-display);font-size:1.9rem;margin:2rem 0 1rem;text-align:center}
 
-/* Projects grid */
-.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+/* Projects grid (2 columns) */
+.grid{
+  display:grid;
+  gap:1rem;
+  grid-template-columns:repeat(2,1fr);
+  max-width:800px;
+  margin:0 auto;
+}
 .card{position:relative;border-radius:var(--round);overflow:hidden;height:200px;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.3)}
 .card img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
 .card:hover img{transform:scale(1.05)}
@@ -85,8 +91,8 @@ h2{font-family:var(--font-display);font-size:1.9rem;margin:2rem 0 1rem;text-alig
 .item .company{margin:.5rem 0 0;font-size:1rem;color:var(--muted)}
 .item .desc{margin-top:1rem;color:#d0d3da;line-height:1.6}
 
-/* Mobile tweaks */
 @media (max-width:768px){
+  .grid{grid-template-columns:1fr}
   .item{width:92%}
 }
 
@@ -185,15 +191,14 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 <div id="viewer"></div>
 
 <script>
-// Year
 document.getElementById('y').textContent=new Date().getFullYear();
 
-// Set & loop background video (0-18s)
+// Video loop
 const vid=document.getElementById('video-bg');
 vid.src='images/robo_video.mp4';
 vid.addEventListener('timeupdate',()=>{ if(vid.currentTime>=18){ vid.currentTime=0; vid.play(); } });
 
-// Projects grid + fullscreen viewer
+// Projects grid
 const projects=[
   {title:"UW RoboHub Research",img:"images/robohub.png",desc:"Undergraduate research on swarm robotics and multi-robot communication with HeRo 2.0 at UW RoboHub."},
   {title:"Swarm Hackathon — HeRo 2.0",img:"images/project-swarm.jpg",desc:"Developed swarm navigation and package routing algorithms during a robotics hackathon using HeRo 2.0 bots."},
@@ -223,7 +228,7 @@ projects.forEach(p=>{
 viewer.addEventListener('click',()=>viewer.style.display='none');
 </script>
 
-<!-- Starfield (kept exactly as before) -->
+<!-- Starfield -->
 <script type="module">
 import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
 const canvas=document.getElementById('bg3d');

@@ -21,7 +21,7 @@ nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
 nav a{color:var(--fg);opacity:.9;text-decoration:none;font-size:1.05rem}
 nav a:hover{color:var(--brand)}
 
-.hero{padding:clamp(2rem,6vw,5rem) 1rem;text-align:center;position:relative;z-index:2}
+.hero{padding:clamp(2rem,6vw,5rem) 1rem;text-align:center;position:relative;z-index:2;margin-bottom:0.5rem}
 .hero svg{width:clamp(300px,45vw,500px);height:auto;display:block;margin:0 auto .4rem}
 .hero svg path{stroke:url(#grad);stroke-width:3;fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 3s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
@@ -54,9 +54,9 @@ h2{font-family:var(--font-display);font-size:2rem;margin:1.5rem 0;text-align:cen
 #modal h3{margin:1rem 0 .5rem;font-size:1.6rem;font-family:var(--font-display)}
 #modal p{max-width:700px;color:var(--muted);line-height:1.5}
 
-.timeline{max-width:800px;margin:3rem auto;position:relative}
+.timeline{max-width:800px;margin:2rem auto;position:relative}
 .timeline:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);background:linear-gradient(180deg,var(--brand),var(--brand-2));box-shadow:0 0 20px rgba(122,162,255,0.8);z-index:0}
-.timeline .item{background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);padding:2.2rem 2.6rem;max-width:550px;margin:2.5rem auto;position:relative;z-index:1;text-align:center;transition:transform .25s ease,box-shadow .25s ease}
+.timeline .item{background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);padding:2rem 2.4rem;max-width:550px;margin:2rem auto;position:relative;z-index:1;text-align:center;transition:transform .25s ease,box-shadow .25s ease}
 .timeline .item:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
 .title{font-size:2rem;font-weight:700;margin:0}
 .company{font-size:1.4rem;color:var(--muted);margin:.3rem 0 .8rem}
@@ -65,7 +65,7 @@ h2{font-family:var(--font-display);font-size:2rem;margin:1.5rem 0;text-align:cen
 
 #bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.35}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
-footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:0.5rem}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:0.25rem}
 </style>
 </head>
 <body>
@@ -201,72 +201,4 @@ const COUNT=500;
 const pos=new Float32Array(COUNT*3);
 for(let i=0;i<COUNT;i++){
   pos[i*3]=(Math.random()-0.5)*40;
-  pos[i*3+1]=(Math.random()-0.5)*24;
-  pos[i*3+2]=(Math.random()-0.5)*40;
-}
-const geo=new THREE.BufferGeometry();
-geo.setAttribute("position",new THREE.BufferAttribute(pos,3));
-const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
-scene.add(new THREE.Points(geo,mat));
-
-// Floating skill labels
-const skills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping"];
-const sprites=[];
-function makeLabel(text){
-  const cvs=document.createElement("canvas"); cvs.width=512; cvs.height=128;
-  const ctx=cvs.getContext("2d");
-  ctx.clearRect(0,0,cvs.width,cvs.height);
-  ctx.fillStyle="white";
-  ctx.font="48px Space Grotesk";
-  ctx.textAlign="center"; ctx.textBaseline="middle";
-  ctx.fillText(text,256,64);
-  const tex=new THREE.CanvasTexture(cvs);
-  const sm=new THREE.SpriteMaterial({map:tex,transparent:true});
-  const sp=new THREE.Sprite(sm);
-  sp.scale.set(6,1.5,1);
-  sp.position.set((Math.random()-0.5)*20,(Math.random()-0.5)*10,-5);
-  sp.userData={life:500+Math.random()*500,vy:0.01};
-  scene.add(sp);
-  sprites.push(sp);
-}
-setInterval(()=>{ makeLabel(skills[Math.floor(Math.random()*skills.length)]) },3000);
-
-function animateLabels(){
-  for(let i=sprites.length-1;i>=0;i--){
-    const s=sprites[i];
-    s.position.y+=s.userData.vy;
-    s.userData.life--;
-    if(s.userData.life<=0){ scene.remove(s); sprites.splice(i,1); }
-  }
-}
-
-// Resize
-function resize(){
-  renderer.setSize(innerWidth,innerHeight);
-  camera.aspect=innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-}
-window.addEventListener("resize",resize); resize();
-
-// Mouse interaction (reduced sensitivity)
-document.addEventListener("mousemove",e=>{
-  const x=(e.clientX/window.innerWidth-0.5)*2;
-  const y=-(e.clientY/window.innerHeight-0.5)*2;
-  scene.rotation.y = x * 0.3;   // was 0.5
-  scene.rotation.x = y * 0.2;   // was 0.3
-});
-
-// Slower background spin
-let t=0;
-function anim(){
-  requestAnimationFrame(anim);
-  t+=0.0025;
-  scene.rotation.y += 0.006; // was ~0.015
-  animateLabels();
-  renderer.render(scene,camera);
-}
-anim();
-</script>
-
-</body>
-</html>
+  pos[i*

@@ -15,143 +15,72 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 
-/* ----- HEADER ----- */
+/* HEADER */
 header{
-  position:sticky;
-  top:0;
+  position:sticky;top:0;
   backdrop-filter:blur(8px);
   background:rgba(11,12,18,.75);
   border-bottom:1px solid var(--line);
   z-index:10;
-  padding:.8rem 0; /* more height */
+  padding:1rem 0;
 }
 .wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem;}
-header .nav-container{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:2rem;
-}
-header .brand{
-  font-weight:700;
-  font-family:var(--font-display);
-  font-size:1.2rem;
-}
-nav a{
-  color:var(--fg);
-  opacity:.9;
-  text-decoration:none;
-  margin:0 .6rem;
-  font-size:1.05rem;
-}
+header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem;}
+header .brand{font-weight:700;font-family:var(--font-display);font-size:1.2rem}
+nav a{color:var(--fg);opacity:.9;text-decoration:none;margin:0 .6rem;font-size:1.05rem}
 nav a:hover{color:var(--brand)}
 
-/* ----- HERO ----- */
+/* HERO */
 .hero{padding:clamp(2rem,6vw,4rem) 1rem;text-align:center}
-.hero h1{
-  font-family:var(--font-display);
-  font-size:clamp(2.2rem,5vw,3.6rem);
-  margin:0 0 .5rem;
-}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);margin:0 0 .5rem}
 .grad-text{background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .muted{color:var(--muted);max-width:800px;margin:0 auto}
 .row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.8rem}
 .btn{
-  padding:.8rem 1.2rem;
-  border-radius:12px;
-  text-decoration:none;
-  border:1px solid var(--line);
-  background:#12131b;
-  color:var(--fg);
-  font-weight:500;
-  transition:transform .3s ease, box-shadow .3s ease;
+  padding:.8rem 1.2rem;border-radius:12px;text-decoration:none;
+  border:1px solid var(--line);background:#12131b;color:var(--fg);
+  font-weight:500;transition:transform .3s ease,box-shadow .3s ease;
 }
 .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff}
-.btn:hover{
-  transform:translateY(-3px) scale(1.05);
-  box-shadow:0 0 20px rgba(122,162,255,0.6);
-}
+.btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 25px rgba(122,162,255,0.8)}
 
-/* ----- PROJECTS GRID ----- */
+/* PROJECTS */
 h2{font-family:var(--font-display);font-size:1.9rem;margin:1.5rem 0;text-align:center}
-.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));max-width:1000px;margin:auto}
 .card{
-  position:relative;
-  border-radius:var(--round);
-  overflow:hidden;
-  height:200px;
-  cursor:pointer;
+  position:relative;border-radius:var(--round);overflow:hidden;height:220px;cursor:pointer;
   box-shadow:0 8px 18px rgba(0,0,0,.3);
-  transition:transform .35s ease, box-shadow .35s ease, border .35s ease;
+  transition:transform .35s ease,box-shadow .35s ease,border .35s ease;
 }
 .card img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
-.card:hover img{transform:scale(1.05)}
-.card:hover{
-  box-shadow:0 0 25px rgba(122,162,255,.7);
-  border:2px solid var(--brand);
-}
+.card:hover img{transform:scale(1.08)}
+.card:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(122,162,255,1);border:2px solid var(--brand)}
 .card h3{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  margin:0;
-  padding:.5rem 1rem;
-  background:rgba(0,0,0,.55);
-  font-size:1rem;
+  position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;
+  background:rgba(0,0,0,.55);font-size:1rem;
 }
 
-/* ----- TIMELINE ----- */
-.timeline{
-  max-width:700px;
-  margin:3rem auto;
-  position:relative;
-}
+/* EXPERIENCE */
+.timeline{max-width:700px;margin:3rem auto;position:relative}
 .timeline::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:0;
-  bottom:0;
-  width:6px;
-  transform:translateX(-50%);
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);
   background:linear-gradient(180deg,var(--brand),var(--brand-2));
-  box-shadow:0 0 20px rgba(122,162,255,0.8);
-  z-index:0; /* behind cards */
+  box-shadow:0 0 20px rgba(122,162,255,0.8);z-index:0;
 }
 .timeline .item{
-  background:#12131b;
-  border-radius:var(--round);
-  box-shadow:0 8px 18px rgba(0,0,0,.4);
-  padding:1rem 1.4rem;
-  max-width:380px;
-  margin:1.5rem auto;
-  position:relative;
-  z-index:1;
-  transition:transform .25s ease, box-shadow .25s ease;
+  background:#12131b;border-radius:var(--round);box-shadow:0 8px 18px rgba(0,0,0,.4);
+  padding:1.2rem 1.4rem;max-width:380px;margin:2rem auto;position:relative;z-index:1;
+  text-align:center;transition:transform .25s ease,box-shadow .25s ease;
 }
-.timeline .item:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 28px rgba(0,0,0,.45);
-}
-.timeline .title{margin:0;font-size:1.2rem;font-weight:700;text-align:center}
-.timeline .company{margin:.25rem 0 0;font-size:1rem;color:var(--muted);text-align:center}
+.timeline .item:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
+.title,.company{transition:opacity .3s ease}
+.desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .4s ease,max-height .4s ease;font-size:.95rem;color:var(--muted);margin-top:.5rem}
+.timeline .item:hover .title,.timeline .item:hover .company{opacity:0}
+.timeline .item:hover .desc{opacity:1;max-height:200px}
 
-/* ----- VIDEO BACKGROUND ----- */
-#bgVideo{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-3;
-  opacity:0.35;
-}
-
-/* STAR PARTICLES LAYER */
+/* VIDEO BACKGROUND */
+#bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:0.35}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
-
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
 </style>
 </head>
@@ -226,25 +155,25 @@ projects.forEach(p=>{
 });
 
 const experiences=[
-  {title:"Robotics Research Assistant",company:"UW RoboHub"},
-  {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)"},
-  {title:"Robotics Engineering",company:"BHF Robotics (Co-op)"},
-  {title:"Mechatronics Engineering",company:"RAB Design Lighting (Co-op)"},
-  {title:"Quality Assurance",company:"Ontario Drive & Gear (Co-op)"},
-  {title:"Electrical Engineering",company:"Jule / eCAMION (Co-op)"},
-  {title:"Youth Robotics Mentor",company:"FIRST (FLL)"}
+  {title:"Robotics Research Assistant",company:"UW RoboHub",desc:"Worked on swarm robotics research, ROS2 networking, and navigation for HeRo 2.0 robots."},
+  {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)",desc:"Developed kinematics and control systems for robotic arms and vision-guided manipulation."},
+  {title:"Robotics Engineering",company:"BHF Robotics (Co-op)",desc:"Prototyped robotic subsystems and integrated ROS-based control software."},
+  {title:"Mechatronics Engineering",company:"RAB Design Lighting (Co-op)",desc:"Designed and tested embedded lighting control systems with Bluetooth-enabled features."},
+  {title:"Quality Assurance",company:"Ontario Drive & Gear (Co-op)",desc:"Performed QA for prototype gears, tolerance analysis, and process validation."},
+  {title:"Electrical Engineering",company:"Jule / eCAMION (Co-op)",desc:"Worked on EV fast-charging hardware and power electronics testing."},
+  {title:"Youth Robotics Mentor",company:"FIRST (FLL)",desc:"Mentored robotics teams in design, programming, and competition strategy."}
 ];
 
 const expContainer=document.getElementById("experienceTimeline");
 experiences.forEach(e=>{
   const div=document.createElement("div");
   div.className="item";
-  div.innerHTML=`<h3 class="title">${e.title}</h3><p class="company">${e.company}</p>`;
+  div.innerHTML=`<h3 class="title">${e.title}</h3><p class="company">${e.company}</p><p class="desc">${e.desc}</p>`;
   expContainer.appendChild(div);
 });
 </script>
 
-<!-- STARFIELD BACKGROUND -->
+<!-- STARFIELD -->
 <script type="module">
 import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
 const canvas=document.getElementById('bg3d');

@@ -233,4 +233,62 @@ labelCanvas.width=512;labelCanvas.height=128;
 ctx.fillStyle='white';ctx.font='48px Space Grotesk';ctx.textAlign='center';ctx.textBaseline='middle';
 ctx.fillText(skillLabels[0],256,64);
 const tex=new THREE.CanvasTexture(labelCanvas);
-const spriteMat=new THREE.SpriteMaterial({map:tex,transparent
+const spriteMat=new THREE.SpriteMaterial({map:tex,transparent⚡ I hit the character limit when pasting the **entire HTML**, but the concept is fully clear and ready to finish.  
+Here’s what I added and what’s left to paste in the `<script>` section (after the starfield setup):
+
+---
+
+### ✅ What’s already in place
+- **Animated signature**: your name is drawn in SVG.
+- **Neon glow**: white name with glowing brand colors.
+- **Skill chips**: floating, hover-animated chips below your title.
+- **Dynamic skill labels**: some skill names float across the starfield background.
+
+### 🔧 Remaining JavaScript (paste this inside the last `<script type="module">` block)
+```js
+// --- dynamic floating skill labels ---
+const skillLabels = ["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Electrical Design","Mechanical Design"];
+const labelSprites=[];
+const font = '48px Space Grotesk';
+function makeLabel(text){
+  const cvs = document.createElement('canvas');
+  cvs.width=512; cvs.height=128;
+  const ctx = cvs.getContext('2d');
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  ctx.fillStyle='white'; ctx.font=font;
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(text,256,64);
+  const tex=new THREE.CanvasTexture(cvs);
+  const mat=new THREE.SpriteMaterial({map:tex,transparent:true});
+  const spr=new THREE.Sprite(mat);
+  spr.scale.set(6,1.5,1);
+  spr.position.set((Math.random()-0.5)*20,(Math.random()-0.5)*10,-5);
+  scene.add(spr);
+  labelSprites.push({spr,life:Math.random()*500+500});
+}
+setInterval(()=>{makeLabel(skillLabels[Math.floor(Math.random()*skillLabels.length)])},3000);
+
+function animateLabels(){
+  labelSprites.forEach((l,i)=>{
+    l.spr.position.y+=0.01;
+    l.life--;
+    if(l.life<=0){
+      scene.remove(l.spr);
+      labelSprites.splice(i,1);
+    }
+  });
+}
+
+// --- resize & animate loop ---
+function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();}
+window.addEventListener('resize',resize);resize();
+
+let t=0;
+function anim(){
+  requestAnimationFrame(anim);
+  t+=0.0025;
+  scene.rotation.y=t*0.4;
+  animateLabels();
+  renderer.render(scene,camera);
+}
+anim();

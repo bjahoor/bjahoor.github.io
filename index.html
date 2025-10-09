@@ -9,6 +9,7 @@
 :root{--bg:#0b0c12;--fg:#eef0f4;--muted:#9aa1ac;--line:#262837;--brand:#7aa2ff;--brand-2:#9b6bff;--round:14px;--font-sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--font-display:"Space Grotesk",var(--font-sans)}
 *{box-sizing:border-box}
 html,body{height:100%}
+html{scroll-behavior:auto} /* we'll handle smooth scroll in JS to avoid browser rounding quirks */
 body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 
 /* Reveal */
@@ -47,21 +48,18 @@ nav a:hover{color:var(--brand)}
 .skill{padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);font-size:1rem;transition:transform .3s ease}
 .skill:hover{transform:translateY(-3px)}
 
-/* Scroll arrow: short hop, rest, glow */
+/* Scroll arrow */
 .scroll-arrow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);font-size:2.8rem;color:var(--brand);animation:arrowjump 1.2s infinite ease-in-out;text-shadow:0 0 25px var(--brand),0 0 50px var(--brand-2),0 0 80px var(--brand)}
 @keyframes arrowjump{0%,70%,100%{transform:translate(-50%,0) scale(1)}35%{transform:translate(-50%,-18px) scale(1.2)}}
 
 /* Headings */
 h2{font-family:var(--font-display);font-size:2rem;margin:3rem 0 1rem;text-align:center}
 
-/* Anchor offset for sticky header */
-section[id]{scroll-margin-top:100px}
-
-/* Section spacing: Experience above Projects */
+/* Section spacing */
 #experience{margin-top:3rem;margin-bottom:2.5rem}
 #projects{margin-top:3rem;margin-bottom:5rem}
 
-/* Compact Experience layout */
+/* Experience layout */
 .timeline{max-width:800px;margin:2rem auto;position:relative;display:flex;flex-direction:column;gap:1rem}
 .timeline .item{background:#12131b;border-radius:var(--round);padding:1rem 1.5rem;box-shadow:0 5px 10px rgba(0,0,0,.4);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer}
 .timeline .item:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.45)}
@@ -93,7 +91,7 @@ section[id]{scroll-margin-top:100px}
 #bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.35}
 #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
 
-/* Footer (reduced bottom space) */
+/* Footer */
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:2rem 1rem 3rem}
 </style>
 </head>
@@ -108,8 +106,8 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
   <div class="wrap nav-container">
     <a class="brand" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Brandon Jahoor</a>
     <nav>
-      <a href="#" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'});return false;">Experiences</a>
-      <a href="#" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'});return false;">Projects</a>
+      <a href="#" data-target="experience">Experiences</a>
+      <a href="#" data-target="projects">Projects</a>
       <a href="Brandon%20Jahoor%20-%20Full%20Application%20Package.pdf" target="_blank" rel="noopener">Resume</a>
       <a href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
       <a href="mailto:bjahoor@uwaterloo.ca">Email</a>
@@ -165,21 +163,22 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text
 // Footer year
 document.getElementById("y").textContent=(new Date).getFullYear();
 
-// Smooth scroll with explicit header offset
-function smoothScrollTo(el){
-  const headerOffset = 80; // matches sticky header height
-  const top = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-  window.scrollTo({ top, behavior: 'smooth' });
+// Smooth scroll v2: dynamic header height + rounding guard + no hash
+function smoothScrollToId(id){
+  const el=document.getElementById(id); if(!el) return;
+  const header=document.querySelector('header');
+  const headerOffset=Math.ceil((header?.getBoundingClientRect().height||0))+1; // +1 to account for border
+  const rect=el.getBoundingClientRect();
+  const top=Math.max(0, Math.round(rect.top + window.pageYOffset - headerOffset));
+  const current=Math.round(window.scrollY);
+  if(Math.abs(current-top)<=1) return; // already aligned
+  window.scrollTo({top,behavior:'smooth'});
 }
 
-// Hook nav links (no hash changes)
-document.querySelectorAll('header nav a[href="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    e.preventDefault();
-    const t=a.textContent.trim().toLowerCase();
-    if(t.includes('experience')) smoothScrollTo(document.getElementById('experience'));
-    else if(t.includes('project')) smoothScrollTo(document.getElementById('projects'));
-  });
+// Hook nav links using data-target (consistent behavior, no hashes)
+document.querySelectorAll('header nav a[data-target]').forEach(a=>{
+  a.addEventListener('click',e=>{ e.preventDefault(); smoothScrollToId(a.dataset.target); });
+  a.addEventListener('keydown',e=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); smoothScrollToId(a.dataset.target); } });
 });
 
 // Fade-in on scroll
@@ -198,7 +197,7 @@ const projects=[
   {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"Transformed a bicycle with a 2-stroke engine retrofit kit using cutting, welding, and drilling skills."},
   {title:"PLC Controls (Siemens)",img:"images/project-plc.jpg",desc:"Programmed a Siemens PLC in ladder logic to control motors, sensors, and buttons for industrial automation."},
   {title:"Rubik’s Cube Solver (EV3)",img:"images/project-ev3.jpg",desc:"Built a LEGO EV3 robot, programmed in RobotC, and integrated a Python solving algorithm with formal design documentation."},
-  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Assembled a Raspberry Pi-powered retro arcade console with a wide selection of classic games."}
+  {title:"Retro Arcade Console",img:"images/project-arcade.jpg",desc:"Assembled a Raspberry Pi-powered retro arcade console with a wide selection of classic games."},
 ];
 const grid=document.getElementById('projectGrid');
 const modal=document.getElementById('modal');
@@ -214,7 +213,7 @@ projects.forEach(p=>{
 });
 modal.addEventListener('click',()=>{ modal.style.display='none'; });
 
-// Experience (compact single-line; hover to expand)
+// Experiences (compact single-line; hover to expand)
 const experiences=[
   {title:"Robotics Research Assistant",company:"UW RoboHub",date:"May 2025 – Present",bullets:["Swarm robotics research on HeRo 2.0.","Implemented ROS2 networking and navigation."]},
   {title:"Robotics Engineering",company:"UW Robotics Team (Co-op)",date:"Jan 2025 – Apr 2025",bullets:["Developed autonomy software on ROS2.","Integrated Realsense camera and drivetrain kinematics."]},
@@ -222,7 +221,7 @@ const experiences=[
   {title:"Mechatronics Engineering",company:"RAB Design Lighting (Co-op)",date:"Jan 2024 – Apr 2024",bullets:["Validated Bluetooth lighting app.","Created training materials and validation tests."]},
   {title:"Quality Assurance",company:"Ontario Drive & Gear (Co-op)",date:"May 2023 – Aug 2023",bullets:["Led QA for prototype gear launches.","Performed high-precision GD&T inspections."]},
   {title:"Electrical Engineering",company:"Jule / eCAMION (Co-op)",date:"Jan 2023 – Apr 2023",bullets:["Assembled EV fast chargers.","Worked on electrical design and quality engineering."]},
-  {title:"Youth Robotics Mentor",company:"FIRST (FLL)",date:"2018 – Present",bullets:["Coached teams to national competitions.","Guided design and programming; won mentor awards."]}
+  {title:"Youth Robotics Mentor",company:"FIRST (FLL)",date:"2018 – Present",bullets:["Coached teams to national competitions.","Guided design and programming; won mentor awards."]},
 ];
 const exp=document.getElementById('experienceTimeline');
 experiences.forEach(e=>{
@@ -264,73 +263,32 @@ geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
 starsGroup.add(new THREE.Points(geo,mat));
 
-// Floating skill labels – now includes GitHub
+// Floating skill labels – includes GitHub
 const skills=["ROS2","C++","Python","MATLAB","Docker","PLC","FPGA","CAD","3D Printing","Ubuntu","Prototyping","GitHub"];
 const sprites=[];
 function randBetween(min,max){ return Math.random()*(max-min)+min; }
-function edgeBiased(min,max,bias=0.65){
-  if(Math.random()<bias){ return Math.random()<0.5?min:max; }
-  return randBetween(min,max);
-}
+function edgeBiased(min,max,bias=0.65){ if(Math.random()<bias){ return Math.random()<0.5?min:max; } return randBetween(min,max); }
 function makeLabel(text){
   const cvs=document.createElement('canvas'); cvs.width=512; cvs.height=128;
-  const ctx=cvs.getContext('2d');
-  ctx.clearRect(0,0,cvs.width,cvs.height);
-  ctx.fillStyle='white';
-  ctx.font='48px Space Grotesk';
-  ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText(text,256,64);
-  const tex=new THREE.CanvasTexture(cvs);
-  const sm=new THREE.SpriteMaterial({map:tex,transparent:true});
-  const sp=new THREE.Sprite(sm);
-  sp.scale.set(6,1.5,1);
-  const x=edgeBiased(-20,20);
-  const y=edgeBiased(-10,10);
-  sp.position.set(x,y,-5);
-  sp.userData={life:500+Math.random()*500,vy:0.01+Math.random()*0.02,vx:(Math.random()-0.5)*0.02};
-  labelsGroup.add(sp);
-  sprites.push(sp);
+  const ctx=cvs.getContext('2d'); ctx.clearRect(0,0,cvs.width,cvs.height);
+  ctx.fillStyle='white'; ctx.font='48px Space Grotesk'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(text,256,64);
+  const tex=new THREE.CanvasTexture(cvs); const sm=new THREE.SpriteMaterial({map:tex,transparent:true}); const sp=new THREE.Sprite(sm);
+  sp.scale.set(6,1.5,1); const x=edgeBiased(-20,20); const y=edgeBiased(-10,10); sp.position.set(x,y,-5);
+  sp.userData={life:500+Math.random()*500,vy:0.01+Math.random()*0.02,vx:(Math.random()-0.5)*0.02}; labelsGroup.add(sp); sprites.push(sp);
 }
 setInterval(()=>{ makeLabel(skills[Math.floor(Math.random()*skills.length)]) },3000);
 
-function animateLabels(){
-  for(let i=sprites.length-1;i>=0;i--){
-    const s=sprites[i];
-    s.position.y+=s.userData.vy;
-    s.position.x+=s.userData.vx;
-    s.userData.life--;
-    // wrap bounds
-    if(s.position.x>22) s.position.x=-22;
-    if(s.position.x<-22) s.position.x=22;
-    if(s.position.y>12) s.position.y=-12;
-    if(s.position.y<-12) s.position.y=12;
-    if(s.userData.life<=0){ labelsGroup.remove(s); sprites.splice(i,1); }
-  }
-}
+function animateLabels(){ for(let i=sprites.length-1;i>=0;i--){ const s=sprites[i]; s.position.y+=s.userData.vy; s.position.x+=s.userData.vx; s.userData.life--; if(s.position.x>22) s.position.x=-22; if(s.position.x<-22) s.position.x=22; if(s.position.y>12) s.position.y=-12; if(s.position.y<-12) s.position.y=12; if(s.userData.life<=0){ labelsGroup.remove(s); sprites.splice(i,1); } } }
 
 // Resize
-function resize(){
-  renderer.setSize(innerWidth,innerHeight);
-  camera.aspect=innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-}
+function resize(){ renderer.setSize(innerWidth,innerHeight); camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); }
 window.addEventListener('resize',resize); resize();
 
 // Mouse interaction: rotate only the stars group
-addEventListener('mousemove',e=>{
-  const x=(e.clientX/innerWidth-0.5)*2;
-  const y=-(e.clientY/innerHeight-0.5)*2;
-  starsGroup.rotation.y = x * 0.3;
-  starsGroup.rotation.x = y * 0.2;
-});
+addEventListener('mousemove',e=>{ const x=(e.clientX/innerWidth-0.5)*2; const y=-(e.clientY/innerHeight-0.5)*2; starsGroup.rotation.y = x * 0.3; starsGroup.rotation.x = y * 0.2; });
 
 // Background spin
-function anim(){
-  requestAnimationFrame(anim);
-  starsGroup.rotation.y += 0.006;
-  animateLabels();
-  renderer.render(scene,camera);
-}
+function anim(){ requestAnimationFrame(anim); starsGroup.rotation.y += 0.006; animateLabels(); renderer.render(scene,camera); }
 anim();
 </script>
 

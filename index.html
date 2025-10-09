@@ -192,7 +192,8 @@
       requestAnimationFrame(anim);
       mouseInfluenceX+=(targetInfluenceX-mouseInfluenceX)*0.05;
       mouseInfluenceY+=(targetInfluenceY-mouseInfluenceY)*0.05;
-      starsGroup.rotation.y+=baseSpeed+mouseInfluenceY;
+      starsGroup.rotation.y+=baseSpeed;
+      starsGroup.rotation.y+=mouseInfluenceY;
       starsGroup.rotation.x+=mouseInfluenceX*0.5;
       renderer.render(scene,camera);
     }

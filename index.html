@@ -275,7 +275,6 @@
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   const mat = new THREE.PointsMaterial({ size: 0.06, transparent: true, opacity: 0.9, color: 0x7aa2ff, depthWrite: false });
   starsGroup.add(new THREE.Points(geo, mat));
-
   function resize() {
     renderer.setSize(innerWidth, innerHeight);
     camera.aspect = innerWidth / innerHeight;
@@ -283,23 +282,14 @@
   }
   window.addEventListener('resize', resize);
   resize();
-
-  // NEW: smooth mouse influence without resetting ongoing spin
-  let targetRotX = 0;
-  let targetRotY = 0;
   addEventListener('mousemove', e => {
     const x = (e.clientX / innerWidth - 0.5) * 2;
     const y = -(e.clientY / innerHeight - 0.5) * 2;
-    targetRotY = x * 0.3;
-    targetRotX = y * 0.2;
+    starsGroup.rotation.y = x * 0.3;
+    starsGroup.rotation.x = y * 0.2;
   });
-
   function anim() {
     requestAnimationFrame(anim);
-    // ease toward mouse target
-    starsGroup.rotation.x += (targetRotX - starsGroup.rotation.x) * 0.05;
-    starsGroup.rotation.y += (targetRotY - starsGroup.rotation.y) * 0.05;
-    // keep your same slow spin speed
     starsGroup.rotation.y += 0.006;
     renderer.render(scene, camera);
   }

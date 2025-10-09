@@ -274,7 +274,9 @@
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   const mat = new THREE.PointsMaterial({ size: 0.06, transparent: true, opacity: 0.9, color: 0x7aa2ff, depthWrite: false });
-  starsGroup.add(new THREE.Points(geo, mat));
+  const stars = new THREE.Points(geo, mat);
+  starsGroup.add(stars);
+
   function resize() {
     renderer.setSize(innerWidth, innerHeight);
     camera.aspect = innerWidth / innerHeight;
@@ -282,15 +284,30 @@
   }
   window.addEventListener('resize', resize);
   resize();
+
+  // Keep same idle spin speed, add smooth mouse offset without resets
+  let targetX = 0, targetY = 0;   // desired offsets from mouse
+  let lerpX = 0, lerpY = 0;       // smoothed offsets
+  let baseY = 0;                  // continuous base spin
+
   addEventListener('mousemove', e => {
     const x = (e.clientX / innerWidth - 0.5) * 2;
     const y = -(e.clientY / innerHeight - 0.5) * 2;
-    starsGroup.rotation.y = x * 0.3;
-    starsGroup.rotation.x = y * 0.2;
+    targetY = x * 0.3;  // same sensitivity as before for Y rotation
+    targetX = y * 0.2;  // same sensitivity as before for X rotation
   });
+
   function anim() {
     requestAnimationFrame(anim);
-    starsGroup.rotation.y += 0.006;
+    // smooth toward target to avoid "reset" feeling
+    lerpX += (targetX - lerpX) * 0.1;
+    lerpY += (targetY - lerpY) * 0.1;
+
+    baseY += 0.006; // same spin speed as original
+
+    starsGroup.rotation.x = lerpX;
+    starsGroup.rotation.y = baseY + lerpY;
+
     renderer.render(scene, camera);
   }
   anim();

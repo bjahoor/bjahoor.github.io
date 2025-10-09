@@ -6,90 +6,87 @@
   <title>Brandon Jahoor — Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0c12;--fg:#eef0f4;--muted:#9aa1ac;--line:#262837;--brand:#7aa2ff;--brand-2:#9b6bff;--round:14px;
-      --font-sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--font-display:"Space Grotesk",var(--font-sans)
+    :root {
+      --bg: #0b0c12;
+      --fg: #eef0f4;
+      --muted: #9aa1ac;
+      --line: #262837;
+      --brand: #7aa2ff;
+      --brand-2: #9b6bff;
+      --round: 14px;
+      --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      --font-display: "Space Grotesk", var(--font-sans);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth;scroll-padding-top:var(--padTop,88px)}
-    body{margin:0;font-family:var(--font-sans);color:var(--fg);background:var(--bg)}
 
-    /* Reveal */
-    .fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
-    .fade-in.visible{opacity:1;transform:translateY(0)}
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--padTop, 88px); }
+    body { margin: 0; font-family: var(--font-sans); color: var(--fg); background: var(--bg); }
 
-    /* Header (fixed at top) */
-    header{position:fixed;top:0;left:0;width:100%;backdrop-filter:blur(8px);background:rgba(11,12,18,.85);border-bottom:1px solid var(--line);z-index:50;padding:.5rem 0}
-    .wrap{max-width:1200px;margin:0 auto;padding:0 1.2rem}
-    header .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem}
-    .brand{font-weight:700;font-family:var(--font-display);font-size:1.3rem;text-decoration:none;color:var(--fg)}
-    .brand:hover{color:var(--brand)}
-    nav{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-    nav a{color:var(--fg);opacity:.9;text-decoration:none;font-size:1.05rem;cursor:pointer}
-    nav a:hover{color:var(--brand)}
+    /* Header */
+    header { position: fixed; top: 0; left: 0; width: 100%; backdrop-filter: blur(8px); background: rgba(11,12,18,.85); border-bottom: 1px solid var(--line); z-index: 50; padding: 0.5rem 0; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.2rem; }
+    header .nav-container { display: flex; justify-content: center; align-items: center; gap: 2rem; }
+    .brand { font-weight: 700; font-family: var(--font-display); font-size: 1.3rem; text-decoration: none; color: var(--fg); }
+    .brand:hover { color: var(--brand); }
+    nav { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    nav a { color: var(--fg); opacity: .9; text-decoration: none; font-size: 1.05rem; cursor: pointer; }
+    nav a:hover { color: var(--brand); }
 
     /* Hero */
-    .hero{padding:4.5rem 1rem 2rem;text-align:center;position:relative;z-index:2;margin-bottom:1rem}
-    /* (Top squiggly SVG intentionally removed) */
-    .hero h1.neon{font-family:var(--font-display);font-size:clamp(4rem,10vw,6rem);font-weight:900;color:#fff;text-shadow:0 0 20px var(--brand),0 0 40px var(--brand-2);margin:.5rem 0}
-    .subtitle,.school{font-family:var(--font-display);background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .subtitle{font-size:clamp(1.6rem,4vw,2.2rem);margin:.6rem 0}
-    .school{font-size:clamp(1.4rem,3.5vw,2rem);margin:.2rem 0 1rem}
+    .hero { padding: 4.5rem 1rem 2rem; text-align: center; position: relative; z-index: 2; margin-bottom: 1rem; }
+    .hero h1.neon { font-family: var(--font-display); font-size: clamp(4rem, 10vw, 6rem); font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--brand), 0 0 40px var(--brand-2); margin: .5rem 0; }
+    .subtitle, .school { font-family: var(--font-display); background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .subtitle { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: .6rem 0; }
+    .school { font-size: clamp(1.4rem, 3.5vw, 2rem); margin: .2rem 0 1rem; }
 
-    /* CTA buttons */
-    .row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.2rem}
-    .btn{padding:1rem 1.8rem;border-radius:14px;text-decoration:none;border:1px solid var(--line);background:#12131b;color:var(--fg);font-weight:600;font-size:1.2rem;transition:transform .3s ease,box-shadow .3s ease;animation:bounce 2s infinite ease-in-out}
-    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:none;color:#fff}
-    .btn:hover{transform:translateY(-5px) scale(1.08);box-shadow:0 0 25px rgba(122,162,255,.8)}
-    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    /* Buttons */
+    .row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.2rem; }
+    .btn { padding: 1rem 1.8rem; border-radius: 14px; text-decoration: none; border: 1px solid var(--line); background: #12131b; color: var(--fg); font-weight: 600; font-size: 1.2rem; transition: transform .3s ease, box-shadow .3s ease; animation: bounce 2s infinite ease-in-out; }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); border: none; color: #fff; }
+    .btn:hover { transform: translateY(-5px) scale(1.08); box-shadow: 0 0 25px rgba(122,162,255,.8); }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-    /* Skills chips */
-    .skills{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem;max-width:900px;margin-left:auto;margin-right:auto}
-    .skill{padding:.5rem 1rem;border:1px solid var(--line);border-radius:20px;background:rgba(18,19,27,.6);font-size:1rem;transition:transform .3s ease}
-    .skill:hover{transform:translateY(-3px)}
+    /* Skills */
+    .skills { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin-top: 1rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+    .skill { padding: .5rem 1rem; border: 1px solid var(--line); border-radius: 20px; background: rgba(18,19,27,.6); font-size: 1rem; transition: transform .3s ease; }
+    .skill:hover { transform: translateY(-3px); }
 
     /* Headings */
-    h2{font-family:var(--font-display);font-size:2rem;margin:3rem 0 1rem;text-align:center}
+    h2 { font-family: var(--font-display); font-size: 2rem; margin: 3rem 0 1rem; text-align: center; }
 
-    /* Section spacing */
-    #experience{margin-top:3rem;margin-bottom:2.5rem}
-    #projects{margin-top:3rem;margin-bottom:5rem}
+    /* Experience */
+    #experience { margin-top: 3rem; margin-bottom: 2.5rem; }
+    .timeline { max-width: 800px; margin: 2rem auto; display: flex; flex-direction: column; gap: 1rem; }
+    .timeline .item { background: #12131b; border-radius: var(--round); padding: 1rem 1.5rem; box-shadow: 0 5px 10px rgba(0,0,0,.4); transition: transform .25s ease, box-shadow .25s ease; cursor: pointer; }
+    .timeline .item:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,0,0,.45); }
+    .item-line { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; }
+    .item-line span { color: var(--muted); font-weight: 600; }
+    .desc { opacity: 0; max-height: 0; overflow: hidden; transition: opacity .5s ease, max-height .5s ease; color: var(--muted); margin-top: .5rem; font-size: 1rem; text-align: left; }
+    .timeline .item:hover .desc { opacity: 1; max-height: 300px; }
 
-    /* Experience layout */
-    .timeline{max-width:800px;margin:2rem auto;position:relative;display:flex;flex-direction:column;gap:1rem}
-    .timeline .item{background:#12131b;border-radius:var(--round);padding:1rem 1.5rem;box-shadow:0 5px 10px rgba(0,0,0,.4);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer}
-    .timeline .item:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.45)}
-    .item-line{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display);font-size:1.2rem;font-weight:700}
-    .item-line span{color:var(--muted);font-weight:600}
-    .desc{opacity:0;max-height:0;overflow:hidden;transition:opacity .5s ease,max-height .5s ease;color:var(--muted);margin-top:.5rem;font-size:1rem;text-align:left}
-    .timeline .item:hover .desc{opacity:1;max-height:300px}
-    .desc p{margin:.2rem 0 .4rem}
-    .desc ul{margin:.5rem 0 0 1.2rem;padding:0}
-    .desc ul li{margin-bottom:.35rem}
-
-    /* Projects grid */
-    .grid{display:grid;gap:1rem;grid-template-columns:repeat(3,1fr);max-width:1000px;margin:auto}
-    @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:640px){.grid{grid-template-columns:1fr}}
-    .card{position:relative;border-radius:var(--round);overflow:hidden;height:220px;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.3);transition:transform .35s ease,box-shadow .35s ease,border .35s ease}
-    .card img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
-    .card:hover img{transform:scale(1.08)}
-    .card:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(122,162,255,1);border:2px solid var(--brand)}
-    .card h3{position:absolute;bottom:0;left:0;right:0;margin:0;padding:.5rem 1rem;background:rgba(0,0,0,.55);font-size:1rem}
+    /* Projects */
+    #projects { margin-top: 3rem; margin-bottom: 5rem; }
+    .grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); max-width: 1000px; margin: auto; }
+    @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+    .card { position: relative; border-radius: var(--round); overflow: hidden; height: 220px; cursor: pointer; box-shadow: 0 8px 18px rgba(0,0,0,.3); transition: transform .35s ease, box-shadow .35s ease, border .35s ease; }
+    .card img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+    .card:hover img { transform: scale(1.08); }
+    .card:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(122,162,255,1); border: 2px solid var(--brand); }
+    .card h3 { position: absolute; bottom: 0; left: 0; right: 0; margin: 0; padding: .5rem 1rem; background: rgba(0,0,0,.55); font-size: 1rem; }
 
     /* Modal */
-    #modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:20;flex-direction:column;text-align:center;padding:1rem;overflow:auto}
-    #modal img{max-width:90%;max-height:50vh;border-radius:var(--round);box-shadow:0 0 40px rgba(122,162,255,0.8);object-fit:contain;margin-top:1rem}
-    #modal h3{margin:1rem 0 .5rem;font-size:1.6rem;font-family:var(--font-display)}
-    #modal p{max-width:700px;color:var(--muted);line-height:1.5}
+    #modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.92); display: none; align-items: center; justify-content: center; z-index: 20; flex-direction: column; text-align: center; padding: 1rem; overflow: auto; }
+    #modal img { max-width: 90%; max-height: 50vh; border-radius: var(--round); box-shadow: 0 0 40px rgba(122,162,255,0.8); object-fit: contain; margin-top: 1rem; }
+    #modal h3 { margin: 1rem 0 .5rem; font-size: 1.6rem; font-family: var(--font-display); }
+    #modal p { max-width: 700px; color: var(--muted); line-height: 1.5; }
 
-    /* Background layers */
-    #bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:.35;transition:opacity .6s ease-out}
-    #bg3d{position:fixed;inset:0;z-index:-2;background:transparent}
+    /* Background */
+    #bgVideo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3; opacity: .35; transition: opacity .6s ease-out; }
+    #bg3d { position: fixed; inset: 0; z-index: -2; background: transparent; }
 
-    /* Footer */
-    footer{border-top:1px solid var(--line);color:var(--muted);font-size:.95rem;text-align:center;padding:2rem 1rem 3rem}
+    footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; text-align: center; padding: 2rem 1rem 3rem; }
   </style>
 </head>
 <body>
@@ -147,87 +144,87 @@
   <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
   <script>
-  // Footer year
-  document.getElementById("y").textContent=(new Date).getFullYear();
+  document.getElementById("y").textContent = (new Date).getFullYear();
 
-  // --- Smooth scrolling without first-click nudge ---
-  function updateScrollPadding(){
-    const header=document.querySelector('header');
-    const h=Math.round(header?.getBoundingClientRect().height||0);
-    document.documentElement.style.setProperty('--padTop', (h+2)+'px');
+  function updateScrollPadding() {
+    const h = Math.round(document.querySelector('header')?.getBoundingClientRect().height || 0);
+    document.documentElement.style.setProperty('--padTop', (h + 2) + 'px');
   }
   updateScrollPadding();
   window.addEventListener('resize', updateScrollPadding);
-  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(updateScrollPadding); }
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(updateScrollPadding); }
 
-  // Intercept nav clicks and call scrollIntoView (no hashes)
-  document.querySelectorAll('header nav a[data-target]').forEach(a=>{
-    a.addEventListener('click',e=>{
+  // Scroll to top on reload
+  window.addEventListener('load', () => {
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
+  });
+
+  // Smooth scroll nav
+  document.querySelectorAll('header nav a[data-target]').forEach(a => {
+    a.addEventListener('click', e => {
       e.preventDefault();
       updateScrollPadding();
-      const id=a.dataset.target; const el=document.getElementById(id); if(!el) return;
-      el.scrollIntoView({behavior:'smooth',block:'start'});
-    });
-    a.addEventListener('keydown',e=>{
-      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); a.click(); }
+      const id = a.dataset.target;
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
-  // Fade-in on scroll (kept for hero only)
-  const faders=document.querySelectorAll('.fade-in');
-  const obs=new IntersectionObserver(entries=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); }}); },{threshold:0.2});
-  faders.forEach(f=>obs.observe(f));
+  const faders = document.querySelectorAll('.fade-in');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
+  }, { threshold: 0.2 });
+  faders.forEach(f => obs.observe(f));
 
-  // --- Background video fade (smooth out and in over same distance) ---
-  const BASE_OPACITY=0.35; // match CSS
-  function updateVideoOpacity(){
-    const v=document.getElementById('bgVideo');
-    const fadeRange=window.innerHeight*1.2; // px distance to go from base → 0
-    const y=window.scrollY;
-    const t=Math.min(Math.max(y/fadeRange,0),1); // clamp 0..1
-    v.style.opacity=(BASE_OPACITY*(1-t)).toFixed(3);
+  const BASE_OPACITY = 0.35;
+  function updateVideoOpacity() {
+    const v = document.getElementById('bgVideo');
+    const fadeRange = window.innerHeight * 1.2;
+    const y = window.scrollY;
+    const t = Math.min(Math.max(y / fadeRange, 0), 1);
+    v.style.opacity = (BASE_OPACITY * (1 - t)).toFixed(3);
   }
   updateVideoOpacity();
-  addEventListener('scroll',updateVideoOpacity);
-  addEventListener('resize',updateVideoOpacity);
+  addEventListener('scroll', updateVideoOpacity);
+  addEventListener('resize', updateVideoOpacity);
 
-  // --- Experiences (from resume) ---
-  const experiences=[
-    {title:"Robotics Research Assistant",company:"University of Waterloo RoboHub",date:"September 2025 – December 2025",bullets:[
+  const experiences = [
+    { title: "Robotics Research Assistant", company: "University of Waterloo RoboHub", date: "September 2025 – December 2025", bullets: [
       "Pairing Xsens IMUs with Emika Panda 7-axis robot arm to mimic human arm movement using ROS2."
-    ]},
-    {title:"Robotics Engineering (Co-op)",company:"University of Waterloo Robotics Team",date:"June 2025 – August 2025",bullets:[
+    ] },
+    { title: "Robotics Engineering (Co-op)", company: "University of Waterloo Robotics Team", date: "June 2025 – August 2025", bullets: [
       "Developed ROS2 RealSense camera streaming with compression and dynamic resolution.",
       "Modeled 6‑wheel drivetrain; solved forward & inverse kinematics."
-    ]},
-    {title:"Robotics Engineering (Co-op)",company:"BHF Robotics",date:"May 2025 – June 2025",bullets:[
+    ] },
+    { title: "Robotics Engineering (Co-op)", company: "BHF Robotics", date: "May 2025 – June 2025", bullets: [
       "Designed (CAD), FEA simulated, prototyped and drew parts; sourced manufacturing and installed components for autonomous electric weeder.",
       "Programmed autodrive navigation in Python/ROS2 and trained weed/crop detection model."
-    ]},
-    {title:"Mechatronics Engineering (Co-op)",company:"RAB Design Lighting",date:"September 2024 – December 2024",bullets:[
+    ] },
+    { title: "Mechatronics Engineering (Co-op)", company: "RAB Design Lighting", date: "September 2024 – December 2024", bullets: [
       "Created engineering documents; conducted electrical & mechanical validation/testing; designed process improvement tools."
-    ]},
-    {title:"Quality Assurance Engineering (Co-op)",company:"Ontario Drive & Gear",date:"January 2024 – April 2024",bullets:[
+    ] },
+    { title: "Quality Assurance Engineering (Co-op)", company: "Ontario Drive & Gear", date: "January 2024 – April 2024", bullets: [
       "Lead QE on prototype new product launch under tight deadlines; earned AGMA Foundation Scholarship."
-    ]},
-    {title:"Electrical Engineering (Co-op)",company:"Jule / eCAMION",date:"February 2022 – June 2022",bullets:[
+    ] },
+    { title: "Electrical Engineering (Co-op)", company: "Jule / eCAMION", date: "February 2022 – June 2022", bullets: [
       "Assembled & wired EV fast chargers; supported electrical, design, software, and quality engineering."
-    ]},
-    {title:"Youth Robotics Mentor",company:"FIRST Robotics (FLL)",date:"January 2021 – December 2023",bullets:[
+    ] },
+    { title: "Youth Robotics Mentor", company: "FIRST Robotics (FLL)", date: "January 2021 – December 2023", bullets: [
       "Coached youth teams to competitions; guided design & programming."
-    ]}
+    ] }
   ];
-  const exp=document.getElementById('experienceTimeline');
-  experiences.forEach(e=>{
-    const d=document.createElement('div');
+
+  const exp = document.getElementById('experienceTimeline');
+  experiences.forEach(e => {
+    const d = document.createElement('div');
     d.className='item';
-    d.innerHTML=`<div class="item-line"><div>${e.title}</div><span>${e.company}</span></div>
-                 <div class="desc"><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;
+    d.innerHTML = `<div class="item-line"><div>${e.title}</div><span>${e.company}</span></div>
+      <div class="desc"><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;
     exp.appendChild(d);
   });
 
-  // --- Projects ---
-  const projects=[
+  const projects = [
     {title:"UW RoboHub Research",img:"images/project-robohub.jpg",desc:"I am currently contributing to the development of the 7-axis Franka Emika Panda robotic arm. Paired with Xsense Awinda IMUs fixed to a human's body, running on ROS2, this project will have the robot mimic the movements of a human arm."},
     {title:"SWARM Hackathon",img:"images/project-swarm.jpg",desc:"A fleet of HeRo 2.0 robots were assembled from scratch involving soldering smd components on pcb's, prototyping components, modifying components, and flashing firmware to ESP32's. With the robots communicating wirelessly through wifi, ir, imu, encoder, and drive data is transmitted through ROS2 pipelines. Running on docker, Gazebo was used as a simulation software."},
     {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"UW robotics creates a Mars-Style rover to compete in the annual CIRC challenge. I contributed developing the Realsense ROS2 Camera Streaming. My package streamed colour and depth data using a RealSense wrapper. I implemented custom compression to significantly reduce wireless bandwidth, and created node for rolling resolution selection. Another project involved me modelling the 6-wheel drivetrain, solving both forward and inverse kinematics."},
@@ -240,68 +237,61 @@
     {title:"Motorized Bicycle",img:"images/project-bike.jpg",desc:"I transformed my bicycle into a motorized machine using a 2-stroke engine retrofit kit. This project required a range of skills, including metal cutting, welding, and drilling."},
     {title:"Custom Lighting Fixture",img:"images/project-light.jpg",desc:"As a parting gift, I had the pleasure of customizing a lighting fixture for myself, incorporating the advanced app lighting controls I worked with during my co-op term at RAB Design."}
   ];
-  const grid=document.getElementById('projectGrid');
-  const modal=document.getElementById('modal');
-  projects.forEach(p=>{
-    const c=document.createElement('div');
-    c.className='card';
-    c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
-    c.addEventListener('click',()=>{
-      modal.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`;
-      modal.style.display='flex';
+
+  const grid = document.getElementById('projectGrid');
+  const modal = document.getElementById('modal');
+  projects.forEach(p => {
+    const c = document.createElement('div');
+    c.className = 'card';
+    c.innerHTML = `<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
+    c.addEventListener('click', () => {
+      modal.innerHTML = `<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`;
+      modal.style.display = 'flex';
     });
     grid.appendChild(c);
   });
-  modal.addEventListener('click',()=>{ modal.style.display='none'; });
+  modal.addEventListener('click', () => { modal.style.display = 'none'; });
   </script>
 
   <!-- 3D background (stars only) -->
   <script type="module">
   import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
-
-  const canvas=document.getElementById('bg3d');
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
-  camera.position.z=12;
-
-  // Reduced star count for performance
-  const COUNT=250;
-  const starsGroup=new THREE.Group();
+  const canvas = document.getElementById('bg3d');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 100);
+  camera.position.z = 12;
+  const starsGroup = new THREE.Group();
   scene.add(starsGroup);
-
-  const pos=new Float32Array(COUNT*3);
-  for(let i=0;i<COUNT;i++){
-    pos[i*3]=(Math.random()-0.5)*40;
-    pos[i*3+1]=(Math.random()-0.5)*24;
-    pos[i*3+2]=(Math.random()-0.5)*40;
+  const COUNT = 250;
+  const pos = new Float32Array(COUNT * 3);
+  for (let i = 0; i < COUNT; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * 40;
+    pos[i * 3 + 1] = (Math.random() - 0.5) * 24;
+    pos[i * 3 + 2] = (Math.random() - 0.5) * 40;
   }
-  const geo=new THREE.BufferGeometry();
-  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
-  starsGroup.add(new THREE.Points(geo,mat));
-
-  function resize(){
-    renderer.setSize(innerWidth,innerHeight);
-    camera.aspect=innerWidth/innerHeight;
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({ size: 0.06, transparent: true, opacity: 0.9, color: 0x7aa2ff, depthWrite: false });
+  starsGroup.add(new THREE.Points(geo, mat));
+  function resize() {
+    renderer.setSize(innerWidth, innerHeight);
+    camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
   }
-  window.addEventListener('resize',resize);
+  window.addEventListener('resize', resize);
   resize();
-
-  addEventListener('mousemove',e=>{
-    const x=(e.clientX/innerWidth-0.5)*2;
-    const y=-(e.clientY/innerHeight-0.5)*2;
-    starsGroup.rotation.y=x*0.3;
-    starsGroup.rotation.x=y*0.2;
+  addEventListener('mousemove', e => {
+    const x = (e.clientX / innerWidth - 0.5) * 2;
+    const y = -(e.clientY / innerHeight - 0.5) * 2;
+    starsGroup.rotation.y = x * 0.3;
+    starsGroup.rotation.x = y * 0.2;
   });
-
-  function anim(){
+  function anim() {
     requestAnimationFrame(anim);
-    starsGroup.rotation.y+=0.006;
-    renderer.render(scene,camera);
+    starsGroup.rotation.y += 0.006;
+    renderer.render(scene, camera);
   }
   anim();
   </script>

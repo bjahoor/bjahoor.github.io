@@ -80,11 +80,11 @@
   <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
   <script>
-    document.getElementById("y").textContent=(new Date).getFullYear();
+    document.getElementById("y").textContent = (new Date).getFullYear();
 
     const experiences=[
       {title:"Robotics Research Assistant",company:"University of Waterloo RoboHub",date:"September 2025 – December 2025",bullets:["Pairing Xsens IMUs with Emika Panda 7-axis robot arm to mimic human arm movement using ROS2."]},
-      {title:"Robotics Engineering (Co-op)",company:"University of Waterloo Robotics Team",date:"June 2025 – August 2025",bullets:["Developed ROS2 RealSense camera streaming with compression and dynamic resolution.","Modeled 6-wheel drivetrain; solved forward & inverse kinematics."]},
+      {title:"Robotics Engineering (Co-op)",company:"University of Waterloo Robotics Team",date:"June 2025 – August 2025",bullets:["Developed ROS2 RealSense camera streaming with compression and dynamic resolution.","Modeled 6‑wheel drivetrain; solved forward & inverse kinematics."]},
       {title:"Robotics Engineering (Co-op)",company:"BHF Robotics",date:"May 2025 – June 2025",bullets:["Designed (CAD), FEA simulated, prototyped and drew parts; sourced manufacturing and installed components for autonomous electric weeder.","Programmed autodrive navigation in Python/ROS2 and trained weed/crop detection model."]},
       {title:"Mechatronics Engineering (Co-op)",company:"RAB Design Lighting",date:"September 2024 – December 2024",bullets:["Created engineering documents; conducted electrical & mechanical validation/testing; designed process improvement tools."]},
       {title:"Quality Assurance Engineering (Co-op)",company:"Ontario Drive & Gear",date:"January 2024 – April 2024",bullets:["Lead QE on prototype new product launch under tight deadlines; earned AGMA Foundation Scholarship."]},
@@ -96,7 +96,7 @@
     experiences.forEach(e=>{
       const d=document.createElement('div');
       d.className='item';
-      d.innerHTML=`<div class=\"item-line\"><div>${e.title}</div><span>${e.company}</span></div><div class=\"desc\"><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;
+      d.innerHTML=`<div class="item-line"><div>${e.title}</div><span>${e.company}</span></div><div class="desc"><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;
       exp.appendChild(d);
     });
 
@@ -119,13 +119,14 @@
     projects.forEach(p=>{
       const c=document.createElement('div');
       c.className='card';
-      c.innerHTML=`<img src=\"${p.img}\" alt=\"${p.title}\"><h3>${p.title}</h3>`;
+      c.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
       c.addEventListener('click',()=>{
-        modal.innerHTML=`<img src=\"${p.img}\" alt=\"${p.title}\"><h3>${p.title}</h3><p>${p.desc}</p>`;
+        modal.innerHTML=`<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`;
         modal.style.display='flex';
       });
       grid.appendChild(c);
     });
+
     modal.addEventListener('click',()=>{ modal.style.display='none'; });
   </script>
 
@@ -145,7 +146,6 @@
 
     const COUNT=100;
     const pos=new Float32Array(COUNT*3);
-
     for(let i=0;i<COUNT;i++){
       pos[i*3]=(Math.random()-0.5)*40;
       pos[i*3+1]=(Math.random()-0.5)*24;
@@ -155,14 +155,7 @@
     const geo=new THREE.BufferGeometry();
     geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 
-    const mat=new THREE.PointsMaterial({
-      size:0.06,
-      transparent:true,
-      opacity:0.9,
-      color:0x7aa2ff,
-      depthWrite:false
-    });
-
+    const mat=new THREE.PointsMaterial({size:0.06,transparent:true,opacity:0.9,color:0x7aa2ff,depthWrite:false});
     const points=new THREE.Points(geo,mat);
     starsGroup.add(points);
 
@@ -171,7 +164,6 @@
       camera.aspect=innerWidth/innerHeight;
       camera.updateProjectionMatrix();
     }
-
     window.addEventListener('resize',resize);
     resize();
 
@@ -192,8 +184,7 @@
       requestAnimationFrame(anim);
       mouseInfluenceX+=(targetInfluenceX-mouseInfluenceX)*0.05;
       mouseInfluenceY+=(targetInfluenceY-mouseInfluenceY)*0.05;
-      starsGroup.rotation.y+=baseSpeed;
-      starsGroup.rotation.y+=mouseInfluenceY;
+      starsGroup.rotation.y+=baseSpeed+mouseInfluenceY;
       starsGroup.rotation.x+=mouseInfluenceX*0.5;
       renderer.render(scene,camera);
     }

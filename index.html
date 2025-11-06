@@ -232,17 +232,17 @@
   });
 
   const projects = [
-    /* --- NEW CARD 1: AI Object Detection --- */
-    {title:"AI Object Detection (ROS2 + RealSense)",img:"images/project-ai-object-detection.jpg",desc:"Built a ROS2 package integrating Intel RealSense RGB/Depth streaming with zero-shot OWL-ViT detection (Transformers) on CPU; dynamic text prompts via ROS topic and OpenCV overlays for real-time visualization."},
-
-    /* --- NEW CARD 2: Blank/Placeholder --- */
-    {title:"New Project (Coming Soon)",img:"images/project-new.jpg",desc:"Coming soon. This placeholder card can be replaced with any new project. Update the image and description when ready."},
-
+    /* Top row order: 1) RoboHub Research, 2) Autonomous Rover Simulation, 3) AI Object Detection */
     {title:"UW RoboHub Research",img:"images/project-robohub.jpg",desc:"I am currently contributing to the development of the 7-axis Franka Emika Panda robotic arm. Paired with Xsense Awinda IMUs fixed to a human's body, running on ROS2, this project will have the robot mimic the movements of a human arm."},
+
+    {title:"Autonomous Rover Simulation",img:"images/construct-rover.jpg",desc:"Containerized Mars-rover simulation in Gazebo with multiple ROS2 packages. System monitors temps and issues warnings when thresholds are exceeded. Obstacle sensors partition the surroundings into 6 sectors; a navigation algorithm recommends the next motion and iterates until the goal is reached. An AI model analyzes the rover’s camera feed to detect and classify plants."},
+
+    {title:"AI Object Detection",img:"images/project-ai-object-detection.jpg",desc:"Built a ROS2 package integrating Intel RealSense RGB/Depth streaming with zero-shot OWL-ViT detection (Transformers) on CPU; dynamic text prompts via ROS topic and OpenCV overlays for real-time visualization."},
+
     {title:"WATonomous Navigation",img:"images/project-watonomous.jpg",desc:"Currently building a navigation project with WATonomous (UW): an in-progress ROS 2 stack for a differential-drive robot that turns LiDAR into a costmap, maintains a lightweight global map, plans paths with A*, and tracks them using Pure-Pursuit to publish cmd_vel. I’m working in C++/Python with Docker and Foxglove, focusing on reliable point-to-point navigation and static-obstacle avoidance in simulation."},
     {title:"SWARM Hackathon",img:"images/project-swarm.jpg",desc:"A fleet of HeRo 2.0 robots were assembled from scratch involving soldering smd components on pcb's, prototyping components, modifying components, and flashing firmware to ESP32's. With the robots communicating wirelessly through wifi, ir, imu, encoder, and drive data is transmitted through ROS2 pipelines. Running on docker, Gazebo was used as a simulation software."},
     {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"UW robotics creates a Mars-Style rover to compete in the annual CIRC challenge. I contributed developing the Realsense ROS2 Camera Streaming. My package streamed colour and depth data using a RealSense wrapper. I implemented custom compression to significantly reduce wireless bandwidth, and created node for rolling resolution selection. Another project involved me modelling the 6-wheel drivetrain, solving both forward and inverse kinematics."},
-    {title:"Autonomous Electric Weeder Robot",img:"images/project-weeder.jpg",desc:"Supporting the development at BHF Robotics, I was able to design (cad), FEA simulate (SolidWorks), prototype, make manufacturing drawings for, source manufacturing for, and install parts for their autonomous electric weeding robot. Additionally I was able to program their autodrive algorithms for their autonomous robot navigation using python in ROS2. Finally, I trained their deep learning AI model for weed/crop detection."},
+    {title:"Autonomous Electric Weeder Robot",img:"images/project-weeder.jpg",desc:"Supporting the development at BHF Robotics, I was able to design (cad), FEA simulate (SolidWorks), prototype, make manufacturing drawings for, source manufacturing for, and install parts for their autonomous electric weeding robot. Additionally, I programmed their autodrive algorithms for autonomous robot navigation in Python/ROS2 and trained a weed/crop detection model."},
     {title:"3-DOF Robotic Arm",img:"images/project-arm.jpg",desc:"This robotics project was designed from scratch in SolidWorks and 3D-printed. Motors were controlled via PWM, internal communication ran on ROS2 on a Raspberry Pi (Ubuntu), and OpenCV processed an overhead camera for token colour detection."},
     {title:"STM32 Custom OS",img:"images/project-stm32.jpg",desc:"During this academic term I am developing a custom operating system on this STM32 Nucleo microcontroller board in C."},
     {title:"PLC Controls",img:"images/project-plc.jpg",desc:"Programmed Siemens PLC using ladder logic to control motors, sensors, & buttons."},

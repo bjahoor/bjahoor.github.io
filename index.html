@@ -51,7 +51,6 @@
     .skills { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin-top: 1rem; max-width: 900px; margin-left: auto; margin-right: auto; }
     .skill { padding: .5rem 1rem; border: 1px solid var(--line); border-radius: 20px; background: rgba(18,19,27,.6); font-size: 1rem; transition: transform .3s ease; }
     .skill:hover { transform: translateY(-3px); }
-    /* Row break helpers to balance rows */
     .break { flex-basis: 100%; height: 0; }
 
     /* Headings */
@@ -203,7 +202,7 @@
     ] },
     { title: "Robotics Engineering (Co-op)", company: "University of Waterloo Robotics Team", date: "June 2025 – August 2025", bullets: [
       "Developed ROS2 RealSense camera streaming with compression and dynamic resolution.",
-      "Modeled 6‑wheel drivetrain; solved forward & inverse kinematics."
+      "Modeled 6-wheel drivetrain; solved forward & inverse kinematics."
     ] },
     { title: "Robotics Engineering (Co-op)", company: "BHF Robotics", date: "May 2025 – June 2025", bullets: [
       "Designed (CAD), FEA simulated, prototyped and drew parts; sourced manufacturing and installed components for autonomous electric weeder.",
@@ -233,6 +232,12 @@
   });
 
   const projects = [
+    /* --- NEW CARD 1: AI Object Detection --- */
+    {title:"AI Object Detection (ROS2 + RealSense)",img:"images/project-ai-object-detection.jpg",desc:"Built a ROS2 package integrating Intel RealSense RGB/Depth streaming with zero-shot OWL-ViT detection (Transformers) on CPU; dynamic text prompts via ROS topic and OpenCV overlays for real-time visualization."},
+
+    /* --- NEW CARD 2: Blank/Placeholder --- */
+    {title:"New Project (Coming Soon)",img:"images/project-new.jpg",desc:"Coming soon. This placeholder card can be replaced with any new project. Update the image and description when ready."},
+
     {title:"UW RoboHub Research",img:"images/project-robohub.jpg",desc:"I am currently contributing to the development of the 7-axis Franka Emika Panda robotic arm. Paired with Xsense Awinda IMUs fixed to a human's body, running on ROS2, this project will have the robot mimic the movements of a human arm."},
     {title:"WATonomous Navigation",img:"images/project-watonomous.jpg",desc:"Currently building a navigation project with WATonomous (UW): an in-progress ROS 2 stack for a differential-drive robot that turns LiDAR into a costmap, maintains a lightweight global map, plans paths with A*, and tracks them using Pure-Pursuit to publish cmd_vel. I’m working in C++/Python with Docker and Foxglove, focusing on reliable point-to-point navigation and static-obstacle avoidance in simulation."},
     {title:"SWARM Hackathon",img:"images/project-swarm.jpg",desc:"A fleet of HeRo 2.0 robots were assembled from scratch involving soldering smd components on pcb's, prototyping components, modifying components, and flashing firmware to ESP32's. With the robots communicating wirelessly through wifi, ir, imu, encoder, and drive data is transmitted through ROS2 pipelines. Running on docker, Gazebo was used as a simulation software."},

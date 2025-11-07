@@ -40,6 +40,22 @@
     .subtitle { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: .6rem 0; }
     .school { font-size: clamp(1.4rem, 3.5vw, 2rem); margin: .2rem 0 1rem; }
 
+    /* Tagline (animated type-in) */
+    .tagline { margin: .4rem auto 0.2rem; font-family: var(--font-display); font-size: clamp(1rem, 2.4vw, 1.25rem); background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .tagline .type {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid currentColor;
+      /* type-in then blink caret */
+      animation: typing 3.2s steps(56, end) .4s both, caret 1s step-end infinite .4s;
+    }
+    @keyframes typing { from { width: 0 } to { width: 56ch } }
+    @keyframes caret { 50% { border-color: transparent } }
+    @media (prefers-reduced-motion: reduce) {
+      .tagline .type { animation: none; border-right: 0; }
+    }
+
     /* Buttons */
     .row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.2rem; }
     .btn { padding: 1rem 1.8rem; border-radius: 14px; text-decoration: none; border: 1px solid var(--line); background: #12131b; color: var(--fg); font-weight: 600; font-size: 1.2rem; transition: transform .3s ease, box-shadow .3s ease; animation: bounce 2s infinite ease-in-out; }
@@ -148,6 +164,9 @@
     <h2 class="subtitle">Mechatronics & Robotics Engineering</h2>
     <h3 class="school">University of Waterloo</h3>
 
+    <!-- New animated tagline (below school, above buttons) -->
+    <p class="tagline"><span class="type">Developing intelligent robotics systems driven by perception and AI</span></p>
+
     <div class="skills" id="skillsRow">
       <!-- Row 1 -->
       <div class="skill">ROS2</div><div class="skill">C++</div><div class="skill">Python</div>
@@ -158,7 +177,7 @@
       <div class="skill">CAD</div><div class="skill">3D Printing</div><div class="skill">Prototyping</div>
       <span class="break"></span>
       <!-- Row 3 -->
-      <div class="skill">Ubuntu</div><div class="skill">GitHub</div>
+      <div class="skill">Ubuntu</div><div class="skill">GitHub</div><div class="skill">AI/ML</div><div class="skill">Vision</div>
       <div class="skill">Electrical Design</div><div class="skill">Mechanical Design</div><div class="skill">Assembly</div>
     </div>
 
@@ -278,7 +297,7 @@
 
     {title:"Autonomous Rover Simulation",img:"images/construct-rover.jpg",desc:"Containerized Mars-rover simulation in Gazebo with multiple ROS2 packages. System monitors temps and issues warnings when thresholds are exceeded. Obstacle sensors partition the surroundings into 6 sectors; a navigation algorithm recommends the next motion and iterates until the goal is reached. An AI model analyzes the rover’s camera feed to detect and classify plants."},
 
-    {title:"AI Object Detection",img:"images/project-ai-object-detection.jpg",desc:"Built a ROS2 package integrating Intel RealSense RGB/Depth streaming with zero-shot OWL-ViT detection (Transformers) on CPU; dynamic text prompts via ROS topic and OpenCV overlays for real-time visualization."},
+    {title:"AI Object Detection",img:"images/project-ai-object-detection.jpg",desc:"Built a ROS2 package integrating Intel RealSense RGB/Depth streaming with zero-shot OWL-VIΤ detection (Transformers) on CPU; dynamic text prompts via ROS topic and OpenCV overlays for real-time visualization."},
 
     {title:"WATonomous Navigation",img:"images/project-watonomous.jpg",desc:"Currently building a navigation project with WATonomous (UW): an in-progress ROS 2 stack for a differential-drive robot that turns LiDAR into a costmap, maintains a lightweight global map, plans paths with A*, and tracks them using Pure-Pursuit to publish cmd_vel. I’m working in C++/Python with Docker and Foxglove, focusing on reliable point-to-point navigation and static-obstacle avoidance in simulation."},
     {title:"SWARM Robots",img:"images/project-swarm.jpg",desc:"A fleet of HeRo 2.0 robots were assembled from scratch involving soldering smd components on pcb's, prototyping components, modifying components, and flashing firmware to ESP32's. With the robots communicating wirelessly through wifi, ir, imu, encoder, and drive data is transmitted through ROS2 pipelines. Running on docker, Gazebo was used as a simulation software."},

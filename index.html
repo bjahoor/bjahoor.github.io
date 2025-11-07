@@ -33,10 +33,6 @@
     nav a { color: var(--fg); opacity: .9; text-decoration: none; font-size: 1.05rem; cursor: pointer; }
     nav a:hover { color: var(--brand); }
 
-    /* Fade-in utility */
-    .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
-
     /* Hero */
     .hero { padding: 4.5rem 1rem 2rem; text-align: center; position: relative; z-index: 2; margin-bottom: 1rem; }
     .hero h1.neon { font-family: var(--font-display); font-size: clamp(4rem, 10vw, 6rem); font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--brand), 0 0 40px var(--brand-2); margin: .5rem 0; }
@@ -44,9 +40,10 @@
     .subtitle { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: .6rem 0; }
     .school { font-size: clamp(1.4rem, 3.5vw, 2rem); margin: .2rem 0 1rem; }
 
-    /* Tagline (randomize-then-settle animation) */
+    /* Tagline (fade-in, no typing) */
     .tagline { margin: .4rem auto 0.2rem; font-family: var(--font-display); font-size: clamp(1rem, 2.4vw, 1.25rem); background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .tagline span { letter-spacing: .02em; }
+    .tagline .type { opacity: 0; transform: translateY(8px); transition: opacity .9s ease, transform .9s ease; }
+    .tagline.visible .type { opacity: 1; transform: none; }
 
     /* Buttons */
     .row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.2rem; }
@@ -60,6 +57,10 @@
     .skill { padding: .5rem 1rem; border: 1px solid var(--line); border-radius: 20px; background: rgba(18,19,27,.6); font-size: 1rem; transition: transform .3s ease; }
     .skill:hover { transform: translateY(-3px); }
     .break { flex-basis: 100%; height: 0; }
+
+    /* Fade-on-scroll utility (apply to all content except title/nav) */
+    .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
 
     /* Headings */
     h2 { font-family: var(--font-display); font-size: 2rem; margin: 3rem 0 1rem; text-align: center; }
@@ -122,7 +123,12 @@
       box-shadow: 0 12px 30px rgba(122,162,255,.6);
       opacity: 1;
     }
-    .fab-github svg { width: 28px; height: 28px; display: block; fill: currentColor; }
+    .fab-github svg {
+      width: 28px;
+      height: 28px;
+      display: block;
+      fill: currentColor;
+    }
   </style>
 </head>
 <body>
@@ -132,7 +138,7 @@
   </video>
   <canvas id="bg3d" aria-hidden="true"></canvas>
 
-  <header class="fade-in">
+  <header>
     <div class="wrap nav-container">
       <a class="brand" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Brandon Jahoor</a>
       <nav>
@@ -151,21 +157,21 @@
     <h2 class="subtitle fade-in">Mechatronics & Robotics Engineering</h2>
     <h3 class="school fade-in">University of Waterloo</h3>
 
-    <!-- Animated tagline (randomized letters settling to phrase) -->
-    <p class="tagline fade-in"><span id="glitchTag"></span></p>
+    <!-- Tagline fades in (no typewriter) -->
+    <p class="tagline fade-in"><span class="type">Developing intelligent robotics systems driven by perception and AI</span></p>
 
     <div class="skills fade-in" id="skillsRow">
       <!-- Row 1 -->
       <div class="skill">ROS2</div><div class="skill">C++</div><div class="skill">Python</div>
-      <div class="skill">AI/ML</div><div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">Foxglove</div>
+      <div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">Foxglove</div><div class="skill">AI/ML</div>
       <span class="break"></span>
       <!-- Row 2 -->
       <div class="skill">Gazebo</div><div class="skill">FPGA</div>
       <div class="skill">CAD</div><div class="skill">3D Printing</div><div class="skill">Prototyping</div><div class="skill">Vision</div>
       <span class="break"></span>
       <!-- Row 3 -->
-      <div class="skill">Ubuntu</div><div class="skill">GitHub</div><div class="skill">PLC</div>
-      <div class="skill">Electrical Design</div><div class="skill">Mechanical Design</div><div class="skill">Assembly</div>
+      <div class="skill">Ubuntu</div><div class="skill">GitHub</div>
+      <div class="skill">Electrical Design</div><div class="skill">Mechanical Design</div><div class="skill">Assembly</div><div class="skill">PLC</div>
     </div>
 
     <div class="row fade-in">
@@ -185,7 +191,7 @@
     <div class="grid" id="projectGrid"></div>
   </section>
 
-  <div id="modal" class="fade-in"></div>
+  <div id="modal"></div>
 
   <footer class="fade-in">© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
@@ -207,6 +213,11 @@
   window.addEventListener('resize', updateScrollPadding);
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(updateScrollPadding); }
 
+  // Scroll to top on reload
+  window.addEventListener('load', () => {
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
+  });
+
   // Smooth scroll nav
   document.querySelectorAll('header nav a[data-target]').forEach(a => {
     a.addEventListener('click', e => {
@@ -219,14 +230,14 @@
     });
   });
 
-  // Fade-in on scroll (for everything with .fade-in)
-  const faders = document.querySelectorAll('.fade-in');
+  /* Fade-in on scroll (apply to everything with .fade-in) */
+  const faders = document.querySelectorAll('.fade-in, .tagline');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.2 });
+
   faders.forEach(f => obs.observe(f));
 
-  // Background video opacity with scroll
   const BASE_OPACITY = 0.35;
   function updateVideoOpacity() {
     const v = document.getElementById('bgVideo');
@@ -308,47 +319,6 @@
     grid.appendChild(c);
   });
   modal.addEventListener('click', () => { modal.style.display = 'none'; });
-
-  // Animated tagline logic (random letters settle left-to-right)
-  const phrase = "Developing intelligent robotics systems driven by perception and AI";
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const tagEl = document.getElementById('glitchTag');
-
-  function randomChar() { return alphabet[Math.floor(Math.random()*alphabet.length)]; }
-
-  function animateTagline(text, stepMs=28, settleEvery=3) {
-    let fixed = 0;      // number of settled characters from the left
-    let frame = 0;
-    const timer = setInterval(() => {
-      frame++;
-      // Build display: settled part + randomizing remainder
-      const settled = text.slice(0, fixed);
-      const restLen = text.length - fixed;
-      let rest = "";
-      for (let i = 0; i < restLen; i++) {
-        const ch = text[fixed + i];
-        rest += (ch === " ") ? " " : randomChar();
-      }
-      tagEl.textContent = settled + rest;
-
-      if (frame % settleEvery === 0) fixed++;      // settle next character periodically
-      if (fixed >= text.length) {                  // finished
-        tagEl.textContent = text;
-        clearInterval(timer);
-      }
-    }, stepMs);
-  }
-
-  // Kick off tagline animation when visible (honors fade-in scroll)
-  const tagObs = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting) {
-        animateTagline(phrase);
-        tagObs.disconnect();
-      }
-    });
-  }, { threshold: 0.6 });
-  tagObs.observe(tagEl);
   </script>
 
   <!-- 3D background (stars only) -->
@@ -384,9 +354,9 @@
   resize();
 
   // Keep same idle spin speed, add smooth mouse offset without resets
-  let targetX = 0, targetY = 0;   // desired offsets from mouse
-  let lerpX = 0, lerpY = 0;       // smoothed offsets
-  let baseY = 0;                  // continuous base spin
+  let targetX = 0, targetY = 0;
+  let lerpX = 0, lerpY = 0;
+  let baseY = 0;
 
   addEventListener('mousemove', e => {
     const x = (e.clientX / innerWidth - 0.5) * 2;
@@ -399,6 +369,7 @@
     requestAnimationFrame(anim);
     lerpX += (targetX - lerpX) * 0.1;
     lerpY += (targetY - lerpY) * 0.1;
+
     baseY += 0.006;
 
     starsGroup.rotation.x = lerpX;

@@ -40,10 +40,12 @@
     .subtitle { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: .6rem 0; }
     .school { font-size: clamp(1.4rem, 3.5vw, 2rem); margin: .2rem 0 1rem; }
 
-    /* Tagline (fade-in, no typing) */
-    .tagline { margin: .4rem auto 0.2rem; font-family: var(--font-display); font-size: clamp(1rem, 2.4vw, 1.25rem); background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .tagline .type { opacity: 0; transform: translateY(8px); transition: opacity .9s ease, transform .9s ease; }
-    .tagline.visible .type { opacity: 1; transform: none; }
+    /* Tagline (fade-in) */
+    .tagline { margin: .4rem auto 0.2rem; font-family: var(--font-display); font-size: clamp(1rem, 2.4vw, 1.25rem); background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0; }
+    .tagline.fade-in.visible { opacity: 1; transition: opacity 1.2s ease .2s; }
+    @media (prefers-reduced-motion: reduce) {
+      .tagline { opacity: 1 !important; transition: none !important; }
+    }
 
     /* Buttons */
     .row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.2rem; }
@@ -57,10 +59,6 @@
     .skill { padding: .5rem 1rem; border: 1px solid var(--line); border-radius: 20px; background: rgba(18,19,27,.6); font-size: 1rem; transition: transform .3s ease; }
     .skill:hover { transform: translateY(-3px); }
     .break { flex-basis: 100%; height: 0; }
-
-    /* Fade-on-scroll utility (apply to all content except title/nav) */
-    .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .7s ease, transform .7s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
 
     /* Headings */
     h2 { font-family: var(--font-display); font-size: 2rem; margin: 3rem 0 1rem; text-align: center; }
@@ -98,6 +96,10 @@
 
     footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; text-align: center; padding: 2rem 1rem 3rem; }
 
+    /* Fade-in on scroll (generic) */
+    .fade-in { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
     /* Floating GitHub button */
     .fab-github {
       position: fixed;
@@ -123,12 +125,7 @@
       box-shadow: 0 12px 30px rgba(122,162,255,.6);
       opacity: 1;
     }
-    .fab-github svg {
-      width: 28px;
-      height: 28px;
-      display: block;
-      fill: currentColor;
-    }
+    .fab-github svg { width: 28px; height: 28px; display: block; fill: currentColor; }
   </style>
 </head>
 <body>
@@ -157,8 +154,8 @@
     <h2 class="subtitle fade-in">Mechatronics & Robotics Engineering</h2>
     <h3 class="school fade-in">University of Waterloo</h3>
 
-    <!-- Tagline fades in (no typewriter) -->
-    <p class="tagline fade-in"><span class="type">Developing intelligent robotics systems driven by perception and AI</span></p>
+    <!-- Fading tagline -->
+    <p class="tagline fade-in">Developing intelligent robotics systems driven by perception and AI</p>
 
     <div class="skills fade-in" id="skillsRow">
       <!-- Row 1 -->
@@ -166,12 +163,12 @@
       <div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">Foxglove</div><div class="skill">AI/ML</div>
       <span class="break"></span>
       <!-- Row 2 -->
-      <div class="skill">Gazebo</div><div class="skill">FPGA</div>
-      <div class="skill">CAD</div><div class="skill">3D Printing</div><div class="skill">Prototyping</div><div class="skill">Vision</div>
+      <div class="skill">Gazebo</div><div class="skill">Vision</div><div class="skill">FPGA</div>
+      <div class="skill">CAD</div><div class="skill">3D Printing</div><div class="skill">Prototyping</div>
       <span class="break"></span>
       <!-- Row 3 -->
-      <div class="skill">Ubuntu</div><div class="skill">GitHub</div>
-      <div class="skill">Electrical Design</div><div class="skill">Mechanical Design</div><div class="skill">Assembly</div><div class="skill">PLC</div>
+      <div class="skill">Ubuntu</div><div class="skill">GitHub</div><div class="skill">PLC</div>
+      <div class="skill">Electrical Design</div><div class="skill">Mechanical Design</div><div class="skill">Assembly</div>
     </div>
 
     <div class="row fade-in">
@@ -218,7 +215,7 @@
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
   });
 
-  // Smooth scroll nav
+  // Smooth scroll nav (unchanged to avoid bugs)
   document.querySelectorAll('header nav a[data-target]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -230,12 +227,11 @@
     });
   });
 
-  /* Fade-in on scroll (apply to everything with .fade-in) */
-  const faders = document.querySelectorAll('.fade-in, .tagline');
+  // IntersectionObserver to fade in elements on scroll (exclude header + main name)
+  const faders = document.querySelectorAll('.fade-in');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
-  }, { threshold: 0.2 });
-
+  }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
   faders.forEach(f => obs.observe(f));
 
   const BASE_OPACITY = 0.35;
@@ -279,20 +275,18 @@
   const exp = document.getElementById('experienceTimeline');
   experiences.forEach(e => {
     const d = document.createElement('div');
-    d.className='item';
+    d.className='item fade-in';
     d.innerHTML = `<div class="item-line"><div>${e.title}</div><span>${e.company}</span></div>
       <div class="desc"><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;
     exp.appendChild(d);
+    // observe each new item
+    obs.observe(d);
   });
 
   const projects = [
-    /* Top row order: 1) RoboHub Research, 2) Autonomous Rover Simulation, 3) AI Object Detection */
     {title:"UW RoboHub Research",img:"images/project-robohub.jpg",desc:"I am currently contributing to the development of the 7-axis Franka Emika Panda robotic arm. Paired with Xsense Awinda IMUs fixed to a human's body, running on ROS2, this project will have the robot mimic the movements of a human arm."},
-
     {title:"Autonomous Rover Simulation",img:"images/construct-rover.jpg",desc:"Containerized Mars-rover simulation in Gazebo with multiple ROS2 packages. System monitors temps and issues warnings when thresholds are exceeded. Obstacle sensors partition the surroundings into 6 sectors; a navigation algorithm recommends the next motion and iterates until the goal is reached. An AI model analyzes the rover’s camera feed to detect and classify plants."},
-
     {title:"AI Object Detection",img:"images/project-ai-object-detection.jpg",desc:"Built a ROS2 package integrating Intel RealSense RGB/Depth streaming with zero-shot OWL-VIΤ detection (Transformers) on CPU; dynamic text prompts via ROS topic and OpenCV overlays for real-time visualization."},
-
     {title:"WATonomous Navigation",img:"images/project-watonomous.jpg",desc:"Currently building a navigation project with WATonomous (UW): an in-progress ROS 2 stack for a differential-drive robot that turns LiDAR into a costmap, maintains a lightweight global map, plans paths with A*, and tracks them using Pure-Pursuit to publish cmd_vel. I’m working in C++/Python with Docker and Foxglove, focusing on reliable point-to-point navigation and static-obstacle avoidance in simulation."},
     {title:"SWARM Robots",img:"images/project-swarm.jpg",desc:"A fleet of HeRo 2.0 robots were assembled from scratch involving soldering smd components on pcb's, prototyping components, modifying components, and flashing firmware to ESP32's. With the robots communicating wirelessly through wifi, ir, imu, encoder, and drive data is transmitted through ROS2 pipelines. Running on docker, Gazebo was used as a simulation software."},
     {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"UW robotics creates a Mars-Style rover to compete in the annual CIRC challenge. I contributed developing the Realsense ROS2 Camera Streaming. My package streamed colour and depth data using a RealSense wrapper. I implemented custom compression to significantly reduce wireless bandwidth, and created node for rolling resolution selection. Another project involved me modelling the 6-wheel drivetrain, solving both forward and inverse kinematics."},
@@ -310,13 +304,14 @@
   const modal = document.getElementById('modal');
   projects.forEach(p => {
     const c = document.createElement('div');
-    c.className = 'card';
+    c.className = 'card fade-in';
     c.innerHTML = `<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3>`;
     c.addEventListener('click', () => {
       modal.innerHTML = `<img src="${p.img}" alt="${p.title}"><h3>${p.title}</h3><p>${p.desc}</p>`;
       modal.style.display = 'flex';
     });
     grid.appendChild(c);
+    obs.observe(c); // observe each card
   });
   modal.addEventListener('click', () => { modal.style.display = 'none'; });
   </script>
@@ -354,9 +349,9 @@
   resize();
 
   // Keep same idle spin speed, add smooth mouse offset without resets
-  let targetX = 0, targetY = 0;
-  let lerpX = 0, lerpY = 0;
-  let baseY = 0;
+  let targetX = 0, targetY = 0;   // desired offsets from mouse
+  let lerpX = 0, lerpY = 0;       // smoothed offsets
+  let baseY = 0;                  // continuous base spin
 
   addEventListener('mousemove', e => {
     const x = (e.clientX / innerWidth - 0.5) * 2;

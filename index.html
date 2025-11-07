@@ -215,15 +215,17 @@
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
   });
 
-  // Smooth scroll nav (unchanged to avoid bugs)
+  // Smooth scroll nav (bug-free: single precise scroll, no header recompute mid-animation)
   document.querySelectorAll('header nav a[data-target]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
-      updateScrollPadding();
       const id = a.dataset.target;
       const el = document.getElementById(id);
       if (!el) return;
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const header = document.querySelector('header');
+      const h = header ? header.getBoundingClientRect().height : 0;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - (h + 2);
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     });
   });
 
@@ -279,7 +281,6 @@
     d.innerHTML = `<div class="item-line"><div>${e.title}</div><span>${e.company}</span></div>
       <div class="desc"><p><em>${e.date}</em></p><ul>${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;
     exp.appendChild(d);
-    // observe each new item
     obs.observe(d);
   });
 
@@ -311,7 +312,7 @@
       modal.style.display = 'flex';
     });
     grid.appendChild(c);
-    obs.observe(c); // observe each card
+    obs.observe(c);
   });
   modal.addEventListener('click', () => { modal.style.display = 'none'; });
   </script>
@@ -349,9 +350,9 @@
   resize();
 
   // Keep same idle spin speed, add smooth mouse offset without resets
-  let targetX = 0, targetY = 0;   // desired offsets from mouse
-  let lerpX = 0, lerpY = 0;       // smoothed offsets
-  let baseY = 0;                  // continuous base spin
+  let targetX = 0, targetY = 0;
+  let lerpX = 0, lerpY = 0;
+  let baseY = 0;
 
   addEventListener('mousemove', e => {
     const x = (e.clientX / innerWidth - 0.5) * 2;

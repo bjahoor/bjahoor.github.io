@@ -40,21 +40,9 @@
     .subtitle { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: .6rem 0; }
     .school { font-size: clamp(1.4rem, 3.5vw, 2rem); margin: .2rem 0 1rem; }
 
-    /* Tagline (animated type-in) */
+    /* Animated tagline (scramble-to-text) */
     .tagline { margin: .4rem auto 0.2rem; font-family: var(--font-display); font-size: clamp(1rem, 2.4vw, 1.25rem); background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .tagline .type {
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid currentColor;
-      /* type-in then blink caret */
-      animation: typing 3.2s steps(56, end) .4s both, caret 1s step-end infinite .4s;
-    }
-    @keyframes typing { from { width: 0 } to { width: 56ch } }
-    @keyframes caret { 50% { border-color: transparent } }
-    @media (prefers-reduced-motion: reduce) {
-      .tagline .type { animation: none; border-right: 0; }
-    }
+    .tagline .scramble { display: inline-block; white-space: nowrap; }
 
     /* Buttons */
     .row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.2rem; }
@@ -68,6 +56,10 @@
     .skill { padding: .5rem 1rem; border: 1px solid var(--line); border-radius: 20px; background: rgba(18,19,27,.6); font-size: 1rem; transition: transform .3s ease; }
     .skill:hover { transform: translateY(-3px); }
     .break { flex-basis: 100%; height: 0; }
+
+    /* Fade-in on scroll (restored) */
+    .fade-in { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
 
     /* Headings */
     h2 { font-family: var(--font-display); font-size: 2rem; margin: 3rem 0 1rem; text-align: center; }
@@ -159,52 +151,52 @@
     </div>
   </header>
 
-  <section class="hero fade-in">
+  <!-- Remove fade on name; add fade-ins to other hero elements -->
+  <section class="hero">
     <h1 class="neon">Brandon Jahoor</h1>
-    <h2 class="subtitle">Mechatronics & Robotics Engineering</h2>
-    <h3 class="school">University of Waterloo</h3>
+    <h2 class="subtitle fade-in">Mechatronics & Robotics Engineering</h2>
+    <h3 class="school fade-in">University of Waterloo</h3>
 
-    <!-- New animated tagline (below school, above buttons) -->
-    <p class="tagline"><span class="type">Developing intelligent robotics systems driven by perception and AI</span></p>
+    <!-- Scramble tagline -->
+    <p class="tagline fade-in"><span id="scramble" class="scramble" aria-live="polite"></span></p>
 
-    <div class="skills" id="skillsRow">
+    <div class="skills fade-in" id="skillsRow">
       <!-- Row 1 -->
       <div class="skill">ROS2</div><div class="skill">C++</div><div class="skill">Python</div>
-      <div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">Foxglove</div>
+      <div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">Foxglove</div><div class="skill">AI/ML</div>
       <span class="break"></span>
       <!-- Row 2 -->
-      <div class="skill">Gazebo</div><div class="skill">PLC</div><div class="skill">FPGA</div>
-      <div class="skill">CAD</div><div class="skill">3D Printing</div><div class="skill">Prototyping</div>
+      <div class="skill">Gazebo</div><div class="skill">FPGA</div>
+      <div class="skill">CAD</div><div class="skill">3D Printing</div><div class="skill">Prototyping</div><div class="skill">Vision</div>
       <span class="break"></span>
       <!-- Row 3 -->
-      <div class="skill">Ubuntu</div><div class="skill">GitHub</div><div class="skill">AI/ML</div><div class="skill">Vision</div>
+      <div class="skill">Ubuntu</div><div class="skill">GitHub</div><div class="skill">PLC</div>
       <div class="skill">Electrical Design</div><div class="skill">Mechanical Design</div><div class="skill">Assembly</div>
     </div>
 
-    <div class="row">
+    <div class="row fade-in">
       <a class="btn primary" href="Brandon%20Jahoor%20Resume.pdf" target="_blank" rel="noopener">See Resume</a>
       <a class="btn" href="https://www.linkedin.com/in/bjahoor/" target="_blank">LinkedIn</a>
       <a class="btn" href="mailto:bjahoor@uwaterloo.ca">Email</a>
     </div>
   </section>
 
-  <section id="experience" class="wrap">
+  <section id="experience" class="wrap fade-in">
     <h2>Experiences</h2>
     <div class="timeline" id="experienceTimeline"></div>
   </section>
 
-  <section id="projects" class="wrap">
+  <section id="projects" class="wrap fade-in">
     <h2>Projects</h2>
     <div class="grid" id="projectGrid"></div>
   </section>
 
   <div id="modal"></div>
 
-  <footer>© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
+  <footer class="fade-in">© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
   <!-- Floating GitHub Button -->
   <a class="fab-github" href="https://github.com/bjahoor" target="_blank" aria-label="GitHub - bjahoor" rel="noopener">
-    <!-- GitHub mark (octocat) -->
     <svg viewBox="0 0 16 16" aria-hidden="true">
       <path d="M8 0C3.58 0 0 3.73 0 8.33c0 3.68 2.39 6.8 5.71 7.9.42.08.58-.19.58-.42 0-.2-.01-.86-.01-1.56-2.08.46-2.52-.91-2.52-.91-.38-.99-.94-1.25-.94-1.25-.77-.54.06-.53.06-.53.85.06 1.3.9 1.3.9.76 1.34 1.99.95 2.47.72.08-.57.3-.95.55-1.17-1.66-.19-3.41-.86-3.41-3.85 0-.85.29-1.55.77-2.1-.08-.19-.34-.96.07-2 0 0 .64-.21 2.1.8a6.83 6.83 0 0 1 3.82 0c1.46-1.01 2.1-.8 2.1-.8.41 1.04.15 1.81.07 2 .48.55.77 1.25.77 2.1 0 3-.1 3.66-3.41 3.85.31.28.59.83.59 1.67 0 1.21-.01 2.18-.01 2.48 0 .23.15.5.58.42C13.61 15.13 16 12.01 16 8.33 16 3.73 12.42 0 8 0Z"/>
     </svg>
@@ -238,6 +230,7 @@
     });
   });
 
+  // Fade-in on scroll (restored)
   const faders = document.querySelectorAll('.fade-in');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
@@ -256,6 +249,7 @@
   addEventListener('scroll', updateVideoOpacity);
   addEventListener('resize', updateVideoOpacity);
 
+  // Experiences (unchanged)
   const experiences = [
     { title: "Robotics Research Assistant", company: "University of Waterloo RoboHub", date: "September 2025 – December 2025", bullets: [
       "Pairing Xsens IMUs with Emika Panda 7-axis robot arm to mimic human arm movement using ROS2."
@@ -291,14 +285,11 @@
     exp.appendChild(d);
   });
 
+  // Projects (unchanged)
   const projects = [
-    /* Top row order: 1) RoboHub Research, 2) Autonomous Rover Simulation, 3) AI Object Detection */
     {title:"UW RoboHub Research",img:"images/project-robohub.jpg",desc:"I am currently contributing to the development of the 7-axis Franka Emika Panda robotic arm. Paired with Xsense Awinda IMUs fixed to a human's body, running on ROS2, this project will have the robot mimic the movements of a human arm."},
-
     {title:"Autonomous Rover Simulation",img:"images/construct-rover.jpg",desc:"Containerized Mars-rover simulation in Gazebo with multiple ROS2 packages. System monitors temps and issues warnings when thresholds are exceeded. Obstacle sensors partition the surroundings into 6 sectors; a navigation algorithm recommends the next motion and iterates until the goal is reached. An AI model analyzes the rover’s camera feed to detect and classify plants."},
-
     {title:"AI Object Detection",img:"images/project-ai-object-detection.jpg",desc:"Built a ROS2 package integrating Intel RealSense RGB/Depth streaming with zero-shot OWL-VIΤ detection (Transformers) on CPU; dynamic text prompts via ROS topic and OpenCV overlays for real-time visualization."},
-
     {title:"WATonomous Navigation",img:"images/project-watonomous.jpg",desc:"Currently building a navigation project with WATonomous (UW): an in-progress ROS 2 stack for a differential-drive robot that turns LiDAR into a costmap, maintains a lightweight global map, plans paths with A*, and tracks them using Pure-Pursuit to publish cmd_vel. I’m working in C++/Python with Docker and Foxglove, focusing on reliable point-to-point navigation and static-obstacle avoidance in simulation."},
     {title:"SWARM Robots",img:"images/project-swarm.jpg",desc:"A fleet of HeRo 2.0 robots were assembled from scratch involving soldering smd components on pcb's, prototyping components, modifying components, and flashing firmware to ESP32's. With the robots communicating wirelessly through wifi, ir, imu, encoder, and drive data is transmitted through ROS2 pipelines. Running on docker, Gazebo was used as a simulation software."},
     {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"UW robotics creates a Mars-Style rover to compete in the annual CIRC challenge. I contributed developing the Realsense ROS2 Camera Streaming. My package streamed colour and depth data using a RealSense wrapper. I implemented custom compression to significantly reduce wireless bandwidth, and created node for rolling resolution selection. Another project involved me modelling the 6-wheel drivetrain, solving both forward and inverse kinematics."},
@@ -325,6 +316,46 @@
     grid.appendChild(c);
   });
   modal.addEventListener('click', () => { modal.style.display = 'none'; });
+
+  /* Scramble animation for tagline */
+  (function(){
+    const el = document.getElementById('scramble');
+    const phrase = 'Developing intelligent robotics systems driven by perception and AI';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=<>?/[]{}';
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced) { el.textContent = phrase; return; }
+
+    let reveal = 0;
+    let frame = 0;
+
+    function tick(){
+      frame++;
+      // randomize all characters after reveal index
+      const out = phrase.split('').map((ch, i) => {
+        if (i < reveal || ch === ' ') return ch;
+        // occasionally keep punctuation stable
+        if (/[,.\-’]/.test(ch)) return ch;
+        // jitter: more random at start, slows as we approach reveal
+        return chars[(Math.random() * chars.length) | 0];
+      }).join('');
+
+      el.textContent = out;
+
+      // every few frames, lock in one more real character
+      if (frame % 3 === 0 && reveal < phrase.length) {
+        reveal++;
+      }
+
+      if (reveal < phrase.length) {
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = phrase; // ensure final exact text
+      }
+    }
+    // small delay to let fade-in kick first
+    setTimeout(() => requestAnimationFrame(tick), 300);
+  })();
   </script>
 
   <!-- 3D background (stars only) -->
@@ -367,17 +398,15 @@
   addEventListener('mousemove', e => {
     const x = (e.clientX / innerWidth - 0.5) * 2;
     const y = -(e.clientY / innerHeight - 0.5) * 2;
-    targetY = x * 0.3;  // same sensitivity as before for Y rotation
-    targetX = y * 0.2;  // same sensitivity as before for X rotation
+    targetY = x * 0.3;
+    targetX = y * 0.2;
   });
 
   function anim() {
     requestAnimationFrame(anim);
-    // smooth toward target to avoid "reset" feeling
     lerpX += (targetX - lerpX) * 0.1;
     lerpY += (targetY - lerpY) * 0.1;
-
-    baseY += 0.006; // same spin speed as original
+    baseY += 0.006;
 
     starsGroup.rotation.x = lerpX;
     starsGroup.rotation.y = baseY + lerpY;

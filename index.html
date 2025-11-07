@@ -45,9 +45,9 @@
     .tagline .type {
       display: inline-block;
       opacity: 0;
-      animation: taglineFade 1.6s ease-out .4s forwards;
+      animation: taglineFade 1.8s ease .3s forwards;
     }
-    @keyframes taglineFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes taglineFade { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
     @media (prefers-reduced-motion: reduce) {
       .tagline .type { animation: none; opacity: 1; }
     }
@@ -160,7 +160,7 @@
     <h2 class="subtitle">Mechatronics & Robotics Engineering</h2>
     <h3 class="school">University of Waterloo</h3>
 
-    <!-- Animated tagline (slow fade-in) -->
+    <!-- Animated tagline (fade-in) -->
     <p class="tagline"><span class="type">Developing intelligent robotics systems driven by perception and AI</span></p>
 
     <div class="skills" id="skillsRow">
@@ -363,21 +363,17 @@
   addEventListener('mousemove', e => {
     const x = (e.clientX / innerWidth - 0.5) * 2;
     const y = -(e.clientY / innerHeight - 0.5) * 2;
-    targetY = x * 0.3;  // same sensitivity as before for Y rotation
-    targetX = y * 0.2;  // same sensitivity as before for X rotation
+    targetY = x * 0.3;
+    targetX = y * 0.2;
   });
 
   function anim() {
     requestAnimationFrame(anim);
-    // smooth toward target to avoid "reset" feeling
     lerpX += (targetX - lerpX) * 0.1;
     lerpY += (targetY - lerpY) * 0.1;
-
-    baseY += 0.006; // same spin speed as original
-
+    baseY += 0.006;
     starsGroup.rotation.x = lerpX;
     starsGroup.rotation.y = baseY + lerpY;
-
     renderer.render(scene, camera);
   }
   anim();

@@ -33,6 +33,10 @@
     nav a { color: var(--fg); opacity: .9; text-decoration: none; font-size: 1.05rem; cursor: pointer; }
     nav a:hover { color: var(--brand); }
 
+    /* Fade-in utility */
+    .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
     /* Hero */
     .hero { padding: 4.5rem 1rem 2rem; text-align: center; position: relative; z-index: 2; margin-bottom: 1rem; }
     .hero h1.neon { font-family: var(--font-display); font-size: clamp(4rem, 10vw, 6rem); font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--brand), 0 0 40px var(--brand-2); margin: .5rem 0; }
@@ -40,9 +44,9 @@
     .subtitle { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: .6rem 0; }
     .school { font-size: clamp(1.4rem, 3.5vw, 2rem); margin: .2rem 0 1rem; }
 
-    /* Animated tagline (scramble-to-text) */
+    /* Tagline (randomize-then-settle animation) */
     .tagline { margin: .4rem auto 0.2rem; font-family: var(--font-display); font-size: clamp(1rem, 2.4vw, 1.25rem); background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .tagline .scramble { display: inline-block; white-space: nowrap; }
+    .tagline span { letter-spacing: .02em; }
 
     /* Buttons */
     .row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.2rem; }
@@ -56,10 +60,6 @@
     .skill { padding: .5rem 1rem; border: 1px solid var(--line); border-radius: 20px; background: rgba(18,19,27,.6); font-size: 1rem; transition: transform .3s ease; }
     .skill:hover { transform: translateY(-3px); }
     .break { flex-basis: 100%; height: 0; }
-
-    /* Fade-in on scroll (restored) */
-    .fade-in { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
 
     /* Headings */
     h2 { font-family: var(--font-display); font-size: 2rem; margin: 3rem 0 1rem; text-align: center; }
@@ -122,12 +122,7 @@
       box-shadow: 0 12px 30px rgba(122,162,255,.6);
       opacity: 1;
     }
-    .fab-github svg {
-      width: 28px;
-      height: 28px;
-      display: block;
-      fill: currentColor;
-    }
+    .fab-github svg { width: 28px; height: 28px; display: block; fill: currentColor; }
   </style>
 </head>
 <body>
@@ -137,7 +132,7 @@
   </video>
   <canvas id="bg3d" aria-hidden="true"></canvas>
 
-  <header>
+  <header class="fade-in">
     <div class="wrap nav-container">
       <a class="brand" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Brandon Jahoor</a>
       <nav>
@@ -151,19 +146,18 @@
     </div>
   </header>
 
-  <!-- Remove fade on name; add fade-ins to other hero elements -->
   <section class="hero">
     <h1 class="neon">Brandon Jahoor</h1>
     <h2 class="subtitle fade-in">Mechatronics & Robotics Engineering</h2>
     <h3 class="school fade-in">University of Waterloo</h3>
 
-    <!-- Scramble tagline -->
-    <p class="tagline fade-in"><span id="scramble" class="scramble" aria-live="polite"></span></p>
+    <!-- Animated tagline (randomized letters settling to phrase) -->
+    <p class="tagline fade-in"><span id="glitchTag"></span></p>
 
     <div class="skills fade-in" id="skillsRow">
       <!-- Row 1 -->
       <div class="skill">ROS2</div><div class="skill">C++</div><div class="skill">Python</div>
-      <div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">Foxglove</div><div class="skill">AI/ML</div>
+      <div class="skill">AI/ML</div><div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">Foxglove</div>
       <span class="break"></span>
       <!-- Row 2 -->
       <div class="skill">Gazebo</div><div class="skill">FPGA</div>
@@ -191,7 +185,7 @@
     <div class="grid" id="projectGrid"></div>
   </section>
 
-  <div id="modal"></div>
+  <div id="modal" class="fade-in"></div>
 
   <footer class="fade-in">© <span id="y"></span> Brandon Jahoor — Built with GitHub Pages.</footer>
 
@@ -213,11 +207,6 @@
   window.addEventListener('resize', updateScrollPadding);
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(updateScrollPadding); }
 
-  // Scroll to top on reload
-  window.addEventListener('load', () => {
-    setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
-  });
-
   // Smooth scroll nav
   document.querySelectorAll('header nav a[data-target]').forEach(a => {
     a.addEventListener('click', e => {
@@ -230,13 +219,14 @@
     });
   });
 
-  // Fade-in on scroll (restored)
+  // Fade-in on scroll (for everything with .fade-in)
   const faders = document.querySelectorAll('.fade-in');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.15 });
   faders.forEach(f => obs.observe(f));
 
+  // Background video opacity with scroll
   const BASE_OPACITY = 0.35;
   function updateVideoOpacity() {
     const v = document.getElementById('bgVideo');
@@ -249,7 +239,6 @@
   addEventListener('scroll', updateVideoOpacity);
   addEventListener('resize', updateVideoOpacity);
 
-  // Experiences (unchanged)
   const experiences = [
     { title: "Robotics Research Assistant", company: "University of Waterloo RoboHub", date: "September 2025 – December 2025", bullets: [
       "Pairing Xsens IMUs with Emika Panda 7-axis robot arm to mimic human arm movement using ROS2."
@@ -285,11 +274,14 @@
     exp.appendChild(d);
   });
 
-  // Projects (unchanged)
   const projects = [
+    /* Top row order: 1) RoboHub Research, 2) Autonomous Rover Simulation, 3) AI Object Detection */
     {title:"UW RoboHub Research",img:"images/project-robohub.jpg",desc:"I am currently contributing to the development of the 7-axis Franka Emika Panda robotic arm. Paired with Xsense Awinda IMUs fixed to a human's body, running on ROS2, this project will have the robot mimic the movements of a human arm."},
+
     {title:"Autonomous Rover Simulation",img:"images/construct-rover.jpg",desc:"Containerized Mars-rover simulation in Gazebo with multiple ROS2 packages. System monitors temps and issues warnings when thresholds are exceeded. Obstacle sensors partition the surroundings into 6 sectors; a navigation algorithm recommends the next motion and iterates until the goal is reached. An AI model analyzes the rover’s camera feed to detect and classify plants."},
+
     {title:"AI Object Detection",img:"images/project-ai-object-detection.jpg",desc:"Built a ROS2 package integrating Intel RealSense RGB/Depth streaming with zero-shot OWL-VIΤ detection (Transformers) on CPU; dynamic text prompts via ROS topic and OpenCV overlays for real-time visualization."},
+
     {title:"WATonomous Navigation",img:"images/project-watonomous.jpg",desc:"Currently building a navigation project with WATonomous (UW): an in-progress ROS 2 stack for a differential-drive robot that turns LiDAR into a costmap, maintains a lightweight global map, plans paths with A*, and tracks them using Pure-Pursuit to publish cmd_vel. I’m working in C++/Python with Docker and Foxglove, focusing on reliable point-to-point navigation and static-obstacle avoidance in simulation."},
     {title:"SWARM Robots",img:"images/project-swarm.jpg",desc:"A fleet of HeRo 2.0 robots were assembled from scratch involving soldering smd components on pcb's, prototyping components, modifying components, and flashing firmware to ESP32's. With the robots communicating wirelessly through wifi, ir, imu, encoder, and drive data is transmitted through ROS2 pipelines. Running on docker, Gazebo was used as a simulation software."},
     {title:"Mars-Style Rover",img:"images/project-rover.jpg",desc:"UW robotics creates a Mars-Style rover to compete in the annual CIRC challenge. I contributed developing the Realsense ROS2 Camera Streaming. My package streamed colour and depth data using a RealSense wrapper. I implemented custom compression to significantly reduce wireless bandwidth, and created node for rolling resolution selection. Another project involved me modelling the 6-wheel drivetrain, solving both forward and inverse kinematics."},
@@ -317,45 +309,46 @@
   });
   modal.addEventListener('click', () => { modal.style.display = 'none'; });
 
-  /* Scramble animation for tagline */
-  (function(){
-    const el = document.getElementById('scramble');
-    const phrase = 'Developing intelligent robotics systems driven by perception and AI';
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=<>?/[]{}';
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Animated tagline logic (random letters settle left-to-right)
+  const phrase = "Developing intelligent robotics systems driven by perception and AI";
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const tagEl = document.getElementById('glitchTag');
 
-    if (prefersReduced) { el.textContent = phrase; return; }
+  function randomChar() { return alphabet[Math.floor(Math.random()*alphabet.length)]; }
 
-    let reveal = 0;
+  function animateTagline(text, stepMs=28, settleEvery=3) {
+    let fixed = 0;      // number of settled characters from the left
     let frame = 0;
-
-    function tick(){
+    const timer = setInterval(() => {
       frame++;
-      // randomize all characters after reveal index
-      const out = phrase.split('').map((ch, i) => {
-        if (i < reveal || ch === ' ') return ch;
-        // occasionally keep punctuation stable
-        if (/[,.\-’]/.test(ch)) return ch;
-        // jitter: more random at start, slows as we approach reveal
-        return chars[(Math.random() * chars.length) | 0];
-      }).join('');
-
-      el.textContent = out;
-
-      // every few frames, lock in one more real character
-      if (frame % 3 === 0 && reveal < phrase.length) {
-        reveal++;
+      // Build display: settled part + randomizing remainder
+      const settled = text.slice(0, fixed);
+      const restLen = text.length - fixed;
+      let rest = "";
+      for (let i = 0; i < restLen; i++) {
+        const ch = text[fixed + i];
+        rest += (ch === " ") ? " " : randomChar();
       }
+      tagEl.textContent = settled + rest;
 
-      if (reveal < phrase.length) {
-        requestAnimationFrame(tick);
-      } else {
-        el.textContent = phrase; // ensure final exact text
+      if (frame % settleEvery === 0) fixed++;      // settle next character periodically
+      if (fixed >= text.length) {                  // finished
+        tagEl.textContent = text;
+        clearInterval(timer);
       }
-    }
-    // small delay to let fade-in kick first
-    setTimeout(() => requestAnimationFrame(tick), 300);
-  })();
+    }, stepMs);
+  }
+
+  // Kick off tagline animation when visible (honors fade-in scroll)
+  const tagObs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        animateTagline(phrase);
+        tagObs.disconnect();
+      }
+    });
+  }, { threshold: 0.6 });
+  tagObs.observe(tagEl);
   </script>
 
   <!-- 3D background (stars only) -->

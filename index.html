@@ -74,12 +74,10 @@
     .card:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(122,162,255,1); border: 2px solid var(--brand); }
     .card h3 { position: absolute; bottom: 0; left: 0; right: 0; margin: 0; padding: .5rem 1rem; background: rgba(0,0,0,.55); font-size: 1rem; }
 
-    #modal { position: fixed; inset: 0; background: rgba(0,0,0,.92); display: none; align-items: center; justify-content: center; z-index: 20; flex-direction: column; text-align: center; padding: 1rem; overflow: auto; }
+    #modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.92); display: none; align-items: center; justify-content: center; z-index: 20; flex-direction: column; text-align: center; padding: 1rem; overflow: auto; }
     #modal img { max-width: 90%; max-height: 50vh; border-radius: var(--round); box-shadow: 0 0 40px rgba(122,162,255,0.8); object-fit: contain; margin-top: 1rem; }
     #modal h3 { margin: 1rem 0 .5rem; font-size: 1.6rem; font-family: var(--font-display); }
     #modal p { max-width: 1000px; color: var(--muted); line-height: 1.5; }
-
-    footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; text-align: center; padding: 2rem 1rem 3rem; }
   </style>
 </head>
 <body>
@@ -88,7 +86,6 @@
   <h1 class="neon">Brandon Jahoor</h1>
   <h2 class="subtitle">Mechatronics &amp; Robotics Engineering</h2>
   <h3 class="school">University of Waterloo</h3>
-
   <p class="tagline"><span class="type">Developing intelligent robotics systems driven by perception and AI</span></p>
 
   <div class="skills">
@@ -98,6 +95,12 @@
     <span class="break"></span>
     <div class="skill">ROS2</div><div class="skill">C++</div><div class="skill">Python</div>
     <div class="skill">MATLAB</div><div class="skill">Docker</div><div class="skill">Foxglove</div><div class="skill">AI/ML</div>
+    <span class="break"></span>
+    <div class="skill">Gazebo</div><div class="skill">FPGA</div>
+    <div class="skill">CAD</div><div class="skill">3D Printing</div><div class="skill">Prototyping</div><div class="skill">Vision</div>
+    <span class="break"></span>
+    <div class="skill">Ubuntu</div><div class="skill">GitHub</div><div class="skill">PLC</div>
+    <div class="skill">Electrical Design</div><div class="skill">Mechanical Design</div><div class="skill">Assembly</div>
   </div>
 </section>
 
@@ -115,15 +118,12 @@ const projects = [
     img:"images/cube_play.gif",
     desc:"I setup Nvidia's (CUDA enabled) Isaac Lab built on (physics accurate) Isaac Sim to train Reinforcement-Learning (RL) control policies for Franka & SO101 arms. Policy stability and sim-to-real transfer readiness was then validated"
   },
-  {
-    title:"UW RoboHub Research",
-    img:"images/project-robohub.jpg",
-    desc:"I am currently contributing to the development of the 7-axis Franka Emika Panda robotic arm..."
-  }
+  {title:"UW RoboHub Research",img:"images/project-robohub.jpg",desc:"I am currently contributing to the development of the 7-axis Franka Emika Panda robotic arm..."},
 ];
 
 const grid = document.getElementById('projectGrid');
 const modal = document.getElementById('modal');
+
 projects.forEach(p => {
   const c = document.createElement('div');
   c.className = 'card';

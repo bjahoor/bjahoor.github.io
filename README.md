@@ -7,6 +7,23 @@ Built with [Astro](https://astro.build) + Tailwind, deployed to GitHub Pages by
 GitHub Actions. Ships no JavaScript except one React island for the project
 filter.
 
+## Colour
+
+The palette is the University of Waterloo **Faculty of Engineering purple**, per the
+official [Waterloo brand guidelines](https://uwaterloo.ca/brand/how-express-our-brand/colour).
+Tokens live in [`src/styles/global.css`](src/styles/global.css).
+
+| Level | Hex | Used for | Contrast on `#08090b` |
+|---|---|---|---|
+| 1 | `#C2A8F0` | links, accent text, focus rings | 9.63 |
+| 2 | `#A05DCB` | hover states | 4.67 |
+| 3 | `#865DA4` | borders, muted accents | 3.90 |
+| 4 | `#5D0096` | solid button fills, **white text only** | 1.81 |
+
+Waterloo designates level 4 the digital primary, and it is — as a *fill*. Against this
+near-black background it fails as text at 1.81:1, so it is only ever used behind white
+(11.02:1). Level 1 carries every piece of accent text instead.
+
 ## Develop
 
 ```bash

@@ -15,8 +15,16 @@
   --color-fg-muted: #9198a3;
   --color-fg-dim: #646b76;
 
-  --color-accent: #5b9dff;
-  --color-accent-dim: #2c5fa8;
+  /* University of Waterloo — Faculty of Engineering purple.
+     https://uwaterloo.ca/brand/how-express-our-brand/colour
+
+     Waterloo names L4 the digital primary, and it is — as a *fill*. On this
+     near-black background it scores 1.81:1 as text, so it is used only behind
+     white (11.02:1). L1 carries every piece of accent text at 9.63:1. */
+  --color-accent: #c2a8f0;        /* L1 — links, accent text, focus rings */
+  --color-accent-hover: #a05dcb;  /* L2 — hover states */
+  --color-accent-dim: #865da4;    /* L3 — borders, muted accents */
+  --color-accent-solid: #5d0096;  /* L4 — solid button fills, white text only */
 
   /* --font-sans and --font-mono are injected by Astro's Fonts API
      (see `fonts` in astro.config.mjs), so they are not redeclared here. */

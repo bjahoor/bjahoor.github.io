@@ -70,7 +70,7 @@ The resume is LaTeX, not a Word export. Source of truth is
 cd resume && latexmk -pdf resume.tex
 ```
 
-CI compiles it on every deploy and copies the result to `/resume.pdf`, so the
+CI compiles it on every deploy and copies the result to `/brandon_jahoor_resume.pdf`, so the
 published PDF can never drift from the source. `resume.yml` additionally fails
 the build if the resume stops being exactly one page.
 

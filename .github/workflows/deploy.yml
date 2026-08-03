@@ -25,7 +25,7 @@ jobs:
       # The resume is compiled here rather than committed by a separate
       # workflow. A push made with GITHUB_TOKEN does not trigger other
       # workflows, so a commit-back job would deploy a stale PDF. Building it
-      # inline means /resume.pdf can never drift from resume/resume.tex.
+      # inline means the published PDF can never drift from resume/resume.tex.
       - name: Compile resume
         uses: xu-cheng/latex-action@v4
         with:
@@ -34,7 +34,11 @@ jobs:
           latexmk_use_xelatex: false
 
       - name: Publish resume into the site
-        run: cp resume/resume.pdf public/resume.pdf
+        run: |
+          cp resume/resume.pdf public/brandon_jahoor_resume.pdf
+          # Compatibility copy: the GitHub profile README's resume badge links
+          # to the old /resume.pdf path and lives in a different repo.
+          cp resume/resume.pdf public/resume.pdf
 
       - name: Build site
         uses: withastro/action@v6

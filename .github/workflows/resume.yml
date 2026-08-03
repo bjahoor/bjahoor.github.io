@@ -1,0 +1,46 @@
+name: Resume
+
+# Fast feedback on the LaTeX alone: does it still compile, and is it still one
+# page? Deploying the PDF to the site is handled by deploy.yml.
+on:
+  push:
+    paths:
+      - "resume/**"
+      - ".github/workflows/resume.yml"
+  pull_request:
+    paths:
+      - "resume/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Compile resume
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: resume.tex
+          working_directory: resume
+
+      - name: Check it is still one page
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+          pages=$(pdfinfo resume/resume.pdf | awk '/^Pages:/ {print $2}')
+          echo "Resume is $pages page(s)."
+          if [ "$pages" -ne 1 ]; then
+            echo "::error::Resume must be exactly 1 page, got $pages."
+            exit 1
+          fi
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v7
+        with:
+          name: resume
+          path: resume/resume.pdf
+          if-no-files-found: error

@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deploys at once; let a newer push supersede an in-flight one.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # The resume is compiled here rather than committed by a separate
+      # workflow. A push made with GITHUB_TOKEN does not trigger other
+      # workflows, so a commit-back job would deploy a stale PDF. Building it
+      # inline means /resume.pdf can never drift from resume/resume.tex.
+      - name: Compile resume
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: resume.tex
+          working_directory: resume
+          latexmk_use_xelatex: false
+
+      - name: Publish resume into the site
+        run: cp resume/resume.pdf public/resume.pdf
+
+      - name: Build site
+        uses: withastro/action@v6
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

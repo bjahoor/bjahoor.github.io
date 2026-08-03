@@ -1,0 +1,130 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../layouts/Base.astro";
+
+const all = (await getCollection("experience")).sort(
+  (a, b) => b.data.order - a.data.order,
+);
+
+const robotics = all.filter((e) => e.data.robotics);
+const other = all.filter((e) => !e.data.robotics);
+
+// Render each body once up front — Astro components can't await inside a map.
+const rendered = new Map(
+  await Promise.all(
+    all.map(async (e) => [e.id, (await render(e)).Content] as const),
+  ),
+);
+---
+
+<Base
+  title="Experience"
+  description="Brandon Jahoor's engineering experience — robotics co-ops at Thalassa Robotics, UW RoboHub, UW Robotics Team, and BHF Robotics."
+>
+  <section class="mx-auto max-w-3xl px-6 pt-20 pb-12">
+    <h1 class="text-4xl font-bold tracking-tight text-fg sm:text-5xl">
+      Experience
+    </h1>
+    <p class="mt-5 text-lg leading-relaxed text-fg-muted">
+      Six co-op terms and a research assistantship, plus three years mentoring
+      youth robotics.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6">
+    <h2
+      class="border-b border-line pb-4 font-mono text-sm tracking-widest text-fg-dim uppercase"
+    >
+      Robotics
+    </h2>
+
+    <div class="divide-y divide-line">
+      {
+        robotics.map((e) => {
+          const Body = rendered.get(e.id)!;
+          return (
+            <article class="py-10">
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <h3 class="text-xl font-semibold text-fg">{e.data.org}</h3>
+                <span class="shrink-0 font-mono text-sm text-fg-dim">
+                  {e.data.start} – {e.data.end}
+                </span>
+              </div>
+              <p class="mt-1 text-fg-muted">
+                {e.data.role}
+                {e.data.location && (
+                  <span class="text-fg-dim"> · {e.data.location}</span>
+                )}
+              </p>
+
+              <div class="exp-body mt-5 space-y-4 leading-relaxed text-fg-muted">
+                <Body />
+              </div>
+
+              {e.data.bullets.length > 0 && (
+                <ul class="mt-5 space-y-2 border-l border-line pl-5">
+                  {e.data.bullets.map((b) => (
+                    <li class="text-sm leading-relaxed text-fg-muted">{b}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto mt-20 max-w-3xl px-6">
+    <h2
+      class="border-b border-line pb-4 font-mono text-sm tracking-widest text-fg-dim uppercase"
+    >
+      Earlier engineering
+    </h2>
+
+    <div class="divide-y divide-line">
+      {
+        other.map((e) => {
+          const Body = rendered.get(e.id)!;
+          return (
+            <article class="py-8">
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <h3 class="font-semibold text-fg">{e.data.org}</h3>
+                <span class="shrink-0 font-mono text-sm text-fg-dim">
+                  {e.data.start} – {e.data.end}
+                </span>
+              </div>
+              <p class="mt-1 text-sm text-fg-muted">{e.data.role}</p>
+              <div class="exp-body mt-4 space-y-3 text-sm leading-relaxed text-fg-muted">
+                <Body />
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto mt-20 max-w-3xl px-6">
+    <a
+      href="/resume.pdf"
+      target="_blank"
+      rel="noopener"
+      class="inline-block rounded-md border border-line px-5 py-2.5 text-sm font-medium text-fg transition-colors hover:border-accent hover:text-accent"
+    >
+      Download resume (PDF)
+    </a>
+  </section>
+</Base>
+
+<style is:global>
+  .exp-body strong {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+  .exp-body a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

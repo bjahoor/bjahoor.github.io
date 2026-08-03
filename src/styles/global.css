@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Engineering-minimal, dark. One accent, a real type scale, generous space.
+   The media is the visual interest — the chrome stays out of its way.
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-bg: #08090b;
+  --color-surface: #0e1013;
+  --color-surface-2: #14171c;
+  --color-line: #1e2228;
+  --color-line-bright: #2b313a;
+
+  --color-fg: #e8eaed;
+  --color-fg-muted: #9198a3;
+  --color-fg-dim: #646b76;
+
+  --color-accent: #5b9dff;
+  --color-accent-dim: #2c5fa8;
+
+  /* --font-sans and --font-mono are injected by Astro's Fonts API
+     (see `fonts` in astro.config.mjs), so they are not redeclared here. */
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tabular, slightly tightened headings — reads engineered, not decorative */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #06070a;
+}
+
+/* Focus ring — visible, accent-colored, never removed */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Cross-page morph targets for <ClientRouter /> */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import ProjectFilter, {
+  type FilterItem,
+} from "../../components/ProjectFilter.tsx";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => b.data.weight - a.data.weight,
+);
+
+// Only the fields the island actually renders cross the server/client boundary.
+const items: FilterItem[] = projects.map((p) => ({
+  id: p.id,
+  title: p.data.title,
+  blurb: p.data.blurb,
+  year: p.data.year,
+  tags: p.data.tags,
+  stack: p.data.stack,
+  cover: p.data.cover,
+}));
+---
+
+<Base
+  title="Work"
+  description="Robotics projects by Brandon Jahoor — simulation, perception, manipulation, autonomy, and hardware."
+>
+  <section class="mx-auto max-w-5xl px-6 pt-20 pb-8">
+    <h1 class="text-4xl font-bold tracking-tight text-fg sm:text-5xl">Work</h1>
+    <p class="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
+      {projects.length} projects — robot arms, rovers, hexapods, swarms, and the
+      perception and control stacks that drive them.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6">
+    <ProjectFilter projects={items} client:idle />
+  </section>
+</Base>

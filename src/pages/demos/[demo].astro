@@ -1,0 +1,37 @@
+---
+import Base from "../../layouts/Base.astro";
+import { DEMOS, type DemoSlug } from "../../data/demos";
+
+export function getStaticPaths() {
+  return Object.keys(DEMOS).map((demo) => ({ params: { demo } }));
+}
+
+const { demo } = Astro.params;
+const entry = DEMOS[demo as DemoSlug];
+---
+
+<Base title={`${entry.title} — demo`} description={`Demo video: ${entry.title}`}>
+  <section class="mx-auto max-w-4xl px-6 pt-16">
+    <a
+      href={`/projects/${entry.project}`}
+      class="font-mono text-sm text-fg-muted transition-colors hover:text-accent"
+    >
+      ← {entry.title}
+    </a>
+
+    <h1 class="mt-8 text-3xl font-bold tracking-tight text-fg">
+      {entry.title} <span class="text-fg-dim">— demo</span>
+    </h1>
+
+    <video
+      controls
+      playsinline
+      preload="metadata"
+      class="mt-8 w-full rounded-lg border border-line bg-black"
+    >
+      <source src={entry.src} type="video/mp4" />
+      Your browser does not support the video tag.
+      <a href={entry.src}>Download the video instead.</a>
+    </video>
+  </section>
+</Base>

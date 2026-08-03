@@ -1,0 +1,106 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const projects = await getCollection("projects");
+const featured = projects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => b.data.weight - a.data.weight);
+
+const experience = (await getCollection("experience"))
+  .filter((e) => e.data.robotics)
+  .sort((a, b) => b.data.order - a.data.order)
+  .slice(0, 4);
+---
+
+<Base title="Brandon Jahoor — Robotics Engineer" bareTitle>
+  <!-- Hero -->
+  <section class="mx-auto max-w-5xl px-6 pt-24 pb-20 sm:pt-32">
+    <p class="mb-6 font-mono text-sm text-accent">
+      Mechatronics Engineering · University of Waterloo
+    </p>
+
+    <h1
+      class="max-w-3xl text-4xl leading-[1.1] font-bold tracking-tight text-fg sm:text-6xl"
+    >
+      I build robots that perceive, decide, and act.
+    </h1>
+
+    <p class="mt-8 max-w-2xl text-lg leading-relaxed text-fg-muted">
+      Four robotics co-ops across simulation, manipulation, and autonomy — from
+      high-fidelity Isaac Sim tooling at <span class="text-fg"
+        >Thalassa Robotics</span
+      > to human-motion retargeting on a Franka Panda at <span class="text-fg"
+        >UW RoboHub</span
+      >. Most of what follows runs on real hardware.
+    </p>
+
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a
+        href="/projects"
+        class="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+      >
+        See the work
+      </a>
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        rel="noopener"
+        class="rounded-md border border-line px-5 py-2.5 text-sm font-medium text-fg transition-colors hover:border-line-bright"
+      >
+        Resume
+      </a>
+    </div>
+  </section>
+
+  <!-- Selected work -->
+  <section class="mx-auto max-w-5xl px-6">
+    <div class="mb-8 flex items-baseline justify-between border-b border-line pb-4">
+      <h2 class="font-mono text-sm tracking-widest text-fg-dim uppercase">
+        Selected work
+      </h2>
+      <a
+        href="/projects"
+        class="font-mono text-sm text-fg-muted transition-colors hover:text-accent"
+      >
+        all {projects.length} →
+      </a>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      {featured.map((p) => <ProjectCard project={p} large />)}
+    </div>
+  </section>
+
+  <!-- Experience preview -->
+  <section class="mx-auto max-w-5xl px-6 pt-24">
+    <div class="mb-8 flex items-baseline justify-between border-b border-line pb-4">
+      <h2 class="font-mono text-sm tracking-widest text-fg-dim uppercase">
+        Experience
+      </h2>
+      <a
+        href="/experience"
+        class="font-mono text-sm text-fg-muted transition-colors hover:text-accent"
+      >
+        full history →
+      </a>
+    </div>
+
+    <ul class="divide-y divide-line">
+      {
+        experience.map((e) => (
+          <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+            <div>
+              <span class="font-medium text-fg">{e.data.org}</span>
+              <span class="text-fg-muted"> — {e.data.role}</span>
+            </div>
+            <span class="shrink-0 font-mono text-sm text-fg-dim">
+              {e.data.start} – {e.data.end}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

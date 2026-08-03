@@ -1,7 +1,8 @@
 %-------------------------------------------------------------------------------
 % Brandon Jahoor — Resume
-% Layout: original Word design, rebuilt on Jake Gutierrez's macro structure
-% Build:  latexmk -pdf resume.tex     (or: pdflatex resume.tex)
+% Built on Jake Gutierrez's resume template (MIT):
+%   https://github.com/jakegut/resume
+% Build: latexmk -pdf resume.tex
 %-------------------------------------------------------------------------------
 \documentclass[letterpaper,10pt]{article}
 
@@ -16,222 +17,230 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\usepackage{xcolor}
 \input{glyphtounicode}
 
 \pagestyle{fancy}
 \fancyhf{}
+\fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Margins — Jake's tight geometry
+% Jake's margins
 \addtolength{\oddsidemargin}{-0.6in}
 \addtolength{\evensidemargin}{-0.6in}
 \addtolength{\textwidth}{1.2in}
-\addtolength{\topmargin}{-.7in}
-\addtolength{\textheight}{1.4in}
+\addtolength{\topmargin}{-.9in}
+\addtolength{\textheight}{1.55in}
 
 \urlstyle{same}
 \raggedbottom
 \raggedright
 \setlength{\tabcolsep}{0in}
 
-%-------------------------------------------------------------------------------
-% Palette — carried over from the original design
-%-------------------------------------------------------------------------------
-\definecolor{namecolor}{HTML}{4B2E83}   % deep violet — the name
-\definecolor{accent}{HTML}{1F4E9C}      % navy blue — bullet body text
-\definecolor{tagcolor}{HTML}{2B6CB0}    % brighter blue — tagline
-
-% Section headings: small-caps-ish bold with a full-width rule beneath
+% Section headings: small caps, full-width rule beneath
 \titleformat{\section}{
-  \vspace{-6pt}\scshape\Large\bfseries
-}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
-% Ensure PDF is machine-readable (ATS keyword extraction)
+% Machine-readable PDF so ATS keyword extraction works
 \pdfgentounicode=1
 
 %-------------------------------------------------------------------------------
-% Macros
+% Jake's macros
 %-------------------------------------------------------------------------------
-% Colored bullet body, matching the original's blue bullets
 \newcommand{\resumeItem}[1]{
-  \item\small{\color{accent}#1 \vspace{-2pt}}
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
 }
 
-% Role – Organization – Location ............ (Dates)
-\newcommand{\resumeSubheading}[3]{
-  \vspace{-1pt}\item
+% {Role}{Dates}{Organization}{Location}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{\textit{#1}} \textit{-- #2} & \textit{(#3)} \\
-    \end{tabular*}\vspace{-6pt}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
 }
 
-% Project Name – Tech stack (italic). Plain line, not a tabular, so long
-% tech-stack lists wrap instead of running off the page.
-\newcommand{\resumeProject}[2]{
-  \vspace{-1pt}\item
-    \small\textbf{#1} \textit{-- #2}
-    \vspace{-4pt}
-}
-
-% Skills line: bold category, then the list
-\newcommand{\resumeSkill}[2]{
-  \item\small{\textbf{#1:} #2 \vspace{-3pt}}
+% {Project name \emph{--} stack}{Right-hand note}
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
 }
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, itemsep=0pt, parsep=0pt]}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[itemsep=0pt, parsep=0pt, topsep=0pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
 %===============================================================================
 \begin{document}
 
 %---------- HEADING ----------
-\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  {\color{namecolor}\Huge \textbf{Brandon Jahoor}} &
-  \small \href{mailto:bjahoor@uwaterloo.ca}{bjahoor@uwaterloo.ca} \\
-  &
-  \small \href{https://linkedin.com/in/bjahoor}{linkedin.com/in/bjahoor} \\
-\end{tabular*}
-
-\vspace{2pt}
 \begin{center}
-  \small\textbf{\textit{Candidate for BASc in Mechatronics Engineering Honours, Minor in Computer
-  Engineering, University of Waterloo}} \\
-  \vspace{2pt}
-  {\color{tagcolor}\textbf{Developing intelligent robotics systems driven by perception and AI!}}
+    \textbf{\Huge \scshape Brandon Jahoor} \\ \vspace{3pt}
+    \small
+    \href{mailto:bjahoor@uwaterloo.ca}{\underline{bjahoor@uwaterloo.ca}} $|$
+    \href{https://linkedin.com/in/bjahoor}{\underline{linkedin.com/in/bjahoor}} $|$
+    \href{https://bjahoor.github.io}{\underline{bjahoor.github.io}} \\ \vspace{3pt}
+    \textit{\small Developing intelligent robotics systems driven by perception and AI}
 \end{center}
-\vspace{-6pt}
 
-%---------- SKILLS ----------
-\section{Skills}
-\resumeSubHeadingListStart
-  \resumeSkill{Robotics \& Perception}
-    {ROS2, Gazebo, Foxglove, OpenCV, kinematics/controls, RealSense, Nvidia Jetson, RPi}
-  \resumeSkill{Software \& Tools}
-    {Python, C++, LeRobot, VLA, Linux/Ubuntu, Isaac Sim \& Lab, Docker, Agentic harnesses}
-  \resumeSkill{Design \& Prototyping}
-    {SolidWorks (CAD), 3D-printing, electrically/mechanically hands-on}
-\resumeSubHeadingListEnd
+%---------- EDUCATION ----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of Waterloo}{Ontario, Canada}
+      {Candidate for BASc in Mechatronics Engineering Honours, Minor in Computer Engineering}{}
+  \resumeSubHeadingListEnd
+
+%---------- TECHNICAL SKILLS ----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Robotics \& Perception}{: ROS2, Gazebo, Foxglove, OpenCV, kinematics/controls,
+       RealSense, Nvidia Jetson, RPi} \\
+     \textbf{Software \& Tools}{: Python, C++, LeRobot, VLA, Linux/Ubuntu, Isaac Sim \& Lab,
+       Docker, Agentic harnesses} \\
+     \textbf{Design \& Prototyping}{: SolidWorks (CAD), 3D-printing, electrically/mechanically
+       hands-on}
+    }}
+ \end{itemize}
 
 %---------- EXPERIENCE ----------
-\section{Experiences}
-\resumeSubHeadingListStart
+\section{Experience}
+  \resumeSubHeadingListStart
 
-  \resumeSubheading
-    {Robotics Engineering}{Thalassa Robotics -- California}{Jan 2026 -- April 2026}
-    \resumeItemListStart
-      \resumeItem{Created high fidelity internal simulation tool using \textbf{Isaac Sim} by
-        integrating \textbf{controls, optics, hydrodynamics}, and maximising user friendliness
-        and mimic real controls and physics beyond what Isaac Sim provides out of the box.}
-    \resumeItemListEnd
+    \resumeSubheading
+      {Robotics Engineering}{Jan 2026 -- April 2026}
+      {Thalassa Robotics}{California}
+      \resumeItemListStart
+        \resumeItem{Created high fidelity internal simulation tool using \textbf{Isaac Sim} by
+          integrating \textbf{controls, optics, hydrodynamics}, and maximising user friendliness
+          and mimic real controls and physics beyond what Isaac Sim provides out of the box.}
+      \resumeItemListEnd
 
-  \resumeSubheading
-    {Robotics Research Assistant}{University of Waterloo RoboHub -- Ontario}{Sept 2025 -- Dec 2025}
-    \resumeItemListStart
-      \resumeItem{Syncing \textbf{Xsens Awinda IMUs} with \textbf{7-axis robotic arm} (Emika
-        Panda's) in to \textbf{mirror human arm motion}.}
-      \resumeItem{Done in a ROS2 environment on Linux/Ubuntu, using \textbf{Docker} for
-        replicability.}
-    \resumeItemListEnd
+    \resumeSubheading
+      {Robotics Research Assistant}{Sept 2025 -- Dec 2025}
+      {University of Waterloo RoboHub}{Ontario}
+      \resumeItemListStart
+        \resumeItem{Syncing \textbf{Xsens Awinda IMUs} with \textbf{7-axis robotic arm}
+          (Emika Panda's) in to \textbf{mirror human arm motion}.}
+        \resumeItem{Done in a ROS2 environment on Linux/Ubuntu, using \textbf{Docker} for
+          replicability.}
+      \resumeItemListEnd
 
-  \resumeSubheading
-    {Robotics Engineering}{University of Waterloo Robotics Team (Co-op) -- Ontario}{June 2025 -- Aug 2025}
-    \resumeItemListStart
-      \resumeItem{Developed \textbf{ROS2 Realsense} RGB \& depth stream with compression and
-        dynamic resolution selection; added \textbf{OpenCV} processing.}
-      \resumeItem{Modelled/solved 6-wheel rocker-bogie drivetrain \textbf{forward \& inverse
-        kinematics} for mars rover running on \textbf{Nvidia Jetson}.}
-    \resumeItemListEnd
+    \resumeSubheading
+      {Robotics Engineering (Co-op)}{June 2025 -- Aug 2025}
+      {University of Waterloo Robotics Team}{Ontario}
+      \resumeItemListStart
+        \resumeItem{Developed \textbf{ROS2 Realsense} RGB \& depth stream with compression and
+          dynamic resolution selection; added \textbf{OpenCV} processing.}
+        \resumeItem{Modelled/solved 6-wheel rocker-bogie drivetrain \textbf{forward \& inverse
+          kinematics} for mars rover running on \textbf{Nvidia Jetson}.}
+      \resumeItemListEnd
 
-  \resumeSubheading
-    {Robotics Engineering}{BHF Robotics (Co-op) -- Ontario}{May 2025 -- June 2025}
-    \resumeItemListStart
-      \resumeItem{Implemented \textbf{ROS2 autodrive} routine; trained \textbf{deep learning AI
-        model} for autonomous farming robot's weed/crop detection.}
-    \resumeItemListEnd
+    \resumeSubheading
+      {Robotics Engineering (Co-op)}{May 2025 -- June 2025}
+      {BHF Robotics}{Ontario}
+      \resumeItemListStart
+        \resumeItem{Implemented \textbf{ROS2 autodrive} routine; trained \textbf{deep learning AI
+          model} for autonomous farming robot's weed/crop detection.}
+      \resumeItemListEnd
 
-\resumeSubHeadingListEnd
+  \resumeSubHeadingListEnd
 
 %---------- PROJECTS ----------
 \section{Projects}
-\resumeSubHeadingListStart
+    \resumeSubHeadingListStart
 
-  \resumeProject{VLA Finetuning}{VLA, LeRobot, Nvidia Jetson, SO-ARM101, SmolVLA}
-    \resumeItemListStart
-      \resumeItem{Fine tuning SmolVLA to pick and place coloured blocks using LeRobot.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{VLA Finetuning} $|$ \emph{VLA, LeRobot, Nvidia Jetson, SO-ARM101, SmolVLA}}{}
+        \resumeItemListStart
+          \resumeItem{Fine tuning SmolVLA to pick and place coloured blocks using LeRobot.}
+        \resumeItemListEnd
 
-  \resumeProject{Chess Robot}{CAD, SO-ARM101, Controls, UX}
-    \resumeItemListStart
-      \resumeItem{Designed and prototyped custom robotic arm with UI and API capable of playing
-        chess. Used LeRobot and Placo kin.\ solvers.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{Chess Robot} $|$ \emph{CAD, SO-ARM101, Controls, UX}}{}
+        \resumeItemListStart
+          \resumeItem{Designed and prototyped custom robotic arm with UI and API capable of
+            playing chess. Used LeRobot and Placo kin.\ solvers.}
+        \resumeItemListEnd
 
-  \resumeProject{AI Roommate}{Nvidia Jetson, Ollama (Qwen2.5-0.5B) LLM, Ultralytics YOLOv8s Detection, REST API (FastAPI)}
-    \resumeItemListStart
-      \resumeItem{Developed scene-aware ``AI Roommate'' delivering real-time detection,
-        assistance, \& interaction from a functional dashboard.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{AI Roommate} $|$ \emph{Nvidia Jetson, Ollama (Qwen2.5-0.5B) LLM, Ultralytics
+          YOLOv8s Detection, REST API (FastAPI)}}{}
+        \resumeItemListStart
+          \resumeItem{Developed scene-aware ``AI Roommate'' delivering real-time detection,
+            assistance, \& interaction from a functional dashboard.}
+        \resumeItemListEnd
 
-  \resumeProject{Robot Arm Simulation}{Nvidia Isaac Sim \& Isaac Lab, AI Policy Training, Reinforcement Learning}
-    \resumeItemListStart
-      \resumeItem{Setup Isaac Sim \& trained RL policies for Franka \& SO101 arms in (CUDA
-        enabled) Isaac Lab; validated sim-to-real transfer readiness.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{Robot Arm Simulation} $|$ \emph{Nvidia Isaac Sim \& Isaac Lab, AI Policy
+          Training, Reinforcement Learning}}{}
+        \resumeItemListStart
+          \resumeItem{Setup Isaac Sim \& trained RL policies for Franka \& SO101 arms in
+            (CUDA enabled) Isaac Lab; validated sim-to-real transfer readiness.}
+        \resumeItemListEnd
 
-  \resumeProject{Hexapod Robot}{Nvidia Jetson (Jetpack), SO-ARM101 Robotic Arm, RealSense, AI Object Detection (OWL-ViT)}
-    \resumeItemListStart
-      \resumeItem{Led integration of Jetson-based OWL-ViT object detection on 18-DOF hexapod
-        with SO101 arm for real-time autonomous following.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{Hexapod Robot} $|$ \emph{Nvidia Jetson (Jetpack), SO-ARM101 Robotic Arm,
+          RealSense, AI Object Detection (OWL-ViT)}}{}
+        \resumeItemListStart
+          \resumeItem{Led integration of Jetson-based OWL-ViT object detection on 18-DOF hexapod
+            with SO101 arm for real-time autonomous following.}
+        \resumeItemListEnd
 
-  \resumeProject{Autonomous Rover Simulation}{Gazebo, ROS2, Python, Navigation, AI Object Detection}
-    \resumeItemListStart
-      \resumeItem{Developed a Gazebo rover simulation with ROS2 navigation stack with obstacle
-        avoidance for autonomous goal-seeking movement.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{Autonomous Rover Simulation} $|$ \emph{Gazebo, ROS2, Python, Navigation,
+          AI Object Detection}}{}
+        \resumeItemListStart
+          \resumeItem{Developed a Gazebo rover simulation with ROS2 navigation stack with
+            obstacle avoidance for autonomous goal-seeking movement.}
+        \resumeItemListEnd
 
-  \resumeProject{AI Object Detection}{AI, ROS2, Python, OpenCV, RealSense}
-    \resumeItemListStart
-      \resumeItem{Developed ROS2 RealSense camera package with compression for VLM object
-        recognition with real-time OpenCV visualization.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{AI Object Detection} $|$ \emph{AI, ROS2, Python, OpenCV, RealSense}}{}
+        \resumeItemListStart
+          \resumeItem{Developed ROS2 RealSense camera package with compression for VLM object
+            recognition with real-time OpenCV visualization.}
+        \resumeItemListEnd
 
-  \resumeProject{WATonomous}{Docker, Foxglove, C++, LiDAR, A*}
-    \resumeItemListStart
-      \resumeItem{Implementing ROS2 nav stack with path planning for autonomous navigation.
-        LiDAR-based cost maps, and real-time odometry.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{WATonomous} $|$ \emph{Docker, Foxglove, C++, LiDAR, A*}}{}
+        \resumeItemListStart
+          \resumeItem{Implementing ROS2 nav stack with path planning for autonomous navigation.
+            LiDAR-based cost maps, and real-time odometry.}
+        \resumeItemListEnd
 
-  \resumeProject{SWARM Robots}{Linux/Ubuntu, Docker, Gazebo, ROS2 Assembly, ESP32}
-    \resumeItemListStart
-      \resumeItem{Assembled research grade robots from scratch and deployed ROS2 and Gazebo
-        containers in Docker to simulate swarm coordination.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{SWARM Robots} $|$ \emph{Linux/Ubuntu, Docker, Gazebo, ROS2 Assembly, ESP32}}{}
+        \resumeItemListStart
+          \resumeItem{Assembled research grade robots from scratch and deployed ROS2 and Gazebo
+            containers in Docker to simulate swarm coordination.}
+        \resumeItemListEnd
 
-  \resumeProject{3-DOF Robotic Arm}{ROS2, OpenCV, SolidWorks, PWM, 3D Printing, Raspberry Pi}
-    \resumeItemListStart
-      \resumeItem{Designed \& 3D-printed using SolidWorks; colour-based token sensing using
-        OpenCV HSV filtering for real-time classification.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{3-DOF Robotic Arm} $|$ \emph{ROS2, OpenCV, SolidWorks, PWM, 3D Printing,
+          Raspberry Pi}}{}
+        \resumeItemListStart
+          \resumeItem{Designed \& 3D-printed using SolidWorks; colour-based token sorting using
+            OpenCV HSV filtering for real-time classification.}
+        \resumeItemListEnd
 
-  \resumeProject{Custom Agentic Harnesses}{Nvidia Jetson, llama.cpp, Hermes, Claude Code}
-    \resumeItemListStart
-      \resumeItem{Developed optimized llama.cpp local infr.\ powering Hermes superagents with
-        Claude Code delegates for fully autonomous operation.}
-    \resumeItemListEnd
+      \resumeProjectHeading
+        {\textbf{Custom Agentic Harnesses} $|$ \emph{Nvidia Jetson, llama.cpp, Hermes,
+          Claude Code}}{}
+        \resumeItemListStart
+          \resumeItem{Developed optimized llama.cpp local infr.\ powering Hermes superagents
+            with Claude Code delegates for fully autonomous operation.}
+        \resumeItemListEnd
 
-\resumeSubHeadingListEnd
-
-\vspace{-2pt}
-\begin{center}
-  {\Large\textbf{\textit{For more information, please visit my website portfolio:
-  {\color{tagcolor}\href{https://bjahoor.github.io}{bjahoor.github.io}}}}}
-\end{center}
+    \resumeSubHeadingListEnd
 
 \end{document}

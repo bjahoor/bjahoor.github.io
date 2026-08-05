@@ -85,7 +85,7 @@ const experience = (await getCollection("experience"))
     <SectionLink
       href="/experience"
       label="Full experience history"
-      sub={`all ${allExperience} roles, with what each one involved`}
+      meta={`${allExperience} roles`}
     />
   </section>
 
@@ -103,8 +103,9 @@ const experience = (await getCollection("experience"))
 
     <SectionLink
       href="/projects"
-      label={`All ${projects.length} projects`}
-      sub="filter by discipline — manipulation, perception, autonomy, hardware"
+      label="Browse every project"
+      meta={`${projects.length} projects`}
+      class="mt-8"
     />
   </section>
 </Base>

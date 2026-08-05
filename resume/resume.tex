@@ -129,10 +129,16 @@
 \hfill
 \begin{minipage}[t]{0.42\textwidth}
   \vspace{0pt}
-  \raggedleft \fontsize{8}{13}\selectfont
-  {\color{uwpurple}\faEnvelope\ \href{mailto:bjahoor@uwaterloo.ca}{\underline{bjahoor@uwaterloo.ca}}}\\
-  {\color{uwpurple}\faLinkedin\ \href{https://linkedin.com/in/bjahoor}{\underline{linkedin.com/in/bjahoor}}}\\
-  {\color{uwpurple}\faGlobe\ \href{https://bjahoor.github.io}{\underline{bjahoor.github.io}}}
+  % Four links in a 2x2 grid rather than a column, so the block stays as wide
+  % as three lines did but only needs two. Rows are spread with \\[..] to keep
+  % the block bottoming out level with the tagline opposite.
+  \raggedleft \fontsize{8}{8}\selectfont
+  \begin{tabular}{@{}r@{\hspace{16pt}}r@{}}
+    {\color{uwpurple}\faEnvelope\ \href{mailto:bjahoor@uwaterloo.ca}{\underline{bjahoor@uwaterloo.ca}}} &
+    {\color{uwpurple}\faLinkedin\ \href{https://linkedin.com/in/bjahoor}{\underline{linkedin.com/in/bjahoor}}} \\[16pt]
+    {\color{uwpurple}\faGithub\ \href{https://github.com/bjahoor}{\underline{github.com/bjahoor}}} &
+    {\color{uwpurple}\faGlobe\ \href{https://bjahoor.github.io}{\underline{bjahoor.github.io}}} \\
+  \end{tabular}
 \end{minipage}
 
 %---------- EDUCATION ----------
@@ -142,7 +148,7 @@
 \hrule height 0.8pt
 \vspace{5pt}
 {\small \textbf{University of Waterloo} $|$ \textit{Candidate for BASc in Mechatronics
-Engineering Honours, Minor in Computer Engineering} \hfill \textit{2028}}
+Engineering Honours, Minor in \href{https://uwaterloo.ca/academic-calendar/undergraduate-studies/catalog\#/programs/Hye0Jk00ih?group=Options\%3A\%20Faculty\%20of\%20Engineering&bc=true&bcCurrent=Artificial\%20Intelligence\%20Option&bcGroup=Options\%3A\%20Faculty\%20of\%20Engineering&bcItemType=programs}{\color{uwpurple}\underline{Artificial Intelligence}}} \hfill \textit{2028}}
 \vspace{2pt}
 
 %---------- SKILLS ----------

@@ -1,6 +1,6 @@
 ---
 title: "Custom Lighting Fixture"
-blurb: "App-controlled lighting fixture."
+blurb: "As a parting gift, I had the pleasure of customizing a lighting fixture for myself, incorporating the advanced app lighting controls I worked with during my co-op term at RAB Design."
 tags:
   - "Hardware"
 stack:
@@ -11,4 +11,3 @@ cover: "../../assets/images/project-light.jpg"
 featured: false
 weight: 12
 ---
-A custom app-controlled lighting fixture, built at the end of my term at **RAB Design**.

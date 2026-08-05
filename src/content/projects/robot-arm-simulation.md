@@ -1,6 +1,6 @@
 ---
 title: "Robot Arm Simulation"
-blurb: "RL control policies for Franka and SO-ARM101 arms in CUDA-enabled Isaac Lab."
+blurb: "I setup Nvidia's (CUDA enabled) Isaac Lab built on (physics accurate) Isaac Sim to train Reinforcement-Learning (RL) control policies for Franka & SO101 arms."
 tags:
   - "Simulation"
   - "AI/ML"
@@ -16,8 +16,5 @@ cover: "../../assets/images/cube_play.webp"
 featured: true
 weight: 98
 ---
-**Isaac Lab** runs many simulated arms in parallel on the GPU, which is what makes reinforcement
-learning practical for manipulation.
 
-I set up CUDA-enabled Isaac Lab on top of Isaac Sim and trained RL control policies for both the
-**Franka** and the **SO-ARM101**, then validated sim-to-real readiness.
+I setup Nvidia's (CUDA enabled) Isaac Lab built on (physics accurate) Isaac Sim to train Reinforcement-Learning (RL) control policies for Franka & SO101 arms. Policy stability and sim-to-real transfer readiness was then validated.

@@ -1,6 +1,6 @@
 ---
 title: "Motorized Bicycle"
-blurb: "Transformed a bicycle with a 2-stroke engine retrofit kit using cutting, welding, and drilling skills."
+blurb: "I transformed my bicycle into a motorized machine using a 2-stroke engine retrofit kit."
 tags:
   - "Hardware"
 stack:
@@ -12,5 +12,5 @@ cover: "../../assets/images/project-bike.jpg"
 featured: false
 weight: 16
 ---
-Transformed a bicycle with a **2-stroke engine** retrofit kit, using metal cutting, welding and drilling
-to fit the drivetrain to the frame.
+
+I transformed my bicycle into a motorized machine using a 2-stroke engine retrofit kit. This project required a range of skills, including metal cutting, welding, and drilling.

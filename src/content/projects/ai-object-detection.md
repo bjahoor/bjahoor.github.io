@@ -1,6 +1,6 @@
 ---
 title: "AI Object Detection"
-blurb: "ROS2 package pairing compressed RealSense RGB-D with OWL-ViT, retargeted by text on a live topic."
+blurb: "Built a ROS2 package integrating Intel RealSense RGB/Depth streaming with zero-shot OWL-VIΤ detection (Transformers) on CPU; dynamic text prompts via ROS topic and OpenCV overlays for real-time visualization."
 tags:
   - "Perception"
   - "AI/ML"
@@ -17,8 +17,3 @@ demo: "/demos/ai-cam"
 featured: false
 weight: 86
 ---
-A ROS 2 package that streams **Intel RealSense** RGB and depth into a zero-shot **OWL-ViT** detector,
-with OpenCV overlays for visualization.
-
-Detection classes arrive as text on a ROS topic at runtime, so what the robot looks for is changed by
-publishing a string rather than by retraining.

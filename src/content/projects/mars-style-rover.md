@@ -1,6 +1,6 @@
 ---
 title: "Mars-Style Rover"
-blurb: "Designed control & autonomy software for a Mars-style rover using ROS2. Modeled 6-wheel drivetrain kinematics and integrated sensors."
+blurb: "UW robotics creates a Mars-Style rover to compete in the annual CIRC challenge."
 tags:
   - "Perception"
   - "Hardware"
@@ -15,11 +15,5 @@ cover: "../../assets/images/project-rover.jpg"
 featured: false
 weight: 78
 ---
-The University of Waterloo Robotics Team builds a Mars-style rover for the annual **CIRC** competition.
-I contributed two pieces.
 
-The first was the **ROS 2 RealSense** RGB-D stream, with custom compression and dynamic resolution
-selection for a bandwidth-limited wireless link.
-
-The second was modelling the **6-wheel rocker-bogie** drivetrain and solving its forward and inverse
-kinematics, running on an **Nvidia Jetson**.
+UW robotics creates a Mars-Style rover to compete in the annual CIRC challenge. I contributed developing the Realsense ROS2 Camera Streaming. My package streamed colour and depth data using a RealSense wrapper. I implemented custom compression to significantly reduce wireless bandwidth, and created node for rolling resolution selection. Another project involved me modelling the 6-wheel drivetrain, solving both forward and inverse kinematics.

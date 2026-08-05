@@ -1,6 +1,6 @@
 ---
 title: "Autonomous Electric Weeder"
-blurb: "ROS2 autodrive and a deep-learning weed/crop detector for an autonomous farming robot."
+blurb: "Supporting the development at BHF Robotics, I was able to design (cad), FEA simulate (SolidWorks), prototype, make manufacturing drawings for, source manufacturing for, and install parts for their autonomous electric weeding robot."
 tags:
   - "Autonomy"
   - "AI/ML"
@@ -16,10 +16,5 @@ cover: "../../assets/images/project-weeder.jpg"
 featured: false
 weight: 76
 ---
-Work at BHF Robotics on an autonomous electric weeding robot, across both software and hardware.
 
-I implemented the **ROS 2 autodrive** routine and trained the **deep-learning weed/crop detector**.
-
-On hardware I designed parts in CAD, validated them with **FEA in SolidWorks**, produced manufacturing
-drawings, sourced fabrication and installed the results, then debugged and improved the robot's
-mechanical, electrical and software systems.
+Supporting the development at BHF Robotics, I was able to design (cad), FEA simulate (SolidWorks), prototype, make manufacturing drawings for, source manufacturing for, and install parts for their autonomous electric weeding robot. Additionally, I programmed their autodrive algorithms for autonomous robot navigation in Python/ROS2 and trained a weed/crop detection model.

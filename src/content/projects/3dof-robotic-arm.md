@@ -1,6 +1,6 @@
 ---
 title: "3-DOF Robotic Arm"
-blurb: "Designed, prototyped, and 3D printed a robotic arm. Controlled motors via PWM and ROS2 on a Raspberry Pi with OpenCV for token color detection."
+blurb: "This robotics project was designed from scratch in SolidWorks and 3D-printed."
 tags:
   - "Manipulation"
   - "Hardware"
@@ -17,7 +17,5 @@ cover: "../../assets/images/project-arm.jpg"
 featured: false
 weight: 68
 ---
-A three-degree-of-freedom arm designed in **SolidWorks**, prototyped and 3D printed.
 
-Motors are driven over **PWM** with **ROS 2** running on a **Raspberry Pi**, and an overhead camera feeds
-**OpenCV** for token colour detection.
+This robotics project was designed from scratch in SolidWorks and 3D-printed. Motors were controlled via PWM, internal communication ran on ROS2 on a Raspberry Pi (Ubuntu), and OpenCV processed an overhead camera for token colour detection.

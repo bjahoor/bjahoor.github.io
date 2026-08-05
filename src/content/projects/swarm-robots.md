@@ -1,6 +1,6 @@
 ---
 title: "SWARM Robots"
-blurb: "Developed swarm navigation and communication strategies for HeRo 2.0 robots during a robotics hackathon."
+blurb: "A fleet of HeRo 2.0 robots were assembled from scratch involving soldering smd components on pcb's, prototyping components, modifying components, and flashing firmware to ESP32's."
 tags:
   - "Hardware"
   - "Embedded"
@@ -17,10 +17,5 @@ docs: "https://verlab.github.io/hero_common/"
 featured: false
 weight: 72
 ---
-A fleet of [**HeRo 2.0**](https://verlab.github.io/hero_common/) research robots assembled from scratch —
-reflow-soldering SMD components onto bare PCBs, prototyping and modifying parts, and flashing firmware to
-the **ESP32** on each unit. HeRo 2.0 is an open swarm-robotics platform out of VeRLab at UFMG.
 
-Once running, the robots communicate over WiFi and IR, streaming IMU, encoder and drive telemetry
-through ROS 2 pipelines. **Gazebo** under Docker provides the simulation environment for testing swarm
-coordination.
+A fleet of HeRo 2.0 robots were assembled from scratch involving soldering smd components on pcb's, prototyping components, modifying components, and flashing firmware to ESP32's. With the robots communicating wirelessly through wifi, ir, imu, encoder, and drive data is transmitted through ROS2 pipelines. Running on docker, Gazebo was used as a simulation software.

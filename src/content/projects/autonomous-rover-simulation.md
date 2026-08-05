@@ -1,6 +1,6 @@
 ---
 title: "Autonomous Rover Simulation"
-blurb: "ROS2/Nav2 stack with six-sector obstacle avoidance and plant classification for a Gazebo rover."
+blurb: "Containerized Mars-rover simulation in Gazebo with multiple ROS2 packages."
 tags:
   - "Simulation"
   - "Autonomy"
@@ -18,12 +18,5 @@ demo: "/demos/rover"
 featured: false
 weight: 84
 ---
-A Mars-rover simulation built across multiple ROS 2 packages and run in **Gazebo** under Docker.
 
-Obstacle sensors partition the rover's surroundings into six sectors; a navigation routine reads those
-sectors, recommends the next motion, and iterates until the goal is reached. A separate model analyzes
-the camera feed to detect and classify plants, and the system monitors temperatures and raises warnings
-when they exceed threshold.
-
-The Gazebo environment and the container setup were already in place; my work was the ROS 2 and **Nav2**
-navigation nodes on top of them.
+Containerized Mars-rover simulation in Gazebo with multiple ROS2 packages. System monitors temps and issues warnings when thresholds are exceeded. Obstacle sensors partition the surroundings into 6 sectors; a navigation algorithm recommends the next motion and iterates until the goal is reached. An AI model analyzes the rover’s camera feed to detect and classify plants.

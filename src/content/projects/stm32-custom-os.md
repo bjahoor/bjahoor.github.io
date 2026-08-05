@@ -1,6 +1,6 @@
 ---
 title: "STM32 Custom OS"
-blurb: "Developed a custom real-time operating system in C on an STM32 Nucleo microcontroller board."
+blurb: "During this academic term I am developing a custom operating system on this STM32 Nucleo microcontroller board in C."
 tags:
   - "Embedded"
 stack:
@@ -12,5 +12,3 @@ cover: "../../assets/images/project-stm32.jpg"
 featured: false
 weight: 48
 ---
-A custom real-time operating system written in **C** on an **STM32 Nucleo** board, covering task
-scheduling, context switching and memory management on bare metal.

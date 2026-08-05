@@ -1,6 +1,6 @@
 ---
 title: "AI Roommate"
-blurb: "Grounded a local LLM in live YOLOv8s detections so it answers questions about what the camera sees."
+blurb: "AI Roommate is an edge AI assistant built for an NVIDIA Jetson that combines real-time computer vision with local, scene-aware conversation."
 tags:
   - "AI/ML"
   - "Perception"
@@ -17,9 +17,5 @@ demo: "/demos/assistant"
 featured: true
 weight: 94
 ---
-An assistant running on a **Jetson Orin Nano** that answers questions about what its camera sees.
 
-**Ultralytics YOLOv8s** detects objects in view and maintains a running scene state, which is injected
-into the context of a locally-hosted **Qwen2.5-0.5B** under **Ollama**. The service is built on
-**FastAPI**, with a separate YOLO inference server behind it. Both the detector and the model run
-on-device.
+AI Roommate is an edge AI assistant built for an NVIDIA Jetson that combines real-time computer vision with local, scene-aware conversation. The system captures a live camera feed for a web dashboard and runs Ultralytics YOLOv8s object detection to continuously identify what is in view. These detections are maintained as the current scene state and provided to an Ollama-hosted Qwen2.5-0.5B LLM so chat responses are grounded in the live environment by answering questions about visible objects, confirming what is present, and providing context-aware assistance. The project is implemented as a FastAPI (REST) service with endpoints for video streaming, detection and state retrieval, and chat, alongside a separate YOLO inference server, creating a responsive on-device pipeline that connects perception to natural-language interaction.

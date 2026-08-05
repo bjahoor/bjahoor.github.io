@@ -15,7 +15,6 @@ featured: false
 weight: 99
 ---
 Built during a co-op term at **Thalassa Robotics** in California, on their underwater vehicle platform.
-Photographs published with the company's permission.
 
 Isaac Sim does not model everything a vehicle operating underwater cares about. Two domains had to be
 integrated and configured on top of it: **optics**, for what the cameras would realistically see through
@@ -31,5 +30,3 @@ interface as the real servos, with path planning bounded by the machine's real a
 an interpolation layer above it for smooth motion.
 
 ![Pressure housings with dome viewport](../../assets/images/thalassa-housing.jpg)
-
-The toolchain was used across the team rather than by me alone.

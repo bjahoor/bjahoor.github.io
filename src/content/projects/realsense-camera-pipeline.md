@@ -1,6 +1,6 @@
 ---
 title: "ROS2 RealSense Camera Pipeline"
-blurb: "Streamed color & depth data with a custom ROS2 RealSense wrapper. Added compression to reduce wireless bandwidth and dynamic resolution selection."
+blurb: "Developed the ROS2 RealSense RGB-D stream with custom compression and dynamic resolution for a bandwidth-limited link."
 tags:
   - "Perception"
 stack:
@@ -15,15 +15,15 @@ repo: "https://github.com/bjahoor/cam_package"
 featured: false
 weight: 80
 ---
-Built for the **University of Waterloo Robotics Team**'s Mars-style rover, which is driven over a
-wireless link with real bandwidth limits.
 
-The launch configuration disables the streams the rover doesn't need — both infrared streams, the gyro,
-the accelerometer, the point cloud, the colorizer and TF broadcasting — and the colour stream is
-JPEG-compressed before it leaves the robot. The viewer subscribes to the compressed topics and decodes
-on the operator's machine.
+A ROS 2 package around the Intel RealSense driver, written for the University of Waterloo Robotics
+Team's Mars-style rover.
 
-For resolution selection, a C++ node queries the camera's ROS parameter service and reads the
-*descriptor* for the colour and depth profile parameters, which is where the RealSense wrapper publishes
-its supported modes. The node parses them into a menu at runtime and sets the chosen profile live,
-rather than working from a hard-coded list.
+The launch configuration disables the streams the package doesn't use — both infrared streams, the gyro,
+the accelerometer, the point cloud, the colorizer and TF broadcasting — and runs colour at 848x480x60
+and depth at 848x480x30, with JPEG quality 75 applied to the colour stream. The viewer subscribes to the
+compressed topics rather than the raw ones, decodes them with **OpenCV**, and colormaps the depth image.
+
+Resolution selection is a separate C++ node. It queries the camera's ROS parameter service and reads the
+*descriptor* for the colour and depth profile parameters, which is where the RealSense wrapper lists the
+modes it supports, then prints them as a menu and sets the chosen profile at runtime.

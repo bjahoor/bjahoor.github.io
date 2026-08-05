@@ -12,6 +12,7 @@ stack:
   - "Python"
   - "SolidWorks"
 year: "2026"
+cover: "../../assets/images/chess-board.jpg"
 featured: false
 weight: 92
 ---

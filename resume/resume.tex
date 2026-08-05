@@ -119,7 +119,7 @@
 \noindent
 \begin{minipage}[t]{0.56\textwidth}
   \vspace{0pt}
-  \textbf{\fontsize{27.67}{27.67}\selectfont \scshape \color{uwpurple}Brandon Jahoor}\\[0.3pt]
+  \textbf{\fontsize{27.67}{27.67}\selectfont \scshape \color{uwpurple}Brandon Jahoor}\\[-1.2pt]
   % 10pt explicitly, not \small. This document is on the 10pt class where
   % \small is 9pt; Jake's template is on 11pt, where \small is 10pt. Setting
   % the size directly matches the template's tagline size without moving the
@@ -129,26 +129,27 @@
 \hfill
 \begin{minipage}[t]{0.42\textwidth}
   \vspace{0pt}
-  % Four links in a 2x2 grid rather than a column, so the block stays as wide
-  % as three lines did but only needs two. Rows are spread with \\[..] to keep
-  % the block bottoming out level with the tagline opposite.
+  % Four links in a 2x2 grid. Both columns are right-aligned, and the long
+  % entries (LinkedIn, email) share the left column so the gap down the middle
+  % stays even — pairing a long entry against a short one is what made the
+  % previous order look ragged.
   \raggedleft \fontsize{8}{8}\selectfont
-  \begin{tabular}{@{}r@{\hspace{16pt}}r@{}}
+  \begin{tabular}{@{}r@{\hspace{18pt}}r@{}}
+    {\color{uwpurple}\faLinkedin\ \href{https://linkedin.com/in/bjahoor}{\underline{linkedin.com/in/bjahoor}}} &
+    {\color{uwpurple}\faGlobe\ \href{https://bjahoor.github.io}{\underline{bjahoor.github.io}}} \\[14.5pt]
     {\color{uwpurple}\faEnvelope\ \href{mailto:bjahoor@uwaterloo.ca}{\underline{bjahoor@uwaterloo.ca}}} &
-    {\color{uwpurple}\faLinkedin\ \href{https://linkedin.com/in/bjahoor}{\underline{linkedin.com/in/bjahoor}}} \\[16pt]
-    {\color{uwpurple}\faGithub\ \href{https://github.com/bjahoor}{\underline{github.com/bjahoor}}} &
-    {\color{uwpurple}\faGlobe\ \href{https://bjahoor.github.io}{\underline{bjahoor.github.io}}} \\
+    {\color{uwpurple}\faGithub\ \href{https://github.com/bjahoor}{\underline{github.com/bjahoor}}} \\
   \end{tabular}
 \end{minipage}
 
 %---------- EDUCATION ----------
 % No section heading, but keep the rule so the degree line still reads as its
 % own band rather than running into the contact block.
-\vspace{3.5pt}
+\vspace{1pt}
 \hrule height 0.8pt
 \vspace{5pt}
 {\small \textbf{University of Waterloo} $|$ \textit{Candidate for BASc in Mechatronics
-Engineering Honours, Minor in \href{https://uwaterloo.ca/academic-calendar/undergraduate-studies/catalog\#/programs/Hye0Jk00ih?group=Options\%3A\%20Faculty\%20of\%20Engineering&bc=true&bcCurrent=Artificial\%20Intelligence\%20Option&bcGroup=Options\%3A\%20Faculty\%20of\%20Engineering&bcItemType=programs}{\color{uwpurple}\underline{Artificial Intelligence}}} \hfill \textit{2028}}
+Engineering Honours, \href{https://uwaterloo.ca/academic-calendar/undergraduate-studies/catalog\#/programs/Hye0Jk00ih?group=Options\%3A\%20Faculty\%20of\%20Engineering&bc=true&bcCurrent=Artificial\%20Intelligence\%20Option&bcGroup=Options\%3A\%20Faculty\%20of\%20Engineering&bcItemType=programs}{\color{uwpurple}\underline{Minor in Artificial Intelligence}}} \hfill \textit{2028}}
 \vspace{2pt}
 
 %---------- SKILLS ----------

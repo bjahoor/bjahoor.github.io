@@ -22,7 +22,18 @@ I extended the arm's reach and fused the wrist to drop a motor, updating the **U
 constraints and the LeRobot driver to match. I also developed the playground it works over — the board,
 the shell and the graveyard.
 
-On top sits a three-call Python API that plugs straight into a chess engine. Squares are addressed in
+On top sits a three-call Python API that plugs straight into a chess engine:
+
+```python
+from api import startup, pick_and_place, shutdown
+
+robot = startup()                         # uses config/values.py
+pick_and_place("e2", "e4", robot)         # pick, place, robot → True
+pick_and_place("e7", "e5", robot)
+shutdown(robot)
+```
+
+Squares are addressed in
 chess notation, `a1` through `h8`, rather than as Cartesian coordinates; that mapping comes from a
 calibration routine that measures the physical board once and writes the square positions to a config
 file.

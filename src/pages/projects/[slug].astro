@@ -172,6 +172,24 @@ const { data } = project;
     border-radius: 4px;
     padding: 0.1em 0.35em;
   }
+  /* Fenced blocks: the chrome belongs to the <pre>, so strip it off the inner
+     <code> or every block gets a border and padding twice over. */
+  .prose-invert pre {
+    background: var(--color-surface) !important;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    padding: 1rem 1.15rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  .prose-invert pre code {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-size: inherit;
+  }
   .prose-invert h2 {
     color: var(--color-fg);
     font-size: 1.35rem;

@@ -1,6 +1,6 @@
 ---
 title: "STM32 Custom OS"
-blurb: "During this academic term I am developing a custom operating system on this STM32 Nucleo microcontroller board in C."
+blurb: "I developed a custom operating system on this STM32 Nucleo microcontroller board in C."
 tags:
   - "Embedded"
 stack:

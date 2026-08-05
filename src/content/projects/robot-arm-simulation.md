@@ -13,7 +13,7 @@ stack:
   - "Python"
 year: "2025-2026"
 cover: "../../assets/images/cube_play.webp"
-featured: true
+featured: false
 weight: 98
 ---
 

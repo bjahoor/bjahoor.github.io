@@ -13,7 +13,7 @@ stack:
   - "SolidWorks"
 year: "2026"
 cover: "../../assets/images/chess-board.jpg"
-featured: false
+featured: true
 weight: 92
 ---
 A robotic arm that plays chess against a human opponent, built on a CAD-modified **SO-ARM101 follower

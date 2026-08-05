@@ -12,7 +12,7 @@ stack:
   - "Linux"
 year: "2025"
 cover: "../../assets/images/project-robohub.jpg"
-featured: false
+featured: true
 weight: 90
 ---
 

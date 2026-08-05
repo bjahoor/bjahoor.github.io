@@ -11,7 +11,7 @@ stack:
   - "Controls"
 year: "2026"
 cover: "../../assets/images/thalassa-turret.jpg"
-featured: false
+featured: true
 weight: 99
 ---
 Built during a co-op term at **Thalassa Robotics** in California, on their underwater vehicle platform.

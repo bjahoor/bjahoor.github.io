@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Resume — live preview</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; height:100vh; display:flex; flex-direction:column;
+         background:#08090b; color:#e8eaed;
+         font:14px ui-sans-serif, system-ui, sans-serif; }
+  header { display:flex; align-items:center; gap:14px;
+           padding:10px 16px; border-bottom:1px solid #1e2228; }
+  .dot { width:9px; height:9px; border-radius:50%; background:#57606a;
+         transition:background .2s; flex:none; }
+  .dot.ok    { background:#2ea043; }
+  .dot.build { background:#d29922; animation:pulse .7s infinite alternate; }
+  .dot.err   { background:#e5534b; }
+  @keyframes pulse { to { opacity:.25 } }
+  #msg { font-family:ui-monospace, monospace; font-size:12px; color:#9198a3; }
+  #pages { margin-left:auto; font-family:ui-monospace, monospace; font-size:12px; }
+  #pages.bad { color:#e5534b; font-weight:600; }
+  iframe { flex:1; width:100%; border:0; background:#333; }
+</style>
+</head>
+<body>
+  <header>
+    <span class="dot" id="dot"></span>
+    <span id="msg">watching resume.tex…</span>
+    <span id="pages"></span>
+  </header>
+  <iframe id="pdf" src="resume.pdf"></iframe>
+
+<script>
+// Polls status.json, which the watcher rewrites after every rebuild.
+// When the build stamp changes, the iframe reloads with a cache-buster.
+let seen = null;
+const dot = document.getElementById('dot');
+const msg = document.getElementById('msg');
+const pagesEl = document.getElementById('pages');
+const frame = document.getElementById('pdf');
+
+async function poll() {
+  try {
+    const r = await fetch('status.json?t=' + Date.now(), { cache: 'no-store' });
+    const s = await r.json();
+
+    if (s.building) {
+      dot.className = 'dot build';
+      msg.textContent = 'rebuilding…';
+    } else if (s.ok) {
+      dot.className = 'dot ok';
+      msg.textContent = 'built ' + s.time;
+      pagesEl.textContent = s.pages + (s.pages === 1 ? ' page' : ' PAGES');
+      pagesEl.className = s.pages === 1 ? '' : 'bad';
+    } else {
+      dot.className = 'dot err';
+      msg.textContent = 'LaTeX error — ' + (s.error || 'see terminal');
+      pagesEl.textContent = '';
+    }
+
+    if (s.stamp && s.stamp !== seen) {
+      if (seen !== null) frame.src = 'resume.pdf?t=' + s.stamp;
+      seen = s.stamp;
+    }
+  } catch (e) {
+    dot.className = 'dot err';
+    msg.textContent = 'watcher not running';
+  }
+}
+poll();
+setInterval(poll, 700);
+</script>
+</body>
+</html>

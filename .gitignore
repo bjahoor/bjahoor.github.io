@@ -20,3 +20,4 @@ resume/build.log
 
 # macOS / editor cruft
 .DS_Store
+resume/status.json

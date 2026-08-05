@@ -173,4 +173,15 @@ const { data } = project;
   .prose-invert li {
     margin-block: 0.35rem;
   }
+  /* Markdown images: never overflow the column, and match the card styling. */
+  .prose-invert img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.75rem 0;
+    max-height: 70vh;
+    width: auto;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+  }
 </style>

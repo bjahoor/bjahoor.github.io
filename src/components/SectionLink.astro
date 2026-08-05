@@ -1,0 +1,39 @@
+---
+interface Props {
+  href: string;
+  /** The main line. Say where it goes, not "click here". */
+  label: string;
+  /** Small line underneath — what the visitor gets by following it. */
+  sub: string;
+}
+
+const { href, label, sub } = Astro.props;
+---
+
+{/*
+  Deliberately much heavier than a project card: full width, a tinted surface,
+  and an arrow that moves on hover. Project cards are also bordered boxes, so
+  the accent tint is what stops this reading as just another one of them.
+*/}
+<a
+  href={href}
+  class="group mt-8 flex items-center justify-between gap-6 rounded-lg border border-line-bright bg-surface px-7 py-6 transition-all duration-300 hover:border-accent hover:bg-accent/5 focus-visible:border-accent"
+>
+  <span>
+    <span
+      class="block text-xl font-semibold tracking-tight text-fg transition-colors group-hover:text-accent sm:text-2xl"
+    >
+      {label}
+    </span>
+    <span class="mt-1.5 block font-mono text-xs text-fg-muted sm:text-sm">
+      {sub}
+    </span>
+  </span>
+
+  <span
+    aria-hidden="true"
+    class="shrink-0 text-2xl text-accent transition-transform duration-300 group-hover:translate-x-1.5 sm:text-3xl"
+  >
+    →
+  </span>
+</a>

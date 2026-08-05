@@ -19,10 +19,13 @@ const {
 const fullTitle = bareTitle ? title : `${title} — Brandon Jahoor`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 
+// "Work" sat next to "Experience" and read as the same thing. "Projects" is
+// unambiguous; the homepage section is still headed "Selected work".
 const nav = [
-  { href: "/projects", label: "Work" },
+  { href: "/projects", label: "Projects" },
   { href: "/experience", label: "Experience" },
   { href: "/brandon_jahoor_resume.pdf", label: "Resume", external: true },
+  { href: "https://linkedin.com/in/bjahoor", label: "LinkedIn", external: true },
 ];
 
 const path = Astro.url.pathname;
@@ -70,7 +73,7 @@ const path = Astro.url.pathname;
           bjahoor
         </a>
 
-        <nav class="flex items-center gap-6" aria-label="Main">
+        <nav class="flex items-center gap-4 sm:gap-6" aria-label="Main">
           {
             nav.map((item) => (
               <a

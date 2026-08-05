@@ -2,12 +2,14 @@
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import SectionLink from "../components/SectionLink.astro";
 
 const projects = await getCollection("projects");
 const featured = projects
   .filter((p) => p.data.featured)
   .sort((a, b) => b.data.weight - a.data.weight);
 
+const allExperience = (await getCollection("experience")).length;
 const experience = (await getCollection("experience"))
   .filter((e) => e.data.robotics)
   .sort((a, b) => b.data.order - a.data.order)
@@ -38,54 +40,31 @@ const experience = (await getCollection("experience"))
 
     <div class="mt-10 flex flex-wrap gap-3">
       <a
-        href="/projects"
-        class="rounded-md bg-accent-solid px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
-      >
-        See the work
-      </a>
-      <a
         href="/brandon_jahoor_resume.pdf"
         target="_blank"
         rel="noopener"
-        class="rounded-md border border-line px-5 py-2.5 text-sm font-medium text-fg transition-colors hover:border-line-bright"
+        class="rounded-md bg-accent-solid px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
       >
-        Resume
+        Resume ↗
+      </a>
+      <a
+        href="https://linkedin.com/in/bjahoor"
+        target="_blank"
+        rel="noopener"
+        class="rounded-md border border-line px-5 py-2.5 text-sm font-medium text-fg transition-colors hover:border-line-bright hover:text-accent"
+      >
+        LinkedIn ↗
       </a>
     </div>
   </section>
 
-  <!-- Selected work -->
+  <!-- Experience -->
   <section class="mx-auto max-w-5xl px-6">
-    <div class="mb-8 flex items-baseline justify-between border-b border-line pb-4">
-      <h2 class="font-mono text-sm tracking-widest text-fg-dim uppercase">
-        Selected work
-      </h2>
-      <a
-        href="/projects"
-        class="font-mono text-sm text-fg-muted transition-colors hover:text-accent"
-      >
-        all {projects.length} →
-      </a>
-    </div>
-
-    <div class="grid gap-5 sm:grid-cols-2">
-      {featured.map((p) => <ProjectCard project={p} large />)}
-    </div>
-  </section>
-
-  <!-- Experience preview -->
-  <section class="mx-auto max-w-5xl px-6 pt-24">
-    <div class="mb-8 flex items-baseline justify-between border-b border-line pb-4">
-      <h2 class="font-mono text-sm tracking-widest text-fg-dim uppercase">
-        Experience
-      </h2>
-      <a
-        href="/experience"
-        class="font-mono text-sm text-fg-muted transition-colors hover:text-accent"
-      >
-        full history →
-      </a>
-    </div>
+    <h2
+      class="mb-8 border-b border-line pb-4 font-mono text-sm tracking-widest text-fg-dim uppercase"
+    >
+      Experience
+    </h2>
 
     <ul class="divide-y divide-line">
       {
@@ -102,5 +81,30 @@ const experience = (await getCollection("experience"))
         ))
       }
     </ul>
+
+    <SectionLink
+      href="/experience"
+      label="Full experience history"
+      sub={`all ${allExperience} roles, with what each one involved`}
+    />
+  </section>
+
+  <!-- Selected work -->
+  <section class="mx-auto max-w-5xl px-6 pt-24">
+    <h2
+      class="mb-8 border-b border-line pb-4 font-mono text-sm tracking-widest text-fg-dim uppercase"
+    >
+      Selected work
+    </h2>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      {featured.map((p) => <ProjectCard project={p} large />)}
+    </div>
+
+    <SectionLink
+      href="/projects"
+      label={`All ${projects.length} projects`}
+      sub="filter by discipline — manipulation, perception, autonomy, hardware"
+    />
   </section>
 </Base>

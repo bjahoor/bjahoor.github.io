@@ -6,7 +6,7 @@ tags:
   - "Hardware"
   - "Controls"
 stack:
-  - "SO-ARM101"
+  - "SO-ARM101 (follower)"
   - "Placo"
   - "LeRobot"
   - "Python"
@@ -15,8 +15,8 @@ year: "2026"
 featured: false
 weight: 92
 ---
-A robotic arm that plays chess against a human opponent, built on a CAD-modified **SO-ARM101** driven
-through **LeRobot** with **Placo** solving the inverse kinematics.
+A robotic arm that plays chess against a human opponent, built on a CAD-modified **SO-ARM101 follower
+arm** driven through **LeRobot** with **Placo** solving the inverse kinematics.
 
 I extended the arm's reach and fused the wrist to drop a motor, updating the **URDF** model, the solver
 constraints and the LeRobot driver to match. I also developed the playground it works over — the board,

@@ -1,6 +1,6 @@
 ---
 title: "Autonomous Rover Simulation"
-blurb: "Containerized Mars-rover simulation in Gazebo with sector-based obstacle avoidance and plant classification."
+blurb: "ROS2/Nav2 stack with six-sector obstacle avoidance and plant classification for a Gazebo rover."
 tags:
   - "Simulation"
   - "Autonomy"

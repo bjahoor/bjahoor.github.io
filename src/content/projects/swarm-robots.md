@@ -1,6 +1,6 @@
 ---
 title: "SWARM Robots"
-blurb: "Fleet of HeRo 2.0 robots built from bare PCBs up, coordinating over ROS 2."
+blurb: "HeRo 2.0 swarm robots assembled from bare PCBs, communicating over ROS2."
 tags:
   - "Hardware"
   - "Embedded"

@@ -1,6 +1,6 @@
 ---
 title: "VLA Finetuning"
-blurb: "Fine-tuned a vision-language-action model to pick and place coloured blocks on real hardware."
+blurb: "ACT and SmolVLA trained on teleoperated demos, running 30 Hz closed-loop on a Jetson."
 tags:
   - "AI/ML"
   - "Manipulation"

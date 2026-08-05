@@ -1,6 +1,6 @@
 ---
 title: "ROS2 RealSense Camera Pipeline"
-blurb: "Bandwidth-conscious RealSense pipeline for ROS 2, with resolution switching discovered from the driver at runtime."
+blurb: "Custom ROS2 RealSense wrapper with compression and dynamic resolution selection."
 tags:
   - "Perception"
 stack:

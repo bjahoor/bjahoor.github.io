@@ -1,6 +1,6 @@
 ---
 title: "Custom Lighting Fixture"
-blurb: "App-controlled lighting fixture built as a parting project from a co-op term."
+blurb: "App-controlled lighting fixture."
 tags:
   - "Hardware"
 stack:

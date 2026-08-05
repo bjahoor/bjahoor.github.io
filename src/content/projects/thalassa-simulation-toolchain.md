@@ -1,6 +1,6 @@
 ---
 title: "High-Fidelity Simulation Toolchain"
-blurb: "Isaac Sim toolchain with integrated optics and hydrodynamics, and a control layer matching the real servos."
+blurb: "High-fidelity Isaac Sim toolchain integrating optics and hydrodynamics it lacks."
 tags:
   - "Simulation"
   - "Controls"

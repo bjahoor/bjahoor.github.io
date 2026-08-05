@@ -1,6 +1,6 @@
 ---
 title: "PLC Controls"
-blurb: "Siemens PLC programmed in ladder logic to drive motors, sensors, and operator inputs."
+blurb: "Siemens PLC programmed in ladder logic to control motors, sensors and buttons."
 tags:
   - "Controls"
   - "Embedded"

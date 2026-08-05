@@ -1,6 +1,6 @@
 ---
 title: "Mars-Style Rover"
-blurb: "Competition rover for CIRC — bandwidth-aware camera streaming and rocker-bogie kinematics."
+blurb: "Control and autonomy software for a Mars-style rover in ROS2, with 6-wheel drivetrain kinematics."
 tags:
   - "Perception"
   - "Hardware"

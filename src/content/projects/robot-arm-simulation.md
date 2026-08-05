@@ -1,6 +1,6 @@
 ---
 title: "Robot Arm Simulation"
-blurb: "Trained reinforcement-learning control policies for Franka and SO-101 arms in Isaac Lab, then validated sim-to-real readiness."
+blurb: "RL control policies for Franka and SO-ARM101 arms in CUDA-enabled Isaac Lab."
 tags:
   - "Simulation"
   - "AI/ML"

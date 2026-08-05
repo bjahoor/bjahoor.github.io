@@ -1,6 +1,6 @@
 ---
 title: "AI Object Detection"
-blurb: "ROS 2 package pairing RealSense RGB-D with zero-shot detection driven by runtime text prompts."
+blurb: "ROS2 package pairing compressed RealSense RGB-D with OWL-ViT, retargeted by text on a live topic."
 tags:
   - "Perception"
   - "AI/ML"

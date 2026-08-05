@@ -1,6 +1,6 @@
 ---
 title: "3-DOF Robotic Arm"
-blurb: "Arm designed in CAD and 3D-printed from scratch, sorting tokens by colour from an overhead camera."
+blurb: "Designed, prototyped and 3D printed a robotic arm, with OpenCV token colour detection."
 tags:
   - "Manipulation"
   - "Hardware"

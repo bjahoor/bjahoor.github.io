@@ -1,6 +1,6 @@
 ---
 title: "WATonomous Navigation"
-blurb: "Autonomous navigation stack for a differential-drive robot — LiDAR costmaps, A* planning, Pure Pursuit tracking."
+blurb: "Four-node ROS2 pipeline: LiDAR costmap, global map, A* planner, Pure Pursuit control."
 tags:
   - "Autonomy"
   - "Perception"

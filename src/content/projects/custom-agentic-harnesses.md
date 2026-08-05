@@ -1,6 +1,6 @@
 ---
 title: "Custom Agentic Harnesses"
-blurb: "Self-hosted LLM infrastructure on Jetson hardware running autonomous agents on the local network."
+blurb: "Self-hosted LLM agents running on Jetson hardware on the local network."
 tags:
   - "AI/ML"
   - "Embedded"

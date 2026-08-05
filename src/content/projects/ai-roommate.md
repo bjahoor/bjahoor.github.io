@@ -1,6 +1,6 @@
 ---
 title: "AI Roommate"
-blurb: "Edge AI assistant that watches a live camera feed and answers questions grounded in what it can actually see."
+blurb: "Grounded a local LLM in live YOLOv8s detections so it answers questions about what the camera sees."
 tags:
   - "AI/ML"
   - "Perception"

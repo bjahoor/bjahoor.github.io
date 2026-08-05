@@ -1,6 +1,6 @@
 ---
 title: "Rubik's Cube Solver"
-blurb: "LEGO EV3 robot that scans and solves a Rubik's cube, driven by a Python solving algorithm."
+blurb: "LEGO EV3 robot programmed in RobotC, with a Python solving algorithm."
 tags:
   - "Hardware"
   - "AI/ML"

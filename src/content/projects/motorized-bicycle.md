@@ -1,6 +1,6 @@
 ---
 title: "Motorized Bicycle"
-blurb: "Bicycle converted to a motorized machine with a 2-stroke engine retrofit."
+blurb: "Transformed a bicycle with a 2-stroke engine retrofit kit using cutting, welding and drilling."
 tags:
   - "Hardware"
 stack:

@@ -1,6 +1,6 @@
 ---
 title: "Chess Robot"
-blurb: "Custom robotic arm that plays chess over a calibrated board, addressed in chess notation."
+blurb: "CAD-modified an SO-ARM101 and developed a three-call Python API that plugs into a chess engine."
 tags:
   - "Manipulation"
   - "Hardware"

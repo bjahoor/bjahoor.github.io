@@ -1,6 +1,6 @@
 ---
 title: "UW RoboHub Research"
-blurb: "Franka Emika Panda mirroring human arm motion from body-mounted IMUs."
+blurb: "Human arm motion from Xsens IMUs retargeted onto a 7-axis Franka Emika Panda."
 tags:
   - "Manipulation"
   - "Perception"

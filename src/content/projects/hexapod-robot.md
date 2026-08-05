@@ -1,6 +1,6 @@
 ---
 title: "Hexapod Robot"
-blurb: "18-DOF hexapod that follows objects named by a text prompt, with a second arm for wireless teleoperation."
+blurb: "Zero-shot OWL-ViT on an 18-DOF hexapod, letting it follow any object named in a text prompt."
 tags:
   - "Perception"
   - "Hardware"

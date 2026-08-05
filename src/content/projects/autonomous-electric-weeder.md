@@ -1,6 +1,6 @@
 ---
 title: "Autonomous Electric Weeder"
-blurb: "Farm robot that drives itself down the rows and tells weeds from crops."
+blurb: "ROS2 autodrive and a deep-learning weed/crop detector for an autonomous farming robot."
 tags:
   - "Autonomy"
   - "AI/ML"

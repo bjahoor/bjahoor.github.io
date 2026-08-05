@@ -11,7 +11,7 @@ stack:
   - "NVIDIA Jetson"
   - "PyTorch"
 year: "2026"
-cover: "/images/so-arm101-act-demo.gif"
+cover: "../../assets/images/so-arm101-act-demo.webp"
 repo: "https://github.com/bjahoor/lerobot-cookbook"
 featured: true
 weight: 100

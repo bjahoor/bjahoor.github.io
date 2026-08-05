@@ -1,7 +1,5 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
-import react from '@astrojs/react';
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -9,7 +7,10 @@ import tailwindcss from '@tailwindcss/vite';
 // GitHub serves from the domain root. Adding a base would break every link.
 export default defineConfig({
   site: 'https://bjahoor.github.io',
-  integrations: [react(), mdx(), sitemap()],
+  // No UI framework: the one interactive piece (the /projects tag filter) is a
+  // few lines of vanilla script, so nothing needs hydrating. Re-add
+  // `@astrojs/react` the day a component actually earns the runtime.
+  integrations: [sitemap()],
 
   // Astro downloads and self-hosts these at build time — no runtime request to
   // Google, and no flash of unstyled text.

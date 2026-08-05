@@ -12,7 +12,7 @@ stack:
   - "Python"
   - "Docker"
 year: "2025"
-cover: "/images/construct-rover.jpg"
+cover: "../../assets/images/construct-rover.jpg"
 repo: "https://github.com/bjahoor/ROS2_Construct_Rover"
 demo: "/demos/rover"
 featured: false

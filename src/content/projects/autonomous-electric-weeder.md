@@ -12,7 +12,7 @@ stack:
   - "FEA"
   - "Deep Learning"
 year: "2025"
-cover: "/images/project-weeder.jpg"
+cover: "../../assets/images/project-weeder.jpg"
 featured: false
 weight: 76
 ---

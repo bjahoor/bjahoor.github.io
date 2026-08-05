@@ -13,7 +13,7 @@ stack:
   - "Foxglove"
   - "Docker"
 year: "2026"
-cover: "/images/project-watonomous.jpg"
+cover: "../../assets/images/project-watonomous.jpg"
 repo: "https://github.com/bjahoor/wato_asd_navigation"
 featured: false
 weight: 82

@@ -9,7 +9,7 @@ stack:
   - "RobotC"
   - "Python"
 year: "2023"
-cover: "/images/project-ev3.jpg"
+cover: "../../assets/images/project-ev3.jpg"
 featured: false
 weight: 28
 ---

@@ -8,7 +8,7 @@ stack:
   - "Raspberry Pi"
   - "Linux"
 year: "2023"
-cover: "/images/project-arcade.jpg"
+cover: "../../assets/images/project-arcade.jpg"
 featured: false
 weight: 22
 ---

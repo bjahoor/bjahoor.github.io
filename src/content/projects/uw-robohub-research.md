@@ -11,7 +11,7 @@ stack:
   - "Docker"
   - "Linux"
 year: "2025"
-cover: "/images/project-robohub.jpg"
+cover: "../../assets/images/project-robohub.jpg"
 featured: false
 weight: 90
 ---

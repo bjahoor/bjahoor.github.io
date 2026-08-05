@@ -11,7 +11,7 @@ stack:
   - "OpenCV"
   - "Transformers"
 year: "2025"
-cover: "/images/project-ai-object-detection.jpg"
+cover: "../../assets/images/project-ai-object-detection.jpg"
 repo: "https://github.com/bjahoor/ai_cam_package"
 demo: "/demos/ai-cam"
 featured: false

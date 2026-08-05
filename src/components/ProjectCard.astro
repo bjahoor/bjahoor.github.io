@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import CoverImage from "./CoverImage.astro";
 
 interface Props {
   project: CollectionEntry<"projects">;
@@ -13,6 +14,7 @@ const { id, data } = project;
 
 <a
   href={`/projects/${id}`}
+  data-tags={data.tags.join("|")}
   class="group relative flex flex-col overflow-hidden rounded-lg border border-line bg-surface transition-colors duration-300 hover:border-line-bright focus-visible:border-accent"
 >
   <div
@@ -23,11 +25,14 @@ const { id, data } = project;
   >
     {
       data.cover ? (
-        <img
+        <CoverImage
           src={data.cover}
-          alt=""
-          loading="lazy"
-          decoding="async"
+          widths={[400, 640, 900]}
+          sizes={
+            isLarge
+              ? "(min-width: 1024px) 620px, (min-width: 640px) 50vw, 100vw"
+              : "(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+          }
           class="h-full w-full object-cover opacity-90 transition-all duration-500 group-hover:scale-[1.03] group-hover:opacity-100"
         />
       ) : (

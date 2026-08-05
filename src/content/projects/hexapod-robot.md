@@ -14,7 +14,7 @@ stack:
   - "ST3215"
   - "UDP"
 year: "2025"
-cover: "/images/project-hexapod.jpg"
+cover: "../../assets/images/project-hexapod.jpg"
 featured: true
 weight: 96
 ---

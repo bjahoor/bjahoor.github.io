@@ -10,7 +10,7 @@ stack:
   - "Python"
   - "Controls"
 year: "2026"
-cover: "/images/thalassa-turret.jpg"
+cover: "../../assets/images/thalassa-turret.jpg"
 featured: false
 weight: 99
 ---
@@ -27,7 +27,7 @@ Getting the robot into the simulator correctly was its own task. The CAD assembl
 as a **USD** scene with every joint articulated to match the physical machine. If the model and the
 real assembly disagree, everything downstream is measuring the wrong robot.
 
-![Electronics stack](/images/thalassa-electronics.jpg)
+![Electronics stack](../../assets/images/thalassa-electronics.jpg)
 
 The part I'd point to first is the control layer. I wrote abstractions over Isaac Sim's stack so that
 **the simulated motors are driven through the same interface as the real servos**. That parity is the
@@ -36,7 +36,7 @@ hardware. On top of it sits path planning bounded by the machine's real accelera
 simulator cannot produce motion the hardware could never execute — and an interpolation layer above
 that for smooth motion profiles.
 
-![Pressure housings with dome viewport](/images/thalassa-housing.jpg)
+![Pressure housings with dome viewport](../../assets/images/thalassa-housing.jpg)
 
 The toolchain was used across the team rather than by me alone, which meant usability mattered as much
 as fidelity. A simulator nobody opens is worth nothing.

@@ -8,7 +8,7 @@ stack:
   - "STM32"
   - "ARM Cortex-M"
 year: "2025"
-cover: "/images/project-stm32.jpg"
+cover: "../../assets/images/project-stm32.jpg"
 featured: false
 weight: 48
 ---

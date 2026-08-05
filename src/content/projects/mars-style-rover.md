@@ -11,7 +11,7 @@ stack:
   - "NVIDIA Jetson"
   - "Kinematics"
 year: "2025"
-cover: "/images/project-rover.jpg"
+cover: "../../assets/images/project-rover.jpg"
 featured: false
 weight: 78
 ---

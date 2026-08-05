@@ -8,7 +8,7 @@ stack:
   - "Metal fabrication"
   - "Mechanical assembly"
 year: "2022"
-cover: "/images/project-bike.jpg"
+cover: "../../assets/images/project-bike.jpg"
 featured: false
 weight: 16
 ---

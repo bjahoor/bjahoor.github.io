@@ -12,7 +12,7 @@ stack:
   - "Reinforcement Learning"
   - "Python"
 year: "2025-2026"
-cover: "/images/cube_play.gif"
+cover: "../../assets/images/cube_play.webp"
 featured: true
 weight: 98
 ---

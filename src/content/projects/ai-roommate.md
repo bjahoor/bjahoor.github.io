@@ -11,7 +11,7 @@ stack:
   - "YOLOv8s"
   - "FastAPI"
 year: "2025"
-cover: "/images/ai-assistant.jpg"
+cover: "../../assets/images/ai-assistant.jpg"
 repo: "https://github.com/bjahoor/ai_roommate_assistant"
 demo: "/demos/assistant"
 featured: true

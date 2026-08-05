@@ -7,7 +7,7 @@ stack:
   - "Lighting control"
   - "Electrical"
 year: "2024"
-cover: "/images/project-light.jpg"
+cover: "../../assets/images/project-light.jpg"
 featured: false
 weight: 12
 ---

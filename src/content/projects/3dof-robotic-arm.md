@@ -13,7 +13,7 @@ stack:
   - "PWM"
   - "Raspberry Pi"
 year: "2024"
-cover: "/images/project-arm.jpg"
+cover: "../../assets/images/project-arm.jpg"
 featured: false
 weight: 68
 ---

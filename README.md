@@ -4,8 +4,7 @@ Portfolio for Brandon Jahoor — robotics projects, co-op experience, and resume
 Live at **[bjahoor.github.io](https://bjahoor.github.io)**.
 
 Built with [Astro](https://astro.build) + Tailwind, deployed to GitHub Pages by
-GitHub Actions. Ships no JavaScript except one React island for the project
-filter.
+GitHub Actions. No UI framework, no hydration — every page is static HTML.
 
 ## Colour
 
@@ -48,7 +47,7 @@ blurb: "One line. What it does, not what it is."
 tags: ["Perception", "Hardware"]
 stack: ["ROS 2", "NVIDIA Jetson"]
 year: "2026"
-cover: "/images/project-name.jpg"   # optional
+cover: "../../assets/images/project-name.jpg"   # optional, path relative to this file
 repo: "https://github.com/..."      # optional
 demo: "/demos/slug"                 # optional
 featured: false                     # promotes to the homepage
@@ -60,6 +59,27 @@ The write-up goes here.
 
 Experience entries work the same way in `src/content/experience/`. Set
 `robotics: false` to place a role in the "Earlier engineering" group.
+
+## Images
+
+Put them in `src/assets/images/`, never `public/` — only files under `src/` go
+through the build pipeline, which emits WebP at several widths and stamps in
+the dimensions that stop the page from shifting as it loads. Reference them
+with a relative path, from frontmatter or from Markdown body.
+
+Two exceptions ship untouched, because Sharp reads only the first frame of an
+animated file and would silently freeze them:
+
+```
+cube_play.webp             animated, 50 frames
+so-arm101-act-demo.webp    animated, 99 frames
+```
+
+`CoverImage.astro` detects those by extension — everything still is a JPEG, so
+a WebP or GIF source is taken to mean "animated". Keep that true.
+
+Sources are pre-compressed: capped at 2000px wide, mozjpeg q82. A 4000px camera
+original is 4 MB and buys nothing on a page that never renders it above 800.
 
 ## Resume
 
@@ -82,8 +102,13 @@ src/
   content/experience/   one markdown file per role
   content.config.ts     collection schemas
   layouts/Base.astro    shell: nav, footer, fonts, view transitions
-  components/           ProjectCard.astro, ProjectFilter.tsx (the one island)
+  components/           ProjectCard.astro, CoverImage.astro
   pages/                routes
-public/images/          media
+  assets/images/        media, processed at build time
+public/                 served verbatim — just the compiled resume PDF
 resume/resume.tex       resume source
 ```
+
+No UI framework. The only interactive piece is the tag filter on `/projects`,
+which is a few lines of vanilla script over server-rendered cards — so the site
+ships 16 kB of JavaScript, all of it Astro's view-transition router.

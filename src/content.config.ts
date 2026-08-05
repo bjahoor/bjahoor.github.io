@@ -8,21 +8,29 @@ import { z } from "astro/zod";
  * homepage.
  */
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
-  schema: z.object({
-    title: z.string(),
-    // One line, shown on cards. Say what it does, not what it is.
-    blurb: z.string(),
-    // Chips on the card and the filter facets on /projects
-    tags: z.array(z.string()).min(1),
-    stack: z.array(z.string()).default([]),
-    year: z.string(),
-    cover: z.string().optional(),
-    repo: z.url().optional(),
-    demo: z.string().optional(),
-    featured: z.boolean().default(false),
-    weight: z.number().default(0),
-  }),
+  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
+  // Function form so the schema can use `image()`, which resolves a path
+  // relative to the entry file and hands the component real ImageMetadata
+  // (dimensions included) instead of an unverified string.
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      // One line, shown on cards. Say what it does, not what it is.
+      blurb: z.string(),
+      // Chips on the card and the filter facets on /projects
+      tags: z.array(z.string()).min(1),
+      stack: z.array(z.string()).default([]),
+      year: z.string(),
+      cover: image().optional(),
+      repo: z.url().optional(),
+      demo: z.string().optional(),
+      // Third-party reference for the hardware a project is built on — not
+      // Brandon's own writing, so it gets its own button rather than sharing
+      // the `repo` one.
+      docs: z.url().optional(),
+      featured: z.boolean().default(false),
+      weight: z.number().default(0),
+    }),
 });
 
 /**
@@ -31,7 +39,7 @@ const projects = defineCollection({
  * absent from the resume.
  */
 const experience = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/experience" }),
+  loader: glob({ pattern: "**/*.md", base: "./src/content/experience" }),
   schema: z.object({
     role: z.string(),
     org: z.string(),

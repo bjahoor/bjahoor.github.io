@@ -8,7 +8,7 @@ stack:
   - "Siemens PLC"
   - "Ladder logic"
 year: "2024"
-cover: "/images/project-plc.jpg"
+cover: "../../assets/images/project-plc.jpg"
 featured: false
 weight: 36
 ---

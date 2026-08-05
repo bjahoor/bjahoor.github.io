@@ -1,6 +1,6 @@
 ---
 title: "Raspberry Pi Arcade"
-blurb: "Raspberry Pi-powered retro arcade console."
+blurb: "Assembled a Raspberry Pi-powered retro arcade console with a wide selection of classic games."
 tags:
   - "Hardware"
   - "Embedded"

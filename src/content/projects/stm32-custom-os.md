@@ -1,6 +1,6 @@
 ---
 title: "STM32 Custom OS"
-blurb: "Custom real-time operating system in C on an STM32 Nucleo board."
+blurb: "Developed a custom real-time operating system in C on an STM32 Nucleo microcontroller board."
 tags:
   - "Embedded"
 stack:

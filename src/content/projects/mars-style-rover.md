@@ -1,6 +1,6 @@
 ---
 title: "Mars-Style Rover"
-blurb: "Control and autonomy software for a Mars-style rover in ROS2, with 6-wheel drivetrain kinematics."
+blurb: "Designed control & autonomy software for a Mars-style rover using ROS2. Modeled 6-wheel drivetrain kinematics and integrated sensors."
 tags:
   - "Perception"
   - "Hardware"

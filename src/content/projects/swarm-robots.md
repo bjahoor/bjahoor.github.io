@@ -1,6 +1,6 @@
 ---
 title: "SWARM Robots"
-blurb: "HeRo 2.0 swarm robots assembled from bare PCBs, communicating over ROS2."
+blurb: "Developed swarm navigation and communication strategies for HeRo 2.0 robots during a robotics hackathon."
 tags:
   - "Hardware"
   - "Embedded"

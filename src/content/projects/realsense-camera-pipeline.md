@@ -1,6 +1,6 @@
 ---
 title: "ROS2 RealSense Camera Pipeline"
-blurb: "Custom ROS2 RealSense wrapper with compression and dynamic resolution selection."
+blurb: "Streamed color & depth data with a custom ROS2 RealSense wrapper. Added compression to reduce wireless bandwidth and dynamic resolution selection."
 tags:
   - "Perception"
 stack:

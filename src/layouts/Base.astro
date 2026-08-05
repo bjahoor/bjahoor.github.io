@@ -4,19 +4,18 @@ import { Font } from "astro:assets";
 import "../styles/global.css";
 
 interface Props {
+  /** Page name. Drives og:title only — the browser tab is fixed site-wide. */
   title: string;
   description?: string;
-  /** Suppresses the site name suffix — used on the homepage. */
-  bareTitle?: boolean;
 }
 
 const {
   title,
   description = "Brandon Jahoor — Mechatronics Engineering at the University of Waterloo. Robotics, perception, and AI on real hardware.",
-  bareTitle = false,
 } = Astro.props;
 
-const fullTitle = bareTitle ? title : `${title} — Brandon Jahoor`;
+// Deliberately identical on every page.
+const tabTitle = "Portfolio - Brandon Jahoor";
 const canonical = new URL(Astro.url.pathname, Astro.site);
 
 // "Work" sat next to "Experience" and read as the same thing. "Projects" is
@@ -36,13 +35,13 @@ const path = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{fullTitle}</title>
+    <title>{tabTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={fullTitle} />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />

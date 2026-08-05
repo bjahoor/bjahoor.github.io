@@ -1,6 +1,6 @@
 ---
 title: "3-DOF Robotic Arm"
-blurb: "Designed, prototyped and 3D printed a robotic arm, with OpenCV token colour detection."
+blurb: "Designed, prototyped, and 3D printed a robotic arm. Controlled motors via PWM and ROS2 on a Raspberry Pi with OpenCV for token color detection."
 tags:
   - "Manipulation"
   - "Hardware"

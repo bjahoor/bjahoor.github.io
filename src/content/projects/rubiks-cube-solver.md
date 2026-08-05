@@ -1,6 +1,6 @@
 ---
 title: "Rubik's Cube Solver"
-blurb: "LEGO EV3 robot programmed in RobotC, with a Python solving algorithm."
+blurb: "Built a LEGO EV3 robot, programmed in RobotC, and integrated a Python solving algorithm with formal design documentation."
 tags:
   - "Hardware"
   - "AI/ML"

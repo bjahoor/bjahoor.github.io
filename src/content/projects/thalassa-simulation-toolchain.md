@@ -1,5 +1,5 @@
 ---
-title: "High-Fidelity Simulation Toolchain"
+title: "Thalassa Robotics Simulation Toolchain"
 blurb: "High-fidelity Isaac Sim toolchain integrating optics and hydrodynamics it lacks."
 tags:
   - "Simulation"

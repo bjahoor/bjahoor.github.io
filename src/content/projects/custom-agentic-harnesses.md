@@ -11,6 +11,7 @@ stack:
   - "Claude Code"
   - "Docker"
 year: "2026"
+cover: "../../assets/images/xavier-cluster.jpg"
 repo: "https://github.com/bjahoor/xavier-llm-server"
 featured: false
 weight: 64

@@ -15,7 +15,7 @@ year: "2025"
 cover: "../../assets/images/construct-rover.jpg"
 repo: "https://github.com/bjahoor/ROS2_Construct_Rover"
 demo: "/demos/rover"
-featured: false
+featured: true
 weight: 84
 ---
 

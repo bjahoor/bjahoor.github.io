@@ -14,7 +14,7 @@ year: "2025"
 cover: "../../assets/images/ai-assistant.jpg"
 repo: "https://github.com/bjahoor/ai_roommate_assistant"
 demo: "/demos/assistant"
-featured: false
+featured: true
 weight: 94
 ---
 

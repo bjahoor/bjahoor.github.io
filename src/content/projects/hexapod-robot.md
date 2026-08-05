@@ -15,7 +15,7 @@ stack:
   - "UDP"
 year: "2025"
 cover: "../../assets/images/project-hexapod.jpg"
-featured: false
+featured: true
 weight: 96
 ---
 

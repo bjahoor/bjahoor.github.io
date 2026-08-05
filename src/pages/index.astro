@@ -99,14 +99,32 @@ const experience = (await getCollection("experience"))
 
     <div class="grid gap-5 sm:grid-cols-2">
       {featured.map((p) => <ProjectCard project={p} large />)}
-    </div>
 
-    <SectionLink
-      href="/projects"
-      label="Browse every project"
-      meta={`${projects.length} projects`}
-      variant="display"
-      class="mt-14"
-    />
+      {/*
+        Last cell of the grid, spanning both columns. Same border, surface,
+        radius and hover as a project card, and inside the same `gap-5`, so it
+        reads as the row that follows the work rather than as a separate
+        section asking for a click.
+      */}
+      <a
+        href="/projects"
+        class="group flex items-center justify-between gap-6 rounded-lg border border-line bg-surface px-7 py-8 transition-colors duration-300 hover:border-line-bright focus-visible:border-accent sm:col-span-2"
+      >
+        <span>
+          <span class="block font-mono text-xs tracking-widest text-fg-dim uppercase">
+            {projects.length} projects
+          </span>
+          <span class="mt-2 block text-2xl font-semibold tracking-tight text-fg transition-colors group-hover:text-accent sm:text-3xl">
+            Browse every project
+          </span>
+        </span>
+        <span
+          aria-hidden="true"
+          class="shrink-0 text-3xl text-accent transition-transform duration-300 group-hover:translate-x-2 sm:text-4xl"
+        >
+          →
+        </span>
+      </a>
+    </div>
   </section>
 </Base>

@@ -29,8 +29,8 @@ from api import startup, pick_and_place, shutdown
 
 robot = startup()
 
-pick_and_place("d2", "d4", robot)
-pick_and_place("g8", "f6", robot)
+pick_and_place("e2", "e4", robot)    # pawn forward two
+pick_and_place("g8", "f6", robot)    # knight out
 
 shutdown(robot)
 ```

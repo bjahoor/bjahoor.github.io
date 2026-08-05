@@ -34,7 +34,10 @@ const isDisplay = variant === "display";
         className,
       ]}
     >
-      <span class="block font-mono text-sm text-fg-dim">{meta}</span>
+      {/* The count carries the accent instead of the label: purple above and
+          purple arrow to the right frames the headline without turning 60px of
+          type into a colour field. */}
+      <span class="block font-mono text-sm text-accent">{meta}</span>
       <span class="mt-3 flex items-center justify-between gap-6">
         <span class="text-4xl font-bold tracking-tight text-fg transition-colors group-hover:text-accent sm:text-6xl">
           {label}

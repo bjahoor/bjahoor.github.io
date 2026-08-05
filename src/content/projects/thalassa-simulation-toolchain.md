@@ -1,6 +1,6 @@
 ---
 title: "Thalassa Robotics Simulation Toolchain"
-blurb: "High-fidelity Isaac Sim toolchain integrating optics and hydrodynamics it lacks."
+blurb: "High-fidelity Isaac Sim toolchain adding the optics, hydrodynamics and servo-accurate motion control it lacks."
 tags:
   - "Simulation"
   - "Controls"

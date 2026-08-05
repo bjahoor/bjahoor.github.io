@@ -6,6 +6,10 @@
 %-------------------------------------------------------------------------------
 \documentclass[letterpaper,10pt]{article}
 
+% Computer Modern ships fixed design sizes topping out at 24.88pt (\Huge).
+% Ask for more and LaTeX silently substitutes 24.88 instead. fix-cm exposes the
+% scalable versions, which is what lets the name be set to an arbitrary size.
+\usepackage{fix-cm}
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
@@ -115,7 +119,7 @@
 \noindent
 \begin{minipage}[t]{0.56\textwidth}
   \vspace{0pt}
-  \textbf{\Huge \scshape \color{uwpurple}Brandon Jahoor}\\[0pt]
+  \textbf{\fontsize{25.59}{25.59}\selectfont \scshape \color{uwpurple}Brandon Jahoor}\\[2pt]
   \textit{\small I give robots the ability to perceive, decide, and act}
 \end{minipage}%
 \hfill

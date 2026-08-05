@@ -27,9 +27,11 @@ On top sits a three-call Python API that plugs straight into a chess engine:
 ```python
 from api import startup, pick_and_place, shutdown
 
-robot = startup()                         # uses config/values.py
-pick_and_place("e2", "e4", robot)         # pick, place, robot → True
-pick_and_place("e7", "e5", robot)
+robot = startup()
+
+pick_and_place("d2", "d4", robot)
+pick_and_place("g8", "f6", robot)
+
 shutdown(robot)
 ```
 

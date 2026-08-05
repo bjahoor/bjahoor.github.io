@@ -16,13 +16,10 @@ cover: "../../assets/images/project-weeder.jpg"
 featured: false
 weight: 76
 ---
+Work at BHF Robotics on an autonomous electric weeding robot, across both software and hardware.
 
-Work at BHF Robotics on an autonomous electric weeding robot, spanning both the software and the
-physical build.
+I implemented the **ROS 2 autodrive** routine and trained the **deep-learning weed/crop detector**.
 
-I wrote the **ROS 2 autodrive** routine that navigates the field and trained the **weed/crop detection
-model** that decides what gets removed. The asymmetry matters: missing a weed costs a little, misclassifying
-a crop costs the harvest.
-
-On hardware I took parts through the whole cycle — CAD, **FEA in SolidWorks**, manufacturing drawings,
-sourcing fabrication, and installation.
+On hardware I designed parts in CAD, validated them with **FEA in SolidWorks**, produced manufacturing
+drawings, sourced fabrication and installed the results, then debugged and improved the robot's
+mechanical, electrical and software systems.

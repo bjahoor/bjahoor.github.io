@@ -12,10 +12,5 @@ cover: "../../assets/images/project-stm32.jpg"
 featured: false
 weight: 48
 ---
-
-A custom operating system built in **C** on an **STM32 Nucleo** board — task scheduling, context
-switching, and memory management on bare metal.
-
-Writing a scheduler is the fastest way to stop treating an RTOS as magic. Once you have hand-saved a
-register set on a context switch, every subsequent conversation about real-time behaviour and priority
-inversion is grounded in something concrete.
+A custom real-time operating system written in **C** on an **STM32 Nucleo** board, covering task
+scheduling, context switching and memory management on bare metal.

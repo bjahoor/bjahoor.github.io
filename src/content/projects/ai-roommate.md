@@ -17,14 +17,9 @@ demo: "/demos/assistant"
 featured: true
 weight: 94
 ---
+An assistant running on a **Jetson Orin Nano** that answers questions about what its camera sees.
 
-Most chat assistants are blind. This one runs on a **Jetson Orin Nano** and grounds every answer
-in a live camera feed.
-
-**Ultralytics YOLOv8s** continuously detects objects in view and maintains a running scene state. That
-state is injected into the context of a locally-hosted **Qwen2.5-0.5B** running under **Ollama**, so the
-model can answer questions about what is actually present rather than guessing.
-
-The whole thing is a **FastAPI** service — endpoints for video streaming, detection state, and chat — with
-a separate YOLO inference server behind it. Nothing leaves the device; the LLM and the detector both run
-locally, which is the entire argument for doing this at the edge instead of calling an API.
+**Ultralytics YOLOv8s** detects objects in view and maintains a running scene state, which is injected
+into the context of a locally-hosted **Qwen2.5-0.5B** under **Ollama**. The service is built on
+**FastAPI**, with a separate YOLO inference server behind it. Both the detector and the model run
+on-device.

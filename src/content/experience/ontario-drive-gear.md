@@ -9,4 +9,5 @@ robotics: false
 bullets:
   - "Led QA for prototype gear launches."
   - "Performed high-precision GD&T inspections."
+  - "Awarded the AGMA Foundation Scholarship."
 ---

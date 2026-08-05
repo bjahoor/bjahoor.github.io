@@ -12,9 +12,5 @@ cover: "../../assets/images/project-arcade.jpg"
 featured: false
 weight: 22
 ---
-
-A fully functional retro arcade console built on a **Raspberry Pi**, with a wide library of games
-and real arcade controls.
-
-Not a research project. It is on here because it is the kind of thing I build for fun, and the wiring and
-Linux configuration were real work.
+A retro arcade console built on a **Raspberry Pi**, with a wide selection of classic games and real
+arcade controls.

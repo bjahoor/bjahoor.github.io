@@ -17,11 +17,7 @@ cover: "../../assets/images/project-arm.jpg"
 featured: false
 weight: 68
 ---
+A three-degree-of-freedom arm designed in **SolidWorks**, prototyped and 3D printed.
 
-A three-degree-of-freedom arm designed from nothing in **SolidWorks** and 3D-printed.
-
-Motors are driven over **PWM**, internal communication runs on **ROS 2** on a **Raspberry Pi** under Ubuntu,
-and an overhead camera feeds **OpenCV** doing HSV-space colour thresholding to classify tokens in real time.
-
-HSV rather than RGB is the whole trick — it separates colour from brightness, so the classifier keeps
-working when someone turns on the room lights.
+Motors are driven over **PWM** with **ROS 2** running on a **Raspberry Pi**, and an overhead camera feeds
+**OpenCV** for token colour detection.

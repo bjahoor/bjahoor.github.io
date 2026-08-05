@@ -11,9 +11,4 @@ cover: "../../assets/images/project-light.jpg"
 featured: false
 weight: 12
 ---
-
-A custom lighting fixture built for myself at the end of my term at **RAB Design**, using the
-app-driven lighting controls I had spent four months validating.
-
-A small project, and a good way to close out a co-op — taking something you tested professionally and
-building your own version of it.
+A custom app-controlled lighting fixture, built at the end of my term at **RAB Design**.

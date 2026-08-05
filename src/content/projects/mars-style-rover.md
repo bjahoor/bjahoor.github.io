@@ -15,14 +15,11 @@ cover: "../../assets/images/project-rover.jpg"
 featured: false
 weight: 78
 ---
+The University of Waterloo Robotics Team builds a Mars-style rover for the annual **CIRC** competition.
+I contributed two pieces.
 
-The University of Waterloo Robotics Team builds a Mars-style rover for the annual **CIRC**
-competition. I contributed two pieces.
+The first was the **ROS 2 RealSense** RGB-D stream, with custom compression and dynamic resolution
+selection for a bandwidth-limited wireless link.
 
-The first was the **RealSense** camera stream. Raw RGB-D saturates a wireless link immediately, so I added
-custom compression and a rolling resolution selector that trades detail for bandwidth as conditions change
-— the operator keeps a usable feed instead of a frozen one.
-
-The second was the **6-wheel rocker-bogie** drivetrain: modelling it and solving both forward and inverse
-kinematics. Rocker-bogie geometry is what keeps all six wheels loaded over uneven ground. Everything ran
-on a **Jetson** aboard the rover.
+The second was modelling the **6-wheel rocker-bogie** drivetrain and solving its forward and inverse
+kinematics, running on an **Nvidia Jetson**.

@@ -29,7 +29,7 @@ const { label, href, external = false } = Astro.props;
 
   <span
     role="tooltip"
-    class="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2.5 w-64 -translate-x-1/2 rounded-md border border-line-bright bg-surface-2 px-3.5 py-2.5 text-left text-[13px] leading-snug text-fg-muted opacity-0 shadow-xl transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
+    class="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2.5 hidden w-64 max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-md border border-line-bright bg-surface-2 px-3.5 py-2.5 text-left text-[13px] leading-snug text-fg-muted opacity-0 shadow-xl transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100 sm:block"
   >
     <slot />
   </span>

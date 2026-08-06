@@ -1,0 +1,36 @@
+---
+interface Props {
+  /** The highlighted word in the sentence. */
+  label: string;
+  /** Where clicking goes. The note explains; the link is the payoff. */
+  href: string;
+  /** External links open in a new tab. */
+  external?: boolean;
+}
+
+const { label, href, external = false } = Astro.props;
+---
+
+{/*
+  The note is a sibling of the link, not a child: putting content inside the
+  anchor would make the whole card a click target and swallow the layout. A
+  dotted underline is the only affordance — on a phone there is no hover, so
+  tapping just follows the link and the note never needs to appear.
+*/}
+<span class="group relative inline-block">
+  <a
+    href={href}
+    target={external ? "_blank" : undefined}
+    rel={external ? "noopener" : undefined}
+    class="text-fg whitespace-nowrap underline decoration-line-bright decoration-dotted underline-offset-4 transition-colors hover:text-accent hover:decoration-accent focus-visible:text-accent"
+  >
+    {label}
+  </a>
+
+  <span
+    role="tooltip"
+    class="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2.5 w-64 -translate-x-1/2 rounded-md border border-line-bright bg-surface-2 px-3.5 py-2.5 text-left text-[13px] leading-snug text-fg-muted opacity-0 shadow-xl transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
+  >
+    <slot />
+  </span>
+</span>

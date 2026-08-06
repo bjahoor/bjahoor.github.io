@@ -49,6 +49,8 @@ const experience = defineCollection({
     // Sorts the timeline. Higher is more recent.
     order: z.number(),
     robotics: z.boolean().default(true),
+    // Employer's own site, linked from the org name.
+    url: z.url().optional(),
     bullets: z.array(z.string()).default([]),
   }),
 });

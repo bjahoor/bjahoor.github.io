@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import SectionLink from "../components/SectionLink.astro";
+import HoverNote from "../components/HoverNote.astro";
 
 const projects = await getCollection("projects");
 const featured = projects
@@ -31,14 +32,58 @@ const experience = (await getCollection("experience"))
 
     <p class="mt-8 max-w-2xl text-lg leading-relaxed text-fg-muted">
       Four robotics co-ops across simulation, controls, manipulation, and
-      autonomy. I've&nbsp;been part of a <span class="text-fg">Bay Area</span> robotics
-      startup, the <span class="text-fg">UW RoboHub</span> research group, multiple <span
-        class="text-fg">Stealth Startups</span
-      >, and multiple <span class="text-fg">Design Teams</span>. At home I run my own <span
-        class="text-fg whitespace-nowrap">SO-ARM101</span
-      > and <span class="text-fg">Isaac Sim</span> setup, training <span
-        class="text-fg">RL</span
-      > policies and finetuning <span class="text-fg">VLAs</span>.
+      autonomy. I've&nbsp;been part of a <HoverNote
+        label="Bay Area"
+        href="https://f.inc/portfolio/thalassa-robotics/"
+        external
+      >
+        Thalassa Robotics, a San Francisco subsea robotics startup in the <strong
+          class="text-fg">Founders, Inc</strong
+        > portfolio.
+      </HoverNote> robotics startup, the <HoverNote
+        label="UW RoboHub"
+        href="/projects/uw-robohub-research"
+      >
+        Waterloo's robotics research facility. I streamed body-worn Xsens IMU
+        motion into ROS 2 there.
+      </HoverNote> research group, multiple <HoverNote
+        label="Stealth Startups"
+        href="/projects/chess-robot"
+      >
+        A chess-playing robot arm, and RL control policies trained in Isaac Lab.
+      </HoverNote>, and multiple <HoverNote
+        label="Design Teams"
+        href="/projects/mars-style-rover"
+      >
+        UW Robotics Team's Mars rover, and WATonomous' autonomous navigation
+        stack.
+      </HoverNote>. At home I run my own <HoverNote
+        label="SO-ARM101"
+        href="https://github.com/TheRobotStudio/SO-ARM100"
+        external
+      >
+        Open-source robot arm from TheRobotStudio, driven through Hugging Face's
+        LeRobot.
+      </HoverNote> and <HoverNote
+        label="Isaac Sim"
+        href="https://developer.nvidia.com/isaac/sim"
+        external
+      >
+        NVIDIA's physics-accurate robotics simulator. Isaac Lab runs GPU
+        training on top of it.
+      </HoverNote> setup, training <HoverNote
+        label="RL"
+        href="/projects/robot-arm-simulation"
+      >
+        Reinforcement learning — policies trained in simulation, then checked
+        for sim-to-real transfer.
+      </HoverNote> policies and finetuning <HoverNote
+        label="VLAs"
+        href="/projects/vla-finetuning"
+      >
+        Vision-language-action models: camera frames and an instruction in,
+        joint commands out.
+      </HoverNote>.
     </p>
 
     <div class="mt-10 flex flex-wrap gap-3">
@@ -74,7 +119,18 @@ const experience = (await getCollection("experience"))
         experience.map((e) => (
           <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
             <div>
-              <span class="font-medium text-fg">{e.data.org}</span>
+              {e.data.url ? (
+                <a
+                  href={e.data.url}
+                  target="_blank"
+                  rel="noopener"
+                  class="font-medium text-fg transition-colors hover:text-accent"
+                >
+                  {e.data.org}
+                </a>
+              ) : (
+                <span class="font-medium text-fg">{e.data.org}</span>
+              )}
               <span class="text-fg-muted"> — {e.data.role}</span>
             </div>
             <span class="shrink-0 font-mono text-sm text-fg-dim">

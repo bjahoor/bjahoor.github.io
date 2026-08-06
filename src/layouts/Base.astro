@@ -25,6 +25,7 @@ const nav = [
   { href: "/experience", label: "Experience" },
   { href: "/brandon_jahoor_resume.pdf", label: "Resume", external: true },
   { href: "https://linkedin.com/in/bjahoor", label: "LinkedIn", external: true },
+  { href: "https://github.com/bjahoor", label: "GitHub", external: true },
 ];
 
 const path = Astro.url.pathname;
@@ -72,7 +73,15 @@ const path = Astro.url.pathname;
           bjahoor
         </a>
 
-        <nav class="flex items-center gap-4 sm:gap-6" aria-label="Main">
+        {/*
+          Five items plus the wordmark is wide for a phone, so the labels drop
+          a size and the gaps tighten below sm. The row can still scroll rather
+          than push the page into horizontal overflow on the narrowest screens.
+        */}
+        <nav
+          class="flex items-center gap-3 overflow-x-auto sm:gap-6"
+          aria-label="Main"
+        >
           {
             nav.map((item) => (
               <a
@@ -81,7 +90,7 @@ const path = Astro.url.pathname;
                 rel={item.external ? "noopener" : undefined}
                 aria-current={path.startsWith(item.href) && !item.external ? "page" : undefined}
                 class:list={[
-                  "font-mono text-sm transition-colors hover:text-fg",
+                  "font-mono text-xs whitespace-nowrap transition-colors hover:text-fg sm:text-sm",
                   path.startsWith(item.href) && !item.external
                     ? "text-fg"
                     : "text-fg-muted",

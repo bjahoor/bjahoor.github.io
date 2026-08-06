@@ -15,5 +15,5 @@ cover: "../../assets/images/project-ai-object-detection.jpg"
 repo: "https://github.com/bjahoor/ai_cam_package"
 demo: "/demos/ai-cam"
 featured: true
-weight: 86
+weight: 93
 ---

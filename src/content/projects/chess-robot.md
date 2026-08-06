@@ -14,7 +14,7 @@ stack:
 year: "2026"
 cover: "../../assets/images/chess-board.jpg"
 featured: true
-weight: 92
+weight: 97
 ---
 A robotic arm that plays chess against a human opponent, built on a CAD-modified **SO-ARM101 follower
 arm** driven through **LeRobot** with **Placo** solving the inverse kinematics.

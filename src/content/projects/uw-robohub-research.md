@@ -13,7 +13,7 @@ stack:
 year: "2025"
 cover: "../../assets/images/project-robohub.jpg"
 featured: true
-weight: 90
+weight: 98
 ---
 
 I contributed to the development of the 7-axis Franka Emika Panda robotic arm. Paired with Xsens Awinda IMUs fixed to a human's body, running on ROS2, the project has the robot mimic the movements of a human arm.

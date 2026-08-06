@@ -1,6 +1,6 @@
 ---
 title: "UW RoboHub Research"
-blurb: "Retargeted human arm motion from body-worn Xsens IMUs onto a 7-axis Franka Emika Panda robotic arm."
+blurb: "Streamed human arm motion from body-worn Xsens IMUs into ROS 2 in real time, for retargeting onto a 7-axis Franka Emika Panda."
 tags:
   - "Manipulation"
   - "Perception"
@@ -16,4 +16,4 @@ featured: true
 weight: 98
 ---
 
-I contributed to the development of the 7-axis Franka Emika Panda robotic arm. Paired with Xsens Awinda IMUs fixed to a human's body, running on ROS2, the project has the robot mimic the movements of a human arm.
+I contributed to the development of the 7-axis Franka Emika Panda robotic arm. Paired with Xsens Awinda IMUs fixed to a human's body, running on ROS2, the project aims to have the robot mimic the movements of a human arm.

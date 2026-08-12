@@ -10,6 +10,7 @@ stack:
   - "Python"
   - "Controls"
 year: "2026"
+demo: "/demos/thalassa"
 cover: "../../assets/images/thalassa-turret.jpg"
 featured: true
 weight: 99

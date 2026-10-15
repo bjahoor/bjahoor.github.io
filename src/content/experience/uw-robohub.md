@@ -1,5 +1,5 @@
 ---
-role: "Robotics Research Assistant"
+role: "Robotics Software Engineering (Research Assistant)"
 org: "University of Waterloo RoboHub"
 location: "Ontario"
 start: "Sept 2025"

@@ -1,6 +1,7 @@
 ---
 role: "Robotics Software Engineering (Co-op)"
 org: "Thalassa Robotics"
+sector: "Subsea Robotics"
 location: "California"
 start: "Jan 2026"
 end: "April 2026"

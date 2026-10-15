@@ -43,6 +43,9 @@ const experience = defineCollection({
   schema: z.object({
     role: z.string(),
     org: z.string(),
+    // What the org does, in a word or two. Shown beside the name, as on the
+    // resume ("Thalassa Robotics | Subsea Robotics").
+    sector: z.string().optional(),
     location: z.string().optional(),
     start: z.string(),
     end: z.string(),

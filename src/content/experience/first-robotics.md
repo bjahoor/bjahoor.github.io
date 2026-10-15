@@ -1,6 +1,7 @@
 ---
 role: "Youth Robotics Mentor"
 org: "FIRST Robotics (FLL)"
+sector: "Youth Robotics"
 location: "Ontario"
 start: "Jan 2021"
 end: "Dec 2023"

@@ -1,6 +1,7 @@
 ---
 role: "Mechatronics Engineering (Co-op)"
 org: "RAB Design Lighting"
+sector: "Lighting"
 location: "Ontario"
 start: "Sept 2024"
 end: "Dec 2024"

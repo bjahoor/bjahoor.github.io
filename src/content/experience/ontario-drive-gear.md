@@ -1,6 +1,7 @@
 ---
 role: "Quality Assurance (Co-op)"
 org: "Ontario Drive & Gear"
+sector: "Gear Manufacturing"
 location: "Ontario"
 start: "Jan 2024"
 end: "Apr 2024"

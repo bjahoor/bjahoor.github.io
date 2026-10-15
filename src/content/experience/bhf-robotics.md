@@ -1,6 +1,7 @@
 ---
 role: "Robotics Engineering (Co-op)"
 org: "BHF Robotics"
+sector: "Agricultural Robotics"
 location: "Ontario"
 start: "May 2025"
 end: "June 2025"

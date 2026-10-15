@@ -1,6 +1,7 @@
 ---
 role: "Robotics Software Engineering (Research Assistant)"
 org: "University of Waterloo RoboHub"
+sector: "Robotics Research Lab"
 location: "Ontario"
 start: "Sept 2025"
 end: "Dec 2025"

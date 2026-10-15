@@ -1,6 +1,7 @@
 ---
 role: "Robotics Engineering (Co-op)"
 org: "University of Waterloo Robotics Team"
+sector: "Mars Rover Team"
 location: "Ontario"
 start: "June 2025"
 end: "Aug 2025"

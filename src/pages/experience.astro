@@ -49,6 +49,9 @@ const hasBody = (e: (typeof all)[number]) => (e.body ?? "").trim().length > 0;
                   ) : (
                     e.data.org
                   )}
+                  {e.data.sector && (
+                    <span class="font-normal text-fg-dim"> · {e.data.sector}</span>
+                  )}
                 </h2>
                 <span class="shrink-0 font-mono text-sm text-fg-dim">
                   {e.data.start} – {e.data.end}

@@ -1,6 +1,7 @@
 ---
 role: "Electrical Engineering (Co-op)"
 org: "Jule / eCAMION"
+sector: "EV Charging"
 location: "Ontario"
 start: "Feb 2022"
 end: "June 2022"

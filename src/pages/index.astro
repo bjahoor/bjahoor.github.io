@@ -131,6 +131,9 @@ const experience = (await getCollection("experience"))
               ) : (
                 <span class="font-medium text-fg">{e.data.org}</span>
               )}
+              {e.data.sector && (
+                <span class="text-fg-dim"> · {e.data.sector}</span>
+              )}
               <span class="text-fg-muted"> — {e.data.role}</span>
             </div>
             <span class="shrink-0 font-mono text-sm text-fg-dim">

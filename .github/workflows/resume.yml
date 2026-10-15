@@ -25,13 +25,13 @@ jobs:
       - name: Compile resume
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: resume.tex
+          root_file: brandon_jahoor_resume.tex
           working_directory: resume
 
       - name: Check it is still one page
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
-          pages=$(pdfinfo resume/resume.pdf | awk '/^Pages:/ {print $2}')
+          pages=$(pdfinfo resume/brandon_jahoor_resume.pdf | awk '/^Pages:/ {print $2}')
           echo "Resume is $pages page(s)."
           if [ "$pages" -ne 1 ]; then
             echo "::error::Resume must be exactly 1 page, got $pages."
@@ -42,5 +42,5 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: resume
-          path: resume/resume.pdf
+          path: resume/brandon_jahoor_resume.pdf
           if-no-files-found: error

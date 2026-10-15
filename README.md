@@ -84,10 +84,10 @@ original is 4 MB and buys nothing on a page that never renders it above 800.
 ## Resume
 
 The resume is LaTeX, not a Word export. Source of truth is
-[`resume/resume.tex`](resume/resume.tex).
+[`resume/brandon_jahoor_resume.tex`](resume/brandon_jahoor_resume.tex).
 
 ```bash
-cd resume && latexmk -pdf resume.tex
+cd resume && latexmk -pdf brandon_jahoor_resume.tex
 ```
 
 CI compiles it on every deploy and copies the result to `/brandon_jahoor_resume.pdf`, so the
@@ -105,8 +105,8 @@ src/
   components/           ProjectCard.astro, CoverImage.astro
   pages/                routes
   assets/images/        media, processed at build time
-public/                 served verbatim — just the compiled resume PDF
-resume/resume.tex       resume source
+public/                 served verbatim — resume PDF is copied in at deploy
+resume/brandon_jahoor_resume.tex  resume source
 ```
 
 No UI framework. The only interactive piece is the tag filter on `/projects`,

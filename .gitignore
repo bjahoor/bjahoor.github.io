@@ -21,3 +21,6 @@ resume/build.log
 # macOS / editor cruft
 .DS_Store
 resume/status.json
+
+# resume PDF is copied into public/ at deploy, never committed there
+public/brandon_jahoor_resume.pdf

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Live preview for resume.tex.
+# Live preview for brandon_jahoor_resume.tex.
 #
 #   ./watch.sh            → http://localhost:8080/preview.html
 #   ./watch.sh 9000       → pick another port
@@ -20,9 +20,9 @@ status () {  # status <building|ok|err> [pages] [error]
 
 build () {
   status building
-  if latexmk -pdf -interaction=nonstopmode resume.tex >build.log 2>&1; then
+  if latexmk -pdf -interaction=nonstopmode brandon_jahoor_resume.tex >build.log 2>&1; then
     local p
-    p=$(pdfinfo resume.pdf 2>/dev/null | awk '/^Pages:/ {print $2}')
+    p=$(pdfinfo brandon_jahoor_resume.pdf 2>/dev/null | awk '/^Pages:/ {print $2}')
     status ok "${p:-0}"
     if [ "${p:-0}" -eq 1 ]; then
       echo "  ✓ $(date +%H:%M:%S)  1 page"
@@ -54,11 +54,11 @@ build
 
 # inotifywait if available (instant); otherwise poll the mtime once a second.
 if command -v inotifywait >/dev/null 2>&1; then
-  while inotifywait -q -e close_write,move_self resume.tex >/dev/null 2>&1; do build; done
+  while inotifywait -q -e close_write,move_self brandon_jahoor_resume.tex >/dev/null 2>&1; do build; done
 else
-  last=$(stat -c %Y resume.tex)
+  last=$(stat -c %Y brandon_jahoor_resume.tex)
   while sleep 1; do
-    now=$(stat -c %Y resume.tex 2>/dev/null) || continue
+    now=$(stat -c %Y brandon_jahoor_resume.tex 2>/dev/null) || continue
     [ "$now" != "$last" ] && { last=$now; build; }
   done
 fi

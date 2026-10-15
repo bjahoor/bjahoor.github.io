@@ -26,10 +26,10 @@
 <body>
   <header>
     <span class="dot" id="dot"></span>
-    <span id="msg">watching resume.tex…</span>
+    <span id="msg">watching brandon_jahoor_resume.tex…</span>
     <span id="pages"></span>
   </header>
-  <iframe id="pdf" src="resume.pdf"></iframe>
+  <iframe id="pdf" src="brandon_jahoor_resume.pdf"></iframe>
 
 <script>
 // Polls status.json, which the watcher rewrites after every rebuild.
@@ -60,7 +60,7 @@ async function poll() {
     }
 
     if (s.stamp && s.stamp !== seen) {
-      if (seen !== null) frame.src = 'resume.pdf?t=' + s.stamp;
+      if (seen !== null) frame.src = 'brandon_jahoor_resume.pdf?t=' + s.stamp;
       seen = s.stamp;
     }
   } catch (e) {

@@ -1,5 +1,5 @@
 ---
-role: "Robotics Engineering (Co-op)"
+role: "Robotics Software Engineering (Co-op)"
 org: "Thalassa Robotics"
 location: "California"
 start: "Jan 2026"

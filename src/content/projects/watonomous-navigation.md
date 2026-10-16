@@ -15,7 +15,7 @@ stack:
 year: "2026"
 cover: "../../assets/images/project-watonomous.jpg"
 repo: "https://github.com/bjahoor/wato_asd_navigation"
-featured: true
+featured: false
 weight: 92
 ---
 

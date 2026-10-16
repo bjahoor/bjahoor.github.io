@@ -14,6 +14,6 @@ year: "2025"
 cover: "../../assets/images/project-ai-object-detection.jpg"
 repo: "https://github.com/bjahoor/ai_cam_package"
 demo: "/demos/ai-cam"
-featured: true
+featured: false
 weight: 93
 ---

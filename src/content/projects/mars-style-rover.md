@@ -12,7 +12,7 @@ stack:
   - "Kinematics"
 year: "2025"
 cover: "../../assets/images/project-rover.jpg"
-featured: true
+featured: false
 weight: 90
 ---
 

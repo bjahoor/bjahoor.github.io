@@ -13,7 +13,7 @@ stack:
   - "Deep Learning"
 year: "2025"
 cover: "../../assets/images/project-weeder.jpg"
-featured: true
+featured: false
 weight: 89
 ---
 

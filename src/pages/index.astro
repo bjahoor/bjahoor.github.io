@@ -31,8 +31,12 @@ const experience = (await getCollection("experience"))
     </h1>
 
     <p class="mt-8 max-w-2xl text-lg leading-relaxed text-fg-muted">
-      Four robotics co-ops across simulation, controls, manipulation, and
-      autonomy. I've&nbsp;been part of a <HoverNote
+      Five robotics co-ops in, and I've fallen in love with <HoverNote
+        label="humanoids"
+        href="/projects/axibo-physical-ai"
+      >
+        On the Physical AI team at Axibo AI, a Canadian humanoid startup.
+      </HoverNote> (not literally). I've&nbsp;been part of a <HoverNote
         label="Bay Area"
         href="https://f.inc/"
         external
@@ -44,46 +48,32 @@ const experience = (await getCollection("experience"))
         label="UW RoboHub"
         href="/projects/uw-robohub-research"
       >
-        Waterloo's robotics research facility. I streamed body-worn Xsens IMU
-        motion into ROS 2 there.
+        Waterloo's robotics research facility. I streamed Xsens motion capture
+        into ROS 2 there.
       </HoverNote> research group, multiple <HoverNote
         label="Stealth Startups"
         href="/projects/chess-robot"
       >
         A chess-playing robot arm, and RL control policies trained in Isaac Lab.
       </HoverNote>, and multiple <HoverNote
-        label="Design Teams"
+        label="Student Teams"
         href="/projects/mars-style-rover"
       >
         UW Robotics Team's Mars rover, and WATonomous' autonomous navigation
         stack.
-      </HoverNote>. At home I run my own <HoverNote
-        label="SO-ARM101"
-        href="https://huggingface.co/docs/lerobot/so101"
+      </HoverNote>. At home I run my own unimanual robotic arm setup, with <HoverNote
+        label="Jetson"
+        href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/"
         external
       >
-        Open-source robot arm from TheRobotStudio, driven through Hugging Face's
-        LeRobot.
-      </HoverNote> and <HoverNote
-        label="Isaac Sim"
-        href="https://developer.nvidia.com/isaac/sim"
+        NVIDIA's edge-AI computers. Policies run on the robot, not in the cloud.
+      </HoverNote> edge computing and <HoverNote
+        label="RTX"
+        href="https://www.nvidia.com/en-us/geforce/graphics-cards/"
         external
       >
-        NVIDIA's physics-accurate robotics simulator. Isaac Lab runs GPU
-        training on top of it.
-      </HoverNote> setup, training <HoverNote
-        label="RL"
-        href="/projects/robot-arm-simulation"
-      >
-        Reinforcement learning — policies trained in simulation, then checked
-        for sim-to-real transfer.
-      </HoverNote> policies and finetuning <HoverNote
-        label="VLAs"
-        href="/projects/vla-finetuning"
-      >
-        Vision-language-action models: camera frames and an instruction in,
-        joint commands out.
-      </HoverNote>.
+        NVIDIA desktop GPUs, used for simulation and policy training.
+      </HoverNote> GPUs for simulations and training policies.
     </p>
 
     <div class="mt-10 flex flex-wrap gap-3">

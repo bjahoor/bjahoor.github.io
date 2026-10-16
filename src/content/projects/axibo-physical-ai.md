@@ -10,4 +10,4 @@ featured: true
 weight: 101
 ---
 Co-op term on the **Physical AI** team at **Axibo AI**. We are building humanoids in Waterloo, Ontario,
-and public releases are coming very, very soon!
+and public releases are coming very soon!

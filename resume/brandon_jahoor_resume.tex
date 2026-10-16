@@ -53,6 +53,8 @@
 \titleformat{\section}{
   \vspace{-4pt}\scshape\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+% Tighter than titlesec's default space above and below each heading
+\titlespacing*{\section}{0pt}{6pt}{11pt}
 
 % Machine-readable PDF so ATS keyword extraction works
 \pdfgentounicode=1
@@ -273,12 +275,11 @@ Engineering Honours, \href{https://uwaterloo.ca/academic-calendar/undergraduate-
 
     \resumeSubHeadingListEnd
 %---------- CLOSING ----------
-\vspace{-12pt}
-\rule{\textwidth}{0.8pt}
-\vspace{7pt}
-\begin{center}
+\vspace{-18pt}
+\noindent\rule{\textwidth}{0.8pt}\par
+\vspace{11pt}
+{\centering
   {\rmfamily\Large\bfseries\itshape See my portfolio:\
-  \textcolor{uwpurple}{\href{https://bjahoor.github.io}{\underline{bjahoor.github.io}}}}
-\end{center}
+  \textcolor{uwpurple}{\href{https://bjahoor.github.io}{\underline{bjahoor.github.io}}}}\par}
 
 \end{document}

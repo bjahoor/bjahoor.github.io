@@ -9,5 +9,5 @@ cover: "../../assets/images/axibo-humanoid.jpg"
 featured: true
 weight: 101
 ---
-Co-op term on the **Physical AI** team at **Axibo AI**. We are building humanoids in Waterloo, Ontario,
-and public releases are coming very soon!
+Co-op term on the **Physical AI** team at **Axibo AI**. We are building humanoids in Waterloo, Ontario.
+Stay tuned as we start to become more public!

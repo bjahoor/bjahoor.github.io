@@ -176,14 +176,16 @@ Engineering Honours, \href{https://uwaterloo.ca/academic-calendar/undergraduate-
 
     \resumeSubheading
       {Robotics Software Engineering (Co-op)}{Sept 2026 -- April 2027}
-      {Axibo AI $|$ Humanoids $|$ \stlink{https://www.axibo.com/}}{Ontario}
+      {Axibo AI $|$ Humanoids $|$ \stlink{https://www.axibo.com/} $\cdot$ \pflink{https://bjahoor.github.io/projects/axibo-physical-ai}}{Ontario}
       \resumeItemListStart
-        \resumeItem{Fine-tune SOTA VLAs (\textbf{$\pi_{0.5}$}, \textbf{DM0.5}, \textbf{GR00T N1.7}) as generalizable bimanual and whole-body policies, both integrated with the \textbf{WBC} and locomotion policies.}
-        \resumeItem{Engineer batched synthetic data generation for delta-EE bimanual \textbf{cross-embodiment} in \textbf{Genesis}, \textbf{Isaac} and \textbf{MuJoCo}, with augmentation and domain randomization.}
-        \resumeItem{Develop the custom \textbf{UMI} data collection pipeline and optimize its training recipes.}
-        \resumeItem{Develop and own training on a custom \textbf{openpi} fork (\textbf{JAX/Orbax}) and \textbf{PyTorch}, maximizing use of public data, with sharded cloud training and recipes tuned to cut compute cost and speed up iteration.}
+        \resumeItem{Fine-tune, evaluate and deploy SOTA VLAs (\href{https://www.physicalintelligence.company/blog/pi05}{\textbf{\boldmath$\pi_{0.5}$}}, \href{https://developer.nvidia.com/isaac/gr00t}{\textbf{GR00T N1.7}}, \href{https://www.dexmal.com/models/dm0.5}{\textbf{DM0.5}}) end-to-end as generalizable bimanual and whole-body policies, both integrated with the \textbf{WBC} and locomotion policies, with a focus on cross-embodiment and sim-to-real.}
+        \resumeItem{Created and designed a batched synthetic data generation toolchain for delta-EE bimanual policies using \href{https://genesis-world.readthedocs.io/en/latest/}{\textbf{Genesis World}}, \href{https://developer.nvidia.com/isaac/sim}{\textbf{Isaac}}, \href{https://mujoco.org/}{\textbf{MuJoCo}} and \href{https://curobo.org/}{\textbf{cuRobo}} (motion planning). Features like augmentation, domain-randomization, noise improve \textbf{cross-embodiment}.}
+        \resumeItem{Accelerated SOTA VLA research iteration and cut compute cost with custom training pipelines and scripts forked from SOTA repos, primarily \href{https://github.com/Physical-Intelligence/openpi}{\textbf{openpi}} (\textbf{JAX/Orbax}) (\textbf{2.5$\times$} faster steps) and \href{https://github.com/NVIDIA/Isaac-GR00T}{\textbf{Isaac-GR00T}} (\textbf{PyTorch}), without sacrificing benchmarks.}
+        \resumeItem{Optimized VLA training through sharding across multi-datacenter GPUs, upgraded version pins, selective weight and optimizer-state quantization, partial backbone freezing/pruning, selective rematerialization and batched checkpointing.}
+        \resumeItem{Built batched sim evaluation toolchains with custom success criteria (per-component scoring with penalties) for SOTA bimanual \& whole-body policies, ran \textbf{sim-to-sim} \& \textbf{sim-to-real} evaluation on a variety of humanoids \& bimanual arms, and raised benchmark scores by tuning training recipes \& inference settings.}
+        \resumeItem{Optimizing real-time inference via \textbf{RTC} \& Mixture of Horizons (\textbf{MoH}), tuning denoising steps \& prediction horizons.}
+        \resumeItem{Productionizing the custom \textbf{UMI} pipeline and developed training recipes to maximize the efficacy of public data and synthetically generated data (including re-simulating public datasets with custom modifications) while minimizing required real-world data.}
         \resumeItem{Deploy bimanual and whole-body policies end-to-end, developing the deployment tooling, workflows and runtime as forks of SOTA systems, integrating \textbf{WBC} and \textbf{RTC}.}
-        \resumeItem{Design and run \textbf{sim-to-sim} and \textbf{sim-to-real} evaluation, raising benchmark scores by tuning training recipes and inference settings.}
         \resumeItem{Develop the team's \textbf{agent-centric} pipelines, workflows and tooling across the data, training and evaluation stack.}
         \resumeItem{Architect humanoid runtimes spanning \textbf{LLM/agent-harness} orchestration of VLA skills, VLA-driven whole-body control and manipulation policies, and an upper-body VLA with a lower-body locomotion policy, all coordinated through the \textbf{WBC}.}
       \resumeItemListEnd

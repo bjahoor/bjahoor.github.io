@@ -16,5 +16,5 @@ bullets:
   - "Built batched sim evaluation toolchains with custom success criteria (per-component scoring with penalties) for SOTA bimanual & whole-body policies, ran sim-to-sim & sim-to-real evaluation on a variety of humanoids & bimanual arms, and raised benchmark scores by tuning training recipes & inference settings."
   - "Optimizing real-time inference via RTC & Mixture of Horizons (MoH), tuning denoising steps & prediction horizons."
   - "Productionizing the custom UMI pipeline and developed training recipes to maximize the efficacy of public data and synthetically generated data (including re-simulating public datasets with custom modifications) while minimizing required real-world data."
-  - "Architected humanoid runtimes as forks of SOTA systems, from LLM/agent-harness orchestration of VLA skills to upper-body VLA + lower-body locomotion handoff through the WBC. Built toolchains, pipelines and workflows across the stack using agent-centric development."
+  - "Architected robotic runtimes with LLM/agent-harness orchestration, either sequencing VLA skills or driving the whole robot directly. Built toolchains, pipelines and workflows across the stack using agent-centric development."
 ---

@@ -161,12 +161,9 @@ Engineering Honours, \href{https://uwaterloo.ca/academic-calendar/undergraduate-
 \section{Skills}
  \begin{itemize}[leftmargin=0in, label={}]
     \small{\item{
-     \textbf{Robotics}{: Isaac Sim \& Lab, URDF/USD, ROS2, controls, IK/FK, Nav2, path planning} \\
-     \textbf{ML \& Perception}{: ACT, VLA, RL, LeRobot, Hugging Face, computer vision, OpenCV,
-       RealSense} \\
-     \textbf{Software}{: Python, C++, Docker, Linux/Ubuntu, Claude Code, llama.cpp, Ollama} \\
-     \textbf{Hardware \& Design}{: SolidWorks, 3D printing, SO-ARM101, Nvidia Jetson,
-       Raspberry Pi, prototyping}
+     \textbf{Robot Learning}{: VLAs ($\pi_{0.5}$, GR00T, SmolVLA), ACT, RL, imitation learning, cross-embodiment, sim-to-real, synthetic data} \\
+     \textbf{Sim \& Robotics}{: Isaac Sim/Lab, MuJoCo, Genesis, cuRobo, ROS2, WBC, URDF/USD, IK/FK} \\
+     \textbf{Software \& Infra}{: Python, C++, PyTorch, JAX, openpi, LeRobot, Docker, Linux, sharded training, Nvidia Jetson, Claude Code}
     }}
  \end{itemize}
 
@@ -185,7 +182,7 @@ Engineering Honours, \href{https://uwaterloo.ca/academic-calendar/undergraduate-
         \resumeItem{Built batched sim evaluation toolchains with custom success criteria (per-component scoring with penalties) for SOTA bimanual \& whole-body policies, ran \textbf{sim-to-sim} \& \textbf{sim-to-real} evaluation on a variety of humanoids \& bimanual arms, and raised benchmark scores by tuning training recipes \& inference settings.}
         \resumeItem{Optimizing real-time inference via \textbf{RTC} \& Mixture of Horizons (\textbf{MoH}), tuning denoising steps \& prediction horizons.}
         \resumeItem{Productionizing the custom \textbf{UMI} pipeline and developed training recipes to maximize the efficacy of public data and synthetically generated data (including re-simulating public datasets with custom modifications) while minimizing required real-world data.}
-        \resumeItem{Architected humanoid runtimes as forks of SOTA systems, from \textbf{LLM/agent-harness} orchestration of VLA skills to upper-body VLA + lower-body locomotion handoff through the \textbf{WBC}. Built toolchains, pipelines and workflows across the stack using \textbf{agent-centric} development.}
+        \resumeItem{Architected robotic runtimes with \textbf{LLM/agent-harness} orchestration, either sequencing VLA skills or driving the whole robot directly. Built toolchains, pipelines and workflows across the stack using \textbf{agent-centric} development.}
       \resumeItemListEnd
 
     \resumeSubheading

@@ -161,7 +161,7 @@ Engineering Honours, \href{https://uwaterloo.ca/academic-calendar/undergraduate-
 \section{Skills}
  \begin{itemize}[leftmargin=0in, label={}]
     \small{\item{
-     \textbf{Robot Learning}{: VLAs ($\pi_{0.5}$, GR00T, SmolVLA), ACT, RL, imitation learning, cross-embodiment, sim-to-real, synthetic data} \\
+     \textbf{Robot Learning}{: VLAs ($\pi_{0.5}$, GR00T, SmolVLA), ACT, RL, imitation learning, cross-embodiment, sim-to-real, co-training, synthetic data, WAM} \\
      \textbf{Sim \& Robotics}{: Isaac Sim/Lab, MuJoCo, Genesis, cuRobo, ROS2, WBC, URDF/USD, IK/FK} \\
      \textbf{Software \& Infra}{: Python, C++, PyTorch, JAX, openpi, LeRobot, Docker, Linux, sharded training, Nvidia Jetson, Claude Code}
     }}
@@ -175,7 +175,7 @@ Engineering Honours, \href{https://uwaterloo.ca/academic-calendar/undergraduate-
       {Robotics Software Engineering (Co-op)}{Sept 2026 -- April 2027}
       {Axibo AI $|$ Humanoids $|$ \stlink{https://www.axibo.com/} $\cdot$ \pflink{https://bjahoor.github.io/projects/axibo-physical-ai}}{Ontario}
       \resumeItemListStart
-        \resumeItem{Fine-tune, evaluate and deploy SOTA VLAs (\href{https://www.physicalintelligence.company/blog/pi05}{\textbf{\boldmath$\pi_{0.5}$}}, \href{https://developer.nvidia.com/isaac/gr00t}{\textbf{GR00T N1.7}}, \href{https://www.dexmal.com/models/dm0.5}{\textbf{DM0.5}}) end-to-end as generalizable bimanual and whole-body policies, both integrated with the \textbf{WBC} and locomotion policies, with a focus on cross-embodiment and sim-to-real.}
+        \resumeItem{Fine-tune, evaluate and deploy SOTA VLAs (\href{https://www.physicalintelligence.company/blog/pi05}{\textbf{\boldmath$\pi_{0.5}$}}, \href{https://developer.nvidia.com/isaac/gr00t}{\textbf{GR00T N1.7}}, \href{https://www.dexmal.com/models/dm0.5}{\textbf{DM0.5}}) end-to-end as generalizable bimanual and whole-body policies, both integrated with the \textbf{WBC} and locomotion policies, with a focus on cross-embodiment, sim-to-real, and co-training.}
         \resumeItem{Created and designed a batched synthetic data generation toolchain for delta-EE bimanual policies using \href{https://genesis-world.readthedocs.io/en/latest/}{\textbf{Genesis World}}, \href{https://developer.nvidia.com/isaac/sim}{\textbf{Isaac}}, \href{https://mujoco.org/}{\textbf{MuJoCo}} and \href{https://curobo.org/}{\textbf{cuRobo}} (motion planning). Features like augmentation, domain-randomization, noise improve \textbf{cross-embodiment}.}
         \resumeItem{Accelerated SOTA VLA research iteration and cut compute cost with custom training pipelines and scripts forked from SOTA repos, primarily \href{https://github.com/Physical-Intelligence/openpi}{\textbf{openpi}} (\textbf{JAX/Orbax}) (\textbf{2.5$\times$} faster steps) and \href{https://github.com/NVIDIA/Isaac-GR00T}{\textbf{Isaac-GR00T}} (\textbf{PyTorch}), without sacrificing benchmarks.}
         \resumeItem{Optimized VLA training through sharding across multi-datacenter GPUs, upgraded version pins, selective weight and optimizer-state quantization, partial backbone freezing/pruning, selective rematerialization and batched checkpointing.}
